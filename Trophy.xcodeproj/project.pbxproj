@@ -1,0 +1,1089 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		045E527C1B435AB50005A8BC /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 045E527B1B435AB50005A8BC /* UIKit.framework */; };
+		045E527E1B435AC30005A8BC /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 045E527D1B435AC30005A8BC /* Foundation.framework */; };
+		04ECB29C1B44A6E9001292C0 /* RearViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 04ECB2991B44A6E9001292C0 /* RearViewController.m */; };
+		04ECB29D1B44A6E9001292C0 /* SWRevealViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 04ECB29B1B44A6E9001292C0 /* SWRevealViewController.m */; };
+		4114CD1E1B44AC6D00547D9A /* TACommentTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4114CD1D1B44AC6D00547D9A /* TACommentTableViewController.m */; };
+		4114CD261B44ACC900547D9A /* TACommentLoadMoreTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 4114CD251B44ACC900547D9A /* TACommentLoadMoreTableViewCell.m */; };
+		4114CD291B44ACDE00547D9A /* TACommentActivityTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 4114CD281B44ACDE00547D9A /* TACommentActivityTableViewCell.m */; };
+		4114CD2C1B44ACF500547D9A /* TACommentBaseTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 4114CD2B1B44ACF500547D9A /* TACommentBaseTableViewCell.m */; };
+		4114CD2F1B44AD6600547D9A /* PAPUtility.m in Sources */ = {isa = PBXBuildFile; fileRef = 4114CD2E1B44AD6600547D9A /* PAPUtility.m */; };
+		416831701B56106D00D7E393 /* MBProgressHUD.m in Sources */ = {isa = PBXBuildFile; fileRef = 4168316F1B56106D00D7E393 /* MBProgressHUD.m */; };
+		41C58EA01B4BA868005A51FA /* TAPhotoDetailsFooterView.m in Sources */ = {isa = PBXBuildFile; fileRef = 41C58E9F1B4BA868005A51FA /* TAPhotoDetailsFooterView.m */; };
+		920036FE1A89DEC5004C34DB /* UITextField+TAAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 920036FD1A89DEC5004C34DB /* UITextField+TAAdditions.m */; };
+		920037011A89F3EB004C34DB /* UIColor+TAAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 920037001A89F3EB004C34DB /* UIColor+TAAdditions.m */; };
+		921BC0091A7B7E5900C9B4F4 /* TAAddGroupViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 921BC0081A7B7E5900C9B4F4 /* TAAddGroupViewController.m */; };
+		921BC00C1A7B812400C9B4F4 /* TAJoinGroupViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 921BC00B1A7B812400C9B4F4 /* TAJoinGroupViewController.m */; };
+		921BC00F1A7B813B00C9B4F4 /* TAJoinGroupView.m in Sources */ = {isa = PBXBuildFile; fileRef = 921BC00E1A7B813B00C9B4F4 /* TAJoinGroupView.m */; };
+		924A9B7E1AA441E400298877 /* libstdc++.6.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 924A9B7D1AA441E400298877 /* libstdc++.6.dylib */; };
+		924A9B811AA4424200298877 /* FBMissingSymbols.m in Sources */ = {isa = PBXBuildFile; fileRef = 924A9B801AA4424200298877 /* FBMissingSymbols.m */; };
+		925E653F1A91452100DF5CB6 /* TALeaderboardTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 925E653E1A91452100DF5CB6 /* TALeaderboardTableViewCell.m */; };
+		928C22DD1A70C50500F6310A /* TAGroupListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 928C22DC1A70C50500F6310A /* TAGroupListViewController.m */; };
+		928C22F31A746E5500F6310A /* TACreateGroupViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 928C22F21A746E5500F6310A /* TACreateGroupViewController.m */; };
+		928C22FA1A75D53400F6310A /* TAGroupInviteViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 928C22F91A75D53400F6310A /* TAGroupInviteViewController.m */; };
+		92AAE6121A43F92600E8AF8B /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 92AAE60F1A43F8F700E8AF8B /* AudioToolbox.framework */; };
+		92AAE6131A43F92600E8AF8B /* Accounts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 92AAE60C1A43F8E400E8AF8B /* Accounts.framework */; };
+		92AAE6141A43F92600E8AF8B /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 92B1DB301A42AA49001B059E /* SystemConfiguration.framework */; };
+		92AAE6151A43F92600E8AF8B /* libz.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 92B1DB2E1A42AA41001B059E /* libz.dylib */; };
+		92AAE6161A43F92600E8AF8B /* libsqlite3.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 92B1DB2C1A42AA36001B059E /* libsqlite3.dylib */; };
+		92AAE61D1A43F93000E8AF8B /* CFNetwork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 92AAE61C1A43F93000E8AF8B /* CFNetwork.framework */; };
+		92AAE61F1A43F93C00E8AF8B /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 92AAE61E1A43F93C00E8AF8B /* CoreGraphics.framework */; };
+		92AAE6211A43F94300E8AF8B /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 92AAE6201A43F94300E8AF8B /* CoreLocation.framework */; };
+		92AAE6231A43F94A00E8AF8B /* MobileCoreServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 92AAE6221A43F94A00E8AF8B /* MobileCoreServices.framework */; };
+		92AAE6251A43F95100E8AF8B /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 92AAE6241A43F95100E8AF8B /* QuartzCore.framework */; };
+		92AAE6271A43F95900E8AF8B /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 92AAE6261A43F95900E8AF8B /* Security.framework */; };
+		92AAE6291A43F95E00E8AF8B /* Social.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 92AAE6281A43F95E00E8AF8B /* Social.framework */; };
+		92AAE62B1A43F96200E8AF8B /* StoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 92AAE62A1A43F96200E8AF8B /* StoreKit.framework */; };
+		92B1DAB61A383AF7001B059E /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 92B1DAB51A383AF7001B059E /* main.m */; };
+		92B1DAC41A383AF7001B059E /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 92B1DAC31A383AF7001B059E /* Images.xcassets */; };
+		92B1DAD31A383AF7001B059E /* TrophyTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 92B1DAD21A383AF7001B059E /* TrophyTests.m */; };
+		92B1DAE31A384047001B059E /* TARootViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 92B1DAE21A384047001B059E /* TARootViewController.m */; };
+		92B1DAE61A3843B7001B059E /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 92B1DAE51A3843B7001B059E /* AppDelegate.m */; };
+		92CB90EA1A5E47B400B62322 /* TATrophyEditorViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 92CB90E91A5E47B400B62322 /* TATrophyEditorViewController.m */; };
+		92CB90EE1A5E4D3B00B62322 /* TATrophyEditorView.m in Sources */ = {isa = PBXBuildFile; fileRef = 92CB90ED1A5E4D3B00B62322 /* TATrophyEditorView.m */; };
+		92CB90F11A5E61DE00B62322 /* TATrophyPickerOverlayView.m in Sources */ = {isa = PBXBuildFile; fileRef = 92CB90F01A5E61DE00B62322 /* TATrophyPickerOverlayView.m */; };
+		92CB90F81A5E7D9C00B62322 /* TATrophySendViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 92CB90F71A5E7D9C00B62322 /* TATrophySendViewController.m */; };
+		92CF1E891A64FDCA00A45D88 /* TATrophyCloseupViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 92CF1E881A64FDCA00A45D88 /* TATrophyCloseupViewController.m */; };
+		92CF1E8D1A65009000A45D88 /* TATrophyCloseupView.m in Sources */ = {isa = PBXBuildFile; fileRef = 92CF1E8C1A65009000A45D88 /* TATrophyCloseupView.m */; };
+		92E059F21A61DFED00A178B5 /* TAGroupManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 92E059F11A61DFED00A178B5 /* TAGroupManager.m */; };
+		92E059F51A61E92000A178B5 /* TADefines.m in Sources */ = {isa = PBXBuildFile; fileRef = 92E059F41A61E92000A178B5 /* TADefines.m */; };
+		92E059F91A63B2C400A178B5 /* TAProfileViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 92E059F81A63B2C400A178B5 /* TAProfileViewController.m */; };
+		92E059FD1A63B35400A178B5 /* TAProfileHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = 92E059FC1A63B35400A178B5 /* TAProfileHeaderView.m */; };
+		92E1C5031A775CAE00BF04A6 /* TAFriendContact.m in Sources */ = {isa = PBXBuildFile; fileRef = 92E1C5021A775CAE00BF04A6 /* TAFriendContact.m */; };
+		92E1C5061A77677100BF04A6 /* TAGroupInviteCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 92E1C5051A77677100BF04A6 /* TAGroupInviteCell.m */; };
+		92E1C5091A77678B00BF04A6 /* TACreateGroupView.m in Sources */ = {isa = PBXBuildFile; fileRef = 92E1C5081A77678B00BF04A6 /* TACreateGroupView.m */; };
+		92E1C50B1A776EF900BF04A6 /* MessageUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 92E1C50A1A776EF900BF04A6 /* MessageUI.framework */; };
+		92E47AD11A46B73400B08C3B /* TASignupView.m in Sources */ = {isa = PBXBuildFile; fileRef = 92E47AD01A46B73400B08C3B /* TASignupView.m */; };
+		92E47AD41A46B73D00B08C3B /* TASignupViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 92E47AD31A46B73D00B08C3B /* TASignupViewController.m */; };
+		92E47ADB1A491CC900B08C3B /* TATimelineViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 92E47ADA1A491CC900B08C3B /* TATimelineViewController.m */; };
+		92E47AE51A4CC68B00B08C3B /* TALeaderboardViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 92E47AE41A4CC68B00B08C3B /* TALeaderboardViewController.m */; };
+		92E47AE81A4CC76200B08C3B /* TASettingsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 92E47AE71A4CC76200B08C3B /* TASettingsViewController.m */; };
+		92E47AEB1A4CC76D00B08C3B /* TAAddSettingsView.m in Sources */ = {isa = PBXBuildFile; fileRef = 92E47AEA1A4CC76D00B08C3B /* TAAddSettingsView.m */; };
+		92E47AF11A4DC86E00B08C3B /* Bolts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 92E47AEC1A4DC86E00B08C3B /* Bolts.framework */; };
+		92E47AF21A4DC86E00B08C3B /* Parse.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 92E47AED1A4DC86E00B08C3B /* Parse.framework */; };
+		92E47AF31A4DC86E00B08C3B /* ParseCrashReporting.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 92E47AEE1A4DC86E00B08C3B /* ParseCrashReporting.framework */; };
+		92E47AF41A4DC86E00B08C3B /* ParseFacebookUtils.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 92E47AEF1A4DC86E00B08C3B /* ParseFacebookUtils.framework */; };
+		92E47AF51A4DC86E00B08C3B /* ParseUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 92E47AF01A4DC86E00B08C3B /* ParseUI.framework */; };
+		92E6E6351A6CA35200A734FF /* TATrophyCollectionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 92E6E6341A6CA35200A734FF /* TATrophyCollectionViewController.m */; };
+		92E6E6381A6CA45000A734FF /* TATrophyCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 92E6E6371A6CA45000A734FF /* TATrophyCollectionViewCell.m */; };
+		92E6E63B1A6CACFA00A734FF /* TATrophyManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 92E6E63A1A6CACFA00A734FF /* TATrophyManager.m */; };
+		92E6E63E1A6DE92C00A734FF /* TALeaderboardScore.m in Sources */ = {isa = PBXBuildFile; fileRef = 92E6E63D1A6DE92C00A734FF /* TALeaderboardScore.m */; };
+		92E6F4701A523E3700010727 /* TATrophy.m in Sources */ = {isa = PBXBuildFile; fileRef = 92E6F46F1A523E3700010727 /* TATrophy.m */; };
+		92E6F4731A530F4C00010727 /* TATrophyActionFooterView.m in Sources */ = {isa = PBXBuildFile; fileRef = 92E6F4721A530F4C00010727 /* TATrophyActionFooterView.m */; };
+		92E6F4761A53361500010727 /* TAGroup.m in Sources */ = {isa = PBXBuildFile; fileRef = 92E6F4751A53361500010727 /* TAGroup.m */; };
+		92E6F4791A5336B200010727 /* TAUser.m in Sources */ = {isa = PBXBuildFile; fileRef = 92E6F4781A5336B200010727 /* TAUser.m */; };
+		92E6F47D1A53375800010727 /* TAActiveUserManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 92E6F47C1A53375800010727 /* TAActiveUserManager.m */; };
+		92E6F4801A55949500010727 /* TASettingsView.m in Sources */ = {isa = PBXBuildFile; fileRef = 92E6F47F1A55949500010727 /* TASettingsView.m */; };
+		92E6F4831A56EB8D00010727 /* TAMainViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 92E6F4821A56EB8D00010727 /* TAMainViewController.m */; };
+		92E6F4861A56F18800010727 /* TALoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 92E6F4851A56F18800010727 /* TALoginViewController.m */; };
+		92E6F4891A56F3E100010727 /* TALoginView.m in Sources */ = {isa = PBXBuildFile; fileRef = 92E6F4881A56F3E100010727 /* TALoginView.m */; };
+		92FAD3371A511E4F009CF398 /* TATimelineTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 92FAD3361A511E4F009CF398 /* TATimelineTableViewCell.m */; };
+		9F7880941B614F5900E800C2 /* TAOnboardingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9F7880931B614F5900E800C2 /* TAOnboardingViewController.m */; };
+		A8ABABD6EBC7E076CB6302AD /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = C423F20A0C7E6D3505D20EEC /* libPods.a */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		92B1DACD1A383AF7001B059E /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 92B1DAA81A383AF7001B059E /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 92B1DAAF1A383AF7001B059E;
+			remoteInfo = Trophy;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		045E527B1B435AB50005A8BC /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
+		045E527D1B435AC30005A8BC /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
+		04ECB2981B44A6E9001292C0 /* RearViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = RearViewController.h; path = Core/RearViewController.h; sourceTree = "<group>"; };
+		04ECB2991B44A6E9001292C0 /* RearViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = RearViewController.m; path = Core/RearViewController.m; sourceTree = "<group>"; };
+		04ECB29A1B44A6E9001292C0 /* SWRevealViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SWRevealViewController.h; path = Core/SWRevealViewController.h; sourceTree = "<group>"; };
+		04ECB29B1B44A6E9001292C0 /* SWRevealViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SWRevealViewController.m; path = Core/SWRevealViewController.m; sourceTree = "<group>"; };
+		4114CD1C1B44AC6D00547D9A /* TACommentTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TACommentTableViewController.h; sourceTree = "<group>"; };
+		4114CD1D1B44AC6D00547D9A /* TACommentTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TACommentTableViewController.m; sourceTree = "<group>"; };
+		4114CD241B44ACC900547D9A /* TACommentLoadMoreTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TACommentLoadMoreTableViewCell.h; sourceTree = "<group>"; };
+		4114CD251B44ACC900547D9A /* TACommentLoadMoreTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TACommentLoadMoreTableViewCell.m; sourceTree = "<group>"; };
+		4114CD271B44ACDE00547D9A /* TACommentActivityTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TACommentActivityTableViewCell.h; sourceTree = "<group>"; };
+		4114CD281B44ACDE00547D9A /* TACommentActivityTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TACommentActivityTableViewCell.m; sourceTree = "<group>"; };
+		4114CD2A1B44ACF500547D9A /* TACommentBaseTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TACommentBaseTableViewCell.h; sourceTree = "<group>"; };
+		4114CD2B1B44ACF500547D9A /* TACommentBaseTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TACommentBaseTableViewCell.m; sourceTree = "<group>"; };
+		4114CD2D1B44AD6600547D9A /* PAPUtility.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PAPUtility.h; sourceTree = "<group>"; };
+		4114CD2E1B44AD6600547D9A /* PAPUtility.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PAPUtility.m; sourceTree = "<group>"; };
+		4168316E1B56105900D7E393 /* MBProgressHUD.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MBProgressHUD.h; sourceTree = "<group>"; };
+		4168316F1B56106D00D7E393 /* MBProgressHUD.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MBProgressHUD.m; sourceTree = "<group>"; };
+		41C58E9E1B4BA868005A51FA /* TAPhotoDetailsFooterView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TAPhotoDetailsFooterView.h; sourceTree = "<group>"; };
+		41C58E9F1B4BA868005A51FA /* TAPhotoDetailsFooterView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TAPhotoDetailsFooterView.m; sourceTree = "<group>"; };
+		83373A0D52091F2573F5C014 /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
+		920036FC1A89DEC5004C34DB /* UITextField+TAAdditions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "UITextField+TAAdditions.h"; path = "Core/iOS Classes/UITextField+TAAdditions.h"; sourceTree = "<group>"; };
+		920036FD1A89DEC5004C34DB /* UITextField+TAAdditions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "UITextField+TAAdditions.m"; path = "Core/iOS Classes/UITextField+TAAdditions.m"; sourceTree = "<group>"; };
+		920036FF1A89F3EB004C34DB /* UIColor+TAAdditions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "UIColor+TAAdditions.h"; path = "Core/iOS Classes/UIColor+TAAdditions.h"; sourceTree = "<group>"; };
+		920037001A89F3EB004C34DB /* UIColor+TAAdditions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "UIColor+TAAdditions.m"; path = "Core/iOS Classes/UIColor+TAAdditions.m"; sourceTree = "<group>"; };
+		921BC0071A7B7E5900C9B4F4 /* TAAddGroupViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TAAddGroupViewController.h; path = Groups/TAAddGroupViewController.h; sourceTree = "<group>"; };
+		921BC0081A7B7E5900C9B4F4 /* TAAddGroupViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = TAAddGroupViewController.m; path = Groups/TAAddGroupViewController.m; sourceTree = "<group>"; };
+		921BC00A1A7B812400C9B4F4 /* TAJoinGroupViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TAJoinGroupViewController.h; path = Groups/TAJoinGroupViewController.h; sourceTree = "<group>"; };
+		921BC00B1A7B812400C9B4F4 /* TAJoinGroupViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = TAJoinGroupViewController.m; path = Groups/TAJoinGroupViewController.m; sourceTree = "<group>"; };
+		921BC00D1A7B813B00C9B4F4 /* TAJoinGroupView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TAJoinGroupView.h; path = Groups/Views/TAJoinGroupView.h; sourceTree = "<group>"; };
+		921BC00E1A7B813B00C9B4F4 /* TAJoinGroupView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = TAJoinGroupView.m; path = Groups/Views/TAJoinGroupView.m; sourceTree = "<group>"; };
+		924A9B7B1AA441D100298877 /* libstdc++.6.0.9.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = "libstdc++.6.0.9.dylib"; path = "usr/lib/libstdc++.6.0.9.dylib"; sourceTree = SDKROOT; };
+		924A9B7D1AA441E400298877 /* libstdc++.6.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = "libstdc++.6.dylib"; path = "usr/lib/libstdc++.6.dylib"; sourceTree = SDKROOT; };
+		924A9B801AA4424200298877 /* FBMissingSymbols.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = FBMissingSymbols.m; path = Core/FBMissingSymbols.m; sourceTree = "<group>"; };
+		925E653D1A91452100DF5CB6 /* TALeaderboardTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TALeaderboardTableViewCell.h; path = "Hall of Fame/Views/TALeaderboardTableViewCell.h"; sourceTree = "<group>"; };
+		925E653E1A91452100DF5CB6 /* TALeaderboardTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = TALeaderboardTableViewCell.m; path = "Hall of Fame/Views/TALeaderboardTableViewCell.m"; sourceTree = "<group>"; };
+		928C22DB1A70C50500F6310A /* TAGroupListViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TAGroupListViewController.h; path = Groups/TAGroupListViewController.h; sourceTree = "<group>"; };
+		928C22DC1A70C50500F6310A /* TAGroupListViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = TAGroupListViewController.m; path = Groups/TAGroupListViewController.m; sourceTree = "<group>"; };
+		928C22F11A746E5500F6310A /* TACreateGroupViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TACreateGroupViewController.h; path = Groups/TACreateGroupViewController.h; sourceTree = "<group>"; };
+		928C22F21A746E5500F6310A /* TACreateGroupViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = TACreateGroupViewController.m; path = Groups/TACreateGroupViewController.m; sourceTree = "<group>"; };
+		928C22F81A75D53400F6310A /* TAGroupInviteViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TAGroupInviteViewController.h; path = Groups/TAGroupInviteViewController.h; sourceTree = "<group>"; };
+		928C22F91A75D53400F6310A /* TAGroupInviteViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = TAGroupInviteViewController.m; path = Groups/TAGroupInviteViewController.m; sourceTree = "<group>"; };
+		92AAE60C1A43F8E400E8AF8B /* Accounts.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Accounts.framework; path = System/Library/Frameworks/Accounts.framework; sourceTree = SDKROOT; };
+		92AAE60F1A43F8F700E8AF8B /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = System/Library/Frameworks/AudioToolbox.framework; sourceTree = SDKROOT; };
+		92AAE61C1A43F93000E8AF8B /* CFNetwork.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CFNetwork.framework; path = System/Library/Frameworks/CFNetwork.framework; sourceTree = SDKROOT; };
+		92AAE61E1A43F93C00E8AF8B /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
+		92AAE6201A43F94300E8AF8B /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
+		92AAE6221A43F94A00E8AF8B /* MobileCoreServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MobileCoreServices.framework; path = System/Library/Frameworks/MobileCoreServices.framework; sourceTree = SDKROOT; };
+		92AAE6241A43F95100E8AF8B /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
+		92AAE6261A43F95900E8AF8B /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
+		92AAE6281A43F95E00E8AF8B /* Social.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Social.framework; path = System/Library/Frameworks/Social.framework; sourceTree = SDKROOT; };
+		92AAE62A1A43F96200E8AF8B /* StoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = StoreKit.framework; path = System/Library/Frameworks/StoreKit.framework; sourceTree = SDKROOT; };
+		92B1DAB01A383AF7001B059E /* Trophy.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Trophy.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		92B1DAB41A383AF7001B059E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		92B1DAB51A383AF7001B059E /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		92B1DAC31A383AF7001B059E /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
+		92B1DACC1A383AF7001B059E /* TrophyTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = TrophyTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		92B1DAD11A383AF7001B059E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		92B1DAD21A383AF7001B059E /* TrophyTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TrophyTests.m; sourceTree = "<group>"; };
+		92B1DAE11A384047001B059E /* TARootViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TARootViewController.h; path = Core/TARootViewController.h; sourceTree = "<group>"; };
+		92B1DAE21A384047001B059E /* TARootViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = TARootViewController.m; path = Core/TARootViewController.m; sourceTree = "<group>"; };
+		92B1DAE41A3843B7001B059E /* AppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AppDelegate.h; path = Core/AppDelegate.h; sourceTree = "<group>"; };
+		92B1DAE51A3843B7001B059E /* AppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = AppDelegate.m; path = Core/AppDelegate.m; sourceTree = "<group>"; };
+		92B1DB2C1A42AA36001B059E /* libsqlite3.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libsqlite3.dylib; path = usr/lib/libsqlite3.dylib; sourceTree = SDKROOT; };
+		92B1DB2E1A42AA41001B059E /* libz.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libz.dylib; path = usr/lib/libz.dylib; sourceTree = SDKROOT; };
+		92B1DB301A42AA49001B059E /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
+		92CB90E81A5E47B400B62322 /* TATrophyEditorViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TATrophyEditorViewController.h; path = Core/Camera/TATrophyEditorViewController.h; sourceTree = "<group>"; };
+		92CB90E91A5E47B400B62322 /* TATrophyEditorViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = TATrophyEditorViewController.m; path = Core/Camera/TATrophyEditorViewController.m; sourceTree = "<group>"; };
+		92CB90EC1A5E4D3B00B62322 /* TATrophyEditorView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TATrophyEditorView.h; path = Core/Camera/Views/TATrophyEditorView.h; sourceTree = "<group>"; };
+		92CB90ED1A5E4D3B00B62322 /* TATrophyEditorView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = TATrophyEditorView.m; path = Core/Camera/Views/TATrophyEditorView.m; sourceTree = "<group>"; };
+		92CB90EF1A5E61DE00B62322 /* TATrophyPickerOverlayView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TATrophyPickerOverlayView.h; path = Core/Camera/Views/TATrophyPickerOverlayView.h; sourceTree = "<group>"; };
+		92CB90F01A5E61DE00B62322 /* TATrophyPickerOverlayView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = TATrophyPickerOverlayView.m; path = Core/Camera/Views/TATrophyPickerOverlayView.m; sourceTree = "<group>"; };
+		92CB90F61A5E7D9C00B62322 /* TATrophySendViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TATrophySendViewController.h; path = Core/Camera/TATrophySendViewController.h; sourceTree = "<group>"; };
+		92CB90F71A5E7D9C00B62322 /* TATrophySendViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = TATrophySendViewController.m; path = Core/Camera/TATrophySendViewController.m; sourceTree = "<group>"; };
+		92CF1E871A64FDCA00A45D88 /* TATrophyCloseupViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TATrophyCloseupViewController.h; path = Closeup/TATrophyCloseupViewController.h; sourceTree = "<group>"; };
+		92CF1E881A64FDCA00A45D88 /* TATrophyCloseupViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = TATrophyCloseupViewController.m; path = Closeup/TATrophyCloseupViewController.m; sourceTree = "<group>"; };
+		92CF1E8B1A65009000A45D88 /* TATrophyCloseupView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TATrophyCloseupView.h; path = Closeup/Views/TATrophyCloseupView.h; sourceTree = "<group>"; };
+		92CF1E8C1A65009000A45D88 /* TATrophyCloseupView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = TATrophyCloseupView.m; path = Closeup/Views/TATrophyCloseupView.m; sourceTree = "<group>"; };
+		92E059F01A61DFED00A178B5 /* TAGroupManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TAGroupManager.h; path = Managers/TAGroupManager.h; sourceTree = "<group>"; };
+		92E059F11A61DFED00A178B5 /* TAGroupManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = TAGroupManager.m; path = Managers/TAGroupManager.m; sourceTree = "<group>"; };
+		92E059F31A61E92000A178B5 /* TADefines.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TADefines.h; path = Core/TADefines.h; sourceTree = "<group>"; };
+		92E059F41A61E92000A178B5 /* TADefines.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = TADefines.m; path = Core/TADefines.m; sourceTree = "<group>"; };
+		92E059F71A63B2C400A178B5 /* TAProfileViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TAProfileViewController.h; path = Profile/TAProfileViewController.h; sourceTree = "<group>"; };
+		92E059F81A63B2C400A178B5 /* TAProfileViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = TAProfileViewController.m; path = Profile/TAProfileViewController.m; sourceTree = "<group>"; };
+		92E059FB1A63B35400A178B5 /* TAProfileHeaderView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TAProfileHeaderView.h; path = Profile/Views/TAProfileHeaderView.h; sourceTree = "<group>"; };
+		92E059FC1A63B35400A178B5 /* TAProfileHeaderView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = TAProfileHeaderView.m; path = Profile/Views/TAProfileHeaderView.m; sourceTree = "<group>"; };
+		92E1C5011A775CAE00BF04A6 /* TAFriendContact.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TAFriendContact.h; path = Models/TAFriendContact.h; sourceTree = "<group>"; };
+		92E1C5021A775CAE00BF04A6 /* TAFriendContact.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = TAFriendContact.m; path = Models/TAFriendContact.m; sourceTree = "<group>"; };
+		92E1C5041A77677100BF04A6 /* TAGroupInviteCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TAGroupInviteCell.h; path = Groups/Views/TAGroupInviteCell.h; sourceTree = "<group>"; };
+		92E1C5051A77677100BF04A6 /* TAGroupInviteCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = TAGroupInviteCell.m; path = Groups/Views/TAGroupInviteCell.m; sourceTree = "<group>"; };
+		92E1C5071A77678B00BF04A6 /* TACreateGroupView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TACreateGroupView.h; path = Groups/Views/TACreateGroupView.h; sourceTree = "<group>"; };
+		92E1C5081A77678B00BF04A6 /* TACreateGroupView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = TACreateGroupView.m; path = Groups/Views/TACreateGroupView.m; sourceTree = "<group>"; };
+		92E1C50A1A776EF900BF04A6 /* MessageUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MessageUI.framework; path = System/Library/Frameworks/MessageUI.framework; sourceTree = SDKROOT; };
+		92E47ACF1A46B73400B08C3B /* TASignupView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TASignupView.h; path = Core/Signup/Views/TASignupView.h; sourceTree = "<group>"; };
+		92E47AD01A46B73400B08C3B /* TASignupView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = TASignupView.m; path = Core/Signup/Views/TASignupView.m; sourceTree = "<group>"; };
+		92E47AD21A46B73D00B08C3B /* TASignupViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TASignupViewController.h; path = Core/Signup/TASignupViewController.h; sourceTree = "<group>"; };
+		92E47AD31A46B73D00B08C3B /* TASignupViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = TASignupViewController.m; path = Core/Signup/TASignupViewController.m; sourceTree = "<group>"; };
+		92E47AD91A491CC900B08C3B /* TATimelineViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TATimelineViewController.h; path = Timeline/TATimelineViewController.h; sourceTree = "<group>"; };
+		92E47ADA1A491CC900B08C3B /* TATimelineViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = TATimelineViewController.m; path = Timeline/TATimelineViewController.m; sourceTree = "<group>"; };
+		92E47AE31A4CC68B00B08C3B /* TALeaderboardViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TALeaderboardViewController.h; path = "Hall of Fame/TALeaderboardViewController.h"; sourceTree = "<group>"; };
+		92E47AE41A4CC68B00B08C3B /* TALeaderboardViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = TALeaderboardViewController.m; path = "Hall of Fame/TALeaderboardViewController.m"; sourceTree = "<group>"; };
+		92E47AE61A4CC76200B08C3B /* TASettingsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TASettingsViewController.h; path = Core/Settings/TASettingsViewController.h; sourceTree = "<group>"; };
+		92E47AE71A4CC76200B08C3B /* TASettingsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = TASettingsViewController.m; path = Core/Settings/TASettingsViewController.m; sourceTree = "<group>"; };
+		92E47AE91A4CC76D00B08C3B /* TAAddSettingsView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TAAddSettingsView.h; path = Core/Settings/Views/TAAddSettingsView.h; sourceTree = "<group>"; };
+		92E47AEA1A4CC76D00B08C3B /* TAAddSettingsView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = TAAddSettingsView.m; path = Core/Settings/Views/TAAddSettingsView.m; sourceTree = "<group>"; };
+		92E47AEC1A4DC86E00B08C3B /* Bolts.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Bolts.framework; path = Parse/Bolts.framework; sourceTree = "<group>"; };
+		92E47AED1A4DC86E00B08C3B /* Parse.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Parse.framework; path = Parse/Parse.framework; sourceTree = "<group>"; };
+		92E47AEE1A4DC86E00B08C3B /* ParseCrashReporting.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ParseCrashReporting.framework; path = Parse/ParseCrashReporting.framework; sourceTree = "<group>"; };
+		92E47AEF1A4DC86E00B08C3B /* ParseFacebookUtils.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ParseFacebookUtils.framework; path = Parse/ParseFacebookUtils.framework; sourceTree = "<group>"; };
+		92E47AF01A4DC86E00B08C3B /* ParseUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ParseUI.framework; path = Parse/ParseUI.framework; sourceTree = "<group>"; };
+		92E6E6331A6CA35200A734FF /* TATrophyCollectionViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TATrophyCollectionViewController.h; path = Profile/TATrophyCollectionViewController.h; sourceTree = "<group>"; };
+		92E6E6341A6CA35200A734FF /* TATrophyCollectionViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = TATrophyCollectionViewController.m; path = Profile/TATrophyCollectionViewController.m; sourceTree = "<group>"; };
+		92E6E6361A6CA45000A734FF /* TATrophyCollectionViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TATrophyCollectionViewCell.h; path = Profile/Views/TATrophyCollectionViewCell.h; sourceTree = "<group>"; };
+		92E6E6371A6CA45000A734FF /* TATrophyCollectionViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = TATrophyCollectionViewCell.m; path = Profile/Views/TATrophyCollectionViewCell.m; sourceTree = "<group>"; };
+		92E6E6391A6CACFA00A734FF /* TATrophyManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TATrophyManager.h; path = Managers/TATrophyManager.h; sourceTree = "<group>"; };
+		92E6E63A1A6CACFA00A734FF /* TATrophyManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = TATrophyManager.m; path = Managers/TATrophyManager.m; sourceTree = "<group>"; };
+		92E6E63C1A6DE92C00A734FF /* TALeaderboardScore.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TALeaderboardScore.h; path = Models/TALeaderboardScore.h; sourceTree = "<group>"; };
+		92E6E63D1A6DE92C00A734FF /* TALeaderboardScore.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = TALeaderboardScore.m; path = Models/TALeaderboardScore.m; sourceTree = "<group>"; };
+		92E6F46E1A523E3700010727 /* TATrophy.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TATrophy.h; path = Models/TATrophy.h; sourceTree = "<group>"; };
+		92E6F46F1A523E3700010727 /* TATrophy.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = TATrophy.m; path = Models/TATrophy.m; sourceTree = "<group>"; };
+		92E6F4711A530F4C00010727 /* TATrophyActionFooterView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TATrophyActionFooterView.h; path = Timeline/Views/TATrophyActionFooterView.h; sourceTree = "<group>"; };
+		92E6F4721A530F4C00010727 /* TATrophyActionFooterView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = TATrophyActionFooterView.m; path = Timeline/Views/TATrophyActionFooterView.m; sourceTree = "<group>"; };
+		92E6F4741A53361500010727 /* TAGroup.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TAGroup.h; path = Models/TAGroup.h; sourceTree = "<group>"; };
+		92E6F4751A53361500010727 /* TAGroup.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = TAGroup.m; path = Models/TAGroup.m; sourceTree = "<group>"; };
+		92E6F4771A5336B200010727 /* TAUser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TAUser.h; path = Models/TAUser.h; sourceTree = "<group>"; };
+		92E6F4781A5336B200010727 /* TAUser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = TAUser.m; path = Models/TAUser.m; sourceTree = "<group>"; };
+		92E6F47B1A53375800010727 /* TAActiveUserManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TAActiveUserManager.h; path = Managers/TAActiveUserManager.h; sourceTree = "<group>"; };
+		92E6F47C1A53375800010727 /* TAActiveUserManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = TAActiveUserManager.m; path = Managers/TAActiveUserManager.m; sourceTree = "<group>"; };
+		92E6F47E1A55949500010727 /* TASettingsView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TASettingsView.h; path = Core/Settings/Views/TASettingsView.h; sourceTree = "<group>"; };
+		92E6F47F1A55949500010727 /* TASettingsView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = TASettingsView.m; path = Core/Settings/Views/TASettingsView.m; sourceTree = "<group>"; };
+		92E6F4811A56EB8D00010727 /* TAMainViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TAMainViewController.h; path = Core/TAMainViewController.h; sourceTree = "<group>"; };
+		92E6F4821A56EB8D00010727 /* TAMainViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = TAMainViewController.m; path = Core/TAMainViewController.m; sourceTree = "<group>"; };
+		92E6F4841A56F18800010727 /* TALoginViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TALoginViewController.h; path = Core/Signup/TALoginViewController.h; sourceTree = "<group>"; };
+		92E6F4851A56F18800010727 /* TALoginViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = TALoginViewController.m; path = Core/Signup/TALoginViewController.m; sourceTree = "<group>"; };
+		92E6F4871A56F3E100010727 /* TALoginView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TALoginView.h; path = Core/Signup/Views/TALoginView.h; sourceTree = "<group>"; };
+		92E6F4881A56F3E100010727 /* TALoginView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = TALoginView.m; path = Core/Signup/Views/TALoginView.m; sourceTree = "<group>"; };
+		92FAD3351A511E4F009CF398 /* TATimelineTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TATimelineTableViewCell.h; path = Timeline/Views/TATimelineTableViewCell.h; sourceTree = "<group>"; };
+		92FAD3361A511E4F009CF398 /* TATimelineTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = TATimelineTableViewCell.m; path = Timeline/Views/TATimelineTableViewCell.m; sourceTree = "<group>"; };
+		9F7880921B614F5900E800C2 /* TAOnboardingViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TAOnboardingViewController.h; sourceTree = "<group>"; };
+		9F7880931B614F5900E800C2 /* TAOnboardingViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TAOnboardingViewController.m; sourceTree = "<group>"; };
+		C423F20A0C7E6D3505D20EEC /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		F333D028068B5D34422C9C06 /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		92B1DAAD1A383AF7001B059E /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				045E527E1B435AC30005A8BC /* Foundation.framework in Frameworks */,
+				045E527C1B435AB50005A8BC /* UIKit.framework in Frameworks */,
+				924A9B7E1AA441E400298877 /* libstdc++.6.dylib in Frameworks */,
+				92E1C50B1A776EF900BF04A6 /* MessageUI.framework in Frameworks */,
+				92E47AF51A4DC86E00B08C3B /* ParseUI.framework in Frameworks */,
+				92AAE6141A43F92600E8AF8B /* SystemConfiguration.framework in Frameworks */,
+				92AAE62B1A43F96200E8AF8B /* StoreKit.framework in Frameworks */,
+				92AAE6291A43F95E00E8AF8B /* Social.framework in Frameworks */,
+				92AAE6271A43F95900E8AF8B /* Security.framework in Frameworks */,
+				92E47AF21A4DC86E00B08C3B /* Parse.framework in Frameworks */,
+				92E47AF41A4DC86E00B08C3B /* ParseFacebookUtils.framework in Frameworks */,
+				92AAE6251A43F95100E8AF8B /* QuartzCore.framework in Frameworks */,
+				92AAE6231A43F94A00E8AF8B /* MobileCoreServices.framework in Frameworks */,
+				92AAE6211A43F94300E8AF8B /* CoreLocation.framework in Frameworks */,
+				92AAE61F1A43F93C00E8AF8B /* CoreGraphics.framework in Frameworks */,
+				92AAE61D1A43F93000E8AF8B /* CFNetwork.framework in Frameworks */,
+				92AAE6121A43F92600E8AF8B /* AudioToolbox.framework in Frameworks */,
+				92AAE6131A43F92600E8AF8B /* Accounts.framework in Frameworks */,
+				92AAE6151A43F92600E8AF8B /* libz.dylib in Frameworks */,
+				92AAE6161A43F92600E8AF8B /* libsqlite3.dylib in Frameworks */,
+				92E47AF11A4DC86E00B08C3B /* Bolts.framework in Frameworks */,
+				92E47AF31A4DC86E00B08C3B /* ParseCrashReporting.framework in Frameworks */,
+				A8ABABD6EBC7E076CB6302AD /* libPods.a in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		92B1DAC91A383AF7001B059E /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		4114CD1B1B44ABF500547D9A /* Comment */ = {
+			isa = PBXGroup;
+			children = (
+				4114CD1F1B44AC8F00547D9A /* Utilities */,
+				4114CD201B44AC9700547D9A /* Views */,
+				4114CD1C1B44AC6D00547D9A /* TACommentTableViewController.h */,
+				4114CD1D1B44AC6D00547D9A /* TACommentTableViewController.m */,
+			);
+			name = Comment;
+			sourceTree = "<group>";
+		};
+		4114CD1F1B44AC8F00547D9A /* Utilities */ = {
+			isa = PBXGroup;
+			children = (
+				4168316D1B560FD400D7E393 /* External */,
+				4114CD2D1B44AD6600547D9A /* PAPUtility.h */,
+				4114CD2E1B44AD6600547D9A /* PAPUtility.m */,
+				41C58E9E1B4BA868005A51FA /* TAPhotoDetailsFooterView.h */,
+				41C58E9F1B4BA868005A51FA /* TAPhotoDetailsFooterView.m */,
+			);
+			name = Utilities;
+			sourceTree = "<group>";
+		};
+		4114CD201B44AC9700547D9A /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				4114CD2A1B44ACF500547D9A /* TACommentBaseTableViewCell.h */,
+				4114CD2B1B44ACF500547D9A /* TACommentBaseTableViewCell.m */,
+				4114CD271B44ACDE00547D9A /* TACommentActivityTableViewCell.h */,
+				4114CD281B44ACDE00547D9A /* TACommentActivityTableViewCell.m */,
+				4114CD241B44ACC900547D9A /* TACommentLoadMoreTableViewCell.h */,
+				4114CD251B44ACC900547D9A /* TACommentLoadMoreTableViewCell.m */,
+			);
+			name = Views;
+			sourceTree = "<group>";
+		};
+		4168316D1B560FD400D7E393 /* External */ = {
+			isa = PBXGroup;
+			children = (
+				4168316E1B56105900D7E393 /* MBProgressHUD.h */,
+				4168316F1B56106D00D7E393 /* MBProgressHUD.m */,
+			);
+			name = External;
+			sourceTree = "<group>";
+		};
+		4B5C33A1A89E63889C4387A1 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				F333D028068B5D34422C9C06 /* Pods.debug.xcconfig */,
+				83373A0D52091F2573F5C014 /* Pods.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
+		920036FB1A89DC70004C34DB /* iOS Classes */ = {
+			isa = PBXGroup;
+			children = (
+				920036FC1A89DEC5004C34DB /* UITextField+TAAdditions.h */,
+				920036FD1A89DEC5004C34DB /* UITextField+TAAdditions.m */,
+				920036FF1A89F3EB004C34DB /* UIColor+TAAdditions.h */,
+				920037001A89F3EB004C34DB /* UIColor+TAAdditions.m */,
+			);
+			name = "iOS Classes";
+			sourceTree = "<group>";
+		};
+		925E653C1A9144D900DF5CB6 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				925E653D1A91452100DF5CB6 /* TALeaderboardTableViewCell.h */,
+				925E653E1A91452100DF5CB6 /* TALeaderboardTableViewCell.m */,
+			);
+			name = Views;
+			sourceTree = "<group>";
+		};
+		928C22DA1A70C4DE00F6310A /* Groups */ = {
+			isa = PBXGroup;
+			children = (
+				928C22F41A746E6700F6310A /* Views */,
+				928C22DB1A70C50500F6310A /* TAGroupListViewController.h */,
+				928C22DC1A70C50500F6310A /* TAGroupListViewController.m */,
+				928C22F11A746E5500F6310A /* TACreateGroupViewController.h */,
+				928C22F21A746E5500F6310A /* TACreateGroupViewController.m */,
+				928C22F81A75D53400F6310A /* TAGroupInviteViewController.h */,
+				928C22F91A75D53400F6310A /* TAGroupInviteViewController.m */,
+				921BC0071A7B7E5900C9B4F4 /* TAAddGroupViewController.h */,
+				921BC0081A7B7E5900C9B4F4 /* TAAddGroupViewController.m */,
+				921BC00A1A7B812400C9B4F4 /* TAJoinGroupViewController.h */,
+				921BC00B1A7B812400C9B4F4 /* TAJoinGroupViewController.m */,
+			);
+			name = Groups;
+			sourceTree = "<group>";
+		};
+		928C22F41A746E6700F6310A /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				92E1C5071A77678B00BF04A6 /* TACreateGroupView.h */,
+				92E1C5081A77678B00BF04A6 /* TACreateGroupView.m */,
+				92E1C5041A77677100BF04A6 /* TAGroupInviteCell.h */,
+				92E1C5051A77677100BF04A6 /* TAGroupInviteCell.m */,
+				921BC00D1A7B813B00C9B4F4 /* TAJoinGroupView.h */,
+				921BC00E1A7B813B00C9B4F4 /* TAJoinGroupView.m */,
+			);
+			name = Views;
+			sourceTree = "<group>";
+		};
+		92B1DAA71A383AF7001B059E = {
+			isa = PBXGroup;
+			children = (
+				92B1DAB21A383AF7001B059E /* Trophy */,
+				92B1DACF1A383AF7001B059E /* TrophyTests */,
+				92B1DAB11A383AF7001B059E /* Products */,
+				92B1DB0C1A42A901001B059E /* Frameworks */,
+				4B5C33A1A89E63889C4387A1 /* Pods */,
+			);
+			sourceTree = "<group>";
+		};
+		92B1DAB11A383AF7001B059E /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				92B1DAB01A383AF7001B059E /* Trophy.app */,
+				92B1DACC1A383AF7001B059E /* TrophyTests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		92B1DAB21A383AF7001B059E /* Trophy */ = {
+			isa = PBXGroup;
+			children = (
+				928C22DA1A70C4DE00F6310A /* Groups */,
+				92CF1E861A64FDAB00A45D88 /* Closeup */,
+				92E059F61A63B25400A178B5 /* Profile */,
+				92E6F47A1A53373D00010727 /* Managers */,
+				92E6F46D1A523D9900010727 /* Models */,
+				92E47AE21A4CC64600B08C3B /* Hall of Fame */,
+				92E47AD81A491CA700B08C3B /* Timeline */,
+				92B1DADC1A383DBB001B059E /* Core */,
+				92B1DAC31A383AF7001B059E /* Images.xcassets */,
+				92B1DAB31A383AF7001B059E /* Supporting Files */,
+			);
+			path = Trophy;
+			sourceTree = "<group>";
+		};
+		92B1DAB31A383AF7001B059E /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				92B1DAB41A383AF7001B059E /* Info.plist */,
+				92B1DAB51A383AF7001B059E /* main.m */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		92B1DACF1A383AF7001B059E /* TrophyTests */ = {
+			isa = PBXGroup;
+			children = (
+				92B1DAD21A383AF7001B059E /* TrophyTests.m */,
+				92B1DAD01A383AF7001B059E /* Supporting Files */,
+			);
+			path = TrophyTests;
+			sourceTree = "<group>";
+		};
+		92B1DAD01A383AF7001B059E /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				92B1DAD11A383AF7001B059E /* Info.plist */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		92B1DADC1A383DBB001B059E /* Core */ = {
+			isa = PBXGroup;
+			children = (
+				920036FB1A89DC70004C34DB /* iOS Classes */,
+				92DB50FD1A5CD0DD001C0B5E /* Camera */,
+				92E47ACA1A46B46A00B08C3B /* Settings */,
+				92B1DADD1A383DCD001B059E /* Signup */,
+				92B1DAE41A3843B7001B059E /* AppDelegate.h */,
+				92B1DAE51A3843B7001B059E /* AppDelegate.m */,
+				92B1DAE11A384047001B059E /* TARootViewController.h */,
+				92B1DAE21A384047001B059E /* TARootViewController.m */,
+				92E6F4811A56EB8D00010727 /* TAMainViewController.h */,
+				92E6F4821A56EB8D00010727 /* TAMainViewController.m */,
+				92E059F31A61E92000A178B5 /* TADefines.h */,
+				92E059F41A61E92000A178B5 /* TADefines.m */,
+				924A9B801AA4424200298877 /* FBMissingSymbols.m */,
+				04ECB2981B44A6E9001292C0 /* RearViewController.h */,
+				04ECB2991B44A6E9001292C0 /* RearViewController.m */,
+				04ECB29A1B44A6E9001292C0 /* SWRevealViewController.h */,
+				04ECB29B1B44A6E9001292C0 /* SWRevealViewController.m */,
+			);
+			name = Core;
+			sourceTree = "<group>";
+		};
+		92B1DADD1A383DCD001B059E /* Signup */ = {
+			isa = PBXGroup;
+			children = (
+				92B1DAE71A3849D6001B059E /* Views */,
+				92E47AD21A46B73D00B08C3B /* TASignupViewController.h */,
+				92E47AD31A46B73D00B08C3B /* TASignupViewController.m */,
+				92E6F4841A56F18800010727 /* TALoginViewController.h */,
+				92E6F4851A56F18800010727 /* TALoginViewController.m */,
+				9F7880921B614F5900E800C2 /* TAOnboardingViewController.h */,
+				9F7880931B614F5900E800C2 /* TAOnboardingViewController.m */,
+			);
+			name = Signup;
+			sourceTree = "<group>";
+		};
+		92B1DAE71A3849D6001B059E /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				92E47ACF1A46B73400B08C3B /* TASignupView.h */,
+				92E47AD01A46B73400B08C3B /* TASignupView.m */,
+				92E6F4871A56F3E100010727 /* TALoginView.h */,
+				92E6F4881A56F3E100010727 /* TALoginView.m */,
+			);
+			name = Views;
+			sourceTree = "<group>";
+		};
+		92B1DB0C1A42A901001B059E /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				045E527D1B435AC30005A8BC /* Foundation.framework */,
+				045E527B1B435AB50005A8BC /* UIKit.framework */,
+				924A9B7D1AA441E400298877 /* libstdc++.6.dylib */,
+				924A9B7B1AA441D100298877 /* libstdc++.6.0.9.dylib */,
+				92E1C50A1A776EF900BF04A6 /* MessageUI.framework */,
+				92E47AEC1A4DC86E00B08C3B /* Bolts.framework */,
+				92E47AED1A4DC86E00B08C3B /* Parse.framework */,
+				92E47AEE1A4DC86E00B08C3B /* ParseCrashReporting.framework */,
+				92E47AEF1A4DC86E00B08C3B /* ParseFacebookUtils.framework */,
+				92E47AF01A4DC86E00B08C3B /* ParseUI.framework */,
+				92AAE62A1A43F96200E8AF8B /* StoreKit.framework */,
+				92AAE6281A43F95E00E8AF8B /* Social.framework */,
+				92AAE6261A43F95900E8AF8B /* Security.framework */,
+				92AAE6241A43F95100E8AF8B /* QuartzCore.framework */,
+				92AAE6221A43F94A00E8AF8B /* MobileCoreServices.framework */,
+				92AAE6201A43F94300E8AF8B /* CoreLocation.framework */,
+				92AAE61E1A43F93C00E8AF8B /* CoreGraphics.framework */,
+				92AAE61C1A43F93000E8AF8B /* CFNetwork.framework */,
+				92AAE60F1A43F8F700E8AF8B /* AudioToolbox.framework */,
+				92AAE60C1A43F8E400E8AF8B /* Accounts.framework */,
+				92B1DB301A42AA49001B059E /* SystemConfiguration.framework */,
+				92B1DB2E1A42AA41001B059E /* libz.dylib */,
+				92B1DB2C1A42AA36001B059E /* libsqlite3.dylib */,
+				C423F20A0C7E6D3505D20EEC /* libPods.a */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		92CB90EB1A5E4D2100B62322 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				92CB90EC1A5E4D3B00B62322 /* TATrophyEditorView.h */,
+				92CB90ED1A5E4D3B00B62322 /* TATrophyEditorView.m */,
+				92CB90EF1A5E61DE00B62322 /* TATrophyPickerOverlayView.h */,
+				92CB90F01A5E61DE00B62322 /* TATrophyPickerOverlayView.m */,
+			);
+			name = Views;
+			sourceTree = "<group>";
+		};
+		92CF1E861A64FDAB00A45D88 /* Closeup */ = {
+			isa = PBXGroup;
+			children = (
+				4114CD1B1B44ABF500547D9A /* Comment */,
+				92CF1E8A1A65007F00A45D88 /* Views */,
+				92CF1E871A64FDCA00A45D88 /* TATrophyCloseupViewController.h */,
+				92CF1E881A64FDCA00A45D88 /* TATrophyCloseupViewController.m */,
+			);
+			name = Closeup;
+			sourceTree = "<group>";
+		};
+		92CF1E8A1A65007F00A45D88 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				92CF1E8B1A65009000A45D88 /* TATrophyCloseupView.h */,
+				92CF1E8C1A65009000A45D88 /* TATrophyCloseupView.m */,
+			);
+			name = Views;
+			sourceTree = "<group>";
+		};
+		92DB50FD1A5CD0DD001C0B5E /* Camera */ = {
+			isa = PBXGroup;
+			children = (
+				92CB90EB1A5E4D2100B62322 /* Views */,
+				92CB90E81A5E47B400B62322 /* TATrophyEditorViewController.h */,
+				92CB90E91A5E47B400B62322 /* TATrophyEditorViewController.m */,
+				92CB90F61A5E7D9C00B62322 /* TATrophySendViewController.h */,
+				92CB90F71A5E7D9C00B62322 /* TATrophySendViewController.m */,
+			);
+			name = Camera;
+			sourceTree = "<group>";
+		};
+		92E059F61A63B25400A178B5 /* Profile */ = {
+			isa = PBXGroup;
+			children = (
+				92E059FA1A63B33F00A178B5 /* Views */,
+				92E059F71A63B2C400A178B5 /* TAProfileViewController.h */,
+				92E059F81A63B2C400A178B5 /* TAProfileViewController.m */,
+				92E6E6331A6CA35200A734FF /* TATrophyCollectionViewController.h */,
+				92E6E6341A6CA35200A734FF /* TATrophyCollectionViewController.m */,
+			);
+			name = Profile;
+			sourceTree = "<group>";
+		};
+		92E059FA1A63B33F00A178B5 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				92E059FB1A63B35400A178B5 /* TAProfileHeaderView.h */,
+				92E059FC1A63B35400A178B5 /* TAProfileHeaderView.m */,
+				92E6E6361A6CA45000A734FF /* TATrophyCollectionViewCell.h */,
+				92E6E6371A6CA45000A734FF /* TATrophyCollectionViewCell.m */,
+			);
+			name = Views;
+			sourceTree = "<group>";
+		};
+		92E47ACA1A46B46A00B08C3B /* Settings */ = {
+			isa = PBXGroup;
+			children = (
+				92E47ACE1A46B51000B08C3B /* Views */,
+				92E47AE61A4CC76200B08C3B /* TASettingsViewController.h */,
+				92E47AE71A4CC76200B08C3B /* TASettingsViewController.m */,
+			);
+			name = Settings;
+			sourceTree = "<group>";
+		};
+		92E47ACE1A46B51000B08C3B /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				92E47AE91A4CC76D00B08C3B /* TAAddSettingsView.h */,
+				92E47AEA1A4CC76D00B08C3B /* TAAddSettingsView.m */,
+				92E6F47E1A55949500010727 /* TASettingsView.h */,
+				92E6F47F1A55949500010727 /* TASettingsView.m */,
+			);
+			name = Views;
+			sourceTree = "<group>";
+		};
+		92E47AD81A491CA700B08C3B /* Timeline */ = {
+			isa = PBXGroup;
+			children = (
+				92E47AF61A51148900B08C3B /* Views */,
+				92E47AD91A491CC900B08C3B /* TATimelineViewController.h */,
+				92E47ADA1A491CC900B08C3B /* TATimelineViewController.m */,
+			);
+			name = Timeline;
+			sourceTree = "<group>";
+		};
+		92E47AE21A4CC64600B08C3B /* Hall of Fame */ = {
+			isa = PBXGroup;
+			children = (
+				925E653C1A9144D900DF5CB6 /* Views */,
+				92E47AE31A4CC68B00B08C3B /* TALeaderboardViewController.h */,
+				92E47AE41A4CC68B00B08C3B /* TALeaderboardViewController.m */,
+			);
+			name = "Hall of Fame";
+			sourceTree = "<group>";
+		};
+		92E47AF61A51148900B08C3B /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				92FAD3351A511E4F009CF398 /* TATimelineTableViewCell.h */,
+				92FAD3361A511E4F009CF398 /* TATimelineTableViewCell.m */,
+				92E6F4711A530F4C00010727 /* TATrophyActionFooterView.h */,
+				92E6F4721A530F4C00010727 /* TATrophyActionFooterView.m */,
+			);
+			name = Views;
+			sourceTree = "<group>";
+		};
+		92E6F46D1A523D9900010727 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				92E6F46E1A523E3700010727 /* TATrophy.h */,
+				92E6F46F1A523E3700010727 /* TATrophy.m */,
+				92E6F4741A53361500010727 /* TAGroup.h */,
+				92E6F4751A53361500010727 /* TAGroup.m */,
+				92E6F4771A5336B200010727 /* TAUser.h */,
+				92E6F4781A5336B200010727 /* TAUser.m */,
+				92E6E63C1A6DE92C00A734FF /* TALeaderboardScore.h */,
+				92E6E63D1A6DE92C00A734FF /* TALeaderboardScore.m */,
+				92E1C5011A775CAE00BF04A6 /* TAFriendContact.h */,
+				92E1C5021A775CAE00BF04A6 /* TAFriendContact.m */,
+			);
+			name = Models;
+			sourceTree = "<group>";
+		};
+		92E6F47A1A53373D00010727 /* Managers */ = {
+			isa = PBXGroup;
+			children = (
+				92E6F47B1A53375800010727 /* TAActiveUserManager.h */,
+				92E6F47C1A53375800010727 /* TAActiveUserManager.m */,
+				92E059F01A61DFED00A178B5 /* TAGroupManager.h */,
+				92E059F11A61DFED00A178B5 /* TAGroupManager.m */,
+				92E6E6391A6CACFA00A734FF /* TATrophyManager.h */,
+				92E6E63A1A6CACFA00A734FF /* TATrophyManager.m */,
+			);
+			name = Managers;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		92B1DAAF1A383AF7001B059E /* Trophy */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 92B1DAD61A383AF7001B059E /* Build configuration list for PBXNativeTarget "Trophy" */;
+			buildPhases = (
+				C30A5A01F4EE1B2E944002B9 /* Check Pods Manifest.lock */,
+				92B1DAAC1A383AF7001B059E /* Sources */,
+				92B1DAAD1A383AF7001B059E /* Frameworks */,
+				92B1DAAE1A383AF7001B059E /* Resources */,
+				440DD579960486F66BA46714 /* Copy Pods Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = Trophy;
+			productName = Trophy;
+			productReference = 92B1DAB01A383AF7001B059E /* Trophy.app */;
+			productType = "com.apple.product-type.application";
+		};
+		92B1DACB1A383AF7001B059E /* TrophyTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 92B1DAD91A383AF7001B059E /* Build configuration list for PBXNativeTarget "TrophyTests" */;
+			buildPhases = (
+				92B1DAC81A383AF7001B059E /* Sources */,
+				92B1DAC91A383AF7001B059E /* Frameworks */,
+				92B1DACA1A383AF7001B059E /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				92B1DACE1A383AF7001B059E /* PBXTargetDependency */,
+			);
+			name = TrophyTests;
+			productName = TrophyTests;
+			productReference = 92B1DACC1A383AF7001B059E /* TrophyTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		92B1DAA81A383AF7001B059E /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 0600;
+				ORGANIZATIONNAME = Gigster;
+				TargetAttributes = {
+					92B1DAAF1A383AF7001B059E = {
+						CreatedOnToolsVersion = 6.0;
+						DevelopmentTeam = F47ZZG9ADY;
+					};
+					92B1DACB1A383AF7001B059E = {
+						CreatedOnToolsVersion = 6.0;
+						DevelopmentTeam = F47ZZG9ADY;
+						TestTargetID = 92B1DAAF1A383AF7001B059E;
+					};
+				};
+			};
+			buildConfigurationList = 92B1DAAB1A383AF7001B059E /* Build configuration list for PBXProject "Trophy" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = 92B1DAA71A383AF7001B059E;
+			productRefGroup = 92B1DAB11A383AF7001B059E /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				92B1DAAF1A383AF7001B059E /* Trophy */,
+				92B1DACB1A383AF7001B059E /* TrophyTests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		92B1DAAE1A383AF7001B059E /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				92B1DAC41A383AF7001B059E /* Images.xcassets in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		92B1DACA1A383AF7001B059E /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		440DD579960486F66BA46714 /* Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods/Pods-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		C30A5A01F4EE1B2E944002B9 /* Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		92B1DAAC1A383AF7001B059E /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				92E6F4701A523E3700010727 /* TATrophy.m in Sources */,
+				4114CD1E1B44AC6D00547D9A /* TACommentTableViewController.m in Sources */,
+				92E6E63E1A6DE92C00A734FF /* TALeaderboardScore.m in Sources */,
+				92CB90F81A5E7D9C00B62322 /* TATrophySendViewController.m in Sources */,
+				921BC00C1A7B812400C9B4F4 /* TAJoinGroupViewController.m in Sources */,
+				92E47AD41A46B73D00B08C3B /* TASignupViewController.m in Sources */,
+				92E47AD11A46B73400B08C3B /* TASignupView.m in Sources */,
+				92E059FD1A63B35400A178B5 /* TAProfileHeaderView.m in Sources */,
+				4114CD2F1B44AD6600547D9A /* PAPUtility.m in Sources */,
+				04ECB29C1B44A6E9001292C0 /* RearViewController.m in Sources */,
+				925E653F1A91452100DF5CB6 /* TALeaderboardTableViewCell.m in Sources */,
+				928C22FA1A75D53400F6310A /* TAGroupInviteViewController.m in Sources */,
+				92E1C5031A775CAE00BF04A6 /* TAFriendContact.m in Sources */,
+				04ECB29D1B44A6E9001292C0 /* SWRevealViewController.m in Sources */,
+				4114CD2C1B44ACF500547D9A /* TACommentBaseTableViewCell.m in Sources */,
+				92CB90F11A5E61DE00B62322 /* TATrophyPickerOverlayView.m in Sources */,
+				92CB90EA1A5E47B400B62322 /* TATrophyEditorViewController.m in Sources */,
+				92CF1E8D1A65009000A45D88 /* TATrophyCloseupView.m in Sources */,
+				928C22F31A746E5500F6310A /* TACreateGroupViewController.m in Sources */,
+				92CB90EE1A5E4D3B00B62322 /* TATrophyEditorView.m in Sources */,
+				92E6F4861A56F18800010727 /* TALoginViewController.m in Sources */,
+				92E1C5061A77677100BF04A6 /* TAGroupInviteCell.m in Sources */,
+				4114CD291B44ACDE00547D9A /* TACommentActivityTableViewCell.m in Sources */,
+				920037011A89F3EB004C34DB /* UIColor+TAAdditions.m in Sources */,
+				92E47AEB1A4CC76D00B08C3B /* TAAddSettingsView.m in Sources */,
+				92B1DAB61A383AF7001B059E /* main.m in Sources */,
+				92E47AE81A4CC76200B08C3B /* TASettingsViewController.m in Sources */,
+				92E059F21A61DFED00A178B5 /* TAGroupManager.m in Sources */,
+				92E6F4801A55949500010727 /* TASettingsView.m in Sources */,
+				921BC00F1A7B813B00C9B4F4 /* TAJoinGroupView.m in Sources */,
+				9F7880941B614F5900E800C2 /* TAOnboardingViewController.m in Sources */,
+				92B1DAE31A384047001B059E /* TARootViewController.m in Sources */,
+				92E6E63B1A6CACFA00A734FF /* TATrophyManager.m in Sources */,
+				92E6F4791A5336B200010727 /* TAUser.m in Sources */,
+				921BC0091A7B7E5900C9B4F4 /* TAAddGroupViewController.m in Sources */,
+				92E1C5091A77678B00BF04A6 /* TACreateGroupView.m in Sources */,
+				92CF1E891A64FDCA00A45D88 /* TATrophyCloseupViewController.m in Sources */,
+				92E6F4831A56EB8D00010727 /* TAMainViewController.m in Sources */,
+				416831701B56106D00D7E393 /* MBProgressHUD.m in Sources */,
+				92B1DAE61A3843B7001B059E /* AppDelegate.m in Sources */,
+				92E47ADB1A491CC900B08C3B /* TATimelineViewController.m in Sources */,
+				924A9B811AA4424200298877 /* FBMissingSymbols.m in Sources */,
+				92E6E6351A6CA35200A734FF /* TATrophyCollectionViewController.m in Sources */,
+				92E6F4761A53361500010727 /* TAGroup.m in Sources */,
+				92E6F4891A56F3E100010727 /* TALoginView.m in Sources */,
+				92E6E6381A6CA45000A734FF /* TATrophyCollectionViewCell.m in Sources */,
+				928C22DD1A70C50500F6310A /* TAGroupListViewController.m in Sources */,
+				920036FE1A89DEC5004C34DB /* UITextField+TAAdditions.m in Sources */,
+				92E059F91A63B2C400A178B5 /* TAProfileViewController.m in Sources */,
+				4114CD261B44ACC900547D9A /* TACommentLoadMoreTableViewCell.m in Sources */,
+				92E47AE51A4CC68B00B08C3B /* TALeaderboardViewController.m in Sources */,
+				92E6F4731A530F4C00010727 /* TATrophyActionFooterView.m in Sources */,
+				92E059F51A61E92000A178B5 /* TADefines.m in Sources */,
+				92FAD3371A511E4F009CF398 /* TATimelineTableViewCell.m in Sources */,
+				41C58EA01B4BA868005A51FA /* TAPhotoDetailsFooterView.m in Sources */,
+				92E6F47D1A53375800010727 /* TAActiveUserManager.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		92B1DAC81A383AF7001B059E /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				92B1DAD31A383AF7001B059E /* TrophyTests.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		92B1DACE1A383AF7001B059E /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 92B1DAAF1A383AF7001B059E /* Trophy */;
+			targetProxy = 92B1DACD1A383AF7001B059E /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin XCBuildConfiguration section */
+		92B1DAD41A383AF7001B059E /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				MTL_ENABLE_DEBUG_INFO = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+			};
+			name = Debug;
+		};
+		92B1DAD51A383AF7001B059E /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = YES;
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				SDKROOT = iphoneos;
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		92B1DAD71A383AF7001B059E /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = F333D028068B5D34422C9C06 /* Pods.debug.xcconfig */;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/Pods",
+					"$(PROJECT_DIR)",
+					"$(PROJECT_DIR)/Parse",
+				);
+				INFOPLIST_FILE = Trophy/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
+				TARGETED_DEVICE_FAMILY = 1;
+			};
+			name = Debug;
+		};
+		92B1DAD81A383AF7001B059E /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 83373A0D52091F2573F5C014 /* Pods.release.xcconfig */;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/Pods",
+					"$(PROJECT_DIR)",
+					"$(PROJECT_DIR)/Parse",
+				);
+				INFOPLIST_FILE = Trophy/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
+				TARGETED_DEVICE_FAMILY = 1;
+			};
+			name = Release;
+		};
+		92B1DADA1A383AF7001B059E /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(SDKROOT)/Developer/Library/Frameworks",
+					"$(inherited)",
+				);
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				INFOPLIST_FILE = TrophyTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Trophy.app/Trophy";
+			};
+			name = Debug;
+		};
+		92B1DADB1A383AF7001B059E /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(SDKROOT)/Developer/Library/Frameworks",
+					"$(inherited)",
+				);
+				INFOPLIST_FILE = TrophyTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Trophy.app/Trophy";
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		92B1DAAB1A383AF7001B059E /* Build configuration list for PBXProject "Trophy" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				92B1DAD41A383AF7001B059E /* Debug */,
+				92B1DAD51A383AF7001B059E /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		92B1DAD61A383AF7001B059E /* Build configuration list for PBXNativeTarget "Trophy" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				92B1DAD71A383AF7001B059E /* Debug */,
+				92B1DAD81A383AF7001B059E /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		92B1DAD91A383AF7001B059E /* Build configuration list for PBXNativeTarget "TrophyTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				92B1DADA1A383AF7001B059E /* Debug */,
+				92B1DADB1A383AF7001B059E /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 92B1DAA81A383AF7001B059E /* Project object */;
+}

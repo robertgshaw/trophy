@@ -1,0 +1,240 @@
+//
+//  TASettingsView.m
+//  Trophy
+//
+//  Created by Gigster on 1/1/15.
+//  Copyright (c) 2015 Gigster. All rights reserved.
+//
+
+#import "TASettingsView.h"
+
+#import "UIColor+TAAdditions.h"
+#import "UITextField+TAAdditions.h"
+#import <ParseUI/ParseUI.h>
+
+static const CGFloat kTextFieldWidth = 200.0;
+static const CGFloat kTextFieldHeight = 40.0;
+static const CGFloat kSaveButtonWidth = 120.0;
+static const CGFloat kSaveButtonHeight = 40.0;
+
+@interface TASettingsView ()<UITextFieldDelegate>
+
+@property (nonatomic, strong) NSString *originalName;
+@property (nonatomic, strong) NSString *originalBio;
+@property (nonatomic, strong) UIImage *originalImage;
+@property (nonatomic, strong) UILabel *nameLabel;
+@property (nonatomic, strong) UILabel *bioLabel;
+@property (nonatomic, strong) UIButton *profileImageButton;
+@property (nonatomic, strong) PFImageView *profileImageView;
+@property (nonatomic, strong) UIButton *saveButton;
+@property (nonatomic, strong) UITextField *nameInput;
+@property (nonatomic, strong) UITextField *descriptionInput;
+@property (nonatomic, assign) BOOL imageHasChanged;
+
+@end
+
+@implementation TASettingsView
+
+- (instancetype)initWithSettings:(TAUser *)user
+{
+    self = [super init];
+    if (self) {
+        self.backgroundColor = [UIColor whiteColor];
+        self.originalName = user.name;
+        self.originalBio = user.bio;
+        self.originalImage = user.profileImage;
+
+        _nameLabel = [[UILabel alloc] init];
+        self.nameLabel.text = @"Name";
+        self.nameLabel.textColor = [UIColor grayColor];
+        [self addSubview:self.nameLabel];
+
+        _nameInput = [TATextField textFieldWithYellowBorder];
+        self.nameInput.delegate = self;
+        self.nameInput.placeholder = @"Name";
+        self.nameInput.text = user.name;
+        self.nameInput.autocapitalizationType = UITextAutocapitalizationTypeWords;
+        self.nameInput.returnKeyType = UIReturnKeyNext;
+        [self addSubview:self.nameInput];
+
+        _bioLabel = [[UILabel alloc] init];
+        self.bioLabel.text = @"Bio";
+        self.bioLabel.textColor = [UIColor grayColor];
+        [self addSubview:self.bioLabel];
+
+        _descriptionInput = [TATextField textFieldWithYellowBorder];
+        self.descriptionInput.delegate = self;
+        self.descriptionInput.placeholder = @"Bio";
+        self.descriptionInput.text = user.bio;
+        self.descriptionInput.autocapitalizationType = UITextAutocapitalizationTypeSentences;
+        self.descriptionInput.returnKeyType = UIReturnKeyDone;
+        [self addSubview:self.descriptionInput];
+        
+
+        _profileImageButton = [[UIButton alloc] init];
+        self.profileImageButton.layer.borderWidth = 3.0f;
+        self.profileImageButton.layer.borderColor = [UIColor trophyYellowColor].CGColor;
+        self.profileImageButton.clipsToBounds = YES;
+        [self.profileImageButton addTarget:self action:@selector(profileImageButtonPressed) forControlEvents:UIControlEventTouchUpInside];
+        [self addSubview:self.profileImageButton];
+        
+        PFFile *imageFile = [user parseFileForProfileImage];
+        if (imageFile) {
+            _profileImageView = [[PFImageView alloc] init];
+            self.profileImageView.file = imageFile;
+            [self.profileImageView loadInBackground];
+            [self.profileImageButton addSubview:self.profileImageView];
+        } else {
+            [self.profileImageButton setBackgroundImage:[UIImage imageNamed:@"default-profile-icon"] forState:UIControlStateNormal];
+        }
+
+        _saveButton = [[UIButton alloc] init];
+        [self.saveButton setTitle:@"Save" forState:UIControlStateNormal];
+        [self.saveButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+        self.saveButton.backgroundColor = [UIColor unselectedGrayColor];
+        [self.saveButton addTarget:self action:@selector(saveButtonPressed) forControlEvents:UIControlEventTouchUpInside];
+        self.saveButton.layer.cornerRadius = 5.0;
+        self.saveButton.layer.borderWidth = 1.0;
+        self.saveButton.layer.borderColor = [UIColor whiteColor].CGColor;
+        [self addSubview:self.saveButton];
+        self.saveButton.enabled = NO;
+
+        self.imageHasChanged = NO;
+    }
+    return self;
+}
+
+- (void)layoutSubviews
+{
+    CGFloat margin = 30.0;
+
+    [self.nameLabel sizeToFit];
+    CGRect frame = self.nameLabel.frame;
+    frame.origin.x = floorf((CGRectGetWidth(self.bounds) - kTextFieldWidth - CGRectGetWidth(self.nameLabel.frame) - 20.0) / 2.0);;
+    frame.origin.y = 50.0 + floorf((kTextFieldHeight - CGRectGetHeight(self.nameLabel.frame)) / 2.0);
+    self.nameLabel.frame = frame;
+
+    frame = self.nameInput.frame;
+    frame.origin.x = CGRectGetMaxX(self.nameLabel.frame) + 20.0;
+    frame.origin.y = 50.0;
+    frame.size.width = kTextFieldWidth;
+    frame.size.height = kTextFieldHeight;
+    self.nameInput.frame = frame;
+
+    [self.bioLabel sizeToFit];
+    frame = self.bioLabel.frame;
+    frame.origin.x = CGRectGetMinX(self.nameLabel.frame);
+    frame.origin.y = CGRectGetMaxY(self.nameInput.frame) + margin + floorf((kTextFieldHeight - CGRectGetHeight(self.bioLabel.frame)) / 2.0);
+    self.bioLabel.frame = frame;
+
+    frame = self.descriptionInput.frame;
+    frame.origin.x = CGRectGetMinX(self.nameInput.frame);
+    frame.origin.y = CGRectGetMaxY(self.nameInput.frame) + margin;
+    frame.size.width = kTextFieldWidth;
+    frame.size.height = kTextFieldHeight;
+    self.descriptionInput.frame = frame;
+
+    frame = self.profileImageButton.frame;
+    frame.origin.x = floorf((CGRectGetWidth(self.bounds) - kTextFieldWidth) / 2.0);
+    frame.origin.y = CGRectGetMaxY(self.descriptionInput.frame) + margin * 2;
+    frame.size.width = kTextFieldWidth;
+    frame.size.height = kTextFieldWidth;
+    self.profileImageButton.frame = frame;
+    self.profileImageButton.layer.cornerRadius = floorf(CGRectGetWidth(self.profileImageButton.frame) / 2.0);
+    self.profileImageView.frame = self.profileImageButton.bounds;
+    
+    [self.saveButton sizeToFit];
+    frame = self.saveButton.frame;
+    frame.size.width = kSaveButtonWidth;
+    frame.size.height = kSaveButtonHeight;
+    frame.origin.x = floorf((CGRectGetWidth(self.bounds) - kSaveButtonWidth) / 2.0);
+    frame.origin.y = CGRectGetMaxY(self.profileImageButton.frame) + margin * 2 - 30.0;
+    self.saveButton.frame = frame;
+}
+
+- (void)setProfileImage:(UIImage *)profileImage
+{
+    if (profileImage) {
+        [self.profileImageButton setBackgroundImage:profileImage forState:UIControlStateNormal];
+        [self.profileImageButton setTitle:@"" forState:UIControlStateNormal];
+        [self.profileImageView removeFromSuperview];
+        self.imageHasChanged = YES;
+        [self enableSaveButton];
+    }
+    _profileImage = profileImage;
+}
+
++ (CGFloat)profileImageWidth
+{
+    return kTextFieldWidth;
+}
+
+#pragma mark - Private Methods
+
+- (void)profileImageButtonPressed
+{
+    [self.delegate settingsViewDidPressProfileImageButton:self];
+}
+
+- (void)saveButtonPressed
+{
+    [self.delegate settingsViewDidPressSaveButton:self];
+}
+
+- (void)enableSaveButton
+{
+    if ([self.name isEqualToString:self.originalName] == NO ||
+        [self.bio isEqualToString:self.originalBio] == NO ||
+        self.imageHasChanged) {
+            self.saveButton.enabled = YES;
+            self.saveButton.backgroundColor = [UIColor standardBlueButtonColor];
+    } else {
+        self.saveButton.enabled = NO;
+        self.saveButton.backgroundColor = [UIColor unselectedGrayColor];
+    }
+}
+
+#pragma mark - UITextField Delegate Methods
+
+- (BOOL)textFieldShouldReturn:(UITextField *)textField
+{
+    if (textField == self.nameInput) {
+        [self.descriptionInput becomeFirstResponder];
+    } else {
+        [self.descriptionInput resignFirstResponder];
+    }
+    return YES;
+}
+
+- (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string
+{
+    NSString *newString = [textField.text stringByReplacingCharactersInRange:range withString:string];
+    if (textField == self.nameInput) {
+        self.name = newString;
+    } else if (textField == self.descriptionInput) {
+        self.bio = newString;
+    }
+    [self enableSaveButton];
+    return YES;
+}
+
+- (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event
+{
+    for (UIView *view in self.subviews){
+        if ([view isKindOfClass:[UITextField class]] && [view isFirstResponder]) {
+            [view resignFirstResponder];
+        }
+    }
+}
+
+- (NSString *)name
+{
+    return self.nameInput.text;
+}
+
+- (NSString *)bio
+{
+    return self.descriptionInput.text;
+}
+
+@end

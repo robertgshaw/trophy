@@ -1,0 +1,5 @@
+*.framework/
+Pods/
+Podfile.lock
+Trophy.xcodeproj/xcuserdata/
+Trophy.xcworkspace
