@@ -8,7 +8,7 @@ A mobile app for sharing interesting photos with private groups.
 
 1. Create a local copy of the Trophy repo
    ```
-   git clone https://github.com/gigster-eng/trophy.git
+   git clone https://github.com/JakeFromTrophy/TrophyApp.git
    ```
 
 2. Install cocoapods (http://guides.cocoapods.org/using/getting-started.html)
