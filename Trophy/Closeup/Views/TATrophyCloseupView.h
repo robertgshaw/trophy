@@ -16,6 +16,7 @@
 @protocol TATrophyCloseupViewDelegate <NSObject>
 
 - (void)closeupViewDidPressCommentsButton:(TATrophyCloseupView *)TrophyCloseupView;
+- (void)backButtonPressed;
 
 @end
 

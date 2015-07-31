@@ -64,7 +64,7 @@
         UILabel *titleLabel = [[UILabel alloc] init];
         titleLabel.font = [UIFont boldSystemFontOfSize:20.0];
         titleLabel.backgroundColor = [UIColor clearColor];
-        titleLabel.textColor = [UIColor darkYellowColor];
+        titleLabel.textColor = [UIColor trophyYellowColor];
         titleLabel.textAlignment = NSTextAlignmentCenter;
         titleLabel.text = @"Settings";
         [titleLabel sizeToFit];

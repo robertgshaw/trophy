@@ -53,7 +53,6 @@ static const CGFloat kGroupsButtonHeight = 70.0;
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    self.view.backgroundColor = [UIColor whiteColor];
     
     self.view.backgroundColor = [UIColor whiteColor];
     self.tabBarItem = [[UITabBarItem alloc] initWithTitle:@""
@@ -73,7 +72,13 @@ static const CGFloat kGroupsButtonHeight = 70.0;
                                                                    target:self
                                                                    action:@selector(presentProfile)];
     self.navigationItem.rightBarButtonItem = rightButton;
-    self.navigationController.navigationBar.tintColor = [UIColor trophyYellowColor];
+    
+    self.navigationItem.rightBarButtonItem.tintColor = [UIColor whiteColor];
+    self.navigationItem.leftBarButtonItem.tintColor = [UIColor whiteColor];
+    
+    // configures nav bar display
+    self.navigationController.navigationBar.barStyle = UIBarStyleDefault;
+    self.navigationController.navigationBar.barTintColor = [UIColor darkYellowColor];
     
     self.backgroundTap = [[UIButton alloc] initWithFrame:self.view.bounds];
     [self.backgroundTap addTarget:self action:@selector(backgroundDidTap:) forControlEvents:UIControlEventTouchUpInside];
@@ -120,7 +125,7 @@ static const CGFloat kGroupsButtonHeight = 70.0;
     UIView *groupListView = [[UIView alloc] initWithFrame:groupListButton.frame];
     UILabel *groupListLabel = [[UILabel alloc] init];
     groupListLabel.text = @"Hall of Fame";;
-    groupListLabel.textColor = [UIColor darkYellowColor];
+    groupListLabel.textColor = [UIColor whiteColor];
     groupListLabel.font = [UIFont boldSystemFontOfSize:20.0];
     [groupListLabel sizeToFit];
     [groupListView addSubview:groupListLabel];

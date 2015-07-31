@@ -72,8 +72,8 @@ static const CGFloat kActionFooterWidth = 150.0;
     frame = self.likesButton.frame;
     frame.size = CGSizeMake(kButtonWidth, kButtonWidth);
     //frame.origin.x = kSideMargin;
-    frame.origin.x=2;
-    frame.origin.y = floorf((CGRectGetHeight(self.bounds) - kButtonWidth) / 2.0)-24;
+    frame.origin.x = 2;
+    frame.origin.y = 0;
     self.likesButton.frame = frame;
     
     [self.likesLabel sizeToFit];

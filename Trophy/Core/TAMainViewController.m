@@ -47,14 +47,14 @@
 - (void)configureViewControllers
 {
     TATimelineViewController *timelineViewController = [[TATimelineViewController alloc] init];
+    
     timelineViewController.presentedDelegate = self;
     self.timelineController = [[UINavigationController alloc] initWithRootViewController:timelineViewController];
-
+    
     self.imagePicker = [[UIViewController alloc] init];
     self.imagePicker.tabBarItem = [[UITabBarItem alloc] initWithTitle:@"" image:[UIImage imageNamed:@"camera-tab-button.png"] selectedImage:[UIImage imageNamed:@"camera-tab-button-selected.png"]];
     self.imagePicker.tabBarItem.imageInsets = UIEdgeInsetsMake(4, 0, -4, 0);
     
-
     TALeaderboardViewController *leaderboardViewController = [[TALeaderboardViewController alloc] init];
     leaderboardViewController.presentedDelegate = self;
     self.leaderboardController = [[UINavigationController alloc] initWithRootViewController:leaderboardViewController];
@@ -164,8 +164,6 @@
     }
 }
 
-
-
 - (void)trophyPickerOverlayDidSelectFlashButton
 {
     if (self.imagePickerController.cameraFlashMode == UIImagePickerControllerCameraFlashModeOn) {
@@ -177,7 +175,6 @@
        
     }
 }
-
 
 - (void)trophyPickerOverlayDidSelectCancelButton
 {
@@ -208,7 +205,7 @@
     TASettingsViewController *settingsVC = [[TASettingsViewController alloc] initWithSetupFlow:NO];
     settingsVC.delegate = self;
     UINavigationController *navController = [[UINavigationController alloc] initWithRootViewController:settingsVC];
-    settingsVC.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"Back" style:UIBarButtonItemStylePlain target:self action:@selector(backButtonPressed)];
+    settingsVC.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"Cancel" style:UIBarButtonItemStylePlain target:self action:@selector(backButtonPressed)];
     [self presentViewController:navController animated:YES completion:nil];
 }
 

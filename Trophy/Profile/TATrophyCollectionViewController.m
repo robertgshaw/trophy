@@ -13,6 +13,7 @@
 #import "TATrophyCollectionViewCell.h"
 #import "TATrophyCloseupViewController.h"
 #import "TACommentTableViewController.h"
+#import "UIColor+TAAdditions.h"
 
 #import <Parse/Parse.h>
 

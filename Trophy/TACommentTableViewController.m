@@ -60,15 +60,16 @@ static const CGFloat kPAPCellInsetWidth = 20.0f;
     
     [super viewDidLoad];
     
-    self.navigationItem.titleView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"f"]];
+//    self.navigationItem.titleView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"f"]];
     
     [self.navigationItem setHidesBackButton:NO];
+    self.navigationController.navigationBarHidden = NO;
     
     UIButton *backButton = [UIButton buttonWithType:UIButtonTypeCustom];
     [backButton setFrame:CGRectMake( 0.0f, 0.0f, 52.0f, 32.0f)];
     [backButton setTitle:@"Back" forState:UIControlStateNormal];
-    [backButton setTitleColor:[UIColor colorWithRed:214.0f/255.0f green:210.0f/255.0f blue:197.0f/255.0f alpha:1.0] forState:UIControlStateNormal];
-    [[backButton titleLabel] setFont:[UIFont boldSystemFontOfSize:[UIFont smallSystemFontSize]]];
+    backButton.tintColor = [UIColor whiteColor];
+    [[backButton titleLabel] setFont:[UIFont boldSystemFontOfSize:[UIFont systemFontSize]]];
     [backButton setTitleEdgeInsets:UIEdgeInsetsMake( 0.0f, 5.0f, 0.0f, 0.0f)];
     [backButton addTarget:self action:@selector(backButtonAction:) forControlEvents:UIControlEventTouchUpInside];
     [backButton setBackgroundImage:[UIImage imageNamed:@"ButtonBack"] forState:UIControlStateNormal];
@@ -328,6 +329,7 @@ static const CGFloat kPAPCellInsetWidth = 20.0f;
 
 - (void)backButtonAction:(id)sender {
     [self.navigationController popViewControllerAnimated:YES];
+    self.navigationController.navigationBarHidden = YES;
 }
 
 - (void)keyboardWillShow:(NSNotification*)note {

@@ -158,6 +158,9 @@
                 [currentInstallation saveInBackground];
                 NSLog(@"Add user to %@ channel for Group [%@]", parseGroup.objectId, parseGroup[@"name"]);
                 
+                // sets joined group as active
+                [self setActiveGroup:newGroup];
+                
                 success(newGroup);
             } else {
                 failure(@"You are already in that group!");

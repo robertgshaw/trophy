@@ -12,6 +12,7 @@
 #import "TASettingsViewController.h"
 #import "TATrophyCollectionViewController.h"
 #import "TATrophyManager.h"
+#import "UIColor+TAAdditions.h"
 
 #import <SVProgressHUD.h>
 
@@ -72,7 +73,23 @@ static const CGFloat kProfileHeaderMinHeight = 100.0;
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-
+    
+    NSLog(@"Loading settings information");
+    
+    // adds the color to the navigation bar
+    self.navigationController.navigationBar.tintColor = [UIColor whiteColor];
+    
+    // adds title label to the profile view
+    UILabel *titleLabel = [[UILabel alloc] init];
+    titleLabel.font = [UIFont boldSystemFontOfSize:20.0];
+    titleLabel.backgroundColor = [UIColor clearColor];
+    titleLabel.textColor = [UIColor whiteColor];
+    titleLabel.textAlignment = NSTextAlignmentCenter;
+    titleLabel.text = @"Trophy Case";
+    [titleLabel sizeToFit];
+    self.navigationItem.titleView = titleLabel;
+    self.navigationController.navigationBar.tintColor = [UIColor whiteColor];
+ 
     self.edgesForExtendedLayout = UIRectEdgeNone;
     self.view.backgroundColor = [UIColor whiteColor];
     

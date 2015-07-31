@@ -18,6 +18,7 @@
 #import "TATrophyCloseupViewController.h"
 #import "TASettingsViewController.h"
 #import "TACommentTableViewController.h"
+#import "TAGroupListButton.h"
 #import "UIColor+TAAdditions.h"
 
 static const CGFloat kGroupsButtonWidth = 80.0;
@@ -34,6 +35,7 @@ static const CGFloat kGroupsButtonHeight = 70.0;
 @property (nonatomic, strong) TAGroup *currentGroup;
 @property (nonatomic, strong) UIButton *backgroundTap;
 @property (nonatomic, strong) CAShapeLayer *formatGroupsLayer;
+@property (nonatomic, strong) TAGroupListButton *groupListButton;
 
 @end
 
@@ -75,13 +77,15 @@ static const CGFloat kGroupsButtonHeight = 70.0;
     self.navigationItem.rightBarButtonItem = rightButton;
     
     // change color
-    rightButton.tintColor = [UIColor trophyYellowColor];
-    leftButton.tintColor = [UIColor trophyYellowColor];
+    rightButton.tintColor = [UIColor whiteColor];
+    leftButton.tintColor = [UIColor whiteColor];
     
     //change top bar icon collor
-    self.navigationController.navigationBar.tintColor = [UIColor trophyYellowColor];
-    //change bttom bar icon color
-    self.tabBarController.tabBar.tintColor = [UIColor standardBlueButtonColor];
+    self.navigationController.navigationBar.barStyle = UIBarStyleDefault;
+    self.navigationController.navigationBar.barTintColor = [UIColor darkYellowColor];
+    
+    //change bottom bar icon color
+    self.tabBarController.tabBar.barStyle = UIBarStyleDefault;
     
     self.backgroundTap = [[UIButton alloc] initWithFrame:self.view.bounds];
     [self.backgroundTap addTarget:self action:@selector(backgroundDidTap:) forControlEvents:UIControlEventTouchUpInside];
@@ -108,31 +112,12 @@ static const CGFloat kGroupsButtonHeight = 70.0;
 
 - (void)layoutGroupsButton
 {
-    UIButton *groupListButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, kGroupsButtonWidth, kGroupsButtonHeight)];
-    [groupListButton addTarget:self action:@selector(groupListButtonDidPress) forControlEvents:UIControlEventTouchUpInside];
-    UIView *groupListView = [[UIView alloc] initWithFrame:groupListButton.frame];
-    UILabel *groupListLabel = [[UILabel alloc] init];
-    groupListLabel.text = @"Trophy";
-
-    groupListLabel.textColor = [UIColor darkYellowColor];
-    groupListLabel.font = [UIFont boldSystemFontOfSize:20.0];
-    [groupListLabel sizeToFit];
-    [groupListView addSubview:groupListLabel];
-    UIImageView *downArrowImageView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"down-arrow"]];
-    [groupListView addSubview:downArrowImageView];
+    // initializes group list button
+    self.groupListButton = [[TAGroupListButton alloc] initWithFrame:CGRectMake(0, 0, kGroupsButtonWidth, kGroupsButtonHeight)];
+    [self.groupListButton addTarget:self action:@selector(groupListButtonDidPress) forControlEvents:UIControlEventTouchUpInside];
     
-    CGRect frame = groupListLabel.frame;
-    frame.origin.x = floorf((kGroupsButtonWidth - CGRectGetWidth(groupListLabel.frame) - CGRectGetWidth(downArrowImageView.frame) - 3.0) / 2.0);
-    frame.origin.y = floorf((kGroupsButtonHeight - CGRectGetHeight(groupListLabel.frame)) / 2.0);
-    groupListLabel.frame = frame;
-    
-    frame = downArrowImageView.frame;
-    frame.origin.x = CGRectGetMaxX(groupListLabel.frame) + 3.0;
-    frame.origin.y = floorf((kGroupsButtonHeight - CGRectGetHeight(downArrowImageView.frame)) / 2.0);
-    downArrowImageView.frame = frame;
-    [groupListButton addSubview:groupListView];
-    groupListView.userInteractionEnabled = NO;
-    self.navigationItem.titleView = groupListButton;
+    // adds group list button to view
+    self.navigationItem.titleView = self.groupListButton;
 }
 
 - (void)layoutGroupListView
@@ -305,6 +290,7 @@ static const CGFloat kGroupsButtonHeight = 70.0;
     CGRect frame = self.groupListVC.view.frame;
     frame.size.height = [self.groupListVC heightForList];
     self.groupListVC.view.frame = frame;
+    [self.groupListButton updateGroupsButtonWithName:[TAGroupManager sharedManager].activeGroup.name];
 }
 
 - (void)groupListViewControllerDidChangeGroups:(TAGroupListViewController *)groupListViewController
@@ -312,11 +298,13 @@ static const CGFloat kGroupsButtonHeight = 70.0;
     self.groupListVC.view.hidden = YES;
     [self.groupListVC.view removeFromSuperview];
     [self loadObjects];
+    [self.groupListButton updateGroupsButtonWithName:[TAGroupManager sharedManager].activeGroup.name];
 }
 
 - (void)groupListViewControllerDidAddGroup:(TAGroupListViewController *)groupListViewController
 {
     [self loadObjects];
+    [self.groupListButton updateGroupsButtonWithName:[TAGroupManager sharedManager].activeGroup.name];
 }
 
 #pragma mark - UINavigation Methods
@@ -334,14 +322,25 @@ static const CGFloat kGroupsButtonHeight = 70.0;
 - (void)presentUserProfile:(TAUser *)user
 {
     TAProfileViewController *profileVC = [[TAProfileViewController alloc] initWithUser:user];
+    
+    // adds navigation item to the view
+    profileVC.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"Back" style:UIBarButtonItemStylePlain target:self action:@selector(backButtonPressed)];
+
     [self.navigationController pushViewController:profileVC animated:YES];
+}
+
+// handles back button presses
+- (void)backButtonPressed {
+    [self.navigationController dismissViewControllerAnimated:YES completion:nil];
 }
 
 - (void)presentTrophyCloseup:(TATrophy *)trophy
 {
     TATrophyCloseupViewController *closeupViewController = [[TATrophyCloseupViewController alloc] initWithTrophy:trophy];
     closeupViewController.delegate = self;
+    closeupViewController.hidesBottomBarWhenPushed = YES;
     [self.navigationController pushViewController:closeupViewController animated:YES];
+ 
 }
 -(void)presentTrophyComments:(TATrophy *)trophy
 {
@@ -354,6 +353,15 @@ static const CGFloat kGroupsButtonHeight = 70.0;
 - (void)trophyCloseupDidPerformAction:(TATrophyCloseupViewController *)viewController
 {
     [self loadObjects];
+}
+
+- (void) closeUpViewControllerBackButtonPressed
+{
+    // pops to the timeline view controller
+    [self.navigationController popToViewController:self animated:YES];
+    
+    // displays the nav bar and the tab bar
+    self.navigationController.navigationBarHidden = NO;
 }
 
 @end

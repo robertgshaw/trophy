@@ -13,12 +13,13 @@
 #import "UIColor+TAAdditions.h"
 #import "TATrophy.h"
 #import "TATimelineViewController.h"
+#import "TAOverlayButton.h"
 
-@interface TATrophyCloseupViewController () <TATrophyActionFooterDelegate>
+@interface TATrophyCloseupViewController () <TATrophyActionFooterDelegate, TAOverlayButtonDelegate, TATrophyCloseupViewDelegate>
 
 @property (nonatomic, strong) TATrophy *trophy;
 @property (nonatomic, strong) TATrophyCloseupView *closeupView;
-@property (nonatomic, strong) UIButton *commentsButton;
+//@property (nonatomic, strong) UIButton *commentsButton;
 @property (nonatomic, strong) UIButton *moreButton;
 
 @end
@@ -32,25 +33,27 @@
         _trophy = trophy;
         
     }
+
     return self;
 }
 
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    self.view.backgroundColor = [UIColor whiteColor];
-    self.edgesForExtendedLayout = UIRectEdgeNone;
-    [self.navigationController setToolbarHidden:YES animated:YES];
+    // hides navbar in closeup view
+    self.navigationController.navigationBarHidden = YES;
+    self.navigationController.toolbarHidden = YES;
+    
+    self.view.backgroundColor = [UIColor blackColor];
+    
+    self.edgesForExtendedLayout = UIRectEdgeAll;
     
     self.closeupView = [[TATrophyCloseupView alloc] initWithDelegate:self];
-    self.closeupView.trophy = self.trophy;
-    self.closeupView.frame = self.view.bounds;
-    [self.view addSubview:self.closeupView];
     
-    self.commentsButton = [[UIButton alloc] init];
-    [self.commentsButton setBackgroundImage:[UIImage imageNamed:@"commentButton"] forState:UIControlStateNormal];
-    [self.commentsButton addTarget:self action:@selector(didPressCommentsButton) forControlEvents:UIControlEventTouchUpInside];
-    [self.view addSubview:self.commentsButton];
+    [self.closeupView setTrophy:self.trophy];
+    self.closeupView.frame = self.view.frame;
+    
+    [self.view addSubview:self.closeupView];
     
     _moreButton = [[UIButton alloc] initWithFrame:CGRectZero];
     self.moreButton.backgroundColor = [UIColor trophyYellowColor];
@@ -63,26 +66,20 @@
     self.moreButton.hidden = YES;
     [self.view addSubview:self.moreButton];
 
-    CGRect frame = self.commentsButton.frame;
-    frame.size = CGSizeMake(25.0, 25.0);
-    frame.origin.x = CGRectGetMinX(self.commentsButton.frame) + 2.5;
-    frame.origin.y = CGRectGetMaxY(self.view.frame) - 140;
-    self.commentsButton.frame = frame;
-    
     PFUser *authorObject = [self.trophy.author getUserAsParseObject];
 
     TAUser *currentUser = [TAActiveUserManager sharedManager].activeUser;
     PFUser *userObject = [currentUser getUserAsParseObject];
-    NSLog(@"%@", authorObject.objectId);
-    NSLog(@"%@", userObject.objectId);
 
     if([authorObject.objectId isEqualToString:userObject.objectId])
     {
         self.moreButton.hidden = NO;
         NSLog(@"HEY");
     }
+    
+    CGRect frame;
     frame.size = CGSizeMake(60.0, 25.0);
-    frame.origin.x = CGRectGetMidX(self.commentsButton.frame) + 30;
+    //frame.origin.x = CGRectGetMidX(self.commentsButton.frame) + 30;
     frame.origin.y = CGRectGetMaxY(self.view.frame) - 140;
     self.moreButton.frame = frame;
     
@@ -98,12 +95,18 @@
     self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:backButton];
 }
 
+#pragma mark - TAOverlayButtonDelegate Methods
+
+- (void) overlayViewDidPressCommentsButton
+{
+     TACommentTableViewController *commentViewController = [[TACommentTableViewController alloc] initWithPhoto:self.trophy];
+    [self.navigationController pushViewController:commentViewController animated:YES];
+}
 
 #pragma mark - TACloseupViewDelegate Methods
 
 - (void)closeupViewDidPressCommentsButton:(TATrophyCloseupView *)TrophyCloseupView;
 {
-    
     TACommentTableViewController *commentsVC = [[TACommentTableViewController alloc] init];
     UINavigationController *navController = [[UINavigationController alloc] initWithRootViewController:commentsVC];
     [self presentViewController:navController animated:YES completion:nil];
@@ -202,4 +205,9 @@
     
 }
 
+- (void) backButtonPressed
+{
+    NSLog(@"hello");
+    [self.delegate closeUpViewControllerBackButtonPressed];
+}
 @end
