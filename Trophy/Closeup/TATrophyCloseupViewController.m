@@ -20,7 +20,7 @@
 @property (nonatomic, strong) TATrophy *trophy;
 @property (nonatomic, strong) TATrophyCloseupView *closeupView;
 //@property (nonatomic, strong) UIButton *commentsButton;
-@property (nonatomic, strong) UIButton *moreButton;
+@property (nonatomic, strong) UIButton *deleteButton;
 
 @end
 
@@ -55,16 +55,16 @@
     
     [self.view addSubview:self.closeupView];
     
-    _moreButton = [[UIButton alloc] initWithFrame:CGRectZero];
-    self.moreButton.backgroundColor = [UIColor trophyYellowColor];
-    [self.moreButton setTitle:@"Delete" forState:UIControlStateNormal];
-    [self.moreButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
-    self.moreButton.titleLabel.font = [UIFont boldSystemFontOfSize:14.0];
-    self.moreButton.layer.cornerRadius = 5.0;
-    self.moreButton.clipsToBounds = YES;
-    [self.moreButton addTarget:self action:@selector(moreButtonPressed) forControlEvents:UIControlEventTouchUpInside];
-    self.moreButton.hidden = YES;
-    [self.view addSubview:self.moreButton];
+    _deleteButton = [[UIButton alloc] initWithFrame:CGRectZero];
+    self.deleteButton.backgroundColor = [UIColor trophyYellowColor];
+    [self.deleteButton setTitle:@"Delete" forState:UIControlStateNormal];
+    [self.deleteButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+    self.deleteButton.titleLabel.font = [UIFont boldSystemFontOfSize:14.0];
+    self.deleteButton.layer.cornerRadius = 5.0;
+    self.deleteButton.clipsToBounds = YES;
+    [self.deleteButton addTarget:self action:@selector(deleteButtonPressed) forControlEvents:UIControlEventTouchUpInside];
+    self.deleteButton.hidden = YES;
+    [self.view addSubview:self.deleteButton];
 
     PFUser *authorObject = [self.trophy.author getUserAsParseObject];
 
@@ -73,26 +73,15 @@
 
     if([authorObject.objectId isEqualToString:userObject.objectId])
     {
-        self.moreButton.hidden = NO;
+        self.deleteButton.hidden = NO;
         NSLog(@"HEY");
     }
     
     CGRect frame;
     frame.size = CGSizeMake(60.0, 25.0);
-    //frame.origin.x = CGRectGetMidX(self.commentsButton.frame) + 30;
-    frame.origin.y = CGRectGetMaxY(self.view.frame) - 140;
-    self.moreButton.frame = frame;
-    
-    UIButton *backButton = [UIButton buttonWithType:UIButtonTypeCustom];
-    [backButton setFrame:CGRectMake( 0.0f, 0.0f, 52.0f, 32.0f)];
-    [backButton setTitle:@"Flag" forState:UIControlStateNormal];
-    [backButton setTitleColor:[UIColor colorWithRed:214.0f/255.0f green:210.0f/255.0f blue:197.0f/255.0f alpha:1.0] forState:UIControlStateNormal];
-    [[backButton titleLabel] setFont:[UIFont boldSystemFontOfSize:[UIFont smallSystemFontSize]]];
-    [backButton setTitleEdgeInsets:UIEdgeInsetsMake( 0.0f, 5.0f, 0.0f, 0.0f)];
-    [backButton addTarget:self action:@selector(flagButtonAction:) forControlEvents:UIControlEventTouchUpInside];
-    [backButton setBackgroundImage:[UIImage imageNamed:@"ButtonBack"] forState:UIControlStateNormal];
-    [backButton setBackgroundImage:[UIImage imageNamed:@"ButtonBackSelected"] forState:UIControlStateHighlighted];
-    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:backButton];
+    frame.origin.x = CGRectGetMidX(self.view.bounds) - 25;
+    frame.origin.y = CGRectGetMaxY(self.view.frame) - 50;
+    self.deleteButton.frame = frame;
 }
 
 #pragma mark - TAOverlayButtonDelegate Methods
@@ -140,37 +129,7 @@
     //[self.delegate trophyCloseupDidPerformAction:self];
     
 }
-- (void)flagButtonAction:(id)sender {
-    UIAlertController * alert=   [UIAlertController
-                                  alertControllerWithTitle:@"Flag"
-                                
-                                  message:@"Do you want to flag this trophy for removal?"
-                                  preferredStyle:UIAlertControllerStyleAlert];
-    
-    UIAlertAction* ok = [UIAlertAction
-                         actionWithTitle:@"Yes"
-                         style:UIAlertActionStyleDefault
-                         handler:^(UIAlertAction * action)
-                         {
-                             // TODO write FLAG FUNCTION here
-                             [alert dismissViewControllerAnimated:YES completion:nil];
-                             
-                         }];
-    UIAlertAction* cancel = [UIAlertAction
-                             actionWithTitle:@"Cancel"
-                             style:UIAlertActionStyleDefault
-                             handler:^(UIAlertAction * action)
-                             {
-                                 [alert dismissViewControllerAnimated:YES completion:nil];
-                                 
-                             }];
-    
-    [alert addAction:ok];
-    [alert addAction:cancel];
-    
-    [self presentViewController:alert animated:YES completion:nil];
-}
-- (void)moreButtonPressed
+- (void)deleteButtonPressed
 {
     // alert - yes/no for delete
     UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Delete Trophy" message:@"Are you sure?" delegate:self cancelButtonTitle:@"Cancel" otherButtonTitles:@"Yes", nil]; [alert show];
@@ -185,12 +144,15 @@
                 // The find succeeded.
                 
                 //init timeline to take user back to timeline after trophy is deleted
-                TATimelineViewController *timelineViewController = [[TATimelineViewController alloc] init];
+                //TATimelineViewController *timelineViewController = [[TATimelineViewController alloc] init];
                 
                 // delete found objects
                 [PFObject deleteAllInBackground:objects];
                 NSLog(@"Successfully deleted!");
-                [self.navigationController pushViewController:timelineViewController animated:YES];
+                //[self.navigationController pushViewController:timelineViewController animated:YES];
+                //self.navigationController.navigationBarHidden = NO;
+                [self.delegate closeUpViewControllerBackButtonPressed];
+
                 
             } else {
                 // Log details of the failure
@@ -202,7 +164,7 @@
 }
 - (void)trophyActionFooterDidPressAddButton
 {
-    
+
 }
 
 - (void) backButtonPressed
