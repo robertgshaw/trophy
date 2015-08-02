@@ -185,13 +185,19 @@ static const CGFloat uiTabBarHeight = 39.0;
 - (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex{
     if (buttonIndex == 1) { // Set buttonIndex == 0 to handel "Ok"/"Yes" button response
         // Ok button response
+        
+        //Query parse
         PFQuery *query = [PFQuery queryWithClassName:@"Trophy"];
         [query whereKey:@"objectId" equalTo: [self.trophy getTrophyAsParseObject].objectId];
-        [query findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
+        [query getFirstObjectInBackgroundWithBlock:^(PFObject * object, NSError *error) {
             if (!error) {
                 // The find succeeded.
                 
-               //put flag in here
+               //flag function
+                [object setObject:[NSNumber numberWithBool:YES] forKey:@"flag"];
+                
+                [object saveInBackground];
+                NSLog(@"Successfully flagged. This trophy will be reviewed for removal.");
                 
             } else {
                 // Log details of the failure
