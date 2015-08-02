@@ -213,6 +213,7 @@
 {
     TAUser *currentUser = [TAActiveUserManager sharedManager].activeUser;
     TAProfileViewController *profileVC = [[TAProfileViewController alloc] initWithUser:currentUser];
+    
     [viewController.navigationController pushViewController:profileVC animated:YES];
 }
 

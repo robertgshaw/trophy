@@ -47,10 +47,12 @@
         NSLog(@"New user, no settings information");
         [self.navigationController setNavigationBarHidden:NO animated:YES];
         self.navigationItem.hidesBackButton = YES;
+        self.navigationController.navigationBar.barStyle = UIBarStyleDefault;
+        self.navigationController.navigationBar.barTintColor = [UIColor darkYellowColor];
         UILabel *titleLabel = [[UILabel alloc] init];
         titleLabel.font = [UIFont boldSystemFontOfSize:20.0];
         titleLabel.backgroundColor = [UIColor clearColor];
-        titleLabel.textColor = [UIColor trophyYellowColor];
+        titleLabel.textColor = [UIColor whiteColor];
         titleLabel.textAlignment = NSTextAlignmentCenter;
         titleLabel.text = @"Create Profile";
         [titleLabel sizeToFit];
@@ -61,15 +63,19 @@
         [self.view addSubview:addSettingsView];
     } else {
         NSLog(@"Loading settings information");
+        self.navigationController.navigationBar.barStyle = UIBarStyleDefault;
+        self.navigationController.navigationBar.barTintColor = [UIColor darkYellowColor];
+        self.navigationController.navigationBar.tintColor = [UIColor whiteColor];
+        
         UILabel *titleLabel = [[UILabel alloc] init];
         titleLabel.font = [UIFont boldSystemFontOfSize:20.0];
         titleLabel.backgroundColor = [UIColor clearColor];
-        titleLabel.textColor = [UIColor trophyYellowColor];
+        titleLabel.textColor = [UIColor whiteColor];
         titleLabel.textAlignment = NSTextAlignmentCenter;
         titleLabel.text = @"Settings";
         [titleLabel sizeToFit];
         self.navigationItem.titleView = titleLabel;
-        self.navigationController.navigationBar.tintColor = [UIColor standardBlueButtonColor];
+    
         UIBarButtonItem *rightButton = [[UIBarButtonItem alloc] initWithTitle:@"Logout" style:UIBarButtonItemStylePlain target:self action:@selector(logoutButtonPressed)];
         self.navigationItem.rightBarButtonItem = rightButton;
 
