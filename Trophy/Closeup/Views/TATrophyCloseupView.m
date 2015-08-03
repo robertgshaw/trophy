@@ -161,7 +161,6 @@ static const CGFloat uiTabBarHeight = 39.0;
 
 - (void)backButtonPressed:(UIButton *)sender {
 
-    NSLog(@"hey");
     [self.delegate1 backButtonPressed];
 
 }

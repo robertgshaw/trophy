@@ -207,7 +207,6 @@
 
 - (void) backButtonPressed
 {
-    NSLog(@"hello");
     [self.delegate closeUpViewControllerBackButtonPressed];
 }
 @end
