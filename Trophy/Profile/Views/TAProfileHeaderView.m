@@ -25,7 +25,10 @@ static const CGFloat kLabelInnerMargin = 10.0;
 @property (nonatomic, strong) UILabel *nameLabel;
 @property (nonatomic, strong) UILabel *trophiesLabel;
 @property (nonatomic, strong) UILabel *groupsLabel;
+//TODO create bio label for college
+//@property (nonatomic, strong) UILabel *bioLabel;
 @property (nonatomic, strong) UIButton *editButton;
+@property (nonatomic, strong) UIButton *flagButton;
 
 @end
 
@@ -74,6 +77,18 @@ static const CGFloat kLabelInnerMargin = 10.0;
         [self.editButton addTarget:self action:@selector(editButtonPressed:) forControlEvents:UIControlEventTouchUpInside];
         self.editButton.hidden = YES;
         [self addSubview:self.editButton];
+        
+        _flagButton = [[UIButton alloc] initWithFrame:CGRectZero];
+        self.flagButton.backgroundColor = [UIColor redColor];
+        [self.flagButton setTitle:@"Flag" forState:UIControlStateNormal];
+        [self.flagButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+        self.flagButton.titleLabel.font = [UIFont boldSystemFontOfSize:14.0];
+        self.flagButton.layer.cornerRadius = 5.0;
+        self.flagButton.clipsToBounds = YES;
+        [self.flagButton addTarget:self action:@selector(flagButtonPressed:) forControlEvents:UIControlEventTouchUpInside];
+        self.flagButton.hidden = NO;
+        [self addSubview:self.flagButton];
+
     }
     return self;
 }
@@ -89,6 +104,14 @@ static const CGFloat kLabelInnerMargin = 10.0;
     frame.size.height = kProfileImageWidth;
     self.profileImageView.frame = frame;
 
+    self.flagButton.hidden = [self isCurrentUser] == YES;
+    [self.flagButton sizeToFit];
+    frame = self.flagButton.frame;
+    frame.origin.x = CGRectGetWidth(self.bounds) - CGRectGetWidth(self.flagButton.frame) - 2 * kLabelInnerMargin - kProfileImageMargin + 25.0;
+    frame.origin.y = CGRectGetMidY(self.profileImageView.frame) - floorf(CGRectGetHeight(self.flagButton.frame) / 2.0);
+    frame.size.width = CGRectGetWidth(self.flagButton.frame) + 2 * kLabelInnerMargin;
+    self.flagButton.frame = frame;
+    
     self.editButton.hidden = [self isCurrentUser] == NO;
     [self.editButton sizeToFit];
     frame = self.editButton.frame;
@@ -176,6 +199,36 @@ static const CGFloat kLabelInnerMargin = 10.0;
 - (void)editButtonPressed:(id)sender
 {
     [self.delegate profileHeaderViewDidPressEdit:self];
+}
+- (void)flagButtonPressed:(id *)sender {
+    
+    // alert - yes/no for flag
+    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Flag User for Inapporpriate Use" message:@"Are you sure?" delegate:self cancelButtonTitle:@"Cancel" otherButtonTitles:@"Yes", nil]; [alert show];
+    
+}
+- (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex{
+    if (buttonIndex == 1) { // Set buttonIndex == 0 to handel "Ok"/"Yes" button response
+        // Ok button response
+        
+        // get trophy author as parse object
+        TAUser *user = _user;
+        PFUser *authorObject = [user getUserAsParseObject];
+        
+        // Object method
+        PFObject *flag = [PFObject objectWithClassName:@"Flag"];
+        flag[@"fromUser"] = [PFUser currentUser];
+        flag[@"toUser"] = authorObject;
+        flag[@"resolved"] = @NO;
+        [flag saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
+            if (succeeded) {
+                // The object has been saved.
+                NSLog(@"Successfully flagged. This user will be reviewed for misbehavior.");
+            } else {
+                // There was a problem, check error.description
+                NSLog(@"Error: %@ %@", error, [error userInfo]);
+            }
+        }];
+    }
 }
 
 @end

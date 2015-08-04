@@ -24,6 +24,7 @@
         //[self setBackgroundImage:[UIImage imageNamed:@"likes-button"] forState:UIControlStateSelected];
         //[self addTarget:self action:@selector(didPressOverlay) forControlEvents:UIControlEventTouchUpInside];
         
+        //
         // configures title label
         self.titleLabel = [[UILabel alloc] init];
         [self.titleLabel setTextAlignment:NSTextAlignmentLeft];
