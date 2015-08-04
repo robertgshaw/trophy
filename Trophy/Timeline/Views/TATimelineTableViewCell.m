@@ -10,6 +10,10 @@
 
 #import "TATrophyActionFooterView.h"
 
+#import "TACommentTableViewController.h"
+
+#import "TACommentButton.h"
+
 #import "UIColor+TAAdditions.h"
 #import <Foundation/Foundation.h>
 #import <ParseUI/ParseUI.h>
@@ -81,6 +85,9 @@ static const CGFloat kCellInnerMargin = 10.0;
         self.dateLabel.font = [UIFont systemFontOfSize:10.0];
         self.dateLabel.numberOfLines = 1;
         [self addSubview:self.dateLabel];
+        
+        self.commentsButton = [[TACommentButton alloc] init];
+        [self addSubview:self.commentsButton];
 
         _descriptionLabel = [[UILabel alloc] initWithFrame:CGRectZero];
         self.descriptionLabel.numberOfLines = 0;
@@ -141,7 +148,7 @@ static const CGFloat kCellInnerMargin = 10.0;
     
     [self.dateLabel sizeToFit];
     frame = self.dateLabel.frame;
-    frame.origin.x = (kCellSideMargin + CGRectGetWidth(self.trophyFrameView.frame) + kCellInnerMargin);
+    frame.origin.x = (kCellSideMargin + CGRectGetWidth(self.trophyFrameView.frame) + kCellInnerMargin*1.5);
     frame.origin.y = kCellSideMargin * 5.5;
     frame.size.width = maxWidth;
     self.dateLabel.frame = frame;
@@ -183,6 +190,19 @@ static const CGFloat kCellInnerMargin = 10.0;
     frame.size = CGSizeMake(kCellTrophyImageWidth, kCellTrophyImageWidth);
     self.trophyImageView.frame = frame;
     self.trophyImageView.center = CGPointMake(self.trophyFrameView.center.x, self.trophyFrameView.center.y - 10.0);
+    
+    frame = self.commentsButton.frame;
+    frame.origin.x = (CGRectGetWidth(self.trophyFrameView.frame) + kCellInnerMargin + 5);
+    frame.origin.y = kCellSideMargin*5.5;
+
+// alternative positioning for comments button
+//    frame.origin.x = 5;
+//    frame.origin.y = kCellSideMargin*4.2;
+    
+    frame.size.height = 14;
+    frame.size.width = 14;
+    self.commentsButton.frame = frame;
+    [self bringSubviewToFront:self.commentsButton];
 }
 
 - (CGFloat)heightOfCell
@@ -266,6 +286,7 @@ static const CGFloat kCellInnerMargin = 10.0;
 {
     [self.delegate timelineCellDidPressProfileButton:self forUser:self.trophy.recipient];
 }*/
+
 
 #pragma mark - TATimelineActionFooterView Delegate
 

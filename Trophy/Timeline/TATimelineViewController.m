@@ -19,6 +19,7 @@
 #import "TASettingsViewController.h"
 #import "TACommentTableViewController.h"
 #import "UIColor+TAAdditions.h"
+#import "TACommentButton.h"
 
 static const CGFloat kGroupsButtonWidth = 80.0;
 static const CGFloat kGroupsButtonHeight = 70.0;
@@ -247,6 +248,10 @@ static const CGFloat kGroupsButtonHeight = 70.0;
         cell.backgroundColor = [UIColor whiteColor];
     }
     cell.trophy = [[TATrophy alloc] initWithStoredTrophy:object];
+    cell.commentsButton.trophy = cell.trophy;
+    cell.commentsButton.numOfComments = cell.trophy.comments.count;
+    NSLog(@"Number of Comments: %d", cell.commentsButton.numOfComments);
+    [cell.commentsButton addTarget:self action:@selector(presentTrophyComments:) forControlEvents:UIControlEventTouchUpInside];
     cell.delegate = self;
     return cell;
 }
@@ -343,12 +348,16 @@ static const CGFloat kGroupsButtonHeight = 70.0;
     closeupViewController.delegate = self;
     [self.navigationController pushViewController:closeupViewController animated:YES];
 }
--(void)presentTrophyComments:(TATrophy *)trophy
+
+-(IBAction)presentTrophyComments:(id)sender
 {
-    TACommentTableViewController *commentVC = [[TACommentTableViewController alloc] initWithPhoto:trophy];
+    TACommentButton *button = sender;
+    
+    TACommentTableViewController *commentVC = [[TACommentTableViewController alloc] initWithPhoto:button.trophy];
     commentVC.delegate = self;
     [self.navigationController pushViewController:commentVC animated:YES];
 }
+
 #pragma mark - TATrophyCloseupViewControllerDelegate
 
 - (void)trophyCloseupDidPerformAction:(TATrophyCloseupViewController *)viewController
