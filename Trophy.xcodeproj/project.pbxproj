@@ -88,6 +88,7 @@
 		92FAD3371A511E4F009CF398 /* TATimelineTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 92FAD3361A511E4F009CF398 /* TATimelineTableViewCell.m */; };
 		9F02A9271B67F2FA0047FFF9 /* TAGroupListButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 9F02A9261B67F2FA0047FFF9 /* TAGroupListButton.m */; };
 		9F5E3A991B6A732100D6C682 /* TAOverlayButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 9F5E3A981B6A732000D6C682 /* TAOverlayButton.m */; };
+		969F25D31B716BB700D68520 /* TACommentButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 969F25D21B716BB700D68520 /* TACommentButton.m */; };
 		9F7880941B614F5900E800C2 /* TAOnboardingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9F7880931B614F5900E800C2 /* TAOnboardingViewController.m */; };
 		A8ABABD6EBC7E076CB6302AD /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = C423F20A0C7E6D3505D20EEC /* libPods.a */; };
 /* End PBXBuildFile section */
@@ -245,6 +246,8 @@
 		9F02A9261B67F2FA0047FFF9 /* TAGroupListButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TAGroupListButton.m; sourceTree = "<group>"; };
 		9F5E3A971B6A732000D6C682 /* TAOverlayButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TAOverlayButton.h; sourceTree = "<group>"; };
 		9F5E3A981B6A732000D6C682 /* TAOverlayButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TAOverlayButton.m; sourceTree = "<group>"; };
+		969F25D11B716BB700D68520 /* TACommentButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TACommentButton.h; path = Models/TACommentButton.h; sourceTree = "<group>"; };
+		969F25D21B716BB700D68520 /* TACommentButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = TACommentButton.m; path = Models/TACommentButton.m; sourceTree = "<group>"; };
 		9F7880921B614F5900E800C2 /* TAOnboardingViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TAOnboardingViewController.h; sourceTree = "<group>"; };
 		9F7880931B614F5900E800C2 /* TAOnboardingViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TAOnboardingViewController.m; sourceTree = "<group>"; };
 		C423F20A0C7E6D3505D20EEC /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -637,6 +640,8 @@
 				92E47AF61A51148900B08C3B /* Views */,
 				92E47AD91A491CC900B08C3B /* TATimelineViewController.h */,
 				92E47ADA1A491CC900B08C3B /* TATimelineViewController.m */,
+				969F25D11B716BB700D68520 /* TACommentButton.h */,
+				969F25D21B716BB700D68520 /* TACommentButton.m */,
 			);
 			name = Timeline;
 			sourceTree = "<group>";
@@ -852,6 +857,7 @@
 				9F02A9271B67F2FA0047FFF9 /* TAGroupListButton.m in Sources */,
 				4114CD291B44ACDE00547D9A /* TACommentActivityTableViewCell.m in Sources */,
 				920037011A89F3EB004C34DB /* UIColor+TAAdditions.m in Sources */,
+				969F25D31B716BB700D68520 /* TACommentButton.m in Sources */,
 				92E47AEB1A4CC76D00B08C3B /* TAAddSettingsView.m in Sources */,
 				92B1DAB61A383AF7001B059E /* main.m in Sources */,
 				9F5E3A991B6A732100D6C682 /* TAOverlayButton.m in Sources */,
