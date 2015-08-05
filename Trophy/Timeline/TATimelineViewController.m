@@ -94,6 +94,8 @@ static const CGFloat kGroupsButtonHeight = 70.0;
     self.backgroundTap.enabled = NO;
     
     [self layoutGroupListView];
+    
+
 }
 
 - (void)viewWillAppear:(BOOL)animated
@@ -103,6 +105,11 @@ static const CGFloat kGroupsButtonHeight = 70.0;
     if (self.currentGroup && [self.currentGroup.groupId isEqualToString:activeGroup.groupId] == NO) {
         [self loadObjects];
     }
+    
+    
+    // displays the nav bar and the tab bar - accounts for transition from comments view table
+    self.navigationController.navigationBarHidden = NO;
+
 }
 
 - (void)viewDidDisappear:(BOOL)animated
