@@ -17,6 +17,8 @@
 @required
 - (void)signupViewDidPressContinueButton;
 - (void)signupViewDidPressLoginButton;
+- (void)signupViewDidPressLegalButton;
+- (void)signupViewDidPressPrivacyButton;
 @end
 
 @interface TASignupView : UIView

@@ -13,7 +13,6 @@
 #import "TASignupView.h"
 #import "TASettingsViewController.h"
 #import "TATimelineViewController.h"
-
 #import "TADefines.h"
 #import "UIColor+TAAdditions.h"
 #import <SVProgressHUD.h>
@@ -64,7 +63,6 @@
         }
     }
 }
-
 - (void)signupViewDidPressLoginButton
 {
     TALoginViewController *loginVC = [[TALoginViewController alloc] init];
@@ -75,8 +73,53 @@
     self.navigationController.navigationBar.tintColor = [UIColor trophyYellowColor];
     [self.navigationController pushViewController:loginVC animated:YES];
 }
+- (void)signupViewDidPressLegalButton
+{
+    
+    CGRect rect = [[UIScreen mainScreen] bounds];
+    CGSize screenSize = rect.size;
+    
+    UIWebView *webView = [[UIWebView alloc] initWithFrame:CGRectMake(0,0,screenSize.width,screenSize.height)];
+    webView.tag=55;
+    NSURL *targetURL = [NSURL URLWithString:@"http://trophyapp.co/termsofservice.pdf"];
+    NSURLRequest *request = [NSURLRequest requestWithURL:targetURL];
+    [webView loadRequest:request];
+    [self.view addSubview:webView];
+    
+    UIButton *button = [UIButton buttonWithType:UIButtonTypeRoundedRect];
+    [button setTitle:@"Close" forState:UIControlStateNormal];
+    button.frame = CGRectMake(80, 210, 160, 40);
+    [button addTarget:self action:@selector(closeLegal:) forControlEvents:UIControlEventTouchUpInside];
+    [webView addSubview:button];
+}
+- (IBAction)closeLegal:(id)sender
+{
+    [[self.view viewWithTag:55] removeFromSuperview];
+}
+- (void)signupViewDidPressPrivacyButton
+{
+    CGRect rect = [[UIScreen mainScreen] bounds];
+    CGSize screenSize = rect.size;
+    
+    UIWebView *webView = [[UIWebView alloc] initWithFrame:CGRectMake(0,0,screenSize.width,screenSize.height)];
+    webView.tag=56;
+    NSURL *targetURL = [NSURL URLWithString:@"http://trophyapp.co/privacypolicy.pdf"];
+    NSURLRequest *request = [NSURLRequest requestWithURL:targetURL];
+    [webView loadRequest:request];
+    [self.view addSubview:webView];
+    
+    UIButton *button = [UIButton buttonWithType:UIButtonTypeRoundedRect];
+    [button setTitle:@"Close" forState:UIControlStateNormal];
+    button.frame = CGRectMake(80, 210, 160, 40);
+    [button addTarget:self action:@selector(closePrivacy:) forControlEvents:UIControlEventTouchUpInside];
+    [webView addSubview:button];
+}
+-(IBAction)closePrivacy:(id)sender
+{
+    [[self.view viewWithTag:56] removeFromSuperview];
 
-- (void)backButtonPressed
+}
+-(void)backButtonPressed
 {
     [self dismissViewControllerAnimated:YES completion:nil];
 }
