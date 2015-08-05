@@ -248,9 +248,19 @@ static const CGFloat kGroupsButtonHeight = 70.0;
         cell.backgroundColor = [UIColor whiteColor];
     }
     cell.trophy = [[TATrophy alloc] initWithStoredTrophy:object];
+    
+    // set properties on commentsButton and commentsLabel from the tableView cell
     cell.commentsButton.trophy = cell.trophy;
-    cell.commentsButton.numOfComments = cell.trophy.comments.count;
-    NSLog(@"Number of Comments: %d", cell.commentsButton.numOfComments);
+    cell.commentsLabel.text = [NSString stringWithFormat:@"%d comments", cell.trophy.commentCount];
+    
+    
+    // THE FOLLOWING COMMENTED-OUT CODE WAS FOR EXPERIMENTATION PURPOSES
+//    UITapGestureRecognizer *labelTapRecognizer = [[UITapGestureRecognizer alloc] init];
+//    [labelTapRecognizer addTarget:self action:@selector(presentTrophyCommentsFromLabel:)];
+//    [labelTapRecognizer setNumberOfTapsRequired:1];
+//    [cell.commentsLabel addGestureRecognizer:labelTapRecognizer];
+//    [cell bringSubviewToFront:cell.commentsLabel];
+   
     [cell.commentsButton addTarget:self action:@selector(presentTrophyComments:) forControlEvents:UIControlEventTouchUpInside];
     cell.delegate = self;
     return cell;
@@ -357,6 +367,20 @@ static const CGFloat kGroupsButtonHeight = 70.0;
     commentVC.delegate = self;
     [self.navigationController pushViewController:commentVC animated:YES];
 }
+
+// AFFILIATED EXPERIMENTAL FUNCTIONS TO ABOVE
+//// this function checks the value of the comment button selected and calls the presentTrophyComments
+//// only call from gesture recognizer on comment label
+//-(IBAction)presentTrophyCommentsFromLabel:(id)sender
+//{
+//    // get superview and affiliated button
+//    UILabel *label = sender;
+//    TATimelineTableViewCell *parentCell = (TATimelineTableViewCell *)label.superview;
+//    
+//    TACommentTableViewController *commentVC = [[TACommentTableViewController alloc] initWithPhoto:parentCell.trophy];
+//    commentVC.delegate = self;
+//    [self.navigationController pushViewController:commentVC animated:YES];
+//}
 
 #pragma mark - TATrophyCloseupViewControllerDelegate
 

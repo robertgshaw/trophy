@@ -26,6 +26,7 @@
 @property (nonatomic, weak) id<TATimelineTableViewCellDelegate> delegate;
 @property (nonatomic, strong) TATrophy *trophy;
 @property (nonatomic, strong) TACommentButton *commentsButton;
+@property (nonatomic, strong) UILabel *commentsLabel;
 
 - (CGFloat)heightOfCell;
 
