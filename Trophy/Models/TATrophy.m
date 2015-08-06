@@ -34,6 +34,7 @@
         self.likes = [storedTrophy[@"likes"] integerValue];
         self.likedUserIds = storedTrophy[@"likedUserIds"];
         self.comments = nil;
+        self.commentNumber = [storedTrophy[@"commentNumber"] integerValue];
 
         [self.imageFile getDataInBackgroundWithBlock:^(NSData *data, NSError *error) {
             if (!error) {
