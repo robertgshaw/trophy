@@ -183,6 +183,8 @@ static const CGFloat kPAPCellInsetWidth = 20.0f;
     
     if (trimmedComment.length != 0 && [self.photo objectForKey:@"author"]) {
         NSLog(@"YOx2");
+        
+        //Set comment function
         PFObject *comment = [PFObject objectWithClassName:@"Activity"];
         [comment setValue:trimmedComment forKey:@"content"]; // Set comment text
         //[comment setValue:_trophy.author forKey:@"recipient"]; // Set toUser
@@ -190,6 +192,17 @@ static const CGFloat kPAPCellInsetWidth = 20.0f;
         [comment setValue:@"comment" forKey:@"type"];
         [comment setValue:[self.trophy getTrophyAsParseObject] forKey:@"trophy"];
         
+        //Update comment count on trophy
+        PFQuery *trophy = [PFQuery queryWithClassName:@"Trophy"];
+        [trophy getObjectInBackgroundWithId:[self.trophy getTrophyAsParseObject].objectId
+                                     block:^(PFObject *counter, NSError *error) {
+                                         
+                                         //update counter
+                                         [counter incrementKey:@"commentNumber" byAmount:[NSNumber numberWithInt:1]];
+                                         [counter saveInBackground];
+                                     }];
+        
+        //update ACL
         PFACL *ACL = [PFACL ACLWithUser:[PFUser currentUser]];
         [ACL setPublicReadAccess:YES];
         comment.ACL = ACL;
