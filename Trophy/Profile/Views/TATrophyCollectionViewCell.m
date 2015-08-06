@@ -85,7 +85,7 @@ static const CGFloat kTrophyBottomMargin = 50.0;
     frame = self.actionFooterView.frame;
     frame.size = CGSizeMake([TATrophyActionFooterView actionFooterWidth], 20.0);
     frame.origin.x = CGRectGetMidX(self.bounds) - floorf([TATrophyActionFooterView actionFooterWidth] / 2.0)+60;
-    frame.origin.y = CGRectGetHeight(self.bounds) - kTrophyBottomMargin+20;
+    frame.origin.y = CGRectGetMaxY(self.bounds) - kTrophyBottomMargin - 20;
     self.actionFooterView.frame = frame;
     
     [self.authorLabel sizeToFit];
