@@ -21,6 +21,7 @@
         
         self.backgroundColor = [UIColor clearColor];
         
+        //let's
         // configures title label
         self.titleLabel = [[UILabel alloc] init];
         [self.titleLabel setTextAlignment:NSTextAlignmentLeft];

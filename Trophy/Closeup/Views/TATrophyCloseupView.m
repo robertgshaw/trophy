@@ -27,6 +27,8 @@ static const CGFloat overlayHeight = 150.0;
 @property (nonatomic, strong) PFImageView *trophyImageView;
 @property (nonatomic, strong) TAOverlayButton *overlay;
 @property (nonatomic, strong) UIButton *backButton;
+@property (nonatomic, strong) UIButton *flagButton;
+
 
 @end
 
@@ -53,7 +55,16 @@ static const CGFloat overlayHeight = 150.0;
         [self.backButton setTintColor: [UIColor trophyYellowColor]];
         [self.backButton addTarget:self action:@selector(backButtonPressed:) forControlEvents:UIControlEventTouchUpInside];
         [self addSubview:self.backButton];
+        
+        self.flagButton = [UIButton buttonWithType:UIButtonTypeRoundedRect];
+        //CGFloat buttonWidth = CGRectGetMaxX(self.bounds);
+        [self.flagButton setFrame:CGRectMake(80, 0, 80, 80)];
+        [self.flagButton setTitle:@"Flag" forState:UIControlStateNormal];
+        [self.flagButton setTintColor: [UIColor trophyYellowColor]];
+        [self.flagButton addTarget:self action:@selector(flagButtonPressed:) forControlEvents:UIControlEventTouchUpInside];
+        [self addSubview:self.flagButton];
 
+        
         self.overlay = [[TAOverlayButton alloc] initWithDelegate:delegate];
         [self addSubview:self.overlay];
         
@@ -128,6 +139,38 @@ static const CGFloat overlayHeight = 150.0;
     [self.delegate1 backButtonPressed];
 
 }
+- (void)flagButtonPressed:(id *)sender {
+    
+    // alert - yes/no for flag
+    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Flag Trophy" message:@"Are you sure?" delegate:self cancelButtonTitle:@"Cancel" otherButtonTitles:@"Yes", nil]; [alert show];
+    
+}
+- (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex{
+    if (buttonIndex == 1) { // Set buttonIndex == 0 to handel "Ok"/"Yes" button response
+        // Ok button response
+        
+        //Query parse
+        PFQuery *query = [PFQuery queryWithClassName:@"Trophy"];
+        [query whereKey:@"objectId" equalTo: [self.trophy getTrophyAsParseObject].objectId];
+        [query getFirstObjectInBackgroundWithBlock:^(PFObject * object, NSError *error) {
+            if (!error) {
+                // The find succeeded.
+                
+               //flag function
+                [object setObject:[NSNumber numberWithBool:YES] forKey:@"flag"];
+                
+                [object saveInBackground];
+                NSLog(@"Successfully flagged. This trophy will be reviewed for removal.");
+                
+            } else {
+                // Log details of the failure
+                NSLog(@"Error: %@ %@", error, [error userInfo]);
+            }
+        }];
+        
+    }
+}
+
 
 - (void)didPressCommentsButton:(id)sender
 {

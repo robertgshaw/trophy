@@ -11,6 +11,7 @@
 
 #import "TATrophy.h"
 #import "TAUser.h"
+#import "TACommentButton.h"
 
 @class TATimelineTableViewCell;
 
@@ -24,6 +25,8 @@
 
 @property (nonatomic, weak) id<TATimelineTableViewCellDelegate> delegate;
 @property (nonatomic, strong) TATrophy *trophy;
+@property (nonatomic, strong) TACommentButton *commentsButton;
+@property (nonatomic, strong) UILabel *commentsLabel;
 
 - (CGFloat)heightOfCell;
 

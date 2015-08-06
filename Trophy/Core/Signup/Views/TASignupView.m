@@ -29,6 +29,8 @@ static const CGFloat kContinueButtonHeight = 40.0;
 @property (nonatomic, strong) TAPhoneNumberField *phoneNumberInput;
 @property (nonatomic, strong) UIButton *continueButton;
 @property (nonatomic, strong) UIButton *loginButton;
+@property (nonatomic, strong) UIButton *privacyButton;
+@property (nonatomic, strong) UIButton *legalButton;
 @property (nonatomic, strong) UIActivityIndicatorView *activityIndicator;
 
 @end
@@ -80,11 +82,27 @@ static const CGFloat kContinueButtonHeight = 40.0;
         [self addSubview:self.continueButton];
 
         _loginButton = [[UIButton alloc] init];
-        [self.loginButton setTitle:@"Login" forState:UIControlStateNormal];
-        [self.loginButton setTitleColor:[UIColor grayColor] forState:UIControlStateNormal];
+        [self.loginButton setTitle:@" Login " forState:UIControlStateNormal];
+        [self.loginButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+        self.loginButton.backgroundColor = [UIColor trophyYellowColor];
+        self.loginButton.layer.cornerRadius = 5.0;
         [self.loginButton setTitleColor:[UIColor colorWithRed:0.812 green:0.82 blue:0.82 alpha:1] forState:UIControlStateHighlighted];
         [self.loginButton addTarget:self action:@selector(loginButtonPressed) forControlEvents:UIControlEventTouchUpInside];
         [self addSubview:self.loginButton];
+        
+        _privacyButton = [[UIButton alloc] init];
+        [self.privacyButton setTitle:@"Privacy Policy" forState:UIControlStateNormal];
+        [self.privacyButton setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
+        [self.privacyButton setTitleColor:[UIColor colorWithRed:0.812 green:0.82 blue:0.82 alpha:1] forState:UIControlStateHighlighted];
+        [self.privacyButton addTarget:self action:@selector(privacyButtonPressed) forControlEvents:UIControlEventTouchUpInside];
+        [self addSubview:self.privacyButton];
+        
+        _legalButton = [[UIButton alloc] init];
+        [self.legalButton setTitle:@"Legal Terms" forState:UIControlStateNormal];
+        [self.legalButton setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
+        [self.legalButton setTitleColor:[UIColor colorWithRed:0.812 green:0.82 blue:0.82 alpha:1] forState:UIControlStateHighlighted];
+        [self.legalButton addTarget:self action:@selector(legalButtonPressed) forControlEvents:UIControlEventTouchUpInside];
+        [self addSubview:self.legalButton];
     }
     return self;
 }
@@ -94,7 +112,7 @@ static const CGFloat kContinueButtonHeight = 40.0;
     
     CGRect frame = self.logoImageView.frame;
     frame.origin.x = floorf((CGRectGetWidth(self.bounds) - CGRectGetWidth(self.logoImageView.frame)) / 2.0);
-    frame.origin.y = floorf(CGRectGetHeight(self.bounds) / 1.5);
+    frame.origin.y = floorf(CGRectGetHeight(self.bounds) / 1.8);
     self.logoImageView.frame = frame;
     
     [self.titleLabel sizeToFit];
@@ -135,8 +153,20 @@ static const CGFloat kContinueButtonHeight = 40.0;
     [self.loginButton sizeToFit];
     frame = self.loginButton.frame;
     frame.origin.x = floorf((CGRectGetWidth(self.bounds) - CGRectGetWidth(self.loginButton.frame)) / 2.0);
-    frame.origin.y = CGRectGetHeight(self.bounds) - 70.0;
+    frame.origin.y = CGRectGetMaxY(self.logoImageView.frame) + 12.5;
     self.loginButton.frame = frame;
+    
+    [self.privacyButton sizeToFit];
+    frame = self.privacyButton.frame;
+    frame.origin.x = CGRectGetMinX(self.phoneNumberInput.frame);
+    frame.origin.y = CGRectGetMaxY(self.loginButton.frame) + 12.5;
+    self.privacyButton.frame = frame;
+    
+    [self.legalButton sizeToFit];
+    frame = self.legalButton.frame;
+    frame.origin.x = CGRectGetMaxX(self.privacyButton.frame) + 12.5;
+    frame.origin.y = CGRectGetMaxY(self.loginButton.frame) + 12.5;
+    self.legalButton.frame = frame;
 }
 
 - (void)continueButtonPressed
@@ -148,7 +178,15 @@ static const CGFloat kContinueButtonHeight = 40.0;
 {
     [self.delegate signupViewDidPressLoginButton];
 }
+- (void)privacyButtonPressed
+{
+    [self.delegate signupViewDidPressPrivacyButton];
+}
+- (void)legalButtonPressed
+{
+    [self.delegate signupViewDidPressLegalButton];
 
+}
 - (TAUser *)user
 {
     if (_user == nil) {

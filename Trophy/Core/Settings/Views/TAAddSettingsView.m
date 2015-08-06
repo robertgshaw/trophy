@@ -44,7 +44,7 @@ static const CGFloat kContinueButtonHeight = 40.0;
 
         _descriptionInput = [TATextField textFieldWithYellowBorder];
         self.descriptionInput.delegate = self;
-        self.descriptionInput.placeholder = @"Bio";
+        self.descriptionInput.placeholder = @"College";
         self.descriptionInput.borderStyle = UITextBorderStyleRoundedRect;
         self.descriptionInput.clearButtonMode = UITextFieldViewModeWhileEditing;
         self.descriptionInput.autocapitalizationType = UITextAutocapitalizationTypeSentences;

@@ -10,6 +10,8 @@
 #import "TACommentActivityTableViewCell.h"
 #import "TACommentBaseTableViewCell.h"
 #import "TATrophyCloseupView.h"
+#import "TATrophyCloseupViewController.h"
+#import "TATimelineViewController.h"
 #import "TACommentLoadMoreTableViewCell.h"
 #import "TAPhotoDetailsFooterView.h"
 #import "TAActiveUserManager.h"
@@ -325,8 +327,12 @@ static const CGFloat kPAPCellInsetWidth = 20.0f;
 }
 
 - (void)backButtonAction:(id)sender {
-    [self.navigationController popViewControllerAnimated:YES];
-    self.navigationController.navigationBarHidden = YES;
+    
+    UINavigationController *navController = self.navigationController;
+    
+    [navController popViewControllerAnimated:YES];
+    
+    navController.navigationBarHidden = YES;
 }
 
 - (void)keyboardWillShow:(NSNotification*)note {

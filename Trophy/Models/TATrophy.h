@@ -23,6 +23,7 @@
 @property (nonatomic, assign) NSInteger likes;
 @property (nonatomic, strong) NSArray *likedUserIds;
 @property (nonatomic, assign) NSArray *comments;
+@property NSInteger commentCount;
 
 - (instancetype)initWithStoredTrophy:(PFObject *)storedTrophy;
 - (BOOL)likedByCurrentUser;
