@@ -37,11 +37,12 @@ static const CGFloat kGroupsButtonHeight = 70.0;
 @property (nonatomic, strong) UIButton *backgroundTap;
 @property (nonatomic, strong) CAShapeLayer *formatGroupsLayer;
 @property (nonatomic, strong) TAGroupListButton *groupListButton;
+//@property (nonatomic, strong) TATimelineTableViewCell *currentCloseupCell;
+@property (nonatomic, strong) NSIndexPath *indexPathOfCurrentCloseupCell;
 
 @end
 
 @implementation TATimelineViewController
-
 
 - (instancetype)init
 {
@@ -105,7 +106,6 @@ static const CGFloat kGroupsButtonHeight = 70.0;
     if (self.currentGroup && [self.currentGroup.groupId isEqualToString:activeGroup.groupId] == NO) {
         [self loadObjects];
     }
-    
     
     // displays the nav bar and the tab bar - accounts for transition from comments view table
     self.navigationController.navigationBarHidden = NO;
@@ -284,9 +284,16 @@ static const CGFloat kGroupsButtonHeight = 70.0;
 {
     [self.tableView deselectRowAtIndexPath:indexPath animated:YES];
 
+    // parse query
     PFObject *object = [self.objects objectAtIndex:indexPath.row];
     TATrophy *trophy = [[TATrophy alloc] initWithStoredTrophy:object];
 
+    // sets index path of current closeup
+    if ([[self tableView:tableView cellForRowAtIndexPath:indexPath] isKindOfClass:[TATimelineTableViewCell class]]) {
+        NSLog(@"hey");
+        
+        self.indexPathOfCurrentCloseupCell = indexPath;
+    }
     [self presentTrophyCloseup:trophy];
 }
 
@@ -391,13 +398,22 @@ static const CGFloat kGroupsButtonHeight = 70.0;
 
 #pragma mark - TATrophyCloseupViewControllerDelegate
 
-- (void)trophyCloseupDidPerformAction:(TATrophyCloseupViewController *)viewController
+- (void)trophyCloseupDidPerformAction:(TATrophy *)updatedTrophy
 {
-    [self loadObjects];
+    // updates only the current closeup cell when an action is performed
+    if (self.indexPathOfCurrentCloseupCell != nil)
+    {
+        [self.tableView beginUpdates];
+        [self.tableView reloadRowsAtIndexPaths:@[self.indexPathOfCurrentCloseupCell] withRowAnimation:UITableViewRowAnimationAutomatic];
+        [self.tableView endUpdates];
+    }
 }
 
 - (void) closeUpViewControllerBackButtonPressed
 {
+    // "unsets" the closeup trophy
+    self.indexPathOfCurrentCloseupCell = nil;
+    
     // pops to the timeline view controller
     [self.navigationController popToViewController:self animated:YES];
     

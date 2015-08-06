@@ -14,7 +14,7 @@
 
 @protocol TATrophyCloseupViewControllerDelegate <NSObject>
 
-- (void)trophyCloseupDidPerformAction:(TATrophyCloseupViewController *)viewController;
+- (void)trophyCloseupDidPerformAction:(TATrophy *)updatedTrophy;
 - (void)closeUpViewControllerBackButtonPressed;
 
 @end

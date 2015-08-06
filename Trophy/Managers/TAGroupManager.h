@@ -24,8 +24,11 @@
             success:(void (^)(TAGroup *group))success
             failure:(void (^)(NSString *error))failure;
 
-- (void)addUserToGroupWithName:(NSString *)groupName
-                    inviteCode:(NSString *)inviteCode
+//- (void)addUserToGroupWithName:(NSString *)groupName
+//                    inviteCode:(NSString *)inviteCode
+//                       success:(void (^)(TAGroup *group))success
+//                       failure:(void (^)(NSString *error))failure;
+- (void)addUserToGroupWithInviteCode:(NSString *)inviteCode
                        success:(void (^)(TAGroup *group))success
                        failure:(void (^)(NSString *error))failure;
 
