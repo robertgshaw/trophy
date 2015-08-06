@@ -41,6 +41,7 @@ static const CGFloat kProfileHeaderMinHeight = 100.0;
         UICollectionViewFlowLayout *flowLayout = [[UICollectionViewFlowLayout alloc] init];
         [flowLayout setScrollDirection:UICollectionViewScrollDirectionHorizontal];
         self.trophyCollectionViewController = [[TATrophyCollectionViewController alloc] initWithCollectionViewLayout:flowLayout];
+        self.trophyCollectionViewController.delegate = self;
         
         [self loadObjects];
     }

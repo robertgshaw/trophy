@@ -37,11 +37,12 @@ static const NSInteger kInviteCodeLength = 6;
     
     self.view.backgroundColor = [UIColor whiteColor];
     self.edgesForExtendedLayout = UIRectEdgeNone;
+    self.navigationController.navigationBar.tintColor = [UIColor whiteColor];
     
     UILabel *titleLabel = [[UILabel alloc] initWithFrame:CGRectZero];
     titleLabel.backgroundColor = [UIColor clearColor];
     titleLabel.font = [UIFont boldSystemFontOfSize:18.0];
-    titleLabel.textColor = [UIColor trophyYellowColor];
+    titleLabel.textColor = [UIColor whiteColor];
     titleLabel.text = @"New Group";
     titleLabel.textAlignment = NSTextAlignmentCenter;
     [titleLabel sizeToFit];

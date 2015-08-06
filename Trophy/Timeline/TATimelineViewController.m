@@ -20,6 +20,7 @@
 #import "TACommentTableViewController.h"
 #import "TAGroupListButton.h"
 #import "UIColor+TAAdditions.h"
+#import "TACommentButton.h"
 
 static const CGFloat kGroupsButtonWidth = 80.0;
 static const CGFloat kGroupsButtonHeight = 70.0;
@@ -93,6 +94,8 @@ static const CGFloat kGroupsButtonHeight = 70.0;
     self.backgroundTap.enabled = NO;
     
     [self layoutGroupListView];
+    
+
 }
 
 - (void)viewWillAppear:(BOOL)animated
@@ -102,6 +105,11 @@ static const CGFloat kGroupsButtonHeight = 70.0;
     if (self.currentGroup && [self.currentGroup.groupId isEqualToString:activeGroup.groupId] == NO) {
         [self loadObjects];
     }
+    
+    
+    // displays the nav bar and the tab bar - accounts for transition from comments view table
+    self.navigationController.navigationBarHidden = NO;
+
 }
 
 - (void)viewDidDisappear:(BOOL)animated
@@ -232,6 +240,21 @@ static const CGFloat kGroupsButtonHeight = 70.0;
         cell.backgroundColor = [UIColor whiteColor];
     }
     cell.trophy = [[TATrophy alloc] initWithStoredTrophy:object];
+    
+    // set properties on commentsButton and commentsLabel from the tableView cell
+    cell.commentsButton.trophy = cell.trophy;
+    PFObject *trophyObject = [cell.trophy getTrophyAsParseObject];
+    cell.commentsLabel.text = [NSString stringWithFormat:@"%@ comments", trophyObject[@"commentNumber"]];
+    
+    
+    // THE FOLLOWING COMMENTED-OUT CODE WAS FOR EXPERIMENTATION PURPOSES
+//    UITapGestureRecognizer *labelTapRecognizer = [[UITapGestureRecognizer alloc] init];
+//    [labelTapRecognizer addTarget:self action:@selector(presentTrophyCommentsFromLabel:)];
+//    [labelTapRecognizer setNumberOfTapsRequired:1];
+//    [cell.commentsLabel addGestureRecognizer:labelTapRecognizer];
+//    [cell bringSubviewToFront:cell.commentsLabel];
+   
+    [cell.commentsButton addTarget:self action:@selector(presentTrophyComments:) forControlEvents:UIControlEventTouchUpInside];
     cell.delegate = self;
     return cell;
 }
@@ -342,12 +365,30 @@ static const CGFloat kGroupsButtonHeight = 70.0;
     [self.navigationController pushViewController:closeupViewController animated:YES];
  
 }
--(void)presentTrophyComments:(TATrophy *)trophy
+
+-(IBAction)presentTrophyComments:(id)sender
 {
-    TACommentTableViewController *commentVC = [[TACommentTableViewController alloc] initWithPhoto:trophy];
+    TACommentButton *button = sender;
+    
+    TACommentTableViewController *commentVC = [[TACommentTableViewController alloc] initWithPhoto:button.trophy];
     commentVC.delegate = self;
     [self.navigationController pushViewController:commentVC animated:YES];
 }
+
+// AFFILIATED EXPERIMENTAL FUNCTIONS TO ABOVE
+//// this function checks the value of the comment button selected and calls the presentTrophyComments
+//// only call from gesture recognizer on comment label
+//-(IBAction)presentTrophyCommentsFromLabel:(id)sender
+//{
+//    // get superview and affiliated button
+//    UILabel *label = sender;
+//    TATimelineTableViewCell *parentCell = (TATimelineTableViewCell *)label.superview;
+//    
+//    TACommentTableViewController *commentVC = [[TACommentTableViewController alloc] initWithPhoto:parentCell.trophy];
+//    commentVC.delegate = self;
+//    [self.navigationController pushViewController:commentVC animated:YES];
+//}
+
 #pragma mark - TATrophyCloseupViewControllerDelegate
 
 - (void)trophyCloseupDidPerformAction:(TATrophyCloseupViewController *)viewController

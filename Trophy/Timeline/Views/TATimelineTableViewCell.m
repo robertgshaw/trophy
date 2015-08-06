@@ -10,6 +10,10 @@
 
 #import "TATrophyActionFooterView.h"
 
+#import "TACommentTableViewController.h"
+
+#import "TACommentButton.h"
+
 #import "UIColor+TAAdditions.h"
 #import <Foundation/Foundation.h>
 #import <ParseUI/ParseUI.h>
@@ -81,6 +85,16 @@ static const CGFloat kCellInnerMargin = 10.0;
         self.dateLabel.font = [UIFont systemFontOfSize:10.0];
         self.dateLabel.numberOfLines = 1;
         [self addSubview:self.dateLabel];
+        
+        _commentsLabel = [[UILabel alloc] initWithFrame:CGRectZero];
+        self.commentsLabel.textColor = [UIColor darkGrayColor];
+//        self.commentsLabel.font = [UIFont systemFontOfSize:10.0];
+        self.commentsLabel.font = [UIFont boldSystemFontOfSize:10.0];
+        self.commentsLabel.numberOfLines = 1;
+        [self addSubview:self.commentsLabel];
+        
+        self.commentsButton = [[TACommentButton alloc] init];
+        [self addSubview:self.commentsButton];
 
         _descriptionLabel = [[UILabel alloc] initWithFrame:CGRectZero];
         self.descriptionLabel.numberOfLines = 0;
@@ -141,8 +155,8 @@ static const CGFloat kCellInnerMargin = 10.0;
     
     [self.dateLabel sizeToFit];
     frame = self.dateLabel.frame;
-    frame.origin.x = (kCellSideMargin + CGRectGetWidth(self.trophyFrameView.frame) + kCellInnerMargin);
-    frame.origin.y = kCellSideMargin * 5.5;
+    frame.origin.x = (kCellSideMargin + CGRectGetWidth(self.trophyFrameView.frame) + (kCellInnerMargin*14));
+    frame.origin.y = kCellSideMargin * 5.4;
     frame.size.width = maxWidth;
     self.dateLabel.frame = frame;
     
@@ -183,6 +197,27 @@ static const CGFloat kCellInnerMargin = 10.0;
     frame.size = CGSizeMake(kCellTrophyImageWidth, kCellTrophyImageWidth);
     self.trophyImageView.frame = frame;
     self.trophyImageView.center = CGPointMake(self.trophyFrameView.center.x, self.trophyFrameView.center.y - 10.0);
+    
+    // set frame on commentsLabel and place label at front of subview
+    [self.commentsLabel sizeToFit];
+    frame = self.commentsLabel.frame;
+    frame.origin.x = (CGRectGetWidth(self.trophyFrameView.frame) + kCellInnerMargin*5);
+    frame.origin.y = kCellSideMargin*5.4;
+    self.commentsLabel.frame = frame;
+    [self bringSubviewToFront:self.commentsLabel];
+    
+    // set frame on commentsButton and place button at front of subview
+    frame = self.commentsButton.frame;
+    frame.origin.x = (CGRectGetWidth(self.trophyFrameView.frame) + kCellInnerMargin*2 + 7);
+    frame.origin.y = kCellSideMargin*5.2;
+// alternative positioning for comments button
+//    frame.origin.x = 5;
+//    frame.origin.y = kCellSideMargin*4.2;
+    frame.size.height = 18;
+    frame.size.width = 18;
+    self.commentsButton.frame = frame;
+    [self bringSubviewToFront:self.commentsButton];
+    
 }
 
 - (CGFloat)heightOfCell
@@ -266,6 +301,7 @@ static const CGFloat kCellInnerMargin = 10.0;
 {
     [self.delegate timelineCellDidPressProfileButton:self forUser:self.trophy.recipient];
 }*/
+
 
 #pragma mark - TATimelineActionFooterView Delegate
 

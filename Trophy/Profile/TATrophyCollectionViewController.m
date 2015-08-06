@@ -20,7 +20,7 @@
 static const CGFloat kTrophyCollectionViewCellWidth = 250.0;
 
 @interface TATrophyCollectionViewController () <UICollectionViewDelegateFlowLayout,
-                                                TATrophyActionFooterDelegate>
+                                                TATrophyActionFooterDelegate, TATrophyCloseupViewControllerDelegate>
 
 @end
 
@@ -37,8 +37,6 @@ static const CGFloat kTrophyCollectionViewCellWidth = 250.0;
 
 - (void)setTrophies:(NSArray *)trophies
 {
-    
-    
     NSArray* reversed = [[trophies reverseObjectEnumerator] allObjects];
     _trophies = reversed;
     [self.collectionView reloadData];
@@ -46,9 +44,13 @@ static const CGFloat kTrophyCollectionViewCellWidth = 250.0;
 
 - (void)presentTrophyCloseup:(TATrophy *)trophy
 {
+    // presents trophy closeup
     TATrophyCloseupViewController *closeupViewController = [[TATrophyCloseupViewController alloc] initWithTrophy:trophy];
+    closeupViewController.delegate = self;
+    closeupViewController.hidesBottomBarWhenPushed = YES;
     [self.navigationController pushViewController:closeupViewController animated:YES];
 }
+
 -(void)presentTrophyComments:(TATrophy *)trophy
 {
     TACommentTableViewController *commentVC = [[TACommentTableViewController alloc] initWithPhoto:trophy];
@@ -95,6 +97,22 @@ static const CGFloat kTrophyCollectionViewCellWidth = 250.0;
 {
     CGFloat sidePadding = floorf((CGRectGetWidth(self.view.bounds) - kTrophyCollectionViewCellWidth) / 2.0);
     return UIEdgeInsetsMake(10, sidePadding, 10, sidePadding);
+}
+
+#pragma mark - TACloseupViewControllerDelegate Methods
+- (void) closeUpViewControllerBackButtonPressed
+{
+    NSLog(@"yo");
+    // pops to the trophy collection view controller
+    [self.navigationController popToViewController:self.delegate animated:YES];
+    
+    // displays the nav bar and the tab bar
+    self.navigationController.navigationBarHidden = NO;
+}
+
+-(void) trophyCloseupDidPerformAction:(TATrophyCloseupViewController *)viewController
+{
+    
 }
 
 #pragma mark - TATimelineActionFooterViewDelegate Methods

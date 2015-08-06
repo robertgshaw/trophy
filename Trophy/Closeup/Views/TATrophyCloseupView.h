@@ -8,8 +8,11 @@
 
 #import <UIKit/UIKit.h>
 
+#import "TAOverlayButton.h"
 #import "TATrophy.h"
 #import "TATrophyActionFooterView.h"
+#import "TALikesButton.h"
+
 
 @class TATrophyCloseupView;
 
@@ -23,7 +26,7 @@
 
 @interface TATrophyCloseupView : UIView
 
-- (instancetype)initWithDelegate:(id<TATrophyActionFooterDelegate>)delegate;
+- (instancetype)initWithDelegate:(id< TALikeButtonDelegate, TATrophyCloseupViewDelegate>)delegate;
 
 @property (nonatomic, weak) id<TATrophyCloseupViewDelegate> delegate1;
 

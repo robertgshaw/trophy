@@ -8,12 +8,11 @@
 
 #import "TAOverlayButton.h"
 
-
 @implementation TAOverlayButton
 
 @synthesize titleLabel = _titleLabel;
 
-- (instancetype) initWithDelegate:(id<TATrophyActionFooterDelegate, TAOverlayButtonDelegate>) delegate
+- (instancetype) initWithDelegate:(id<TALikeButtonDelegate, TAOverlayButtonDelegate>) delegate
 {
     self = [super init];
     if (self) {
@@ -21,38 +20,36 @@
         self.delegate = delegate;
         
         self.backgroundColor = [UIColor clearColor];
-        //[self setBackgroundImage:[UIImage imageNamed:@"likes-button"] forState:UIControlStateSelected];
-        //[self addTarget:self action:@selector(didPressOverlay) forControlEvents:UIControlEventTouchUpInside];
         
         //let's
         // configures title label
         self.titleLabel = [[UILabel alloc] init];
         [self.titleLabel setTextAlignment:NSTextAlignmentLeft];
         self.titleLabel.textColor = [UIColor trophyYellowColor];
-        self.titleLabel.font = [UIFont systemFontOfSize:16.0];
+        self.titleLabel.font = [UIFont boldSystemFontOfSize:18.0];
         self.titleLabel.adjustsFontSizeToFitWidth = YES;
         self.titleLabel.minimumScaleFactor = 0.5;
         self.titleLabel.lineBreakMode = NSLineBreakByTruncatingTail;
-       // [self addSubview:self.titleLabel];
+        [self addSubview:self.titleLabel];
         
         // configures date label
         self.dateLabel = [[UILabel alloc] init];
         [self.dateLabel setTextAlignment:NSTextAlignmentLeft];
-        self.dateLabel.textColor = [UIColor whiteColor];
-        self.dateLabel.font = [UIFont systemFontOfSize:16.0];
-        //[self addSubview:self.dateLabel];
+        self.dateLabel.textColor = [UIColor trophyYellowColor];
+        self.dateLabel.font = [UIFont boldSystemFontOfSize:14.0];
+        [self addSubview:self.dateLabel];
         
         // configures recipient label
         self.recipientLabel = [[UILabel alloc] init];
         [self.recipientLabel setTextAlignment:NSTextAlignmentLeft];
         self.recipientLabel.textColor = [UIColor whiteColor];
-        self.recipientLabel.font = [UIFont boldSystemFontOfSize:20];
+        self.recipientLabel.font = [UIFont boldSystemFontOfSize:18];
         [self addSubview:self.recipientLabel];
-        
-        // configures action footer view
-        self.actionFooterView = [[TATrophyActionFooterView alloc] initWithFrame:CGRectZero];
-        self.actionFooterView.delegate = delegate;
-        [self addSubview:self.actionFooterView];
+
+        // configures likes button
+        self.likesButton = [[TALikesButton alloc] initWithFrame:CGRectZero];
+        self.likesButton.delegate = delegate;
+        [self addSubview:self.likesButton];
         
         // configures comment button
         self.commentsButton = [[UIButton alloc] init];
@@ -60,6 +57,8 @@
         [self.commentsButton addTarget:self action:@selector(didPressCommentsButton) forControlEvents:UIControlEventTouchUpInside];
         [self addSubview:self.commentsButton];
         
+        [self setBackgroundColor:[UIColor colorWithRed:0 green:0 blue:0 alpha:0.5]];
+    
     }
     
     return self;
@@ -72,38 +71,39 @@
     
     // configures title label
     [self.titleLabel sizeToFit];
-    CGFloat width = 100;
     CGRect frame = self.titleLabel.frame;
-    frame.origin.x = 20.0;
-    frame.origin.y = 20.0;
-    frame.size.width = width;
+    frame.origin.x = self.bounds.size.width / 10;
+    frame.origin.y = self.bounds.size.height / 10;
     self.titleLabel.frame = frame;
+ //   [self.titleLabel setBackgroundColor:[UIColor colorWithRed:0 green:0 blue:0 alpha:0.5]];
     
     // configures recipient label
     [self.recipientLabel sizeToFit];
     frame = self.recipientLabel.frame;
     frame.origin.x = self.bounds.size.width / 10;
-    frame.origin.y = self.bounds.size.height / 10;
+    frame.origin.y = CGRectGetMinY(self.titleLabel.frame) + (floorf(self.titleLabel.font.lineHeight) * 1.25);
     self.recipientLabel.frame = frame;
+   // [self.recipientLabel setBackgroundColor:[UIColor colorWithRed:0 green:0 blue:0 alpha:0.5]];
     
     // configures date label
     [self.dateLabel sizeToFit];
     frame = self.dateLabel.frame;
-    frame.origin.x = self.recipientLabel.frame.origin.x;
-    frame.origin.y = self.recipientLabel.frame.origin.y + self.recipientLabel.frame.size.height + 2;
+    frame.origin.x = CGRectGetMidX(self.bounds) - (self.dateLabel.bounds.size.width / 2);
+    frame.origin.y = CGRectGetMaxY(self.bounds) - 35.0 - (self.dateLabel.bounds.size.height / 2);
     self.dateLabel.frame = frame;
 
-    // configures likes button
-    frame = self.actionFooterView.frame;
-    frame.size = CGSizeMake([TATrophyActionFooterView actionFooterWidth], 20.0);
+    // configures like button
+    frame = self.likesButton.frame;
+    frame.size = CGSizeMake([TALikesButton likeButtonWidth], 20.0);
     frame.origin.x = CGRectGetMaxX(self.bounds) - 70.0;
-    frame.origin.y = CGRectGetMaxY(self.bounds) - 50.0;
-    self.actionFooterView.frame = frame;
+    frame.origin.y = CGRectGetMaxY(self.bounds) - 40.0 - (self.likesButton.bounds.size.height / 2);
+    self.likesButton.frame = frame;
     
     // configures comment button
+    frame = self.commentsButton.frame;
     frame.size = CGSizeMake(25.0, 25.0);
     frame.origin.x = self.bounds.size.width / 10;
-    frame.origin.y = CGRectGetMaxY(self.bounds) - 50.0;
+    frame.origin.y = CGRectGetMaxY(self.bounds) - 35.0 - (self.commentsButton.bounds.size.height / 2);
     self.commentsButton.frame = frame;
 
 }

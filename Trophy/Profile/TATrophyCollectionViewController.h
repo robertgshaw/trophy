@@ -7,9 +7,11 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "TAProfileViewController.h"
 
 @interface TATrophyCollectionViewController : UICollectionViewController
 
 @property (nonatomic, strong) NSArray *trophies;
+@property (nonatomic, strong) TAProfileViewController *delegate;
 
 @end

@@ -30,6 +30,12 @@ static const CGFloat extraInfoLogoHeight = 50.0;
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    
+    // configures nav bar
+    [self.navigationController setNavigationBarHidden:NO animated:YES];
+    self.navigationController.navigationBar.barStyle = UIBarStyleDefault;
+    self.navigationController.navigationBar.barTintColor = [UIColor darkYellowColor];
+    self.navigationController.navigationBar.tintColor = [UIColor whiteColor];
    
     // configures the onboarding View
     self.view.backgroundColor = [UIColor whiteColor];
@@ -96,7 +102,7 @@ static const CGFloat extraInfoLogoHeight = 50.0;
                                                                   target:self
                                                                   action:@selector(presentSettings:)];
     self.navigationItem.leftBarButtonItem = leftButton;
-    leftButton.tintColor = [UIColor trophyYellowColor];
+    //leftButton.tintColor = [UIColor trophyYellowColor];
 
 }
 
