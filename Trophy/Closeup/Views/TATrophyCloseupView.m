@@ -15,22 +15,16 @@
 #import <Parse/Parse.h>
 #import <ParseUI/ParseUI.h>
 #import "TATrophyManager.h"
+#import "TALikesButton.h"
 
 
-static const CGFloat kTrophyImageSideMargin = 20.0;
-static const CGFloat kTrophyImageBottomMargin = 250.0;
 static const CGFloat kTrophyImageCornerRadius = 15.0;
-static const CGFloat kButtonWidth = 25.0;
-
-static const CGFloat overlayWidth = 500.0;
 static const CGFloat overlayHeight = 150.0;
-static const CGFloat uiTabBarHeight = 39.0;
+
 
 @interface TATrophyCloseupView ()
 
 @property (nonatomic, strong) PFImageView *trophyImageView;
-
-@property (nonatomic, strong) UIButton *likesIndicatorLabel;
 @property (nonatomic, strong) TAOverlayButton *overlay;
 @property (nonatomic, strong) UIButton *backButton;
 
@@ -38,7 +32,7 @@ static const CGFloat uiTabBarHeight = 39.0;
 
 @implementation TATrophyCloseupView
 
-- (instancetype)initWithDelegate:(id<TATrophyActionFooterDelegate, TAOverlayButtonDelegate, TATrophyCloseupViewDelegate>)delegate
+- (instancetype)initWithDelegate:(id<TALikeButtonDelegate, TAOverlayButtonDelegate, TATrophyCloseupViewDelegate>)delegate
 {
     self = [super init];
     if (self) {
@@ -54,10 +48,7 @@ static const CGFloat uiTabBarHeight = 39.0;
         [self addSubview:self.trophyImageView];
         
         self.backButton = [UIButton buttonWithType:UIButtonTypeRoundedRect];
-        //[self.backButton setBackgroundImage:[UIImage imageNamed:@"left-arrow"] forState:UIControlStateNormal];
-
         [self.backButton setFrame:CGRectMake(0, 0, 80, 80)];
-        //self.titleLabel.textAlignment = NSTextAlignmentLeft;
         [self.backButton setTitle:@"Back" forState:UIControlStateNormal];
         [self.backButton setTintColor: [UIColor trophyYellowColor]];
         [self.backButton addTarget:self action:@selector(backButtonPressed:) forControlEvents:UIControlEventTouchUpInside];
@@ -67,13 +58,6 @@ static const CGFloat uiTabBarHeight = 39.0;
         [self addSubview:self.overlay];
         
         self.backgroundColor = [UIColor blackColor];
-        /*
-        _commentsButton = [[UIButton alloc] init];
-        [self.commentsButton setBackgroundImage:[UIImage imageNamed:@"commentButton"] forState:UIControlStateNormal];
-        [self.commentsButton addTarget:self action:@selector(didPressCommentsButton) forControlEvents:UIControlEventTouchUpInside];
-        [self addSubview:self.commentsButton];
-        */
-        
         
     }
     return self;
@@ -87,12 +71,10 @@ static const CGFloat uiTabBarHeight = 39.0;
     // configures image display
     CGRect frame = self.trophyImageView.frame;
     
-   CGFloat height = CGRectGetMaxY(self.frame) * 8 / 10;
-    //CGFloat height = CGRectGetMaxY(self.frame);
+    CGFloat height = CGRectGetMaxY(self.frame) * 8 / 10;
     CGFloat width = CGRectGetMaxX(self.frame);
     frame.origin.x = (CGRectGetMidX(self.bounds) - floorf(width / 2.0));
-   frame.origin.y = CGRectGetMaxY(self.frame) * 1 / 10;
-    //frame.origin.y = 0;
+    frame.origin.y = CGRectGetMaxY(self.frame) * 1 / 10;
     frame.size.width = width;
     frame.size.height = height;
     self.trophyImageView.frame = frame;
@@ -102,24 +84,6 @@ static const CGFloat uiTabBarHeight = 39.0;
     frame.origin.x = CGRectGetMinX(self.bounds);
     frame.origin.y = CGRectGetMaxY(self.bounds) - overlayHeight;
     self.overlay.frame = frame;
-    
-    /*
-    frame = self.commentsButton.frame;
-    frame.size = CGSizeMake(kButtonWidth, kButtonWidth);
-    frame.origin.x = CGRectGetMinX(self.bounds) + 2.5;
-    frame.origin.y = CGRectGetMaxY(self.recipientLabel.frame) + 10;
-    self.commentsButton.frame = frame;
-    */
-
-    
-    // to enable likes button just undo comment
-    /*frame = self.likesButton.frame;
-     frame.size = CGSizeMake(kButtonWidth, kButtonWidth);
-     //frame.origin.x = kSideMargin;
-     frame.origin.x = CGRectGetMidX(self.bounds) - floorf([TATrophyActionFooterView actionFooterWidth] / 2.0)+2;
-     frame.origin.y = CGRectGetMaxY(self.recipientLabel.frame) + 5.0+ floorf((20 - kButtonWidth) / 2.0)-24;
-     //floorf((CGRectGetHeight(self.bounds) - kButtonWidth) / 2.0)-24;
-     self.likesButton.frame = frame;*/
     
 }
 
@@ -179,14 +143,7 @@ static const CGFloat uiTabBarHeight = 39.0;
     
     [self.delegate1 closeupViewDidPressCommentsButton:self];
 }
-- (void)didPressOverlay
-{
-    //swag
-}
--(void)didPressCommentsButton
-{
-    //swag
-}
+
 - (void)setTrophy:(TATrophy *)trophy
 {
     _trophy = trophy;
@@ -206,15 +163,13 @@ static const CGFloat uiTabBarHeight = 39.0;
         [format setDateFormat:@"MM/dd/yy"];
         [self.overlay.dateLabel setText:[format stringFromDate:trophy.time]];
         
-        // Author
-        //[self.overlay.recipientLabel setText:trophy.recipient.name];
-        
         //IF YOU WANT "___ AWARDED _____"
         self.overlay.recipientLabel.text = [NSString stringWithFormat:@"%@ awarded %@",trophy.author.name, trophy.recipient.name];
         [self.overlay.recipientLabel setText:self.overlay.recipientLabel.text];
         
         // Action footer
-        self.overlay.actionFooterView.trophy = trophy;
+        //self.overlay.actionFooterView.trophy = trophy;
+        self.overlay.likesButton.trophy = trophy;
         
         [self setNeedsLayout];
     }

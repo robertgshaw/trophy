@@ -15,9 +15,6 @@
 #import "TAActiveUserManager.h"
 #import "MBProgressHUD.h"
 
-
-
-
 enum ActionSheetTags {
     MainActionSheetTag = 0,
     ConfirmDeleteActionSheetTag = 1

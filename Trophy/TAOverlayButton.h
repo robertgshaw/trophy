@@ -9,6 +9,7 @@
 #import <UIKit/UIKit.h>
 #import "UIColor+TAAdditions.h"
 #import "TATrophyCloseupView.h"
+#import "TALikesButton.h"
 
 @protocol TAOverlayButtonDelegate <NSObject>
 @required
@@ -20,11 +21,10 @@
 @property (nonatomic, strong) UILabel *titleLabel;
 @property (nonatomic, strong) UILabel *dateLabel;
 @property (nonatomic, strong) UILabel *recipientLabel;
-@property (nonatomic, strong) UILabel *likesIndicatorLabel;
 @property (nonatomic, strong) UIButton *commentsButton;
-@property (nonatomic, strong) TATrophyActionFooterView *actionFooterView;
+@property (nonatomic, strong) TALikesButton *likesButton;
 @property (nonatomic, strong) id<TAOverlayButtonDelegate> delegate;
 
--(instancetype) initWithDelegate:(id<TATrophyActionFooterDelegate, TAOverlayButtonDelegate>) delegate;
+-(instancetype) initWithDelegate:(id<TALikeButtonDelegate, TAOverlayButtonDelegate>) delegate;
 
 @end

@@ -15,7 +15,7 @@
 #import "TATimelineViewController.h"
 #import "TAOverlayButton.h"
 
-@interface TATrophyCloseupViewController () <TATrophyActionFooterDelegate, TAOverlayButtonDelegate, TATrophyCloseupViewDelegate>
+@interface TATrophyCloseupViewController () <TALikeButtonDelegate, TAOverlayButtonDelegate, TATrophyCloseupViewDelegate>
 
 @property (nonatomic, strong) TATrophy *trophy;
 @property (nonatomic, strong) TATrophyCloseupView *closeupView;
@@ -119,9 +119,10 @@
 
 #pragma mark - TATimelineActionFooterViewDelegate Methods
 
-- (void)trophyActionFooterDidPressLikesButton
+- (void)didPressLikesButton
 {
     [self.delegate trophyCloseupDidPerformAction:self];
+    
     //TATrophy *updatedTrophy = [[TATrophyManager sharedManager] likeTrophy:self.trophy];
     //self.trophy = updatedTrophy;
 }
