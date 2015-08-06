@@ -33,7 +33,7 @@
         self.groupId = storedTrophy[@"groupId"];
         self.likes = [storedTrophy[@"likes"] integerValue];
         self.likedUserIds = storedTrophy[@"likedUserIds"];
-        self.comments = nil;
+        self.comments = 0;
 
         [self.imageFile getDataInBackgroundWithBlock:^(NSData *data, NSError *error) {
             if (!error) {
