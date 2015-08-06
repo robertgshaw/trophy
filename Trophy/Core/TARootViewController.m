@@ -37,8 +37,8 @@
     
     SWRevealViewController *revealController = [self revealViewController];
     
-    
-    [revealController panGestureRecognizer];
+    //CHANGE THIS BACK TO RESTORE SLIDE OUT TODO
+    //[revealController panGestureRecognizer];
 }
 
 #pragma mark - AppSessionManager Delegate Methods

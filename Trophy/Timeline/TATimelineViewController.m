@@ -245,6 +245,10 @@ static const CGFloat kGroupsButtonHeight = 70.0;
     cell.commentsButton.trophy = cell.trophy;
     PFObject *trophyObject = [cell.trophy getTrophyAsParseObject];
     cell.commentsLabel.text = [NSString stringWithFormat:@"%@ comments", trophyObject[@"commentNumber"]];
+    if(trophyObject[@"commentNumber"] == nil) {
+        cell.commentsLabel.text = @"0 comments";
+    
+    }
     
     
     // THE FOLLOWING COMMENTED-OUT CODE WAS FOR EXPERIMENTATION PURPOSES

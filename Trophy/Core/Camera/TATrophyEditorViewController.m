@@ -74,7 +74,7 @@
     trophy.image = self.cameraImage;
     trophy.time = [NSDate date];
     trophy.likes = 0;
-    trophy.comments = nil;
+    trophy.comments = 0;
 
     [[TATrophyManager sharedManager] addTrophyToActiveGroup:trophy
                                                     success:^{
