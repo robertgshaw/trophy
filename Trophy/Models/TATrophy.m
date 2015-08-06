@@ -34,7 +34,6 @@
         self.likes = [storedTrophy[@"likes"] integerValue];
         self.likedUserIds = storedTrophy[@"likedUserIds"];
         self.comments = nil;
-        self.commentCount = [self updateCommentCount];
 
         [self.imageFile getDataInBackgroundWithBlock:^(NSData *data, NSError *error) {
             if (!error) {
@@ -53,17 +52,6 @@
         return YES;
     }
     return NO;
-}
-
-// function to populate the comments array
-- (NSInteger)updateCommentCount
-{
-    PFQuery *query = [PFQuery queryWithClassName:@"Activity"];
-    
-    [query whereKey:@"trophy" equalTo:self.parseObject];
-    [query whereKey:@"type" equalTo:@"comment"];
-    
-    return query.countObjects;
 }
 
 - (PFObject *)getTrophyAsParseObject
