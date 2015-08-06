@@ -43,7 +43,8 @@ static const CGFloat kTrophySendIconWidth = 70.0;
         self.captionTextField.clearButtonMode = UITextFieldViewModeWhileEditing;
         self.captionTextField.autocapitalizationType = UITextAutocapitalizationTypeSentences;
         self.captionTextField.returnKeyType = UIReturnKeyDone;
-        self.captionTextField.backgroundColor = [UIColor lightGrayColor];
+        self.captionTextField.backgroundColor = [UIColor colorWithRed:170 green:170 blue:170 alpha:0.7];
+
         self.captionTextField.textColor = [UIColor darkGrayColor];
         self.captionTextField.textAlignment = NSTextAlignmentCenter;
         self.captionTextField.hidden = YES;

@@ -178,7 +178,7 @@ static const CGFloat uiTabBarHeight = 39.0;
 }
 - (void)flagButtonPressed:(id *)sender {
     
-    // alert - yes/no for delete
+    // alert - yes/no for flag
     UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Flag Trophy" message:@"Are you sure?" delegate:self cancelButtonTitle:@"Cancel" otherButtonTitles:@"Yes", nil]; [alert show];
     
 }
