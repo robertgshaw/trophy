@@ -15,7 +15,7 @@
 
 static const CGFloat kProfileImageWidth = 70.0;
 static const CGFloat kProfileImageMargin = 30.0;
-static const CGFloat kNameLabelTopMargin = 16.0;
+static const CGFloat kNameLabelTopMargin = 10.0;
 static const CGFloat kLabelPadding = 7.5;
 static const CGFloat kLabelInnerMargin = 10.0;
 
@@ -25,8 +25,7 @@ static const CGFloat kLabelInnerMargin = 10.0;
 @property (nonatomic, strong) UILabel *nameLabel;
 @property (nonatomic, strong) UILabel *trophiesLabel;
 @property (nonatomic, strong) UILabel *groupsLabel;
-//TODO create bio label for college
-//@property (nonatomic, strong) UILabel *bioLabel;
+@property (nonatomic, strong) UILabel *bioLabel;
 @property (nonatomic, strong) UIButton *editButton;
 @property (nonatomic, strong) UIButton *flagButton;
 
@@ -49,29 +48,36 @@ static const CGFloat kLabelInnerMargin = 10.0;
         [self addSubview:self.profileImageView];
 
         _nameLabel = [[UILabel alloc] initWithFrame:CGRectZero];
-        self.nameLabel.textAlignment = NSTextAlignmentCenter;
+        self.nameLabel.textAlignment = NSTextAlignmentLeft;
         self.nameLabel.textColor = [UIColor darkGrayColor];
-        self.nameLabel.font = [UIFont boldSystemFontOfSize:20.0];
+        self.nameLabel.font = [UIFont boldSystemFontOfSize:16.0];
         [self addSubview:self.nameLabel];
 
         _trophiesLabel = [[UILabel alloc] initWithFrame:CGRectZero];
-        self.trophiesLabel.textAlignment = NSTextAlignmentCenter;
+        self.trophiesLabel.textAlignment = NSTextAlignmentLeft;
         self.trophiesLabel.textColor = [UIColor darkGrayColor];
-        self.trophiesLabel.font = [UIFont systemFontOfSize:16.0];
+        self.trophiesLabel.font = [UIFont systemFontOfSize:13.0];
         [self addSubview:self.trophiesLabel];
 
         _groupsLabel = [[UILabel alloc] initWithFrame:CGRectZero];
-        self.groupsLabel.textAlignment = NSTextAlignmentCenter;
+        self.groupsLabel.textAlignment = NSTextAlignmentLeft;
         self.groupsLabel.textColor = [UIColor darkGrayColor];
-        self.groupsLabel.font = [UIFont systemFontOfSize:16.0];
+        self.groupsLabel.font = [UIFont systemFontOfSize:13.0];
         [self addSubview:self.groupsLabel];
         self.groupsLabel.hidden = YES;
+        
+        _bioLabel = [[UILabel alloc] initWithFrame:CGRectZero];
+        self.bioLabel.textAlignment = NSTextAlignmentLeft;
+        self.bioLabel.textColor = [UIColor darkGrayColor];
+        self.bioLabel.font = [UIFont systemFontOfSize:13.0];
+        [self addSubview:self.bioLabel];
+        self.groupsLabel.hidden = NO;
         
         _editButton = [[UIButton alloc] initWithFrame:CGRectZero];
         self.editButton.backgroundColor = [UIColor trophyYellowColor];
         [self.editButton setTitle:@"Edit" forState:UIControlStateNormal];
         [self.editButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
-        self.editButton.titleLabel.font = [UIFont boldSystemFontOfSize:14.0];
+        self.editButton.titleLabel.font = [UIFont boldSystemFontOfSize:10.0];
         self.editButton.layer.cornerRadius = 5.0;
         self.editButton.clipsToBounds = YES;
         [self.editButton addTarget:self action:@selector(editButtonPressed:) forControlEvents:UIControlEventTouchUpInside];
@@ -82,7 +88,7 @@ static const CGFloat kLabelInnerMargin = 10.0;
         self.flagButton.backgroundColor = [UIColor redColor];
         [self.flagButton setTitle:@"Flag" forState:UIControlStateNormal];
         [self.flagButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
-        self.flagButton.titleLabel.font = [UIFont boldSystemFontOfSize:14.0];
+        self.flagButton.titleLabel.font = [UIFont boldSystemFontOfSize:10.0];
         self.flagButton.layer.cornerRadius = 5.0;
         self.flagButton.clipsToBounds = YES;
         [self.flagButton addTarget:self action:@selector(flagButtonPressed:) forControlEvents:UIControlEventTouchUpInside];
@@ -151,6 +157,14 @@ static const CGFloat kLabelInnerMargin = 10.0;
     frame.origin.y = CGRectGetMaxY(self.trophiesLabel.frame) + kLabelPadding;
     frame.size.width = maxWidth;
     self.groupsLabel.frame = frame;
+    
+    self.bioLabel.hidden = [self isCurrentUser] == YES;
+    [self.bioLabel sizeToFit];
+    frame = self.bioLabel.frame;
+    frame.origin.x = CGRectGetMinX(self.nameLabel.frame);
+    frame.origin.y = CGRectGetMaxY(self.trophiesLabel.frame) + kLabelPadding;
+    frame.size.width = maxWidth;
+    self.bioLabel.frame = frame;
 }
 
 - (void)setUser:(TAUser *)user
@@ -165,6 +179,7 @@ static const CGFloat kLabelInnerMargin = 10.0;
         
         [self.nameLabel setText:_user.name];
         [self.groupsLabel setText:@"1 group"];
+        [self.bioLabel setText:_user.bio];
         [self setNeedsLayout];
     }
 }
