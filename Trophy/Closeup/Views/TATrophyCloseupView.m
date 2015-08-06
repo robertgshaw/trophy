@@ -50,20 +50,20 @@ static const CGFloat overlayHeight = 150.0;
         [self addSubview:self.trophyImageView];
         
         self.backButton = [UIButton buttonWithType:UIButtonTypeRoundedRect];
-        [self.backButton setFrame:CGRectMake(0, 0, 80, 80)];
         [self.backButton setTitle:@"Back" forState:UIControlStateNormal];
         [self.backButton setTintColor: [UIColor trophyYellowColor]];
+        self.backButton.titleLabel.textAlignment = NSTextAlignmentCenter;
         [self.backButton addTarget:self action:@selector(backButtonPressed:) forControlEvents:UIControlEventTouchUpInside];
         [self addSubview:self.backButton];
         
         self.flagButton = [UIButton buttonWithType:UIButtonTypeRoundedRect];
-        //CGFloat buttonWidth = CGRectGetMaxX(self.bounds);
-        [self.flagButton setFrame:CGRectMake(80, 0, 80, 80)];
+        self.flagButton.backgroundColor = [UIColor clearColor];
+        self.flagButton.layer.cornerRadius = 5.0;
         [self.flagButton setTitle:@"Flag" forState:UIControlStateNormal];
         [self.flagButton setTintColor: [UIColor trophyYellowColor]];
+        self.flagButton.titleLabel.textAlignment = NSTextAlignmentCenter;
         [self.flagButton addTarget:self action:@selector(flagButtonPressed:) forControlEvents:UIControlEventTouchUpInside];
         [self addSubview:self.flagButton];
-
         
         self.overlay = [[TAOverlayButton alloc] initWithDelegate:delegate];
         [self addSubview:self.overlay];
@@ -81,7 +81,6 @@ static const CGFloat overlayHeight = 150.0;
     
     // configures image display
     CGRect frame = self.trophyImageView.frame;
-    
     CGFloat height = CGRectGetMaxY(self.frame) * 8 / 10;
     CGFloat width = CGRectGetMaxX(self.frame);
     frame.origin.x = (CGRectGetMidX(self.bounds) - floorf(width / 2.0));
@@ -96,6 +95,17 @@ static const CGFloat overlayHeight = 150.0;
     frame.origin.y = CGRectGetMaxY(self.bounds) - overlayHeight;
     self.overlay.frame = frame;
     
+    // lays out the flag button
+    frame.size = CGSizeMake(60.0, 25.0);
+    frame.origin.x = CGRectGetMidX(self.bounds) - (frame.size.width / 2);
+    frame.origin.y = 25;
+    self.flagButton.frame = frame;
+    
+    // lays out the back button
+    frame.size = CGSizeMake(60.0, 25.0);
+    frame.origin.x = 10.0;
+    frame.origin.y = 25.0;
+    self.backButton.frame = frame;
 }
 
 // square crop
@@ -134,17 +144,20 @@ static const CGFloat overlayHeight = 150.0;
     return image;
 }
 
+// back button action handler
 - (void)backButtonPressed:(UIButton *)sender {
 
     [self.delegate1 backButtonPressed];
 
 }
+
 - (void)flagButtonPressed:(id *)sender {
     
     // alert - yes/no for flag
     UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Flag Trophy" message:@"Are you sure?" delegate:self cancelButtonTitle:@"Cancel" otherButtonTitles:@"Yes", nil]; [alert show];
     
 }
+
 - (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex{
     if (buttonIndex == 1) { // Set buttonIndex == 0 to handel "Ok"/"Yes" button response
         // Ok button response
@@ -171,22 +184,7 @@ static const CGFloat overlayHeight = 150.0;
     }
 }
 
-
-- (void)didPressCommentsButton:(id)sender
-{
-    //
-    // Disabled because button is acting as watermark
-    /*if (self.likesButton.selected) {
-     self.likesButton.selected = NO;
-     } else {
-     self.likesButton.selected = YES;
-     }
-     TATrophy *updatedTrophy = [[TATrophyManager sharedManager] likeTrophy:self.trophy];
-     self.trophy = updatedTrophy;*/
-    
-    [self.delegate1 closeupViewDidPressCommentsButton:self];
-}
-
+// configures correct data
 - (void)setTrophy:(TATrophy *)trophy
 {
     _trophy = trophy;
@@ -206,12 +204,11 @@ static const CGFloat overlayHeight = 150.0;
         [format setDateFormat:@"MM/dd/yy"];
         [self.overlay.dateLabel setText:[format stringFromDate:trophy.time]];
         
-        //IF YOU WANT "___ AWARDED _____"
+        // "___ AWARDED _____"
         self.overlay.recipientLabel.text = [NSString stringWithFormat:@"%@ awarded %@",trophy.author.name, trophy.recipient.name];
         [self.overlay.recipientLabel setText:self.overlay.recipientLabel.text];
         
-        // Action footer
-        //self.overlay.actionFooterView.trophy = trophy;
+        // Likes
         self.overlay.likesButton.trophy = trophy;
         
         [self setNeedsLayout];

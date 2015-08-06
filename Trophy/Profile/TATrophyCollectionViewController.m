@@ -112,7 +112,7 @@ static const CGFloat kTrophyCollectionViewCellWidth = 250.0;
 
 -(void) trophyCloseupDidPerformAction:(TATrophyCloseupViewController *)viewController
 {
-
+    
 }
 
 #pragma mark - TATimelineActionFooterViewDelegate Methods

@@ -11,7 +11,7 @@
 
 @protocol TALikeButtonDelegate <NSObject>
 @required
-- (void)didPressLikesButton;
+- (void)likesButtonDidPressLikesButton:(TATrophy *) updatedTrophy;
 @end
 
 @interface TALikesButton : UIButton

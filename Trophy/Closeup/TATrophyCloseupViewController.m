@@ -19,7 +19,6 @@
 
 @property (nonatomic, strong) TATrophy *trophy;
 @property (nonatomic, strong) TATrophyCloseupView *closeupView;
-//@property (nonatomic, strong) UIButton *commentsButton;
 @property (nonatomic, strong) UIButton *deleteButton;
 
 @end
@@ -79,8 +78,8 @@
     
     CGRect frame;
     frame.size = CGSizeMake(60.0, 25.0);
-    frame.origin.x = CGRectGetMidX(self.view.bounds) - 25;
-    frame.origin.y = CGRectGetMaxY(self.view.frame) - 50;
+    frame.origin.x = CGRectGetMaxX(self.view.bounds) - 70;
+    frame.origin.y = CGRectGetMinY(self.view.bounds) + 25;
     self.deleteButton.frame = frame;
 }
 
@@ -94,42 +93,21 @@
 
 #pragma mark - TACloseupViewDelegate Methods
 
-- (void)closeupViewDidPressCommentsButton:(TATrophyCloseupView *)TrophyCloseupView;
+- (void)closeupViewDidPressCommentsButton:(TATrophyCloseupView *)TrophyCloseupView
 {
     TACommentTableViewController *commentsVC = [[TACommentTableViewController alloc] init];
     UINavigationController *navController = [[UINavigationController alloc] initWithRootViewController:commentsVC];
     [self presentViewController:navController animated:YES completion:nil];
-    
-    //[self.navigationController pushViewController:commentsVC animated:YES];
-    
-    //[self.delegate trophyCloseupDidPerformAction:self];
-    
+
 }
 
-#pragma mark - TATimelineActionFooterViewDelegate Methods
-
-- (void)didPressLikesButton
+#pragma mark - TALikesButtonDelegate Methods
+-(void) likesButtonDidPressLikesButton:(TATrophy *)updatedTrophy
 {
+    NSLog(@"yoooo");
     [self.delegate trophyCloseupDidPerformAction:self];
-    
-    //TATrophy *updatedTrophy = [[TATrophyManager sharedManager] likeTrophy:self.trophy];
-    //self.trophy = updatedTrophy;
 }
 
-- (void)didPressCommentsButton
-{
-    /*
-    TATrophyCloseupViewController *closeupViewController = [[TATrophyCloseupViewController alloc] initWithTrophy:self.trophy];
-    closeupViewController.delegate = self;
-    [self.navigationController pushViewController:closeupViewController animated:YES];
-    */
-    
-    TACommentTableViewController *commentViewController = [[TACommentTableViewController alloc] initWithPhoto:self.trophy];
-    //commentViewController.delegate = self;
-    [self.navigationController pushViewController:commentViewController animated:YES];
-    //[self.delegate trophyCloseupDidPerformAction:self];
-    
-}
 - (void)deleteButtonPressed
 {
     // alert - yes/no for delete
@@ -162,10 +140,6 @@
         }];
 
     }
-}
-- (void)trophyActionFooterDidPressAddButton
-{
-
 }
 
 - (void) backButtonPressed

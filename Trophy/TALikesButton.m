@@ -82,8 +82,13 @@ static const CGFloat kButtonWidth = 25.0;
     } else {
         self.likesButton.selected = YES;
     }
+    
+    // updates likes on parse
     TATrophy *updatedTrophy = [[TATrophyManager sharedManager] likeTrophy:self.trophy];
     self.trophy = updatedTrophy;
+    
+    // sends updated trophy back to delegate
+    [self.delegate likesButtonDidPressLikesButton:(updatedTrophy)];
 }
 
 + (CGFloat)likeButtonWidth
