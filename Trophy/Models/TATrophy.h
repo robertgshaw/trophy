@@ -29,5 +29,6 @@
 - (BOOL)likedByCurrentUser;
 - (PFObject *)getTrophyAsParseObject;
 - (PFFile *)parseFileForTrophyImage;
+- (void)updateCommentNumber;
 
 @end

@@ -96,6 +96,8 @@ static const CGFloat kGroupsButtonHeight = 70.0;
     
     [self layoutGroupListView];
     
+    
+    
 
 }
 
@@ -372,9 +374,11 @@ static const CGFloat kGroupsButtonHeight = 70.0;
  
 }
 
--(IBAction)presentTrophyComments:(id)sender
+-(void)presentTrophyComments:(id)sender
 {
     TACommentButton *button = sender;
+    
+    self.indexPathOfCurrentCloseupCell = [self.tableView indexPathForCell:(TATimelineTableViewCell *)button.superview];
     
     TACommentTableViewController *commentVC = [[TACommentTableViewController alloc] initWithPhoto:button.trophy];
     commentVC.delegate = self;
