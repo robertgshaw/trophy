@@ -245,6 +245,12 @@ static const CGFloat kGroupsButtonHeight = 70.0;
     
     // set properties on commentsButton and commentsLabel from the tableView cell
     cell.commentsButton.trophy = cell.trophy;
+    PFObject *trophyObject = [cell.trophy getTrophyAsParseObject];
+    cell.commentsLabel.text = [NSString stringWithFormat:@"%@ comments", trophyObject[@"commentNumber"]];
+    if(trophyObject[@"commentNumber"] == nil) {
+        cell.commentsLabel.text = @"0 comments";
+    
+    }
     cell.commentsLabel.text = [NSString stringWithFormat:@"%ld comments", (long)cell.trophy.commentNumber];
     
     

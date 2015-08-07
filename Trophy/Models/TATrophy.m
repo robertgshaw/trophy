@@ -33,6 +33,7 @@
         self.groupId = storedTrophy[@"groupId"];
         self.likes = [storedTrophy[@"likes"] integerValue];
         self.likedUserIds = storedTrophy[@"likedUserIds"];
+        self.comments = 0;
         self.comments = nil;
         self.commentNumber = [storedTrophy[@"commentNumber"] integerValue];
 
