@@ -34,6 +34,8 @@
         self.likes = [storedTrophy[@"likes"] integerValue];
         self.likedUserIds = storedTrophy[@"likedUserIds"];
         self.comments = 0;
+        self.comments = nil;
+        self.commentNumber = [storedTrophy[@"commentNumber"] integerValue];
 
         [self.imageFile getDataInBackgroundWithBlock:^(NSData *data, NSError *error) {
             if (!error) {
@@ -52,6 +54,15 @@
         return YES;
     }
     return NO;
+}
+
+- (void)updateCommentNumber
+{
+    // update local counter from Parse database
+    
+    self.commentNumber = [self.parseObject[@"commentNumber"] integerValue];
+    
+    
 }
 
 - (PFObject *)getTrophyAsParseObject

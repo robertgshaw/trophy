@@ -119,15 +119,13 @@
     }];
 }
 
-
-- (void)addUserToGroupWithName:(NSString *)groupName
-                    inviteCode:(NSString *)inviteCode
+// adds user to group via invite code only
+- (void)addUserToGroupWithInviteCode:(NSString *)inviteCode
                        success:(void (^)(TAGroup *group))success
                        failure:(void (^)(NSString *error))failure
 {
     BlockWeakSelf weakSelf = self;
     PFQuery *query = [PFQuery queryWithClassName:@"Group"];
-    [query whereKey:@"name" equalTo:groupName];
     [query whereKey:@"inviteCode" equalTo:inviteCode];
     [query includeKey:@"users"];
     NSArray *objects = [query findObjects];

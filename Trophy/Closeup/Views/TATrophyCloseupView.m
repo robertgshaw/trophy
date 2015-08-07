@@ -19,7 +19,7 @@
 
 
 static const CGFloat kTrophyImageCornerRadius = 15.0;
-static const CGFloat overlayHeight = 150.0;
+static const CGFloat overlayHeight = 140.0;
 
 
 @interface TATrophyCloseupView ()
@@ -41,6 +41,7 @@ static const CGFloat overlayHeight = 150.0;
 
         self.delegate1 = delegate;
         
+        // adds trophy image view
         _trophyImageView = [[PFImageView alloc] init];
         self.trophyImageView.layer.cornerRadius = kTrophyImageCornerRadius;
         self.trophyImageView.layer.masksToBounds = YES;
@@ -49,6 +50,7 @@ static const CGFloat overlayHeight = 150.0;
         self.trophyImageView.layer.borderWidth = 0.0;
         [self addSubview:self.trophyImageView];
         
+        // adds back button
         self.backButton = [UIButton buttonWithType:UIButtonTypeRoundedRect];
         [self.backButton setTitle:@"Back" forState:UIControlStateNormal];
         [self.backButton setTintColor: [UIColor trophyYellowColor]];
@@ -56,6 +58,7 @@ static const CGFloat overlayHeight = 150.0;
         [self.backButton addTarget:self action:@selector(backButtonPressed:) forControlEvents:UIControlEventTouchUpInside];
         [self addSubview:self.backButton];
         
+        // adds flag button
         self.flagButton = [UIButton buttonWithType:UIButtonTypeRoundedRect];
         self.flagButton.backgroundColor = [UIColor clearColor];
         self.flagButton.layer.cornerRadius = 5.0;
@@ -65,6 +68,7 @@ static const CGFloat overlayHeight = 150.0;
         [self.flagButton addTarget:self action:@selector(flagButtonPressed:) forControlEvents:UIControlEventTouchUpInside];
         [self addSubview:self.flagButton];
         
+        // adds overlay
         self.overlay = [[TAOverlayButton alloc] initWithDelegate:delegate];
         [self addSubview:self.overlay];
         
@@ -155,7 +159,6 @@ static const CGFloat overlayHeight = 150.0;
     
     // alert - yes/no for flag
     UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Flag Trophy" message:@"Are you sure?" delegate:self cancelButtonTitle:@"Cancel" otherButtonTitles:@"Yes", nil]; [alert show];
-    
 }
 
 - (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex{
@@ -189,8 +192,8 @@ static const CGFloat overlayHeight = 150.0;
 {
     _trophy = trophy;
     if (_trophy) {
-        // Trophy Image
         
+        // Trophy Image
         PFFile *imageFile = [trophy parseFileForTrophyImage];
         self.trophyImageView.file = imageFile;
         self.trophyImageView.image = [self squareImageFromImage:self.trophyImageView.image scaledToSize:400];
@@ -205,7 +208,7 @@ static const CGFloat overlayHeight = 150.0;
         [self.overlay.dateLabel setText:[format stringFromDate:trophy.time]];
         
         // "___ AWARDED _____"
-        self.overlay.recipientLabel.text = [NSString stringWithFormat:@"%@ awarded %@",trophy.author.name, trophy.recipient.name];
+        self.overlay.recipientLabel.text = [NSString stringWithFormat:@"%@ awarded %@ for:",trophy.author.name, trophy.recipient.name];
         [self.overlay.recipientLabel setText:self.overlay.recipientLabel.text];
         
         // Likes

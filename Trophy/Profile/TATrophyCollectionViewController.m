@@ -22,6 +22,8 @@ static const CGFloat kTrophyCollectionViewCellWidth = 250.0;
 @interface TATrophyCollectionViewController () <UICollectionViewDelegateFlowLayout,
                                                 TATrophyActionFooterDelegate, TATrophyCloseupViewControllerDelegate>
 
+@property (nonatomic, strong) NSIndexPath *indexPathOfCurrentCloseupItem;
+
 @end
 
 @implementation TATrophyCollectionViewController
@@ -82,7 +84,12 @@ static const CGFloat kTrophyCollectionViewCellWidth = 250.0;
 
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath
 {
+    // parse query
     PFObject *parseObject = [self.trophies objectAtIndex:indexPath.row];
+    
+    // sets index path of current closeup cell
+    self.indexPathOfCurrentCloseupItem = indexPath;
+    
     [self presentTrophyCloseup:[[TATrophy alloc] initWithStoredTrophy:parseObject]];
 }
 
@@ -102,7 +109,9 @@ static const CGFloat kTrophyCollectionViewCellWidth = 250.0;
 #pragma mark - TACloseupViewControllerDelegate Methods
 - (void) closeUpViewControllerBackButtonPressed
 {
-    NSLog(@"yo");
+    // "unsets" current closeup
+    self.indexPathOfCurrentCloseupItem = nil;
+    
     // pops to the trophy collection view controller
     [self.navigationController popToViewController:self.delegate animated:YES];
     
@@ -112,7 +121,11 @@ static const CGFloat kTrophyCollectionViewCellWidth = 250.0;
 
 -(void) trophyCloseupDidPerformAction:(TATrophyCloseupViewController *)viewController
 {
-    
+    // updates only the current closeup cell when an action is performed
+    if (self.indexPathOfCurrentCloseupItem != nil)
+    {
+        [self.collectionView reloadItemsAtIndexPaths:@[self.indexPathOfCurrentCloseupItem]];
+    }
 }
 
 #pragma mark - TATimelineActionFooterViewDelegate Methods
