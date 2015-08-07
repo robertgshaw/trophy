@@ -17,11 +17,11 @@
     self = [super init];
     if (self) {
     
+        // sets delegate
         self.delegate = delegate;
         
         self.backgroundColor = [UIColor clearColor];
-        
-        //let's
+    
         // configures title label
         self.titleLabel = [[UILabel alloc] init];
         [self.titleLabel setTextAlignment:NSTextAlignmentLeft];
@@ -43,7 +43,7 @@
         self.recipientLabel = [[UILabel alloc] init];
         [self.recipientLabel setTextAlignment:NSTextAlignmentLeft];
         self.recipientLabel.textColor = [UIColor whiteColor];
-        self.recipientLabel.font = [UIFont boldSystemFontOfSize:18];
+        self.recipientLabel.font = [UIFont systemFontOfSize:16.0];
         [self addSubview:self.recipientLabel];
 
         // configures likes button
@@ -57,6 +57,7 @@
         [self.commentsButton addTarget:self action:@selector(didPressCommentsButton) forControlEvents:UIControlEventTouchUpInside];
         [self addSubview:self.commentsButton];
         
+        // adds the shadow to the overlay
         [self setBackgroundColor:[UIColor colorWithRed:0 green:0 blue:0 alpha:0.5]];
     
     }
@@ -69,22 +70,21 @@
 {
     [super layoutSubviews];
     
-    // configures title label
-    [self.titleLabel sizeToFit];
-    CGRect frame = self.titleLabel.frame;
-    frame.origin.x = self.bounds.size.width / 10;
-    frame.origin.y = self.bounds.size.height / 10;
-    self.titleLabel.frame = frame;
- //   [self.titleLabel setBackgroundColor:[UIColor colorWithRed:0 green:0 blue:0 alpha:0.5]];
-    
     // configures recipient label
     [self.recipientLabel sizeToFit];
-    frame = self.recipientLabel.frame;
+    CGRect frame = self.recipientLabel.frame;
     frame.origin.x = self.bounds.size.width / 10;
-    frame.origin.y = CGRectGetMinY(self.titleLabel.frame) + (floorf(self.titleLabel.font.lineHeight) * 1.25);
+    frame.origin.y = self.bounds.size.height / 10;
     self.recipientLabel.frame = frame;
-   // [self.recipientLabel setBackgroundColor:[UIColor colorWithRed:0 green:0 blue:0 alpha:0.5]];
     
+    // configures title label
+    [self.titleLabel sizeToFit];
+    frame = self.titleLabel.frame;
+    frame.origin.x = self.bounds.size.width / 10;
+    frame.origin.y = CGRectGetMinY(self.recipientLabel.frame) + (floorf(self.recipientLabel.font.lineHeight) * 1.25);
+    self.titleLabel.frame = frame;
+    
+
     // configures date label
     [self.dateLabel sizeToFit];
     frame = self.dateLabel.frame;

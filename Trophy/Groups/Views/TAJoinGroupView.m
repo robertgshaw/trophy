@@ -12,7 +12,7 @@
 #import "UITextField+TAAdditions.h"
 
 static const CGFloat kJoinGroupTextFieldHeight = 35.0;
-static const CGFloat kJoinGroupVerticalMargin = 20.0;
+static const CGFloat kJoinGroupVerticalMargin = 30.0;
 
 @interface TAJoinGroupView () <UITextFieldDelegate>
 
@@ -40,14 +40,14 @@ static const CGFloat kJoinGroupVerticalMargin = 20.0;
         [self addSubview:self.titleLabel];
         
         
-        _groupNameInput = [TATextField textFieldWithYellowBorder];
-        self.groupNameInput.delegate = self;
-        self.groupNameInput.placeholder = @"Group name";
-        self.groupNameInput.borderStyle = UITextBorderStyleRoundedRect;
-        self.groupNameInput.clearButtonMode = UITextFieldViewModeWhileEditing;
-        self.groupNameInput.autocapitalizationType = UITextAutocapitalizationTypeWords;
-        self.groupNameInput.returnKeyType = UIReturnKeyNext;
-        [self addSubview:self.groupNameInput];
+//        _groupNameInput = [TATextField textFieldWithYellowBorder];
+//        self.groupNameInput.delegate = self;
+//        self.groupNameInput.placeholder = @"Group name";
+//        self.groupNameInput.borderStyle = UITextBorderStyleRoundedRect;
+//        self.groupNameInput.clearButtonMode = UITextFieldViewModeWhileEditing;
+//        self.groupNameInput.autocapitalizationType = UITextAutocapitalizationTypeWords;
+//        self.groupNameInput.returnKeyType = UIReturnKeyNext;
+//        [self addSubview:self.groupNameInput];
         
          
         _inviteCodeInput = [TATextField textFieldWithYellowBorder];
@@ -72,28 +72,28 @@ static const CGFloat kJoinGroupVerticalMargin = 20.0;
     [self.titleLabel sizeToFit];
     frame = self.titleLabel.frame;
     frame.origin.x = floorf((CGRectGetWidth(self.bounds) - CGRectGetWidth(self.titleLabel.frame)) / 2.0);
-    frame.origin.y = 40.0; //CGRectGetMaxY(self.joinGroupImageView.frame) + kJoinGroupVerticalMargin;
+    frame.origin.y = 60.0;
     self.titleLabel.frame = frame;
-    
-    frame = self.groupNameInput.frame;
-    frame.size.width = CGRectGetWidth(self.bounds) - 100.0;
-    frame.size.height = kJoinGroupTextFieldHeight;
-    frame.origin.x = floorf((CGRectGetWidth(self.bounds) - frame.size.width) / 2.0);
-    frame.origin.y = CGRectGetMaxY(self.titleLabel.frame) + kJoinGroupVerticalMargin;
-    self.groupNameInput.frame = frame;
     
     frame = self.inviteCodeInput.frame;
     frame.size.width = CGRectGetWidth(self.bounds) - 100.0;
     frame.size.height = kJoinGroupTextFieldHeight;
     frame.origin.x = floorf((CGRectGetWidth(self.bounds) - frame.size.width) / 2.0);
-    frame.origin.y = CGRectGetMaxY(self.groupNameInput.frame) + kJoinGroupVerticalMargin;
+    frame.origin.y = CGRectGetMaxY(self.titleLabel.frame) + kJoinGroupVerticalMargin;
     self.inviteCodeInput.frame = frame;
+    
+//    frame = self.groupNameInput.frame;
+//    frame.size.width = CGRectGetWidth(self.bounds) - 100.0;
+//    frame.size.height = kJoinGroupTextFieldHeight;
+//    frame.origin.x = floorf((CGRectGetWidth(self.bounds) - frame.size.width) / 2.0);
+//    frame.origin.y = CGRectGetMaxY(self.titleLabel.frame) + kJoinGroupVerticalMargin;
+//    self.groupNameInput.frame = frame;
 }
 
-- (NSString *)groupName
-{
-    return self.groupNameInput.text;
-}
+//- (NSString *)groupName
+//{
+//    return self.groupNameInput.text;
+//}
 
 - (NSString *)inviteCode
 {
@@ -105,8 +105,8 @@ static const CGFloat kJoinGroupVerticalMargin = 20.0;
 - (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string
 {
     NSString *updatedString = [textField.text stringByReplacingCharactersInRange:range withString:string];
-    UITextField *remainingTextField = (textField == self.groupNameInput) ? self.inviteCodeInput : self.groupNameInput;
-    if ([updatedString length] > 0 && [remainingTextField.text length] > 0) {
+    // UITextField *remainingTextField = (textField == self.groupNameInput) ? self.inviteCodeInput : self.groupNameInput;
+    if ([updatedString length] > 0) {
         [self.delegate joinGroupViewShouldShowJoinButton:self enabled:YES];
     } else {
         [self.delegate joinGroupViewShouldShowJoinButton:self enabled:NO];
@@ -122,11 +122,13 @@ static const CGFloat kJoinGroupVerticalMargin = 20.0;
 
 - (BOOL)textFieldShouldReturn:(UITextField *)textField
 {
-    if (textField == self.groupNameInput) {
-        [self.inviteCodeInput becomeFirstResponder];
-    } else {
-        [self.delegate joinGroupViewDidFinishEnteringInformation:self];
-    }
+//    if (textField == self.groupNameInput) {
+//        [self.inviteCodeInput becomeFirstResponder];
+//    } else {
+//        [self.delegate joinGroupViewDidFinishEnteringInformation:self];
+//    }
+
+    [self.delegate joinGroupViewDidFinishEnteringInformation:self];
     return YES;
 }
 

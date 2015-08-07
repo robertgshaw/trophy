@@ -51,13 +51,14 @@
 
 - (void)joinButtonPressed
 {
-    [[TAGroupManager sharedManager] addUserToGroupWithName:self.joinGroupView.groupName
-                                                inviteCode:self.joinGroupView.inviteCode success:^(TAGroup *group) {
+    // adds user to group via invite
+    [[TAGroupManager sharedManager] addUserToGroupWithInviteCode:self.joinGroupView.inviteCode success:^(TAGroup *group) {
                                                     [self.delegate joinGroupViewControllerDidJoinGroup:self];
                                                     [self sendGroupAlertNotification:group];
                                                 } failure:^(NSString *error) {
                                                     [SVProgressHUD showErrorWithStatus:error maskType:SVProgressHUDMaskTypeBlack];
                                                 }];
+
 }
 
 - (void)sendGroupAlertNotification:(TAGroup *)group

@@ -47,13 +47,13 @@
     
     self.edgesForExtendedLayout = UIRectEdgeAll;
     
+    // configures and adds closeup view
     self.closeupView = [[TATrophyCloseupView alloc] initWithDelegate:self];
-    
     [self.closeupView setTrophy:self.trophy];
     self.closeupView.frame = self.view.frame;
-    
     [self.view addSubview:self.closeupView];
     
+    // configures and adds delete button
     _deleteButton = [[UIButton alloc] initWithFrame:CGRectZero];
     self.deleteButton.backgroundColor = [UIColor trophyYellowColor];
     [self.deleteButton setTitle:@"Delete" forState:UIControlStateNormal];
@@ -63,6 +63,12 @@
     self.deleteButton.clipsToBounds = YES;
     [self.deleteButton addTarget:self action:@selector(deleteButtonPressed) forControlEvents:UIControlEventTouchUpInside];
     self.deleteButton.hidden = YES;
+    
+    CGRect frame;
+    frame.size = CGSizeMake(60.0, 25.0);
+    frame.origin.x = CGRectGetMaxX(self.view.bounds) - 70;
+    frame.origin.y = CGRectGetMinY(self.view.bounds) + 25;
+    self.deleteButton.frame = frame;
     [self.view addSubview:self.deleteButton];
 
     PFUser *authorObject = [self.trophy.author getUserAsParseObject];
@@ -75,12 +81,6 @@
         self.deleteButton.hidden = NO;
         NSLog(@"HEY");
     }
-    
-    CGRect frame;
-    frame.size = CGSizeMake(60.0, 25.0);
-    frame.origin.x = CGRectGetMaxX(self.view.bounds) - 70;
-    frame.origin.y = CGRectGetMinY(self.view.bounds) + 25;
-    self.deleteButton.frame = frame;
 }
 
 #pragma mark - TAOverlayButtonDelegate Methods
@@ -102,10 +102,10 @@
 }
 
 #pragma mark - TALikesButtonDelegate Methods
+
 -(void) likesButtonDidPressLikesButton:(TATrophy *)updatedTrophy
 {
-    NSLog(@"yoooo");
-    [self.delegate trophyCloseupDidPerformAction:self];
+    [self.delegate trophyCloseupDidPerformAction:updatedTrophy];
 }
 
 - (void)deleteButtonPressed
@@ -113,6 +113,7 @@
     // alert - yes/no for delete
     UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Delete Trophy" message:@"Are you sure?" delegate:self cancelButtonTitle:@"Cancel" otherButtonTitles:@"Yes", nil]; [alert show];
 }
+
 - (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex{
     if (buttonIndex == 1) { // Set buttonIndex == 0 to handel "Ok"/"Yes" button response
         // Ok button response
@@ -141,6 +142,8 @@
 
     }
 }
+
+#pragma mark - Delete Button Action Handler
 
 - (void) backButtonPressed
 {
