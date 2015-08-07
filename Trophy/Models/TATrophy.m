@@ -33,12 +33,9 @@
         self.groupId = storedTrophy[@"groupId"];
         self.likes = [storedTrophy[@"likes"] integerValue];
         self.likedUserIds = storedTrophy[@"likedUserIds"];
-<<<<<<< HEAD
         self.comments = 0;
-=======
         self.comments = nil;
         self.commentNumber = [storedTrophy[@"commentNumber"] integerValue];
->>>>>>> origin/master
 
         [self.imageFile getDataInBackgroundWithBlock:^(NSData *data, NSError *error) {
             if (!error) {
