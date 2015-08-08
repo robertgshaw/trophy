@@ -24,6 +24,7 @@ static const CGFloat kContinueButtonHeight = 40.0;
 
 @property (nonatomic, strong) UIImageView *logoImageView;
 @property (nonatomic, strong) UILabel *titleLabel;
+@property (nonatomic, strong) UILabel *legalLabel;
 @property (nonatomic, strong) TATextField *usernameInput;
 @property (nonatomic, strong) TATextField *passwordInput;
 @property (nonatomic, strong) TAPhoneNumberField *phoneNumberInput;
@@ -51,7 +52,13 @@ static const CGFloat kContinueButtonHeight = 40.0;
         self.titleLabel.font = [UIFont boldSystemFontOfSize:30.0];
         self.titleLabel.textColor = [UIColor trophyYellowColor];
         [self addSubview:self.titleLabel];
-
+        
+        _legalLabel = [[UILabel alloc] init];
+        self.legalLabel.text = @"By logging in or signing up, you hereby agree to the:";
+        self.legalLabel.font = [UIFont boldSystemFontOfSize:12.0];
+        self.legalLabel.textColor = [UIColor lightGrayColor];
+        [self addSubview:self.legalLabel];
+        
         _usernameInput = [TATextField textFieldWithYellowBorder];
         self.usernameInput.delegate = self;
         self.usernameInput.placeholder = @"Username";
@@ -92,15 +99,18 @@ static const CGFloat kContinueButtonHeight = 40.0;
         
         _privacyButton = [[UIButton alloc] init];
         [self.privacyButton setTitle:@"Privacy Policy" forState:UIControlStateNormal];
-        [self.privacyButton setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
+        [self.privacyButton setTitleColor:[UIColor lightGrayColor] forState:UIControlStateNormal];
         [self.privacyButton setTitleColor:[UIColor colorWithRed:0.812 green:0.82 blue:0.82 alpha:1] forState:UIControlStateHighlighted];
+        self.privacyButton.titleLabel.font = [UIFont systemFontOfSize:12.0];
         [self.privacyButton addTarget:self action:@selector(privacyButtonPressed) forControlEvents:UIControlEventTouchUpInside];
         [self addSubview:self.privacyButton];
         
         _legalButton = [[UIButton alloc] init];
         [self.legalButton setTitle:@"Legal Terms" forState:UIControlStateNormal];
-        [self.legalButton setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
+        [self.legalButton setTitleColor:[UIColor lightGrayColor] forState:UIControlStateNormal];
         [self.legalButton setTitleColor:[UIColor colorWithRed:0.812 green:0.82 blue:0.82 alpha:1] forState:UIControlStateHighlighted];
+        self.legalButton.titleLabel.font = [UIFont systemFontOfSize:12.0];
+
         [self.legalButton addTarget:self action:@selector(legalButtonPressed) forControlEvents:UIControlEventTouchUpInside];
         [self addSubview:self.legalButton];
     }
@@ -120,7 +130,7 @@ static const CGFloat kContinueButtonHeight = 40.0;
     frame.origin.x = floorf((CGRectGetWidth(self.bounds) - CGRectGetWidth(self.titleLabel.frame)) / 2.0);
     frame.origin.y = floorf(CGRectGetHeight(self.bounds) / 50.0) + 10.0;
     self.titleLabel.frame = frame;
-
+    
     frame = self.usernameInput.frame;
     frame.size.width = CGRectGetWidth(self.bounds) - 100.0;
     frame.size.height = kSignupTextFieldHeight;
@@ -156,16 +166,22 @@ static const CGFloat kContinueButtonHeight = 40.0;
     frame.origin.y = CGRectGetMaxY(self.logoImageView.frame) + 12.5;
     self.loginButton.frame = frame;
     
+    [self.legalLabel sizeToFit];
+    frame = self.legalLabel.frame;
+    frame.origin.x = CGRectGetMinX(self.bounds) + 15.0;
+    frame.origin.y = CGRectGetMaxY(self.loginButton.frame) + 12.5;
+    self.legalLabel.frame = frame;
+    
     [self.privacyButton sizeToFit];
     frame = self.privacyButton.frame;
-    frame.origin.x = CGRectGetMinX(self.phoneNumberInput.frame);
-    frame.origin.y = CGRectGetMaxY(self.loginButton.frame) + 12.5;
+    frame.origin.x = CGRectGetMinX(self.continueButton.frame);
+    frame.origin.y = CGRectGetMaxY(self.loginButton.frame) + 17.5;
     self.privacyButton.frame = frame;
     
     [self.legalButton sizeToFit];
     frame = self.legalButton.frame;
     frame.origin.x = CGRectGetMaxX(self.privacyButton.frame) + 12.5;
-    frame.origin.y = CGRectGetMaxY(self.loginButton.frame) + 12.5;
+    frame.origin.y = CGRectGetMaxY(self.loginButton.frame) + 17.5;
     self.legalButton.frame = frame;
 }
 

@@ -96,6 +96,8 @@ static const CGFloat kGroupsButtonHeight = 70.0;
     
     [self layoutGroupListView];
     
+    
+    
 
 }
 
@@ -243,6 +245,12 @@ static const CGFloat kGroupsButtonHeight = 70.0;
     
     // set properties on commentsButton and commentsLabel from the tableView cell
     cell.commentsButton.trophy = cell.trophy;
+    PFObject *trophyObject = [cell.trophy getTrophyAsParseObject];
+    cell.commentsLabel.text = [NSString stringWithFormat:@"%@ comments", trophyObject[@"commentNumber"]];
+    if(trophyObject[@"commentNumber"] == nil) {
+        cell.commentsLabel.text = @"0 comments";
+    
+    }
     cell.commentsLabel.text = [NSString stringWithFormat:@"%ld comments", (long)cell.trophy.commentNumber];
     
     
@@ -372,9 +380,11 @@ static const CGFloat kGroupsButtonHeight = 70.0;
  
 }
 
--(IBAction)presentTrophyComments:(id)sender
+-(void)presentTrophyComments:(id)sender
 {
     TACommentButton *button = sender;
+    
+    self.indexPathOfCurrentCloseupCell = [self.tableView indexPathForCell:(TATimelineTableViewCell *)button.superview];
     
     TACommentTableViewController *commentVC = [[TACommentTableViewController alloc] initWithPhoto:button.trophy];
     commentVC.delegate = self;

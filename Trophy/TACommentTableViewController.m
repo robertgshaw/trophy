@@ -192,7 +192,7 @@ static const CGFloat kPAPCellInsetWidth = 20.0f;
         [comment setValue:@"comment" forKey:@"type"];
         [comment setValue:[self.trophy getTrophyAsParseObject] forKey:@"trophy"];
         
-        //Update comment count on trophy
+        //Update comment count on trophy - in Parse
         PFQuery *trophy = [PFQuery queryWithClassName:@"Trophy"];
         [trophy getObjectInBackgroundWithId:[self.trophy getTrophyAsParseObject].objectId
                                      block:^(PFObject *counter, NSError *error) {
@@ -201,6 +201,10 @@ static const CGFloat kPAPCellInsetWidth = 20.0f;
                                          [counter incrementKey:@"commentNumber" byAmount:[NSNumber numberWithInt:1]];
                                          [counter saveInBackground];
                                      }];
+        
+        //Update comment count on trophy - on local Trophy model
+        [self.trophy updateCommentNumber];
+
         
         //update ACL
         PFACL *ACL = [PFACL ACLWithUser:[PFUser currentUser]];
