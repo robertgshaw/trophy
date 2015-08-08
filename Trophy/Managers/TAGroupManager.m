@@ -129,6 +129,7 @@
     [query whereKey:@"inviteCode" equalTo:inviteCode];
     [query includeKey:@"users"];
     NSArray *objects = [query findObjects];
+    NSLog(@"%@", objects);
     if(objects != nil) {
         if ([objects count] > 0) {
             PFObject *parseGroup = objects[0];
