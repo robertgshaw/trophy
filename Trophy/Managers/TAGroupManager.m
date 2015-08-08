@@ -156,8 +156,17 @@
                 [currentInstallation saveInBackground];
                 NSLog(@"Add user to %@ channel for Group [%@]", parseGroup.objectId, parseGroup[@"name"]);
                 
-                // sets joined group as active
-                [self setActiveGroup:newGroup];
+//                // sets joined group as active
+//                [self setActiveGroup:newGroup];
+//                
+//                PFObject *groupToUpdate = [self.activeGroup getGroupAsParseObject];
+//                NSMutableArray *usersFromParse = groupToUpdate[@"users"];
+//                [usersFromParse addObject:[currentUser getUserAsParseObject]];
+//                NSLog(@"%@", usersFromParse);
+//                groupToUpdate[@"users"] = [usersFromParse copy];
+//                [groupToUpdate saveInBackground];
+//                
+//                NSLog(@"added User to group");
                 
                 success(newGroup);
             } else {

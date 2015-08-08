@@ -42,6 +42,8 @@
 
     [[TAGroupManager sharedManager] getUsersForActiveGroupWithSuccess:^(NSArray *users) {
         self.users = users;
+        NSLog(@"%@", users);
+        NSLog(@"%@", self.users);
         [self.tableView reloadData];
     } failure:^(NSString *error) {
         NSLog(@"%@", error);
@@ -73,19 +75,22 @@
     static NSString *cellIdentifier = @"Cell";
 
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:cellIdentifier];
-    if (cell == nil)
+    if (cell == nil) {
         cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellIdentifier];
+    }
 
     cell.backgroundView = [[UIView alloc] init];
     [cell.backgroundView setBackgroundColor:[UIColor clearColor]];
     [[[cell contentView] subviews] makeObjectsPerformSelector:@selector(removeFromSuperview)];
 
     PFUser *user = self.users[indexPath.row];
-    if ([user.username isEqualToString:[TAActiveUserManager sharedManager].activeUser.username]) {
-        cell.textLabel.text = [NSString stringWithFormat:@"%@ (Me)", user[@"name"]];
-    } else {
-        cell.textLabel.text = user[@"name"];
-    }
+    
+        if ([user.username isEqualToString:[TAActiveUserManager sharedManager].activeUser.username]) {
+            cell.textLabel.text = [NSString stringWithFormat:@"%@ (Me)", user[@"name"]];
+        } else {
+            cell.textLabel.text = user[@"name"];
+        }
+    
     return cell;
 }
 
