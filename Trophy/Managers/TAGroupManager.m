@@ -134,6 +134,8 @@
         if ([objects count] > 0) {
             PFObject *parseGroup = objects[0];
             if ([weakSelf currentUserHasAlreadyJoined:parseGroup] == NO) {
+            
+                // adds new group to user's group array
                 TAUser *currentUser = [TAActiveUserManager sharedManager].activeUser;
                 NSArray *groups = currentUser.groups;
                 NSMutableArray *newGroups;
@@ -144,30 +146,29 @@
                 }
                 TAGroup *newGroup = [[TAGroup alloc] initWithStoredGroup:parseGroup];
                 [newGroups addObject:newGroup];
+                
+                // updates user on parse
                 [[TAActiveUserManager sharedManager] updateUserWithParameters:@{@"groups": newGroups}];
                 
+                // upates group on parse
+                [parseGroup addObject:[[TAActiveUserManager sharedManager].activeUser getUserAsParseObject] forKey:@"users"];
+                [parseGroup save];
+                
+                // adds leaderboard score
                 PFObject *leaderboardScore = [[PFObject alloc] initWithClassName:@"LeaderboardScore"];
                 leaderboardScore[@"groupId"] = parseGroup.objectId;
                 leaderboardScore[@"user"] = [PFUser currentUser];
                 leaderboardScore[@"trophyCount"] = @0;
                 [leaderboardScore saveInBackground];
                 
+                // adds current installation
                 PFInstallation *currentInstallation = [PFInstallation currentInstallation];
                 [currentInstallation addUniqueObject:parseGroup.objectId forKey:@"channels"];
                 [currentInstallation saveInBackground];
                 NSLog(@"Add user to %@ channel for Group [%@]", parseGroup.objectId, parseGroup[@"name"]);
                 
-//                // sets joined group as active
-//                [self setActiveGroup:newGroup];
-//                
-//                PFObject *groupToUpdate = [self.activeGroup getGroupAsParseObject];
-//                NSMutableArray *usersFromParse = groupToUpdate[@"users"];
-//                [usersFromParse addObject:[currentUser getUserAsParseObject]];
-//                NSLog(@"%@", usersFromParse);
-//                groupToUpdate[@"users"] = [usersFromParse copy];
-//                [groupToUpdate saveInBackground];
-//                
-//                NSLog(@"added User to group");
+                // sets joined group as active
+                [self setActiveGroup:newGroup];
                 
                 success(newGroup);
             } else {
@@ -195,8 +196,10 @@
     } else {
         query.cachePolicy = kPFCachePolicyCacheElseNetwork;
     }
+    
     [query getObjectInBackgroundWithId:self.activeGroup.groupId block:^(PFObject *object, NSError *error) {
         if (error == nil) {
+            NSLog(@"hi");
             success(object[@"users"]);
         } else {
             failure(error.description);

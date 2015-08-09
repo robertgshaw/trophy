@@ -10,6 +10,7 @@
 
 #import "TAActiveUserManager.h"
 #import "TAGroupManager.h"
+#import "UIColor+TAAdditions.h"
 
 @interface TATrophySendViewController () <UITableViewDataSource,
                                           UITableViewDelegate>
@@ -26,11 +27,17 @@
     [super viewDidLoad];
 
     self.view.backgroundColor = [UIColor whiteColor];
+    
+    self.navigationController.navigationBar.backgroundColor = [UIColor trophyYellowColor];
+    
     self.navigationItem.title = @"Award to...";
+    self.navigationItem.titleView.tintColor = [UIColor whiteColor];
     UIBarButtonItem *leftButton = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"send-back-button"] style:UIBarButtonItemStylePlain target:self action:@selector(closeButtonPressed)];
+    leftButton.tintColor = [UIColor whiteColor];
     self.navigationItem.leftBarButtonItem = leftButton;
 
     UIBarButtonItem *rightButton = [[UIBarButtonItem alloc] initWithTitle:@"Send" style:UIBarButtonItemStyleDone target:self action:@selector(sendButtonPressed)];
+    rightButton.tintColor = [UIColor whiteColor];
     self.navigationItem.rightBarButtonItem = rightButton;
     self.navigationItem.rightBarButtonItem.enabled = NO;
 
@@ -42,8 +49,6 @@
 
     [[TAGroupManager sharedManager] getUsersForActiveGroupWithSuccess:^(NSArray *users) {
         self.users = users;
-        NSLog(@"%@", users);
-        NSLog(@"%@", self.users);
         [self.tableView reloadData];
     } failure:^(NSString *error) {
         NSLog(@"%@", error);

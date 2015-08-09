@@ -230,7 +230,6 @@ static const CGFloat kGroupsButtonHeight = 70.0;
 }
 
 #pragma mark - UITableView Datasource Methods
-
 - (PFTableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath object:(PFObject *)object
 {
     TATimelineTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:NSStringFromClass([TATimelineTableViewCell class])];
