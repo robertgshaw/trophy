@@ -55,6 +55,16 @@
     }];
 }
 
+- (void)viewDidAppear:(BOOL)animated
+{
+    [[TAGroupManager sharedManager] getUsersForActiveGroupWithSuccess:^(NSArray *users) {
+        self.users = users;
+        [self.tableView reloadData];
+    } failure:^(NSString *error) {
+        NSLog(@"%@", error);
+    }];
+}
+
 - (void)closeButtonPressed
 {
     [self.delegate trophySendViewControllerDidPressClose];
