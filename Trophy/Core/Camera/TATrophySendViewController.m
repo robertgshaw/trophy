@@ -10,6 +10,7 @@
 
 #import "TAActiveUserManager.h"
 #import "TAGroupManager.h"
+#import "UIColor+TAAdditions.h"
 
 @interface TATrophySendViewController () <UITableViewDataSource,
                                           UITableViewDelegate>
@@ -26,11 +27,17 @@
     [super viewDidLoad];
 
     self.view.backgroundColor = [UIColor whiteColor];
+    
+    self.navigationController.navigationBar.backgroundColor = [UIColor trophyYellowColor];
+    
     self.navigationItem.title = @"Award to...";
+    self.navigationItem.titleView.tintColor = [UIColor whiteColor];
     UIBarButtonItem *leftButton = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"send-back-button"] style:UIBarButtonItemStylePlain target:self action:@selector(closeButtonPressed)];
+    leftButton.tintColor = [UIColor whiteColor];
     self.navigationItem.leftBarButtonItem = leftButton;
 
     UIBarButtonItem *rightButton = [[UIBarButtonItem alloc] initWithTitle:@"Send" style:UIBarButtonItemStyleDone target:self action:@selector(sendButtonPressed)];
+    rightButton.tintColor = [UIColor whiteColor];
     self.navigationItem.rightBarButtonItem = rightButton;
     self.navigationItem.rightBarButtonItem.enabled = NO;
 
@@ -73,19 +80,22 @@
     static NSString *cellIdentifier = @"Cell";
 
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:cellIdentifier];
-    if (cell == nil)
+    if (cell == nil) {
         cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellIdentifier];
+    }
 
     cell.backgroundView = [[UIView alloc] init];
     [cell.backgroundView setBackgroundColor:[UIColor clearColor]];
     [[[cell contentView] subviews] makeObjectsPerformSelector:@selector(removeFromSuperview)];
 
     PFUser *user = self.users[indexPath.row];
-    if ([user.username isEqualToString:[TAActiveUserManager sharedManager].activeUser.username]) {
-        cell.textLabel.text = [NSString stringWithFormat:@"%@ (Me)", user[@"name"]];
-    } else {
-        cell.textLabel.text = user[@"name"];
-    }
+    
+        if ([user.username isEqualToString:[TAActiveUserManager sharedManager].activeUser.username]) {
+            cell.textLabel.text = [NSString stringWithFormat:@"%@ (Me)", user[@"name"]];
+        } else {
+            cell.textLabel.text = user[@"name"];
+        }
+    
     return cell;
 }
 

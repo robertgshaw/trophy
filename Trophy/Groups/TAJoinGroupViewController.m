@@ -51,6 +51,7 @@
 
 - (void)joinButtonPressed
 {
+    NSLog(@"doing this");
     // adds user to group via invite
     [[TAGroupManager sharedManager] addUserToGroupWithInviteCode:self.joinGroupView.inviteCode success:^(TAGroup *group) {
                                                     [self.delegate joinGroupViewControllerDidJoinGroup:self];
