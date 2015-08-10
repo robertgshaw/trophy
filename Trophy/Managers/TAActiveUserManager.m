@@ -118,6 +118,7 @@
     PFObject *user = [query getFirstObject];
     if (user == nil) {
         failure(@"Could not retrieve User info");
+        [[TAActiveUserManager sharedManager] endSession];
     } else {
         self.activeUser = [[TAUser alloc] initWithStoredUser:(PFUser *)user];
         if (success) {
