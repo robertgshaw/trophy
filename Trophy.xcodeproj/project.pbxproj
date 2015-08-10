@@ -86,11 +86,12 @@
 		92E6F4861A56F18800010727 /* TALoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 92E6F4851A56F18800010727 /* TALoginViewController.m */; };
 		92E6F4891A56F3E100010727 /* TALoginView.m in Sources */ = {isa = PBXBuildFile; fileRef = 92E6F4881A56F3E100010727 /* TALoginView.m */; };
 		92FAD3371A511E4F009CF398 /* TATimelineTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 92FAD3361A511E4F009CF398 /* TATimelineTableViewCell.m */; };
+		969F25D31B716BB700D68520 /* TACommentButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 969F25D21B716BB700D68520 /* TACommentButton.m */; };
 		9F02A9271B67F2FA0047FFF9 /* TAGroupListButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 9F02A9261B67F2FA0047FFF9 /* TAGroupListButton.m */; };
 		9F1E3E2B1B6FCF11003CA892 /* TALikesButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 9F1E3E2A1B6FCF11003CA892 /* TALikesButton.m */; };
 		9F5E3A991B6A732100D6C682 /* TAOverlayButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 9F5E3A981B6A732000D6C682 /* TAOverlayButton.m */; };
-		969F25D31B716BB700D68520 /* TACommentButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 969F25D21B716BB700D68520 /* TACommentButton.m */; };
 		9F7880941B614F5900E800C2 /* TAOnboardingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9F7880931B614F5900E800C2 /* TAOnboardingViewController.m */; };
+		9F7AEFAB1B792E0300E0EBBA /* TASendTrophyCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 9F7AEFAA1B792E0300E0EBBA /* TASendTrophyCell.m */; };
 		A8ABABD6EBC7E076CB6302AD /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = C423F20A0C7E6D3505D20EEC /* libPods.a */; };
 /* End PBXBuildFile section */
 
@@ -243,16 +244,18 @@
 		92E6F4881A56F3E100010727 /* TALoginView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = TALoginView.m; path = Core/Signup/Views/TALoginView.m; sourceTree = "<group>"; };
 		92FAD3351A511E4F009CF398 /* TATimelineTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TATimelineTableViewCell.h; path = Timeline/Views/TATimelineTableViewCell.h; sourceTree = "<group>"; };
 		92FAD3361A511E4F009CF398 /* TATimelineTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = TATimelineTableViewCell.m; path = Timeline/Views/TATimelineTableViewCell.m; sourceTree = "<group>"; };
+		969F25D11B716BB700D68520 /* TACommentButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TACommentButton.h; path = Models/TACommentButton.h; sourceTree = "<group>"; };
+		969F25D21B716BB700D68520 /* TACommentButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = TACommentButton.m; path = Models/TACommentButton.m; sourceTree = "<group>"; };
 		9F02A9251B67F2FA0047FFF9 /* TAGroupListButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TAGroupListButton.h; sourceTree = "<group>"; };
 		9F02A9261B67F2FA0047FFF9 /* TAGroupListButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TAGroupListButton.m; sourceTree = "<group>"; };
 		9F1E3E291B6FCF11003CA892 /* TALikesButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TALikesButton.h; sourceTree = "<group>"; };
 		9F1E3E2A1B6FCF11003CA892 /* TALikesButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TALikesButton.m; sourceTree = "<group>"; };
 		9F5E3A971B6A732000D6C682 /* TAOverlayButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TAOverlayButton.h; sourceTree = "<group>"; };
 		9F5E3A981B6A732000D6C682 /* TAOverlayButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TAOverlayButton.m; sourceTree = "<group>"; };
-		969F25D11B716BB700D68520 /* TACommentButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TACommentButton.h; path = Models/TACommentButton.h; sourceTree = "<group>"; };
-		969F25D21B716BB700D68520 /* TACommentButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = TACommentButton.m; path = Models/TACommentButton.m; sourceTree = "<group>"; };
 		9F7880921B614F5900E800C2 /* TAOnboardingViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TAOnboardingViewController.h; sourceTree = "<group>"; };
 		9F7880931B614F5900E800C2 /* TAOnboardingViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TAOnboardingViewController.m; sourceTree = "<group>"; };
+		9F7AEFA91B792E0300E0EBBA /* TASendTrophyCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TASendTrophyCell.h; sourceTree = "<group>"; };
+		9F7AEFAA1B792E0300E0EBBA /* TASendTrophyCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TASendTrophyCell.m; sourceTree = "<group>"; };
 		C423F20A0C7E6D3505D20EEC /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		F333D028068B5D34422C9C06 /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -551,6 +554,8 @@
 		92CB90EB1A5E4D2100B62322 /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				9F7AEFA91B792E0300E0EBBA /* TASendTrophyCell.h */,
+				9F7AEFAA1B792E0300E0EBBA /* TASendTrophyCell.m */,
 				92CB90EC1A5E4D3B00B62322 /* TATrophyEditorView.h */,
 				92CB90ED1A5E4D3B00B62322 /* TATrophyEditorView.m */,
 				92CB90EF1A5E61DE00B62322 /* TATrophyPickerOverlayView.h */,
@@ -868,6 +873,7 @@
 				9F5E3A991B6A732100D6C682 /* TAOverlayButton.m in Sources */,
 				92E47AE81A4CC76200B08C3B /* TASettingsViewController.m in Sources */,
 				92E059F21A61DFED00A178B5 /* TAGroupManager.m in Sources */,
+				9F7AEFAB1B792E0300E0EBBA /* TASendTrophyCell.m in Sources */,
 				92E6F4801A55949500010727 /* TASettingsView.m in Sources */,
 				921BC00F1A7B813B00C9B4F4 /* TAJoinGroupView.m in Sources */,
 				9F7880941B614F5900E800C2 /* TAOnboardingViewController.m in Sources */,
@@ -957,6 +963,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
+				PROVISIONING_PROFILE = "";
 				SDKROOT = iphoneos;
 			};
 			name = Debug;
@@ -992,6 +999,7 @@
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
+				PROVISIONING_PROFILE = "";
 				SDKROOT = iphoneos;
 				VALIDATE_PRODUCT = YES;
 			};

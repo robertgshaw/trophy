@@ -55,8 +55,6 @@ static const CGFloat kCellInnerMargin = 10.0;
         _trophyFrameView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"trophy-timeline-icon"]];
         [self addSubview:self.trophyFrameView];
          */
-         
-         
         
         _trophyPhoto = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, kCellRecipientImageWidth, kCellRecipientImageWidth)];
         [self.trophyPhoto setBackgroundImage:[UIImage imageNamed:@"default-profile-icon"] forState:UIControlStateNormal];
@@ -73,7 +71,6 @@ static const CGFloat kCellInnerMargin = 10.0;
         self.accessoryView = self.recipientImageView;
         //[self.trophyPhoto addSubview:self.recipientImageView];
 
-        
         _recipientLabel = [[UILabel alloc] initWithFrame:CGRectZero];
         self.recipientLabel.textColor = [UIColor darkGrayColor];
         self.recipientLabel.font = [UIFont systemFontOfSize:13.0];
