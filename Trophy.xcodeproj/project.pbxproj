@@ -650,8 +650,6 @@
 				92E47AF61A51148900B08C3B /* Views */,
 				92E47AD91A491CC900B08C3B /* TATimelineViewController.h */,
 				92E47ADA1A491CC900B08C3B /* TATimelineViewController.m */,
-				969F25D11B716BB700D68520 /* TACommentButton.h */,
-				969F25D21B716BB700D68520 /* TACommentButton.m */,
 			);
 			name = Timeline;
 			sourceTree = "<group>";
@@ -669,6 +667,8 @@
 		92E47AF61A51148900B08C3B /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				969F25D11B716BB700D68520 /* TACommentButton.h */,
+				969F25D21B716BB700D68520 /* TACommentButton.m */,
 				92FAD3351A511E4F009CF398 /* TATimelineTableViewCell.h */,
 				92FAD3361A511E4F009CF398 /* TATimelineTableViewCell.m */,
 				92E6F4711A530F4C00010727 /* TATrophyActionFooterView.h */,

@@ -41,8 +41,7 @@
     
     // hides navbar in closeup view
     self.navigationController.navigationBarHidden = YES;
-    self.navigationController.toolbarHidden = YES;
-    
+        
     self.view.backgroundColor = [UIColor blackColor];
     
     self.edgesForExtendedLayout = UIRectEdgeAll;
