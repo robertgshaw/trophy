@@ -92,6 +92,8 @@
 		9F5E3A991B6A732100D6C682 /* TAOverlayButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 9F5E3A981B6A732000D6C682 /* TAOverlayButton.m */; };
 		9F7880941B614F5900E800C2 /* TAOnboardingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9F7880931B614F5900E800C2 /* TAOnboardingViewController.m */; };
 		9F7AEFAB1B792E0300E0EBBA /* TASendTrophyCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 9F7AEFAA1B792E0300E0EBBA /* TASendTrophyCell.m */; };
+		9F7AEFAE1B7A65AD00E0EBBA /* TABackButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 9F7AEFAD1B7A65AD00E0EBBA /* TABackButton.m */; };
+		9F7AEFB11B7A6BB700E0EBBA /* TAFlagButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 9F7AEFB01B7A6BB700E0EBBA /* TAFlagButton.m */; };
 		A8ABABD6EBC7E076CB6302AD /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = C423F20A0C7E6D3505D20EEC /* libPods.a */; };
 /* End PBXBuildFile section */
 
@@ -256,6 +258,10 @@
 		9F7880931B614F5900E800C2 /* TAOnboardingViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TAOnboardingViewController.m; sourceTree = "<group>"; };
 		9F7AEFA91B792E0300E0EBBA /* TASendTrophyCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TASendTrophyCell.h; sourceTree = "<group>"; };
 		9F7AEFAA1B792E0300E0EBBA /* TASendTrophyCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TASendTrophyCell.m; sourceTree = "<group>"; };
+		9F7AEFAC1B7A65AD00E0EBBA /* TABackButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TABackButton.h; sourceTree = "<group>"; };
+		9F7AEFAD1B7A65AD00E0EBBA /* TABackButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TABackButton.m; sourceTree = "<group>"; };
+		9F7AEFAF1B7A6BB700E0EBBA /* TAFlagButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TAFlagButton.h; sourceTree = "<group>"; };
+		9F7AEFB01B7A6BB700E0EBBA /* TAFlagButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TAFlagButton.m; sourceTree = "<group>"; };
 		C423F20A0C7E6D3505D20EEC /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		F333D028068B5D34422C9C06 /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -578,6 +584,10 @@
 		92CF1E8A1A65007F00A45D88 /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				9F7AEFAF1B7A6BB700E0EBBA /* TAFlagButton.h */,
+				9F7AEFB01B7A6BB700E0EBBA /* TAFlagButton.m */,
+				9F7AEFAC1B7A65AD00E0EBBA /* TABackButton.h */,
+				9F7AEFAD1B7A65AD00E0EBBA /* TABackButton.m */,
 				9F1E3E291B6FCF11003CA892 /* TALikesButton.h */,
 				9F1E3E2A1B6FCF11003CA892 /* TALikesButton.m */,
 				9F5E3A971B6A732000D6C682 /* TAOverlayButton.h */,
@@ -859,11 +869,13 @@
 				4114CD2C1B44ACF500547D9A /* TACommentBaseTableViewCell.m in Sources */,
 				92CB90F11A5E61DE00B62322 /* TATrophyPickerOverlayView.m in Sources */,
 				92CB90EA1A5E47B400B62322 /* TATrophyEditorViewController.m in Sources */,
+				9F7AEFAE1B7A65AD00E0EBBA /* TABackButton.m in Sources */,
 				92CF1E8D1A65009000A45D88 /* TATrophyCloseupView.m in Sources */,
 				928C22F31A746E5500F6310A /* TACreateGroupViewController.m in Sources */,
 				92CB90EE1A5E4D3B00B62322 /* TATrophyEditorView.m in Sources */,
 				92E6F4861A56F18800010727 /* TALoginViewController.m in Sources */,
 				92E1C5061A77677100BF04A6 /* TAGroupInviteCell.m in Sources */,
+				9F7AEFB11B7A6BB700E0EBBA /* TAFlagButton.m in Sources */,
 				9F02A9271B67F2FA0047FFF9 /* TAGroupListButton.m in Sources */,
 				4114CD291B44ACDE00547D9A /* TACommentActivityTableViewCell.m in Sources */,
 				920037011A89F3EB004C34DB /* UIColor+TAAdditions.m in Sources */,
