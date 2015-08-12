@@ -79,7 +79,6 @@
     if([authorObject.objectId isEqualToString:userObject.objectId])
     {
         self.deleteButton.hidden = NO;
-        NSLog(@"HEY");
     }
 }
 

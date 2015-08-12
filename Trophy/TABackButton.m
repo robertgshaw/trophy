@@ -55,8 +55,6 @@
     frame.origin.x = CGRectGetMaxX(self.backLogo.frame);
     frame.origin.y = self.backLogo.frame.origin.y;
     self.backLabel.frame = frame;
-    
-    NSLog(@"back label %@", NSStringFromCGRect(self.backLabel.frame));
 
 }
 #pragma mark - back button pressed handler

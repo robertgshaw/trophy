@@ -75,7 +75,6 @@
         [[TAGroupManager sharedManager] createTestGroup];
     } else {
         if (self.hasCurrentUser) {
-            NSLog(@"hey");
             [self configureActiveUser];
             
             // if no groups, go to onboarding view controller

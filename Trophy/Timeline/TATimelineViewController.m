@@ -292,7 +292,6 @@ static const CGFloat kGroupsButtonHeight = 70.0;
 
     // sets index path of current closeup
     if ([[self tableView:tableView cellForRowAtIndexPath:indexPath] isKindOfClass:[TATimelineTableViewCell class]]) {
-        NSLog(@"hey");
         
         self.indexPathOfCurrentCloseupCell = indexPath;
     }

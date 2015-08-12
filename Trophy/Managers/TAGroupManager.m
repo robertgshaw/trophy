@@ -69,7 +69,6 @@
             NSArray *parseGroups = [query findObjects];
             TAGroup *group = [[TAGroup alloc] initWithStoredGroup:parseGroups[0]];
             self.activeGroup = group;
-            NSLog(@"active group in load active group %@", self.activeGroup);
         }
     }
     else {
@@ -129,7 +128,6 @@
     [query whereKey:@"inviteCode" equalTo:inviteCode];
     [query includeKey:@"users"];
     NSArray *objects = [query findObjects];
-    NSLog(@"%@", objects);
     if(objects != nil) {
         if ([objects count] > 0) {
             PFObject *parseGroup = objects[0];
@@ -191,15 +189,14 @@
     
     PFQuery *query = [PFQuery queryWithClassName:@"Group"];
     [query includeKey:@"users"];
-    if ([query hasCachedResult]) {
-        query.cachePolicy = kPFCachePolicyCacheThenNetwork;
-    } else {
-        query.cachePolicy = kPFCachePolicyCacheElseNetwork;
-    }
+//    if ([query hasCachedResult]) {
+//        query.cachePolicy = kPFCachePolicyCacheThenNetwork;
+//    } else {
+//        query.cachePolicy = kPFCachePolicyCacheElseNetwork;
+//    }
     
     [query getObjectInBackgroundWithId:self.activeGroup.groupId block:^(PFObject *object, NSError *error) {
         if (error == nil) {
-            NSLog(@"hi");
             success(object[@"users"]);
         } else {
             failure(error.description);

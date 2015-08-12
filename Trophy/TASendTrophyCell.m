@@ -15,8 +15,6 @@ static const CGFloat cellMarginLeft = 20.0;
 
 @interface TASendTrophyCell ()
 
-@property (nonatomic, strong) PFImageView *profileImageView;
-
 @end
 
 @implementation TASendTrophyCell
@@ -44,7 +42,6 @@ static const CGFloat cellMarginLeft = 20.0;
         self.nameLabel.font = [UIFont boldSystemFontOfSize:25.0];
         [self addSubview:self.nameLabel];
 
-    
     }
     return self;
 }
@@ -66,32 +63,30 @@ static const CGFloat cellMarginLeft = 20.0;
     frame.origin.y = cellMargin;
     frame.size.height = self.profileImageView.frame.size.height;
     self.nameLabel.frame = frame;
-    
-    NSLog(@"%@", NSStringFromCGRect(self.nameLabel.frame));
-    NSLog(@"%@", NSStringFromCGRect(self.nameLabel.bounds));
+
 }
 
-// overrides get method to configure timeline cell
-- (void)setUser:(PFUser *)user
-{
-    _user = user;
-    
-    // gets users profile image for the cell, loads in background
-    if (self.user) {
-        if (self.user[@"profileImage"]) {
-            self.profileImageView.file = self.user[@"profileImage"];
-            [self.profileImageView  loadInBackground];
-        }
-    }
-    
-    // gets users names for the cell
-    [self.nameLabel setText:_user[@"name"]];
-    
-    // calls for the cell to be reloaded
-    [self setNeedsLayout];
-}
+//// overrides get method to configure timeline cell
+//- (void)setUser:(PFUser *)user
+//{
+//    _user = user;
+//    
+//    // gets users profile image for the cell, loads in background
+//    if (self.user) {
+//        if (self.user[@"profileImage"]) {
+//            self.profileImageView.file = self.user[@"profileImage"];
+//            [self.profileImageView  loadInBackground];
+//        }
+//    }
+//    
+//    // gets users names for the cell
+//    [self.nameLabel setText:_user[@"name"]];
+//    
+//    // calls for the cell to be reloaded
+//    [self setNeedsLayout];
+//}
 
-- (CGFloat)heightOfCell
++ (CGFloat)heightOfCell
 {
     return kProfileImageWidth + 2 * cellMargin;
 }
