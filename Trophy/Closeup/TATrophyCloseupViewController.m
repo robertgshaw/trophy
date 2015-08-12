@@ -14,8 +14,9 @@
 #import "TATrophy.h"
 #import "TATimelineViewController.h"
 #import "TAOverlayButton.h"
+#import "TAFlagButton.h"
 
-@interface TATrophyCloseupViewController () <TALikeButtonDelegate, TAOverlayButtonDelegate, TATrophyCloseupViewDelegate>
+@interface TATrophyCloseupViewController () <TAFlagButtonDelegate, TABackButtonDelegate, TALikeButtonDelegate, TAOverlayButtonDelegate, TATrophyCloseupViewDelegate>
 
 @property (nonatomic, strong) TATrophy *trophy;
 @property (nonatomic, strong) TATrophyCloseupView *closeupView;
@@ -29,7 +30,7 @@
 {
     self = [super init];
     if (self) {
-        _trophy = trophy;
+        self.trophy = trophy;
         
     }
 
@@ -41,8 +42,7 @@
     
     // hides navbar in closeup view
     self.navigationController.navigationBarHidden = YES;
-    self.navigationController.toolbarHidden = YES;
-    
+        
     self.view.backgroundColor = [UIColor blackColor];
     
     self.edgesForExtendedLayout = UIRectEdgeAll;
@@ -65,9 +65,9 @@
     self.deleteButton.hidden = YES;
     
     CGRect frame;
-    frame.size = CGSizeMake(60.0, 25.0);
-    frame.origin.x = CGRectGetMaxX(self.view.bounds) - 70;
-    frame.origin.y = CGRectGetMinY(self.view.bounds) + 25;
+    frame.size = CGSizeMake(70.0, 25.0);
+    frame.origin.x = CGRectGetMidX(self.view.bounds) - (frame.size.width / 2);
+    frame.origin.y = 25;
     self.deleteButton.frame = frame;
     [self.view addSubview:self.deleteButton];
 
@@ -79,7 +79,6 @@
     if([authorObject.objectId isEqualToString:userObject.objectId])
     {
         self.deleteButton.hidden = NO;
-        NSLog(@"HEY");
     }
 }
 
@@ -108,6 +107,8 @@
     [self.delegate trophyCloseupDidPerformAction:updatedTrophy];
 }
 
+
+#pragma - DeleteButton Action Handler
 - (void)deleteButtonPressed
 {
     // alert - yes/no for delete
@@ -143,10 +144,19 @@
     }
 }
 
-#pragma mark - Delete Button Action Handler
+#pragma mark - TABackButtonDelegate Methods
 
-- (void) backButtonPressed
+- (void)backButtonDidPressBack
 {
     [self.delegate closeUpViewControllerBackButtonPressed];
 }
+
+#pragma mark - TAFlagButtonDelegate Methods
+
+// gives flag button access to trophy property
+- (TATrophy *)getTATrophy
+{
+    return self.trophy;
+}
+
 @end

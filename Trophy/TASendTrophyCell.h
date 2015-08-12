@@ -8,13 +8,15 @@
 
 #import <UIKit/UIKit.h>
 #import <ParseUI/ParseUI.h>
+#import <Parse/Parse.h>
 #import "TAUser.h"
 
-@interface TASendTrophyCell : UITableViewCell
+@interface TASendTrophyCell : PFTableViewCell
 
 @property (nonatomic, strong) PFUser *user;
 @property (nonatomic, strong) UILabel *nameLabel;
+@property (nonatomic, strong) PFImageView *profileImageView;
 
-- (CGFloat)heightOfCell;
++ (CGFloat)heightOfCell;
 
 @end

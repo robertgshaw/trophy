@@ -53,8 +53,11 @@
     self.tableView.delegate = self;
 }
 
-- (void)viewDidAppear:(BOOL)animated
+- (void)viewWillAppear:(BOOL)animated
 {
+    [super viewWillAppear:animated];
+    
+    NSLog(@"here");
     [[TAGroupManager sharedManager] getUsersForActiveGroupWithSuccess:^(NSArray *users) {
         self.users = users;
         [self.tableView reloadData];
@@ -77,8 +80,8 @@
     }
 }
 
-
 # pragma mark - UIAlertView methods
+
 - (void) userCellPressedAt:(NSIndexPath *) indexPath {
 
     NSString *title;
@@ -112,6 +115,7 @@
 // adds TASendTrophyCells to the table view
 - (TASendTrophyCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
+    NSLog(@"hereo");
     static NSString *cellIdentifier = @"Cell";
 
     TASendTrophyCell *cell = [tableView dequeueReusableCellWithIdentifier:cellIdentifier];
@@ -121,22 +125,31 @@
 
     [[[cell contentView] subviews] makeObjectsPerformSelector:@selector(removeFromSuperview)];
 
+    // gets the correct user
     PFUser *user = self.users[indexPath.row];
+    
+    // initializes the cell's properties
     cell.user = user;
     
-        if ([user.username isEqualToString:[TAActiveUserManager sharedManager].activeUser.username]) {
-            cell.nameLabel.text = [NSString stringWithFormat:@"%@ (Me)", user[@"name"]];
-        } else {
-            cell.nameLabel.text = user[@"name"];
-        }
+    // initializes the name label
+    if ([user.username isEqualToString:[TAActiveUserManager sharedManager].activeUser.username]) {
+        cell.nameLabel.text = [NSString stringWithFormat:@"%@ (Me)", user[@"name"]];
+    } else {
+        cell.nameLabel.text = user[@"name"];
+    }
+    
+    // initializes and loads the profile image
+    if (user[@"profileImage"]) {
+        cell.profileImageView.file = user[@"profileImage"];
+        [cell.profileImageView loadInBackground];
+    }
     
     return cell;
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    TASendTrophyCell *cell = (TASendTrophyCell *)[self tableView:tableView cellForRowAtIndexPath:indexPath];
-    return [cell heightOfCell];
+    return [TASendTrophyCell heightOfCell];
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
@@ -153,21 +166,6 @@
     
     [self userCellPressedAt:indexPath];
 
-    
-    
-//    if (indexPath == self.selectedPath) {
-//        self.selectedPath = nil;
-//        [tableView deselectRowAtIndexPath:indexPath animated:YES];
-//        self.navigationItem.rightBarButtonItem.enabled = NO;
-//    } else {
-//        if (self.selectedPath != nil) {
-//            [tableView deselectRowAtIndexPath:self.selectedPath animated:YES];
-//        }
-//        self.selectedPath = indexPath;
-//        if (self.navigationItem.rightBarButtonItem.enabled == NO) {
-//            self.navigationItem.rightBarButtonItem.enabled = YES;
-//        }
-//    }
 }
 
 

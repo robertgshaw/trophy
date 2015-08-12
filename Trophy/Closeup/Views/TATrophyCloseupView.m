@@ -10,6 +10,8 @@
 #import "TACommentTableViewController.h"
 #import "TATrophyActionFooterView.h"
 #import "TAOverlayButton.h"
+#import "TABackButton.h"
+#import "TAFlagButton.h"
 
 #import "UIColor+TAAdditions.h"
 #import <Parse/Parse.h>
@@ -20,21 +22,21 @@
 
 static const CGFloat kTrophyImageCornerRadius = 15.0;
 static const CGFloat overlayHeight = 140.0;
-
+static const CGFloat closeupMargin = 10.0;
 
 @interface TATrophyCloseupView ()
 
 @property (nonatomic, strong) PFImageView *trophyImageView;
 @property (nonatomic, strong) TAOverlayButton *overlay;
-@property (nonatomic, strong) UIButton *backButton;
-@property (nonatomic, strong) UIButton *flagButton;
+@property (nonatomic, strong) TABackButton *backButton;
+@property (nonatomic, strong) TAFlagButton *flagButton;
 
 
 @end
 
 @implementation TATrophyCloseupView
 
-- (instancetype)initWithDelegate:(id<TALikeButtonDelegate, TAOverlayButtonDelegate, TATrophyCloseupViewDelegate>)delegate
+- (instancetype)initWithDelegate:(id<TAFlagButtonDelegate, TABackButtonDelegate, TALikeButtonDelegate, TAOverlayButtonDelegate, TATrophyCloseupViewDelegate>)delegate
 {
     self = [super init];
     if (self) {
@@ -51,21 +53,15 @@ static const CGFloat overlayHeight = 140.0;
         [self addSubview:self.trophyImageView];
         
         // adds back button
-        self.backButton = [UIButton buttonWithType:UIButtonTypeRoundedRect];
-        [self.backButton setTitle:@"Back" forState:UIControlStateNormal];
-        [self.backButton setTintColor: [UIColor trophyYellowColor]];
-        self.backButton.titleLabel.textAlignment = NSTextAlignmentCenter;
-        [self.backButton addTarget:self action:@selector(backButtonPressed:) forControlEvents:UIControlEventTouchUpInside];
+        self.backButton = [[TABackButton alloc] initWithFrame:CGRectZero];
+        [self.backButton setTintColor:[UIColor trophyYellowColor]];
+        self.backButton.delegate = delegate;
         [self addSubview:self.backButton];
         
         // adds flag button
-        self.flagButton = [UIButton buttonWithType:UIButtonTypeRoundedRect];
-        self.flagButton.backgroundColor = [UIColor clearColor];
-        self.flagButton.layer.cornerRadius = 5.0;
-        [self.flagButton setTitle:@"Flag" forState:UIControlStateNormal];
-        [self.flagButton setTintColor: [UIColor trophyYellowColor]];
-        self.flagButton.titleLabel.textAlignment = NSTextAlignmentCenter;
-        [self.flagButton addTarget:self action:@selector(flagButtonPressed:) forControlEvents:UIControlEventTouchUpInside];
+        self.flagButton = [[TAFlagButton alloc] initWithFrame:CGRectZero];
+        [self.backButton setTintColor:[UIColor trophyYellowColor]];
+        self.flagButton.delegate = delegate;
         [self addSubview:self.flagButton];
         
         // adds overlay
@@ -100,14 +96,14 @@ static const CGFloat overlayHeight = 140.0;
     self.overlay.frame = frame;
     
     // lays out the flag button
-    frame.size = CGSizeMake(60.0, 25.0);
-    frame.origin.x = CGRectGetMidX(self.bounds) - (frame.size.width / 2);
+    frame.size = CGSizeMake(70.0, 25.0);
+    frame.origin.x = CGRectGetMaxX(self.bounds) - (frame.size.width);
     frame.origin.y = 25;
     self.flagButton.frame = frame;
     
     // lays out the back button
-    frame.size = CGSizeMake(60.0, 25.0);
-    frame.origin.x = 10.0;
+    frame.size = CGSizeMake(70.0, 25.0);
+    frame.origin.x = closeupMargin;
     frame.origin.y = 25.0;
     self.backButton.frame = frame;
 }
@@ -146,45 +142,6 @@ static const CGFloat overlayHeight = 140.0;
     UIGraphicsEndImageContext();
     
     return image;
-}
-
-// back button action handler
-- (void)backButtonPressed:(UIButton *)sender {
-
-    [self.delegate1 backButtonPressed];
-
-}
-
-- (void)flagButtonPressed:(id *)sender {
-    
-    // alert - yes/no for flag
-    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Flag Trophy" message:@"Are you sure?" delegate:self cancelButtonTitle:@"Cancel" otherButtonTitles:@"Yes", nil]; [alert show];
-}
-
-- (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex{
-    if (buttonIndex == 1) { // Set buttonIndex == 0 to handel "Ok"/"Yes" button response
-        // Ok button response
-        
-        //Query parse
-        PFQuery *query = [PFQuery queryWithClassName:@"Trophy"];
-        [query whereKey:@"objectId" equalTo: [self.trophy getTrophyAsParseObject].objectId];
-        [query getFirstObjectInBackgroundWithBlock:^(PFObject * object, NSError *error) {
-            if (!error) {
-                // The find succeeded.
-                
-               //flag function
-                [object setObject:[NSNumber numberWithBool:YES] forKey:@"flag"];
-                
-                [object saveInBackground];
-                NSLog(@"Successfully flagged. This trophy will be reviewed for removal.");
-                
-            } else {
-                // Log details of the failure
-                NSLog(@"Error: %@ %@", error, [error userInfo]);
-            }
-        }];
-        
-    }
 }
 
 // configures correct data
