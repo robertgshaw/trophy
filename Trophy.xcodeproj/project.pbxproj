@@ -17,6 +17,7 @@
 		4114CD2C1B44ACF500547D9A /* TACommentBaseTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 4114CD2B1B44ACF500547D9A /* TACommentBaseTableViewCell.m */; };
 		4114CD2F1B44AD6600547D9A /* PAPUtility.m in Sources */ = {isa = PBXBuildFile; fileRef = 4114CD2E1B44AD6600547D9A /* PAPUtility.m */; };
 		416831701B56106D00D7E393 /* MBProgressHUD.m in Sources */ = {isa = PBXBuildFile; fileRef = 4168316F1B56106D00D7E393 /* MBProgressHUD.m */; };
+		4188E7C21B79E09A0009E3F7 /* Avenir.ttc in Resources */ = {isa = PBXBuildFile; fileRef = 4188E7C11B79E09A0009E3F7 /* Avenir.ttc */; };
 		41C58EA01B4BA868005A51FA /* TAPhotoDetailsFooterView.m in Sources */ = {isa = PBXBuildFile; fileRef = 41C58E9F1B4BA868005A51FA /* TAPhotoDetailsFooterView.m */; };
 		920036FE1A89DEC5004C34DB /* UITextField+TAAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 920036FD1A89DEC5004C34DB /* UITextField+TAAdditions.m */; };
 		920037011A89F3EB004C34DB /* UIColor+TAAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 920037001A89F3EB004C34DB /* UIColor+TAAdditions.m */; };
@@ -126,6 +127,7 @@
 		4114CD2E1B44AD6600547D9A /* PAPUtility.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PAPUtility.m; sourceTree = "<group>"; };
 		4168316E1B56105900D7E393 /* MBProgressHUD.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MBProgressHUD.h; sourceTree = "<group>"; };
 		4168316F1B56106D00D7E393 /* MBProgressHUD.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MBProgressHUD.m; sourceTree = "<group>"; };
+		4188E7C11B79E09A0009E3F7 /* Avenir.ttc */ = {isa = PBXFileReference; lastKnownFileType = file; path = Avenir.ttc; sourceTree = "<group>"; };
 		41C58E9E1B4BA868005A51FA /* TAPhotoDetailsFooterView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TAPhotoDetailsFooterView.h; sourceTree = "<group>"; };
 		41C58E9F1B4BA868005A51FA /* TAPhotoDetailsFooterView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TAPhotoDetailsFooterView.m; sourceTree = "<group>"; };
 		83373A0D52091F2573F5C014 /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
@@ -352,6 +354,14 @@
 			name = External;
 			sourceTree = "<group>";
 		};
+		4188E7C01B79DFC40009E3F7 /* Fonts */ = {
+			isa = PBXGroup;
+			children = (
+				4188E7C11B79E09A0009E3F7 /* Avenir.ttc */,
+			);
+			name = Fonts;
+			sourceTree = "<group>";
+		};
 		4B5C33A1A89E63889C4387A1 /* Pods */ = {
 			isa = PBXGroup;
 			children = (
@@ -364,6 +374,7 @@
 		920036FB1A89DC70004C34DB /* iOS Classes */ = {
 			isa = PBXGroup;
 			children = (
+				4188E7C01B79DFC40009E3F7 /* Fonts */,
 				920036FC1A89DEC5004C34DB /* UITextField+TAAdditions.h */,
 				920036FD1A89DEC5004C34DB /* UITextField+TAAdditions.m */,
 				920036FF1A89F3EB004C34DB /* UIColor+TAAdditions.h */,
@@ -801,6 +812,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				4188E7C21B79E09A0009E3F7 /* Avenir.ttc in Resources */,
 				92B1DAC41A383AF7001B059E /* Images.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

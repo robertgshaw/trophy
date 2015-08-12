@@ -225,8 +225,14 @@ static const CGFloat kSaveButtonHeight = 40.0;
                 
                 
                 // The find succeeded delete found objects
-                //[PFObject deleteAllInBackground:objects];
                 [[PFUser currentUser] deleteInBackground];
+                
+                // delete from leaderboard
+                PFQuery *leaderQuery = [PFQuery queryWithClassName:@"LeaderboardScore"];
+                [leaderQuery whereKey:@"user" equalTo:userObject.objectId];
+                PFObject *leaderObj = [leaderQuery getFirstObject];
+                [leaderObj deleteInBackground];
+                
                 
                 NSLog(@"Successfully deleted!");
                 

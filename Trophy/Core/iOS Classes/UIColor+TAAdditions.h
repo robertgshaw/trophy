@@ -11,8 +11,10 @@
 @interface UIColor (TAAdditions)
 
 + (UIColor *)trophyYellowColor;
++ (UIColor *)trophyNavyColor;
 + (UIColor *)darkYellowColor;
 + (UIColor *)standardBlueButtonColor;
 + (UIColor *)unselectedGrayColor;
++ (UIFont *)avenirFont;
 
 @end
