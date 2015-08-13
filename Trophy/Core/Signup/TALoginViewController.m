@@ -35,8 +35,9 @@
     titleLabel.font = [UIFont boldSystemFontOfSize:20.0];
     titleLabel.backgroundColor = [UIColor clearColor];
     titleLabel.textColor = [UIColor whiteColor];
+    titleLabel.font = [UIFont fontWithName:@"Avenir-Heavy" size:20.0];
     titleLabel.textAlignment = NSTextAlignmentCenter;
-    titleLabel.text = @"Login";
+    titleLabel.text = @"LOGIN";
     [titleLabel sizeToFit];
     self.navigationItem.titleView = titleLabel;
 

@@ -75,7 +75,6 @@
         [[TAGroupManager sharedManager] createTestGroup];
     } else {
         if (self.hasCurrentUser) {
-            NSLog(@"hey");
             [self configureActiveUser];
             
             // if no groups, go to onboarding view controller
@@ -118,6 +117,7 @@
     [query includeKey:@"groups"];
     PFObject *user = [query getFirstObject];
     if (user == nil) {
+        [[TAActiveUserManager sharedManager] endSession];
         failure(@"Could not retrieve User info");
     } else {
         self.activeUser = [[TAUser alloc] initWithStoredUser:(PFUser *)user];

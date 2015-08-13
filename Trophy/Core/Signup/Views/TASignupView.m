@@ -42,20 +42,20 @@ static const CGFloat kContinueButtonHeight = 40.0;
 {
     self = [super initWithFrame:frame];
     if (self) {
-        self.backgroundColor = [UIColor whiteColor];
+        self.backgroundColor = [UIColor trophyNavyColor];
 
-        _logoImageView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"logo"]];
+        _logoImageView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"home-logo"]];
         [self addSubview:self.logoImageView];
         
         _titleLabel = [[UILabel alloc] init];
-        self.titleLabel.text = @"Trophy";
-        self.titleLabel.font = [UIFont boldSystemFontOfSize:30.0];
+        self.titleLabel.text = @"Welcome to Trophy";
+        self.titleLabel.font = [UIFont fontWithName:@"Avenir-Heavy" size:25.0];
         self.titleLabel.textColor = [UIColor trophyYellowColor];
         [self addSubview:self.titleLabel];
         
         _legalLabel = [[UILabel alloc] init];
         self.legalLabel.text = @"By logging in or signing up, you hereby agree to the:";
-        self.legalLabel.font = [UIFont boldSystemFontOfSize:12.0];
+        self.legalLabel.font = [UIFont fontWithName:@"Avenir-Book" size:12.0];
         self.legalLabel.textColor = [UIColor lightGrayColor];
         [self addSubview:self.legalLabel];
         
@@ -63,6 +63,8 @@ static const CGFloat kContinueButtonHeight = 40.0;
         self.usernameInput.delegate = self;
         self.usernameInput.placeholder = @"Username";
         self.usernameInput.returnKeyType = UIReturnKeyNext;
+        self.usernameInput.backgroundColor = [UIColor whiteColor];
+        self.usernameInput.font = [UIFont fontWithName:@"Avenir-Book" size:13.0];
         [self addSubview:self.usernameInput];
 
         _passwordInput = [TATextField textFieldWithYellowBorder];
@@ -70,12 +72,16 @@ static const CGFloat kContinueButtonHeight = 40.0;
         self.passwordInput.secureTextEntry = YES;
         self.passwordInput.placeholder = @"Password";
         self.passwordInput.returnKeyType = UIReturnKeyNext;
+        self.passwordInput.backgroundColor = [UIColor whiteColor];
+        self.passwordInput.font = [UIFont fontWithName:@"Avenir-Book" size:13.0];
         [self addSubview:self.passwordInput];
 
         _phoneNumberInput = [TAPhoneNumberField textFieldWithYellowBorder];
         self.phoneNumberInput.placeholder = @"Phone Number";
         self.phoneNumberInput.returnKeyType = UIReturnKeyDone;
         self.phoneNumberInput.keyboardType = UIKeyboardTypePhonePad;
+        self.phoneNumberInput.backgroundColor = [UIColor whiteColor];
+        self.phoneNumberInput.font = [UIFont fontWithName:@"Avenir-Book" size:13.0];
         [self addSubview:self.phoneNumberInput];
 
         _continueButton = [[UIButton alloc] init];
@@ -83,8 +89,7 @@ static const CGFloat kContinueButtonHeight = 40.0;
         [self.continueButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
         self.continueButton.backgroundColor = [UIColor trophyYellowColor];
         self.continueButton.layer.cornerRadius = 5.0;
-        self.continueButton.layer.borderWidth = 1.0;
-        self.continueButton.layer.borderColor = [UIColor whiteColor].CGColor;
+        self.continueButton.font = [UIFont fontWithName:@"Avenir-Heavy" size:15.0];
         [self.continueButton addTarget:self action:@selector(continueButtonPressed) forControlEvents:UIControlEventTouchUpInside];
         [self addSubview:self.continueButton];
 
@@ -94,6 +99,7 @@ static const CGFloat kContinueButtonHeight = 40.0;
         self.loginButton.backgroundColor = [UIColor trophyYellowColor];
         self.loginButton.layer.cornerRadius = 5.0;
         [self.loginButton setTitleColor:[UIColor colorWithRed:0.812 green:0.82 blue:0.82 alpha:1] forState:UIControlStateHighlighted];
+        self.loginButton.font = [UIFont fontWithName:@"Avenir-Heavy" size:17.0];
         [self.loginButton addTarget:self action:@selector(loginButtonPressed) forControlEvents:UIControlEventTouchUpInside];
         [self addSubview:self.loginButton];
         
@@ -122,13 +128,13 @@ static const CGFloat kContinueButtonHeight = 40.0;
     
     CGRect frame = self.logoImageView.frame;
     frame.origin.x = floorf((CGRectGetWidth(self.bounds) - CGRectGetWidth(self.logoImageView.frame)) / 2.0);
-    frame.origin.y = floorf(CGRectGetHeight(self.bounds) / 1.8);
+    frame.origin.y = floorf(CGRectGetMinY(self.bounds) / 5.0) + 25.0;
     self.logoImageView.frame = frame;
     
     [self.titleLabel sizeToFit];
     frame = self.titleLabel.frame;
     frame.origin.x = floorf((CGRectGetWidth(self.bounds) - CGRectGetWidth(self.titleLabel.frame)) / 2.0);
-    frame.origin.y = floorf(CGRectGetHeight(self.bounds) / 50.0) + 10.0;
+    frame.origin.y = floorf(CGRectGetMaxY(self.logoImageView.frame) + 10.0);
     self.titleLabel.frame = frame;
     
     frame = self.usernameInput.frame;
@@ -163,7 +169,7 @@ static const CGFloat kContinueButtonHeight = 40.0;
     [self.loginButton sizeToFit];
     frame = self.loginButton.frame;
     frame.origin.x = floorf((CGRectGetWidth(self.bounds) - CGRectGetWidth(self.loginButton.frame)) / 2.0);
-    frame.origin.y = CGRectGetMaxY(self.logoImageView.frame) + 12.5;
+    frame.origin.y = CGRectGetMaxY(self.continueButton.frame) + 12.5;
     self.loginButton.frame = frame;
     
     [self.legalLabel sizeToFit];

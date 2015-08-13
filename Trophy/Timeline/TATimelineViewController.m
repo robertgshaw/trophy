@@ -37,7 +37,6 @@ static const CGFloat kGroupsButtonHeight = 70.0;
 @property (nonatomic, strong) UIButton *backgroundTap;
 @property (nonatomic, strong) CAShapeLayer *formatGroupsLayer;
 @property (nonatomic, strong) TAGroupListButton *groupListButton;
-//@property (nonatomic, strong) TATimelineTableViewCell *currentCloseupCell;
 @property (nonatomic, strong) NSIndexPath *indexPathOfCurrentCloseupCell;
 
 @end
@@ -95,9 +94,6 @@ static const CGFloat kGroupsButtonHeight = 70.0;
     self.backgroundTap.enabled = NO;
     
     [self layoutGroupListView];
-    
-    
-    
 
 }
 
@@ -296,7 +292,6 @@ static const CGFloat kGroupsButtonHeight = 70.0;
 
     // sets index path of current closeup
     if ([[self tableView:tableView cellForRowAtIndexPath:indexPath] isKindOfClass:[TATimelineTableViewCell class]]) {
-        NSLog(@"hey");
         
         self.indexPathOfCurrentCloseupCell = indexPath;
     }

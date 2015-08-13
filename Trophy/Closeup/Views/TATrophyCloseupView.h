@@ -12,6 +12,7 @@
 #import "TATrophy.h"
 #import "TATrophyActionFooterView.h"
 #import "TALikesButton.h"
+#import "TABackButton.h"
 
 
 @class TATrophyCloseupView;
@@ -19,14 +20,13 @@
 @protocol TATrophyCloseupViewDelegate <NSObject>
 
 - (void)closeupViewDidPressCommentsButton:(TATrophyCloseupView *)TrophyCloseupView;
-- (void)backButtonPressed;
 
 @end
 
 
 @interface TATrophyCloseupView : UIView
 
-- (instancetype)initWithDelegate:(id< TALikeButtonDelegate, TATrophyCloseupViewDelegate>)delegate;
+- (instancetype)initWithDelegate:(id< TALikeButtonDelegate, TABackButtonDelegate, TATrophyCloseupViewDelegate>)delegate;
 
 @property (nonatomic, weak) id<TATrophyCloseupViewDelegate> delegate1;
 
