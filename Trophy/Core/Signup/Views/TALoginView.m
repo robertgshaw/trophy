@@ -41,7 +41,7 @@ static const CGFloat kContinueButtonHeight = 40.0;
 {
     self = [super initWithFrame:frame];
     if (self) {
-        self.backgroundColor = [UIColor whiteColor];
+        self.backgroundColor = [UIColor trophyNavyColor];
         self.buttonSelectedColor = [UIColor standardBlueButtonColor];
         self.buttonUnselectedColor = [UIColor unselectedGrayColor];
         
@@ -49,9 +49,8 @@ static const CGFloat kContinueButtonHeight = 40.0;
         [self.usernameButton setTitle:@"Username" forState:UIControlStateNormal];
         [self.usernameButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
         [self.usernameButton setBackgroundColor:self.buttonSelectedColor];
-        self.usernameButton.layer.cornerRadius = 5.0;
-        self.usernameButton.layer.borderWidth = 1.0;
         self.usernameButton.layer.borderColor = [UIColor whiteColor].CGColor;
+        self.usernameButton.font = [UIFont fontWithName:@"Avenir-Heavy" size:17.0];
         [self.usernameButton addTarget:self action:@selector(usernameButtonPressed:) forControlEvents:UIControlEventTouchUpInside];
         [self addSubview:self.usernameButton];
         self.usernameButton.selected = YES;
@@ -60,15 +59,16 @@ static const CGFloat kContinueButtonHeight = 40.0;
         [self.phoneNumberButton setTitle:@"Phone Number" forState:UIControlStateNormal];
         [self.phoneNumberButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
         [self.phoneNumberButton setBackgroundColor:self.buttonUnselectedColor];
-        self.phoneNumberButton.layer.cornerRadius = 5.0;
-        self.phoneNumberButton.layer.borderWidth = 1.0;
         self.phoneNumberButton.layer.borderColor = [UIColor whiteColor].CGColor;
+        self.phoneNumberButton.font = [UIFont fontWithName:@"Avenir-Heavy" size:17.0];
         [self.phoneNumberButton addTarget:self action:@selector(phoneNumberButtonPressed:) forControlEvents:UIControlEventTouchUpInside];
         [self addSubview:self.phoneNumberButton];
         
         _usernameInput = [TATextField textFieldWithYellowBorder];
         self.usernameInput.delegate = self;
         self.usernameInput.placeholder = @"Username";
+        self.usernameInput.font = [UIFont fontWithName:@"Avenir-Book" size:13.0];
+        self.usernameInput.backgroundColor = [UIColor whiteColor];
         self.usernameInput.returnKeyType = UIReturnKeyNext;
         [self addSubview:self.usernameInput];
 
@@ -76,6 +76,8 @@ static const CGFloat kContinueButtonHeight = 40.0;
         self.phoneNumberInput.placeholder = @"Phone Number";
         self.phoneNumberInput.keyboardType = UIKeyboardTypePhonePad;
         [self addSubview:self.phoneNumberInput];
+        self.phoneNumberInput.backgroundColor = [UIColor whiteColor];
+        self.phoneNumberInput.font = [UIFont fontWithName:@"Avenir-Book" size:13.0];
         self.phoneNumberInput.hidden = YES;
         self.phoneNumberInput.enabled = NO;
 
@@ -83,6 +85,9 @@ static const CGFloat kContinueButtonHeight = 40.0;
         self.passwordInput.delegate = self;
         self.passwordInput.secureTextEntry = YES;
         self.passwordInput.placeholder = @"Password";
+        self.passwordInput.font = [UIFont fontWithName:@"Avenir-Book" size:13.0];
+
+        self.passwordInput.backgroundColor = [UIColor whiteColor];
         self.passwordInput.returnKeyType = UIReturnKeyNext;
         [self addSubview:self.passwordInput];
 
@@ -91,7 +96,7 @@ static const CGFloat kContinueButtonHeight = 40.0;
         [self.continueButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
         self.continueButton.backgroundColor = [UIColor trophyYellowColor];
         self.continueButton.layer.cornerRadius = 5.0;
-        self.continueButton.layer.borderWidth = 1.0;
+        self.continueButton.font = [UIFont fontWithName:@"Avenir-Heavy" size:18.0];
         self.continueButton.layer.borderColor = [UIColor whiteColor].CGColor;
         [self.continueButton addTarget:self action:@selector(loginButtonPressed) forControlEvents:UIControlEventTouchUpInside];
         [self addSubview:self.continueButton];
@@ -103,18 +108,18 @@ static const CGFloat kContinueButtonHeight = 40.0;
 {
     [self.usernameButton sizeToFit];
     CGRect frame = self.usernameButton.frame;
-    frame.size.width = kLoginButtonWidth;
+    frame.size.width = CGRectGetMidX(self.bounds);
     frame.size.height = kLoginButtonHeight;
-    frame.origin.x = CGRectGetMidX(self.bounds) - 5.0 - kLoginButtonWidth;
-    frame.origin.y = 100.0;
+    frame.origin.x = CGRectGetMinX(self.bounds);
+    frame.origin.y = CGRectGetMinY(self.bounds) + (kLoginButtonHeight * 2) - 16.5;
     self.usernameButton.frame = frame;
     
     [self.phoneNumberButton sizeToFit];
     frame = self.phoneNumberButton.frame;
-    frame.size.width = kLoginButtonWidth;
+    frame.size.width = CGRectGetMidX(self.bounds);
     frame.size.height = kLoginButtonHeight;
-    frame.origin.x = CGRectGetMidX(self.bounds) + 5.0;
-    frame.origin.y = 100.0;
+    frame.origin.x = CGRectGetMidX(self.bounds);
+    frame.origin.y = CGRectGetMinY(self.bounds) + (kLoginButtonHeight * 2) - 16.5;
     self.phoneNumberButton.frame = frame;
     
     frame = self.usernameInput.frame;
