@@ -21,11 +21,11 @@ static const CGFloat kGroupsButtonHeight = 70.0;
     // creates the label to display the name of the current group
     self.groupListView = [[UIView alloc] initWithFrame:self.frame];
     self.groupListLabel = [[UILabel alloc] init];
+    self.groupListLabel.font = [UIFont fontWithName:@"Avenir-Medium" size:20.0];
     self.groupListLabel.text = [TAGroupManager sharedManager].activeGroup.name;
 
     self.groupListLabel.textColor = [UIColor whiteColor];
     self.groupListLabel.textAlignment = NSTextAlignmentCenter;
-    self.groupListLabel.font = [UIFont boldSystemFontOfSize:20.0];
     [self.groupListLabel sizeToFit];
     [self.groupListView addSubview:self.groupListLabel];
     

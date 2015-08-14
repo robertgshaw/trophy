@@ -42,33 +42,39 @@ static const CGFloat kSaveButtonHeight = 40.0;
 {
     self = [super init];
     if (self) {
-        self.backgroundColor = [UIColor whiteColor];
+        self.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"sand-background"]];
         self.originalName = user.name;
         self.originalBio = user.bio;
         self.originalImage = user.profileImage;
 
         _nameLabel = [[UILabel alloc] init];
         self.nameLabel.text = @"Name";
-        self.nameLabel.textColor = [UIColor grayColor];
+        self.nameLabel.font = [UIFont fontWithName:@"Avenir-Book" size:16.0];
+        self.nameLabel.textColor = [UIColor trophyNavyColor];
         [self addSubview:self.nameLabel];
 
         _nameInput = [TATextField textFieldWithYellowBorder];
         self.nameInput.delegate = self;
         self.nameInput.placeholder = @"Name";
+        self.nameInput.font = [UIFont fontWithName:@"Avenir-Book" size:13.0];
         self.nameInput.text = user.name;
+        self.nameInput.backgroundColor = [UIColor whiteColor];
         self.nameInput.autocapitalizationType = UITextAutocapitalizationTypeWords;
         self.nameInput.returnKeyType = UIReturnKeyNext;
         [self addSubview:self.nameInput];
 
         _bioLabel = [[UILabel alloc] init];
         self.bioLabel.text = @"College";
-        self.bioLabel.textColor = [UIColor grayColor];
+        self.bioLabel.font = [UIFont fontWithName:@"Avenir-Book" size:15];
+        self.bioLabel.textColor = [UIColor trophyNavyColor];
         [self addSubview:self.bioLabel];
 
         _descriptionInput = [TATextField textFieldWithYellowBorder];
         self.descriptionInput.delegate = self;
         self.descriptionInput.placeholder = @"College";
+        self.descriptionInput.font = [UIFont fontWithName:@"Avenir-Book" size:13.0];
         self.descriptionInput.text = user.bio;
+        self.descriptionInput.backgroundColor = [UIColor whiteColor];
         self.descriptionInput.autocapitalizationType = UITextAutocapitalizationTypeSentences;
         self.descriptionInput.returnKeyType = UIReturnKeyDone;
         [self addSubview:self.descriptionInput];
@@ -97,7 +103,7 @@ static const CGFloat kSaveButtonHeight = 40.0;
         self.saveButton.backgroundColor = [UIColor unselectedGrayColor];
         [self.saveButton addTarget:self action:@selector(saveButtonPressed) forControlEvents:UIControlEventTouchUpInside];
         self.saveButton.layer.cornerRadius = 5.0;
-        self.saveButton.layer.borderWidth = 1.0;
+        self.saveButton.font = [UIFont fontWithName:@"Avenir-Heavy" size:18.0];
         self.saveButton.layer.borderColor = [UIColor whiteColor].CGColor;
         [self addSubview:self.saveButton];
         self.saveButton.enabled = NO;
@@ -105,10 +111,11 @@ static const CGFloat kSaveButtonHeight = 40.0;
         _deleteProfileButton = [[UIButton alloc] init];
         [self.deleteProfileButton setTitle:@"Delete Profile" forState:UIControlStateNormal];
         [self.deleteProfileButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
-        self.deleteProfileButton.backgroundColor = [UIColor redColor];
+        self.deleteProfileButton.backgroundColor = [UIColor trophyRedColor];
         [self.deleteProfileButton addTarget:self action:@selector(deleteProfileButtonPressed) forControlEvents:UIControlEventTouchUpInside];
+        self.deleteProfileButton.font = [UIFont fontWithName:@"Avenir-Heavy" size:17.0];
+
         self.deleteProfileButton.layer.cornerRadius = 5.0;
-        self.deleteProfileButton.layer.borderWidth = 1.0;
         self.deleteProfileButton.layer.borderColor = [UIColor whiteColor].CGColor;
         [self addSubview:self.deleteProfileButton];
         self.deleteProfileButton.enabled = YES;

@@ -29,7 +29,7 @@ static const CGFloat kCreateGroupVerticalMargin = 20.0;
 {
     self = [super initWithFrame:frame];
     if (self) {
-        self.backgroundColor = [UIColor whiteColor];
+        self.backgroundColor = [UIColor trophyNavyColor];
         
         _createTrophyImageView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"create-group-logo"]];
         [self addSubview:self.createTrophyImageView];
@@ -38,12 +38,13 @@ static const CGFloat kCreateGroupVerticalMargin = 20.0;
         [self.titleLabel setText:@"Group Info"];
         [self.titleLabel setTextAlignment:NSTextAlignmentCenter];
         self.titleLabel.textColor = [UIColor trophyYellowColor];
-        self.titleLabel.font = [UIFont boldSystemFontOfSize:18.0];
+        self.titleLabel.font = [UIFont fontWithName:@"Avenir-Heavy" size:22.0];
         [self addSubview:self.titleLabel];
         
         _groupNameInput = [TATextField textFieldWithYellowBorder];
         self.groupNameInput.delegate = self;
         self.groupNameInput.placeholder = @"Group name";
+        self.groupNameInput.font = [UIFont fontWithName:@"Avenir-Book" size:15.0];
         self.groupNameInput.borderStyle = UITextBorderStyleRoundedRect;
         self.groupNameInput.clearButtonMode = UITextFieldViewModeWhileEditing;
         self.groupNameInput.autocapitalizationType = UITextAutocapitalizationTypeWords;
@@ -53,6 +54,7 @@ static const CGFloat kCreateGroupVerticalMargin = 20.0;
         _maxGroupSizeInput = [TATextField textFieldWithYellowBorder];
         self.maxGroupSizeInput.delegate = self;
         self.maxGroupSizeInput.placeholder = @"Minimum group size";
+        self.maxGroupSizeInput.font = [UIFont fontWithName:@"Avenir-Book" size:15.0];
         self.maxGroupSizeInput.borderStyle = UITextBorderStyleRoundedRect;
         self.maxGroupSizeInput.clearButtonMode = UITextFieldViewModeWhileEditing;
         self.maxGroupSizeInput.autocapitalizationType = UITextAutocapitalizationTypeSentences;
