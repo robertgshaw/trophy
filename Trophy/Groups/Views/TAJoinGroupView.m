@@ -32,11 +32,13 @@ static const CGFloat kJoinGroupVerticalMargin = 30.0;
         _joinGroupImageView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"join-group-logo"]];
         [self addSubview:self.joinGroupImageView];
         
+        self.backgroundColor = [UIColor trophyNavyColor];
+        
         _titleLabel = [[UILabel alloc] init];
         [self.titleLabel setText:@"Group Info"];
         [self.titleLabel setTextAlignment:NSTextAlignmentCenter];
         self.titleLabel.textColor = [UIColor trophyYellowColor];
-        self.titleLabel.font = [UIFont boldSystemFontOfSize:18.0];
+        self.titleLabel.font = [UIFont fontWithName:@"Avenir-Heavy" size:22.0];
         [self addSubview:self.titleLabel];
         
         
@@ -53,6 +55,7 @@ static const CGFloat kJoinGroupVerticalMargin = 30.0;
         _inviteCodeInput = [TATextField textFieldWithYellowBorder];
         self.inviteCodeInput.delegate = self;
         self.inviteCodeInput.placeholder = @"Invite Code";
+        self.inviteCodeInput.font = [UIFont fontWithName:@"Avenir-Book" size:15.0];
         self.inviteCodeInput.borderStyle = UITextBorderStyleRoundedRect;
         self.inviteCodeInput.clearButtonMode = UITextFieldViewModeWhileEditing;
         self.inviteCodeInput.autocapitalizationType = UITextAutocapitalizationTypeSentences;

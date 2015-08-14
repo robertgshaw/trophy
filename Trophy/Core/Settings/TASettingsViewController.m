@@ -54,7 +54,8 @@
         titleLabel.backgroundColor = [UIColor clearColor];
         titleLabel.textColor = [UIColor whiteColor];
         titleLabel.textAlignment = NSTextAlignmentCenter;
-        titleLabel.text = @"Create Profile";
+        titleLabel.text = @"CREATE PROFILE";
+        titleLabel.font = [UIFont fontWithName:@"Avenir-Heavy" size:20.0];
         [titleLabel sizeToFit];
         self.navigationItem.titleView = titleLabel;
         
@@ -72,6 +73,7 @@
         titleLabel.backgroundColor = [UIColor clearColor];
         titleLabel.textColor = [UIColor whiteColor];
         titleLabel.textAlignment = NSTextAlignmentCenter;
+        titleLabel.font = [UIFont fontWithName:@"Avenir-Medium" size:20.0];
         titleLabel.text = @"Settings";
         [titleLabel sizeToFit];
         self.navigationItem.titleView = titleLabel;
