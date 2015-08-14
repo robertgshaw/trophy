@@ -79,8 +79,8 @@
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"GroupsListCell" forIndexPath:indexPath];
     if (indexPath.row == 0) {
         cell.textLabel.text = @"My Groups";
+        cell.textLabel.font = [UIFont fontWithName:@"Avenir-Black" size:18.0];
         cell.textLabel.textColor = [UIColor trophyYellowColor];
-        cell.textLabel.font = [UIFont boldSystemFontOfSize:18.0];
     } else if (indexPath.row - 1 < [self.groups count]) {
         TAGroup *currentGroup = [self groupAtIndex:(indexPath.row - 1)];
         if (currentGroup) {
@@ -88,14 +88,17 @@
             // If this is the current group, change background color
             if ([currentGroup.groupId isEqualToString:[TAGroupManager sharedManager].activeGroup.groupId]) {
                 cell.backgroundColor = [UIColor trophyYellowColor];
+                cell.textLabel.font = [UIFont fontWithName:@"Avenir-Black" size:17.0];
                 cell.textLabel.textColor = [UIColor whiteColor];
             } else {
                 cell.backgroundColor = [UIColor whiteColor];
+                cell.textLabel.font = [UIFont fontWithName:@"Avenir-Black" size:17.0];
                 cell.textLabel.textColor = [UIColor trophyYellowColor];
             }
         }
     } else {
-        cell.textLabel.text = @"Add a group";
+        cell.textLabel.text = @"Group Settings";
+        cell.textLabel.font = [UIFont fontWithName:@"Avenir-Black" size:17.0];
         cell.textLabel.textColor = [UIColor standardBlueButtonColor];
     }
     cell.textLabel.textAlignment = NSTextAlignmentCenter;
