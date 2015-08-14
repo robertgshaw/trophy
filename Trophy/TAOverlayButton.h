@@ -10,6 +10,7 @@
 #import "UIColor+TAAdditions.h"
 #import "TATrophyCloseupView.h"
 #import "TALikesButton.h"
+#import "TACommentTableViewController.h"
 
 @protocol TAOverlayButtonDelegate <NSObject>
 @required

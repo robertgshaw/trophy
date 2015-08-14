@@ -119,7 +119,7 @@ static const CGFloat kTrophyCollectionViewCellWidth = 250.0;
     self.navigationController.navigationBarHidden = NO;
 }
 
--(void) trophyCloseupDidPerformAction:(TATrophyCloseupViewController *)viewController
+-(void) trophyCloseupDidPerformAction:(TATrophy *)updatedTrophy
 {
     // updates only the current closeup cell when an action is performed
     if (self.indexPathOfCurrentCloseupItem != nil)

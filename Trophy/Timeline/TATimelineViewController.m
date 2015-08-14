@@ -28,16 +28,16 @@ static const CGFloat kGroupsButtonHeight = 70.0;
 @interface TATimelineViewController () <UITableViewDataSource,
                                         UITableViewDelegate,
                                         TATimelineTableViewCellDelegate,
+                                        TACommentTableViewControllerDelegate,
                                         TAGroupListViewControllerDelegate,
                                         TATrophyCloseupViewControllerDelegate>
 
-@property (nonatomic, strong) NSArray *trophies;
 @property (nonatomic, strong) TAGroupListViewController *groupListVC;
 @property (nonatomic, strong) TAGroup *currentGroup;
 @property (nonatomic, strong) UIButton *backgroundTap;
 @property (nonatomic, strong) CAShapeLayer *formatGroupsLayer;
 @property (nonatomic, strong) TAGroupListButton *groupListButton;
-@property (nonatomic, strong) NSIndexPath *indexPathOfCurrentCloseupCell;
+@property (nonatomic, strong) NSIndexPath *indexPathOfCurrentSelectedCell;
 
 @end
 
@@ -236,6 +236,8 @@ static const CGFloat kGroupsButtonHeight = 70.0;
     } else {
         cell.backgroundColor = [UIColor whiteColor];
     }
+    
+    // sets the cells trophy based on parse query
     cell.trophy = [[TATrophy alloc] initWithStoredTrophy:object];
     
     // set properties on commentsButton and commentsLabel from the tableView cell
@@ -247,18 +249,18 @@ static const CGFloat kGroupsButtonHeight = 70.0;
     
     }
     cell.commentsLabel.text = [NSString stringWithFormat:@"%ld comments", (long)cell.trophy.commentNumber];
+
+    [cell.commentsButton addTarget:self action:@selector(presentTrophyComments:) forControlEvents:UIControlEventTouchUpInside];
+    cell.delegate = self;
+    return cell;
     
-    
-    // THE FOLLOWING COMMENTED-OUT CODE WAS FOR EXPERIMENTATION PURPOSES
+        // THE FOLLOWING COMMENTED-OUT CODE WAS FOR EXPERIMENTATION PURPOSES
 //    UITapGestureRecognizer *labelTapRecognizer = [[UITapGestureRecognizer alloc] init];
 //    [labelTapRecognizer addTarget:self action:@selector(presentTrophyCommentsFromLabel:)];
 //    [labelTapRecognizer setNumberOfTapsRequired:1];
 //    [cell.commentsLabel addGestureRecognizer:labelTapRecognizer];
 //    [cell bringSubviewToFront:cell.commentsLabel];
    
-    [cell.commentsButton addTarget:self action:@selector(presentTrophyComments:) forControlEvents:UIControlEventTouchUpInside];
-    cell.delegate = self;
-    return cell;
 }
 
 - (PFTableViewCell *)tableView:(UITableView *)tableView cellForNextPageAtIndexPath:(NSIndexPath *)indexPath
@@ -293,7 +295,7 @@ static const CGFloat kGroupsButtonHeight = 70.0;
     // sets index path of current closeup
     if ([[self tableView:tableView cellForRowAtIndexPath:indexPath] isKindOfClass:[TATimelineTableViewCell class]]) {
         
-        self.indexPathOfCurrentCloseupCell = indexPath;
+        self.indexPathOfCurrentSelectedCell = indexPath;
     }
     [self presentTrophyCloseup:trophy];
 }
@@ -306,6 +308,59 @@ static const CGFloat kGroupsButtonHeight = 70.0;
         return YES;
     }
 }
+
+#pragma mark - helper methods
+- (void)reloadSelectedCellWithUpdatedTrophy:(TATrophy *)updatedTrophy;
+{
+    // updates only the current closeup cell when an action is performed
+    if (self.indexPathOfCurrentSelectedCell != nil)
+    {
+        
+        PFObject *objectToUpdate = [self objectAtIndexPath:self.indexPathOfCurrentSelectedCell];
+        
+        NSLog(@"%@", objectToUpdate[@"commentNumber"]);
+        [objectToUpdate fetchInBackground];
+        NSLog(@"%@", objectToUpdate[@"commentNumber"]);
+    }
+}
+
+- (void)jumpToTimelineWithNavBarHidden:(BOOL)enabled
+{
+    // "unselects" cell
+    self.indexPathOfCurrentSelectedCell = nil;
+    
+    // pops to the timeline view controller
+    [self.navigationController popToViewController:self animated:YES];
+    
+    // displays the nav bar and the tab bar
+    self.navigationController.navigationBarHidden = enabled;
+
+}
+
+#pragma mark - TACommentTableViewControllerDelegate Methods
+- (void)trophyCommentDidPerformAction:(TATrophy *)updatedTrophy
+{
+    [self reloadSelectedCellWithUpdatedTrophy:updatedTrophy];
+}
+
+- (void)trophyCommentViewControllerDidPressBackButton
+{
+     [self jumpToTimelineWithNavBarHidden:NO];
+}
+
+#pragma mark - TATrophyCloseupViewControllerDelegate
+
+- (void)trophyCloseupDidPerformAction:(TATrophy *)updatedTrophy
+{
+    [self reloadSelectedCellWithUpdatedTrophy:updatedTrophy];
+}
+
+- (void) closeUpViewControllerBackButtonPressed
+{
+    self.navigationController.navigationBar.barTintColor = [UIColor trophyYellowColor];
+    [self jumpToTimelineWithNavBarHidden:NO];
+}
+
 
 #pragma mark - TATimelineTableViewCellDelegate Methods
 
@@ -361,7 +416,8 @@ static const CGFloat kGroupsButtonHeight = 70.0;
 }
 
 // handles back button presses
-- (void)backButtonPressed {
+- (void)backButtonPressed
+{
     [self.navigationController dismissViewControllerAnimated:YES completion:nil];
 }
 
@@ -378,7 +434,7 @@ static const CGFloat kGroupsButtonHeight = 70.0;
 {
     TACommentButton *button = sender;
     
-    self.indexPathOfCurrentCloseupCell = [self.tableView indexPathForCell:(TATimelineTableViewCell *)button.superview];
+    self.indexPathOfCurrentSelectedCell = [self.tableView indexPathForCell:(TATimelineTableViewCell *)button.superview];
     
     TACommentTableViewController *commentVC = [[TACommentTableViewController alloc] initWithPhoto:button.trophy];
     commentVC.delegate = self;
@@ -398,30 +454,5 @@ static const CGFloat kGroupsButtonHeight = 70.0;
 //    commentVC.delegate = self;
 //    [self.navigationController pushViewController:commentVC animated:YES];
 //}
-
-#pragma mark - TATrophyCloseupViewControllerDelegate
-
-- (void)trophyCloseupDidPerformAction:(TATrophy *)updatedTrophy
-{
-    // updates only the current closeup cell when an action is performed
-    if (self.indexPathOfCurrentCloseupCell != nil)
-    {
-        [self.tableView beginUpdates];
-        [self.tableView reloadRowsAtIndexPaths:@[self.indexPathOfCurrentCloseupCell] withRowAnimation:UITableViewRowAnimationAutomatic];
-        [self.tableView endUpdates];
-    }
-}
-
-- (void) closeUpViewControllerBackButtonPressed
-{
-    // "unsets" the closeup trophy
-    self.indexPathOfCurrentCloseupCell = nil;
-    
-    // pops to the timeline view controller
-    [self.navigationController popToViewController:self animated:YES];
-    
-    // displays the nav bar and the tab bar
-    self.navigationController.navigationBarHidden = NO;
-}
 
 @end
