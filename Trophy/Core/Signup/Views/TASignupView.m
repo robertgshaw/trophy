@@ -89,7 +89,7 @@ static const CGFloat kContinueButtonHeight = 40.0;
         [self.continueButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
         self.continueButton.backgroundColor = [UIColor trophyYellowColor];
         self.continueButton.layer.cornerRadius = 5.0;
-        self.continueButton.font = [UIFont fontWithName:@"Avenir-Heavy" size:15.0];
+        self.continueButton.font = [UIFont fontWithName:@"Avenir-Heavy" size:17.0];
         [self.continueButton addTarget:self action:@selector(continueButtonPressed) forControlEvents:UIControlEventTouchUpInside];
         [self addSubview:self.continueButton];
 
