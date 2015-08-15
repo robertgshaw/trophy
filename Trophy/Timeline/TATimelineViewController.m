@@ -244,9 +244,12 @@ static const CGFloat kGroupsButtonHeight = 70.0;
     cell.commentsLabel.text = [NSString stringWithFormat:@"%@ comments", trophyObject[@"commentNumber"]];
     if(trophyObject[@"commentNumber"] == nil) {
         cell.commentsLabel.text = @"0 comments";
+        cell.commentsLabel.font = [UIFont fontWithName:@"Avenir-Book" size:12.0];
     
     }
     cell.commentsLabel.text = [NSString stringWithFormat:@"%ld comments", (long)cell.trophy.commentNumber];
+    cell.commentsLabel.font = [UIFont fontWithName:@"Avenir-Book" size:12.0];
+
     
     
     // THE FOLLOWING COMMENTED-OUT CODE WAS FOR EXPERIMENTATION PURPOSES

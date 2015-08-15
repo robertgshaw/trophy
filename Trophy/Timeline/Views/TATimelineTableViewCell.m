@@ -73,13 +73,13 @@ static const CGFloat kCellInnerMargin = 10.0;
 
         _recipientLabel = [[UILabel alloc] initWithFrame:CGRectZero];
         self.recipientLabel.textColor = [UIColor darkGrayColor];
-        self.recipientLabel.font = [UIFont systemFontOfSize:13.0];
+        self.recipientLabel.font = [UIFont fontWithName:@"Avenir-Medium" size:13.0];
         self.recipientLabel.numberOfLines = 1;
         [self addSubview:self.recipientLabel];
         
         _dateLabel = [[UILabel alloc] initWithFrame:CGRectZero];
         self.dateLabel.textColor = [UIColor trophyYellowColor];
-        self.dateLabel.font = [UIFont systemFontOfSize:10.0];
+        self.dateLabel.font = [UIFont fontWithName:@"Avenir-Book" size:10.0];
         self.dateLabel.numberOfLines = 1;
         [self addSubview:self.dateLabel];
         
@@ -97,14 +97,14 @@ static const CGFloat kCellInnerMargin = 10.0;
         self.descriptionLabel.numberOfLines = 0;
         self.descriptionLabel.lineBreakMode = NSLineBreakByWordWrapping;
         self.descriptionLabel.textColor = [UIColor darkGrayColor];
-        self.descriptionLabel.font = [UIFont systemFontOfSize:13.5];
+        self.descriptionLabel.font = [UIFont fontWithName:@"Avenir-Heavy" size:13.5];
         [self addSubview:self.descriptionLabel];
 
         _authorLabel = [[UILabel alloc] initWithFrame:CGRectZero];
         self.authorLabel.numberOfLines = 0;
         self.authorLabel.lineBreakMode = NSLineBreakByWordWrapping;
         self.authorLabel.textColor = [UIColor darkGrayColor];
-        self.authorLabel.font = [UIFont boldSystemFontOfSize:10.0];
+        self.authorLabel.font = [UIFont fontWithName:@"Avenir-Medium" size:10.0];
         [self addSubview:self.authorLabel];
 
         _actionFooterView = [[TATrophyActionFooterView alloc] initWithFrame:CGRectZero];
