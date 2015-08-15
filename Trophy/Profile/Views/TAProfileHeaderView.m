@@ -38,7 +38,7 @@ static const CGFloat kLabelInnerMargin = 10.0;
 {
     self = [super initWithFrame:frame];
     if (self) {
-        self.backgroundColor = [UIColor colorWithRed:0.7 green:0.7 blue:0.7 alpha:0.4];
+        self.backgroundColor = [UIColor trophyNavyColor];
 
         _profileImageView = [[PFImageView alloc] init];
         self.profileImageView.backgroundColor = [UIColor whiteColor];
@@ -49,27 +49,27 @@ static const CGFloat kLabelInnerMargin = 10.0;
 
         _nameLabel = [[UILabel alloc] initWithFrame:CGRectZero];
         self.nameLabel.textAlignment = NSTextAlignmentLeft;
-        self.nameLabel.textColor = [UIColor darkGrayColor];
-        self.nameLabel.font = [UIFont boldSystemFontOfSize:16.0];
+        self.nameLabel.textColor = [UIColor whiteColor];
+        self.nameLabel.font = [UIFont fontWithName:@"Avenir-Medium" size:16.0];
         [self addSubview:self.nameLabel];
 
         _trophiesLabel = [[UILabel alloc] initWithFrame:CGRectZero];
         self.trophiesLabel.textAlignment = NSTextAlignmentLeft;
-        self.trophiesLabel.textColor = [UIColor darkGrayColor];
-        self.trophiesLabel.font = [UIFont systemFontOfSize:13.0];
+        self.trophiesLabel.textColor = [UIColor whiteColor];
+        self.trophiesLabel.font = [UIFont fontWithName:@"Avenir-Book" size:13.0];
         [self addSubview:self.trophiesLabel];
 
         _groupsLabel = [[UILabel alloc] initWithFrame:CGRectZero];
         self.groupsLabel.textAlignment = NSTextAlignmentLeft;
-        self.groupsLabel.textColor = [UIColor darkGrayColor];
-        self.groupsLabel.font = [UIFont systemFontOfSize:13.0];
+        self.groupsLabel.textColor = [UIColor whiteColor];
+        self.groupsLabel.font = [UIFont fontWithName:@"Avenir-Book" size:13.0];
         [self addSubview:self.groupsLabel];
         self.groupsLabel.hidden = YES;
         
         _bioLabel = [[UILabel alloc] initWithFrame:CGRectZero];
         self.bioLabel.textAlignment = NSTextAlignmentLeft;
-        self.bioLabel.textColor = [UIColor darkGrayColor];
-        self.bioLabel.font = [UIFont systemFontOfSize:13.0];
+        self.bioLabel.textColor = [UIColor whiteColor];
+        self.bioLabel.font = [UIFont fontWithName:@"Avenir-Book" size:13.0];
         [self addSubview:self.bioLabel];
         self.groupsLabel.hidden = NO;
         
@@ -85,7 +85,7 @@ static const CGFloat kLabelInnerMargin = 10.0;
         [self addSubview:self.editButton];
         
         _flagButton = [[UIButton alloc] initWithFrame:CGRectZero];
-        self.flagButton.backgroundColor = [UIColor redColor];
+        self.flagButton.backgroundColor = [UIColor trophyRedColor];
         [self.flagButton setTitle:@"Flag" forState:UIControlStateNormal];
         [self.flagButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
         self.flagButton.titleLabel.font = [UIFont boldSystemFontOfSize:10.0];

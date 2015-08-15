@@ -82,11 +82,12 @@ static const CGFloat kProfileHeaderMinHeight = 100.0;
     
     // adds title label to the profile view
     UILabel *titleLabel = [[UILabel alloc] init];
-    titleLabel.font = [UIFont boldSystemFontOfSize:20.0];
     titleLabel.backgroundColor = [UIColor clearColor];
     titleLabel.textColor = [UIColor whiteColor];
     titleLabel.textAlignment = NSTextAlignmentCenter;
     titleLabel.text = @"Trophy Case";
+    titleLabel.font = [UIFont fontWithName:@"Avenir-Medium" size:20.0];
+
     [titleLabel sizeToFit];
     self.navigationItem.titleView = titleLabel;
     self.navigationController.navigationBar.tintColor = [UIColor whiteColor];

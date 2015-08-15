@@ -44,17 +44,13 @@ static const CGFloat kCellInnerMargin = 10.0;
 {
     self = [super initWithStyle:style reuseIdentifier:reuseIdentifier];
     if (self) {
+    
         _trophyImageView = [[PFImageView alloc] initWithFrame:CGRectMake(0, 0, kCellTrophyImageWidth, kCellTrophyImageWidth)];
         // this is the wierd black box on top left
         self.trophyImageView.backgroundColor = [UIColor clearColor];
         self.trophyImageView.contentMode = UIViewContentModeScaleAspectFill;
         self.trophyImageView.clipsToBounds = YES;
         [self addSubview:self.trophyImageView];
-        
-        /* THIS IS DELETED TROPHY PIC
-        _trophyFrameView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"trophy-timeline-icon"]];
-        [self addSubview:self.trophyFrameView];
-         */
         
         _trophyPhoto = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, kCellRecipientImageWidth, kCellRecipientImageWidth)];
         [self.trophyPhoto setBackgroundImage:[UIImage imageNamed:@"default-profile-icon"] forState:UIControlStateNormal];
@@ -63,13 +59,11 @@ static const CGFloat kCellInnerMargin = 10.0;
         self.trophyPhoto.layer.borderColor = [UIColor trophyYellowColor].CGColor;
         self.trophyPhoto.layer.cornerRadius = floorf(kCellRecipientImageWidth / 2.0);
         self.trophyPhoto.clipsToBounds = YES;
-        //[self.trophyPhoto addTarget:self action:@selector(profileButtonTapped:) forControlEvents:UIControlEventTouchUpInside];
         self.accessoryView = self.trophyPhoto;
              
         _recipientImageView = [[PFImageView alloc] initWithFrame:self.trophyPhoto.bounds];
         self.recipientImageView.alpha = 2.0;
         self.accessoryView = self.recipientImageView;
-        //[self.trophyPhoto addSubview:self.recipientImageView];
 
         _recipientLabel = [[UILabel alloc] initWithFrame:CGRectZero];
         self.recipientLabel.textColor = [UIColor darkGrayColor];
@@ -85,7 +79,6 @@ static const CGFloat kCellInnerMargin = 10.0;
         
         _commentsLabel = [[UILabel alloc] initWithFrame:CGRectZero];
         self.commentsLabel.textColor = [UIColor darkGrayColor];
-//        self.commentsLabel.font = [UIFont systemFontOfSize:10.0];
         self.commentsLabel.font = [UIFont boldSystemFontOfSize:10.0];
         self.commentsLabel.numberOfLines = 1;
         [self addSubview:self.commentsLabel];
@@ -138,8 +131,6 @@ static const CGFloat kCellInnerMargin = 10.0;
     frame.size.width = maxWidth;
     self.recipientLabel.frame = frame;
     
-   
-    
     //this is the actual trophy photo
     [self.recipientImageView sizeToFit];
     frame.origin.x = CGRectGetMaxX(self.bounds) - 100;
@@ -148,7 +139,6 @@ static const CGFloat kCellInnerMargin = 10.0;
     frame = self.recipientImageView.frame;
     frame.size = CGSizeMake(90,112.5);
     self.recipientImageView.frame = frame;
-    //self.recipientImageView.center = CGPointMake(self.recipientImageView.center.x, self.recipientImageView.center.y - 10.0);
     
     [self.dateLabel sizeToFit];
     frame = self.dateLabel.frame;
@@ -180,9 +170,7 @@ static const CGFloat kCellInnerMargin = 10.0;
 
     frame = self.actionFooterView.frame;
     frame.size = CGSizeMake([TATrophyActionFooterView actionFooterWidth], 70.0);
-    //frame.origin.x = CGRectGetMinX(self.recipientLabel.frame) + 5.0;
-    frame.origin.x =0;
-    //frame.origin.y = CGRectGetMaxY(self.descriptionLabel.frame) ;
+    frame.origin.x = 0;
     frame.origin.y = CGRectGetMaxY(self.descriptionLabel.frame) + (2.4 * kCellInnerMargin)-50;
     self.actionFooterView.frame = frame;
 
@@ -206,10 +194,7 @@ static const CGFloat kCellInnerMargin = 10.0;
     // set frame on commentsButton and place button at front of subview
     frame = self.commentsButton.frame;
     frame.origin.x = (CGRectGetWidth(self.trophyFrameView.frame) + kCellInnerMargin*2 + 7);
-    frame.origin.y = kCellSideMargin*5.2;
-// alternative positioning for comments button
-//    frame.origin.x = 5;
-//    frame.origin.y = kCellSideMargin*4.2;
+    frame.origin.y = kCellSideMargin * 5.2;
     frame.size.height = 18;
     frame.size.width = 18;
     self.commentsButton.frame = frame;
@@ -271,12 +256,6 @@ static const CGFloat kCellInnerMargin = 10.0;
     self.actionFooterView.trophy = trophy;
     self.dateLabel.text = [NSString stringWithFormat:@"%@" , [self formatDate:trophy.time]];
     
-    /* THIS IS DELETED PROF PIC
-    PFFile *imageFile = [trophy.recipient parseFileForProfileImage];
-    self.trophyImageView.file = imageFile;
-    [self.trophyImageView loadInBackground];
-    */
-    
     PFFile *profileImageFile =[trophy parseFileForTrophyImage];
     self.recipientImageView.file = profileImageFile;
     self.recipientImageView.alpha = 1.0;
@@ -293,12 +272,6 @@ static const CGFloat kCellInnerMargin = 10.0;
 
     // Configure the view for the selected state
 }
-
-/*- (void)profileButtonTapped:(id)sender
-{
-    [self.delegate timelineCellDidPressProfileButton:self forUser:self.trophy.recipient];
-}*/
-
 
 #pragma mark - TATimelineActionFooterView Delegate
 
