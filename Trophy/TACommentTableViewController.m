@@ -59,8 +59,6 @@ static const CGFloat kPAPCellInsetWidth = 20.0f;
     
     [super viewDidLoad];
     
-//    self.navigationItem.titleView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"f"]];
-    
     [self.navigationItem setHidesBackButton:NO];
     self.navigationController.navigationBarHidden = NO;
     
@@ -90,6 +88,7 @@ static const CGFloat kPAPCellInsetWidth = 20.0f;
     // Register to be notified when the keyboard will be shown to scroll the view
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillShow:) name:UIKeyboardWillShowNotification object:nil];
 }
+
 - (void)viewDidAppear:(BOOL)animated {
     [super viewDidAppear:animated];
 }
@@ -132,10 +131,11 @@ static const CGFloat kPAPCellInsetWidth = 20.0f;
     
     return query;
 }
+
 - (void)objectsDidLoad:(NSError *)error {
     [super objectsDidLoad:error];
-    NSLog(@"Objects did load");
 }
+
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath object:(PFObject *)object {
     static NSString *cellID = @"commentCell";
     
@@ -176,15 +176,13 @@ static const CGFloat kPAPCellInsetWidth = 20.0f;
 #pragma mark - UITextFieldDelegate
 
 - (BOOL)textFieldShouldReturn:(UITextField *)textField {
-    NSLog(@"YO");
 
     // trim comment text
     NSString *trimmedComment = [textField.text stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet]];
     
     if (trimmedComment.length != 0 && [self.photo objectForKey:@"author"]) {
-        NSLog(@"YOx2");
         
-        //Set comment function
+        // Set comment function
         PFObject *comment = [PFObject objectWithClassName:@"Activity"];
         [comment setValue:trimmedComment forKey:@"content"]; // Set comment text
         //[comment setValue:_trophy.author forKey:@"recipient"]; // Set toUser
@@ -192,19 +190,32 @@ static const CGFloat kPAPCellInsetWidth = 20.0f;
         [comment setValue:@"comment" forKey:@"type"];
         [comment setValue:[self.trophy getTrophyAsParseObject] forKey:@"trophy"];
         
-        //Update comment count on trophy - in Parse
-        PFQuery *trophy = [PFQuery queryWithClassName:@"Trophy"];
-        [trophy getObjectInBackgroundWithId:[self.trophy getTrophyAsParseObject].objectId
-                                     block:^(PFObject *counter, NSError *error) {
-                                         
-                                         //update counter
-                                         [counter incrementKey:@"commentNumber" byAmount:[NSNumber numberWithInt:1]];
-                                         [counter saveInBackground];
-                                     }];
+//        // Update comment count on trophy, asynchronously - in Parse
+//        PFQuery *trophy = [PFQuery queryWithClassName:@"Trophy"];
+//        [trophy getObjectInBackgroundWithId:[self.trophy getTrophyAsParseObject].objectId
+//                                     block:^(PFObject *counter, NSError *error) {
+//                                         
+//                                         // update counter, synchronously, so that timeline updates correclty
+//                                         [counter incrementKey:@"commentNumber" byAmount:[NSNumber numberWithInt:1]];
+//                                         [counter save];
+//                                         NSLog(@"here");
+//                                         
+////                                          // update counter, asychronously
+////                                         [counter incrementKey:@"commentNumber" byAmount:[NSNumber numberWithInt:1]];
+////                                         [counter saveInBackground];
+//                                         
+//                                         // update comment count on trophy - on local Trophy model
+//                                         [self.trophy updateCommentNumber];
+//                                     }];
         
-        //Update comment count on trophy - on local Trophy model
+        // Update comment count on trophy, synchronously, to update timeline - in Parse
+        PFQuery *trophy = [PFQuery queryWithClassName:@"Trophy"];
+        PFObject *counter = [trophy getObjectWithId:[self.trophy getTrophyAsParseObject].objectId];
+        [counter incrementKey:@"commentNumber" byAmount:[NSNumber numberWithInt:1]];
+        [counter save];
+        NSLog(@"here");
+        
         [self.trophy updateCommentNumber];
-
         
         //update ACL
         PFACL *ACL = [PFACL ACLWithUser:[PFUser currentUser]];
@@ -273,8 +284,15 @@ static const CGFloat kPAPCellInsetWidth = 20.0f;
             [[NSNotificationCenter defaultCenter] postNotificationName:@"com.parse.Anypic.photoDetailsViewController.userCommentedOnPhotoInDetailsViewNotification" object:self.photo userInfo:[NSDictionary dictionaryWithObject:[NSNumber numberWithInt:self.objects.count + 1] forKey:@"comments"]];
              */
             
-             [MBProgressHUD hideHUDForView:self.view.superview animated:YES];
-             [self loadObjects];
+            // on success, reload comments in the comment view
+            [MBProgressHUD hideHUDForView:self.view.superview animated:YES];
+            [self loadObjects];
+            
+            NSLog(@"here2");
+            
+            // on success, tell timeline of updated trophy
+            [self.delegate trophyCommentDidPerformAction:self.trophy];
+            
         }];
     }
     [textField setText:@""];
@@ -345,11 +363,13 @@ static const CGFloat kPAPCellInsetWidth = 20.0f;
 
 - (void)backButtonAction:(id)sender {
     
-    UINavigationController *navController = self.navigationController;
+//    UINavigationController *navController = self.navigationController;
+//    
+//    [navController popViewControllerAnimated:YES];
+//    
+//    navController.navigationBarHidden = YES;
+    [self.delegate trophyCommentViewControllerDidPressBackButton];
     
-    [navController popViewControllerAnimated:YES];
-    
-    navController.navigationBarHidden = YES;
 }
 
 - (void)keyboardWillShow:(NSNotification*)note {

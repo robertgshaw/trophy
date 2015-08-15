@@ -16,7 +16,7 @@
 #import "TAOverlayButton.h"
 #import "TAFlagButton.h"
 
-@interface TATrophyCloseupViewController () <TAFlagButtonDelegate, TABackButtonDelegate, TALikeButtonDelegate, TAOverlayButtonDelegate, TATrophyCloseupViewDelegate>
+@interface TATrophyCloseupViewController () <TACommentTableViewControllerDelegate, TAFlagButtonDelegate, TABackButtonDelegate, TALikeButtonDelegate, TAOverlayButtonDelegate, TATrophyCloseupViewDelegate>
 
 @property (nonatomic, strong) TATrophy *trophy;
 @property (nonatomic, strong) TATrophyCloseupView *closeupView;
@@ -42,11 +42,11 @@
     
     // hides navbar in closeup view
     self.navigationController.navigationBarHidden = YES;
-        
+
     self.view.backgroundColor = [UIColor blackColor];
     
     self.edgesForExtendedLayout = UIRectEdgeAll;
-    
+
     // configures and adds closeup view
     self.closeupView = [[TATrophyCloseupView alloc] initWithDelegate:self];
     [self.closeupView setTrophy:self.trophy];
@@ -86,7 +86,8 @@
 
 - (void) overlayViewDidPressCommentsButton
 {
-     TACommentTableViewController *commentViewController = [[TACommentTableViewController alloc] initWithPhoto:self.trophy];
+    TACommentTableViewController *commentViewController = [[TACommentTableViewController alloc] initWithPhoto:self.trophy];
+    commentViewController.delegate = self;
     [self.navigationController pushViewController:commentViewController animated:YES];
 }
 
@@ -97,7 +98,6 @@
     TACommentTableViewController *commentsVC = [[TACommentTableViewController alloc] init];
     UINavigationController *navController = [[UINavigationController alloc] initWithRootViewController:commentsVC];
     [self presentViewController:navController animated:YES completion:nil];
-
 }
 
 #pragma mark - TALikesButtonDelegate Methods
@@ -109,6 +109,7 @@
 
 
 #pragma - DeleteButton Action Handler
+
 - (void)deleteButtonPressed
 {
     // alert - yes/no for delete
@@ -122,16 +123,11 @@
         [query whereKey:@"objectId" equalTo: [self.trophy getTrophyAsParseObject].objectId];
         [query findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
             if (!error) {
-                // The find succeeded.
-                
-                //init timeline to take user back to timeline after trophy is deleted
-                //TATimelineViewController *timelineViewController = [[TATimelineViewController alloc] init];
                 
                 // delete found objects
                 [PFObject deleteAllInBackground:objects];
                 NSLog(@"Successfully deleted!");
-                //[self.navigationController pushViewController:timelineViewController animated:YES];
-                //self.navigationController.navigationBarHidden = NO;
+                
                 [self.delegate closeUpViewControllerBackButtonPressed];
 
                 
@@ -144,11 +140,25 @@
     }
 }
 
+#pragma mark - TACommentTableViewDelegate Methods
+
+- (void) trophyCommentDidPerformAction:(TATrophy *)updatedTrophy
+{
+    [self.delegate trophyCloseupDidPerformAction:updatedTrophy];
+}
+
+- (void) trophyCommentViewControllerDidPressBackButton
+{
+    [self.navigationController popToViewController:self animated:YES];
+    self.navigationController.navigationBarHidden = YES;
+}
+
 #pragma mark - TABackButtonDelegate Methods
 
 - (void)backButtonDidPressBack
 {
     [self.delegate closeUpViewControllerBackButtonPressed];
+    NSLog(@"yes");
 }
 
 #pragma mark - TAFlagButtonDelegate Methods

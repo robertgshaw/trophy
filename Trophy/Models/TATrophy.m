@@ -59,9 +59,7 @@
 - (void)updateCommentNumber
 {
     // update local counter from Parse database
-    
     self.commentNumber = [self.parseObject[@"commentNumber"] integerValue];
-    
     
 }
 
