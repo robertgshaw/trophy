@@ -256,6 +256,10 @@ static const CGFloat kGroupsButtonHeight = 70.0;
     return cell;
     cell.commentsLabel.font = [UIFont fontWithName:@"Avenir-Book" size:12.0];
 
+
+    [cell.commentsButton addTarget:self action:@selector(presentTrophyComments:) forControlEvents:UIControlEventTouchUpInside];
+    cell.delegate = self;
+    return cell;
     
         // THE FOLLOWING COMMENTED-OUT CODE WAS FOR EXPERIMENTATION PURPOSES
 //    UITapGestureRecognizer *labelTapRecognizer = [[UITapGestureRecognizer alloc] init];

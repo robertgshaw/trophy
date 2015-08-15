@@ -32,7 +32,7 @@ static const CGFloat kTrophyBottomMargin = 50.0;
 {
     self = [super initWithFrame:frame];
     if (self) {
-        self.backgroundColor = [UIColor whiteColor];
+        self.backgroundColor = [UIColor clearColor];
         
         _trophyImageView = [[PFImageView alloc] init];
         self.trophyImageView.layer.cornerRadius = 5.0;
@@ -45,7 +45,7 @@ static const CGFloat kTrophyBottomMargin = 50.0;
         _titleLabel = [[UILabel alloc] init];
         [self.titleLabel setTextAlignment:NSTextAlignmentCenter];
         self.titleLabel.textColor = [UIColor blackColor];
-        self.titleLabel.font = [UIFont boldSystemFontOfSize:11.0];
+        self.titleLabel.font = [UIFont fontWithName:@"Avenir-Heavy" size:12.0];
         [self addSubview:self.titleLabel];
         
          _dateLabel = [[UILabel alloc] init];
@@ -57,7 +57,7 @@ static const CGFloat kTrophyBottomMargin = 50.0;
         _authorLabel = [[UILabel alloc] init];
         [self.authorLabel setTextAlignment:NSTextAlignmentCenter];
         self.authorLabel.textColor = [UIColor blackColor];
-        self.authorLabel.font = [UIFont systemFontOfSize:14.0];
+        self.authorLabel.font = [UIFont fontWithName:@"Avenir-Book" size:13.0];
         [self addSubview:self.authorLabel];
         
         _actionFooterView = [[TATrophyActionFooterView alloc] initWithFrame:CGRectZero];
