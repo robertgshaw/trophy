@@ -123,12 +123,14 @@ static const CGFloat kGroupsButtonHeight = 70.0;
     UIButton *groupListButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, kGroupsButtonWidth, kGroupsButtonHeight)];
     [groupListButton addTarget:self action:@selector(groupListButtonDidPress) forControlEvents:UIControlEventTouchUpInside];
     UIView *groupListView = [[UIView alloc] initWithFrame:groupListButton.frame];
+    
     UILabel *groupListLabel = [[UILabel alloc] init];
-    groupListLabel.text = @"Hall of Fame";;
+    groupListLabel.text = @"Hall of Fame";
     groupListLabel.textColor = [UIColor whiteColor];
-    groupListLabel.font = [UIFont boldSystemFontOfSize:20.0];
+    groupListLabel.font = [UIFont fontWithName:@"Avenir-Medium" size:20.0];
     [groupListLabel sizeToFit];
     [groupListView addSubview:groupListLabel];
+   
     UIImageView *downArrowImageView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"down-arrow"]];
     [groupListView addSubview:downArrowImageView];
     

@@ -40,21 +40,21 @@ static const CGFloat kCellInnerMargin = 10.0;
         
         _nameLabel = [[UILabel alloc] init];
         self.nameLabel.numberOfLines = 0;
-        self.nameLabel.font = [UIFont boldSystemFontOfSize:20.0];
+        self.nameLabel.font = [UIFont fontWithName:@"Avenir-Heavy" size:20.0];
         self.nameLabel.textAlignment = NSTextAlignmentCenter;
         self.nameLabel.textColor = [UIColor darkGrayColor];
         [self addSubview:self.nameLabel];
         
         _trophyCountLabel = [[UILabel alloc] init];
         self.trophyCountLabel.numberOfLines = 1;
-        self.trophyCountLabel.font = [UIFont boldSystemFontOfSize:14.0];
+        self.trophyCountLabel.font = [UIFont fontWithName:@"Avenir-Book" size:14.0];
         self.trophyCountLabel.textAlignment = NSTextAlignmentCenter;
         self.trophyCountLabel.textColor = [UIColor unselectedGrayColor];
         [self addSubview:self.trophyCountLabel];
         
         _rankLabel = [[UILabel alloc] init];
         self.rankLabel.numberOfLines = 1;
-        self.rankLabel.font = [UIFont boldSystemFontOfSize:25.0];
+        self.rankLabel.font = [UIFont fontWithName:@"Avenir-Medium" size:25.0];
         self.rankLabel.textColor = [UIColor darkGrayColor];
         self.accessoryView = self.rankLabel;
     }
