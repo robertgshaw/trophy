@@ -11,7 +11,11 @@
 #import "TATrophy.h"
 #import "TACommentBaseTableViewCell.h"
 
-@protocol TACommentTableViewControllerDelegate;
+@protocol TACommentTableViewControllerDelegate <NSObject>
+@required
+- (void)trophyCommentDidPerformAction:(TATrophy *)updatedTrophy;
+- (void)trophyCommentViewControllerDidPressBackButton;
+@end
 
 @interface TACommentTableViewController : PFQueryTableViewController <UITextFieldDelegate, UIActionSheetDelegate, TACommentBaseTableViewCellDelegate>
 

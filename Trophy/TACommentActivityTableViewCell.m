@@ -95,7 +95,6 @@
     NSString *activityString = @"test";
     //[PAPActivityFeedViewController stringForActivityType:(NSString*)[activity objectForKey:@"type"]];
     
-    //TODO Why this broken :(
     /*
      self.user = [activity objectForKey:@"author"];
      

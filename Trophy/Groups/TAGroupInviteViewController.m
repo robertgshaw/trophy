@@ -39,8 +39,8 @@ static const CGFloat kMinContactsForScrubber = 20.0;
     
     UILabel *titleLabel = [[UILabel alloc] initWithFrame:CGRectZero];
     titleLabel.backgroundColor = [UIColor clearColor];
-    titleLabel.font = [UIFont boldSystemFontOfSize:18.0];
-    titleLabel.textColor = [UIColor trophyYellowColor];
+    titleLabel.font = [UIFont fontWithName:@"Avenir-Black" size:18.0];
+    titleLabel.textColor = [UIColor whiteColor];
     titleLabel.text = @"Invite Friends";
     titleLabel.textAlignment = NSTextAlignmentCenter;
     [titleLabel sizeToFit];

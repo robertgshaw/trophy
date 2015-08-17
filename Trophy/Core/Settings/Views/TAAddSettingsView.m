@@ -31,13 +31,14 @@ static const CGFloat kContinueButtonHeight = 40.0;
 {
     self = [super initWithFrame:frame];
     if (self) {
-        self.backgroundColor = [UIColor whiteColor];
+        self.backgroundColor = [UIColor trophyNavyColor];
 
         _nameInput = [TATextField textFieldWithYellowBorder];
         self.nameInput.delegate = self;
         self.nameInput.placeholder = @"Name";
         self.nameInput.borderStyle = UITextBorderStyleRoundedRect;
         self.nameInput.clearButtonMode = UITextFieldViewModeWhileEditing;
+        self.nameInput.font = [UIFont fontWithName:@"Avenir-Book" size:12.0];
         self.nameInput.autocapitalizationType = UITextAutocapitalizationTypeWords;
         self.nameInput.returnKeyType = UIReturnKeyNext;
         [self addSubview:self.nameInput];
@@ -45,6 +46,7 @@ static const CGFloat kContinueButtonHeight = 40.0;
         _descriptionInput = [TATextField textFieldWithYellowBorder];
         self.descriptionInput.delegate = self;
         self.descriptionInput.placeholder = @"College";
+        self.descriptionInput.font = [UIFont fontWithName:@"Avenir-Book" size:12.0];
         self.descriptionInput.borderStyle = UITextBorderStyleRoundedRect;
         self.descriptionInput.clearButtonMode = UITextFieldViewModeWhileEditing;
         self.descriptionInput.autocapitalizationType = UITextAutocapitalizationTypeSentences;

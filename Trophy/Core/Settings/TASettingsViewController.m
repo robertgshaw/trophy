@@ -54,7 +54,7 @@
         titleLabel.backgroundColor = [UIColor clearColor];
         titleLabel.textColor = [UIColor whiteColor];
         titleLabel.textAlignment = NSTextAlignmentCenter;
-        titleLabel.text = @"CREATE PROFILE";
+        titleLabel.text = @"Create Profile";
         titleLabel.font = [UIFont fontWithName:@"Avenir-Heavy" size:20.0];
         [titleLabel sizeToFit];
         self.navigationItem.titleView = titleLabel;
@@ -80,7 +80,7 @@
     
         UIBarButtonItem *rightButton = [[UIBarButtonItem alloc] initWithTitle:@"Logout" style:UIBarButtonItemStylePlain target:self action:@selector(logoutButtonPressed)];
         self.navigationItem.rightBarButtonItem = rightButton;
-
+        
         TASettingsView *settingsView = [[TASettingsView alloc] initWithSettings:[TAActiveUserManager sharedManager].activeUser];
         settingsView.frame = self.view.bounds;
         settingsView.delegate = self;
