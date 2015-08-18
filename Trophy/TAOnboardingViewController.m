@@ -70,7 +70,7 @@ static const CGFloat extraInfoLogoHeight = 50.0;
     [joinGroupButton setTitle:@"Join Group" forState:UIControlStateNormal];
     joinGroupButton.font = [UIFont fontWithName:@"Avenir-Heavy" size:20.0];
     [joinGroupButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
-    joinGroupButton.backgroundColor = [UIColor standardBlueButtonColor];
+    joinGroupButton.backgroundColor = [UIColor darkerBlueColor];
     joinGroupButton.layer.cornerRadius = 5.0;
     frame = CGRectZero;
     frame.origin.x = floorf((CGRectGetWidth(self.view.bounds) - kGroupButtonWidth) / 2.0);

@@ -42,7 +42,7 @@ static const CGFloat kContinueButtonHeight = 40.0;
     self = [super initWithFrame:frame];
     if (self) {
         self.backgroundColor = [UIColor trophyNavyColor];
-        self.buttonSelectedColor = [UIColor standardBlueButtonColor];
+        self.buttonSelectedColor = [UIColor darkerBlueColor];
         self.buttonUnselectedColor = [UIColor unselectedGrayColor];
         
         _usernameButton = [[UIButton alloc] init];

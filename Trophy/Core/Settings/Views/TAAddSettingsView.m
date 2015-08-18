@@ -33,7 +33,7 @@ static const CGFloat kContinueButtonHeight = 40.0;
     if (self) {
         self.backgroundColor = [UIColor trophyNavyColor];
 
-        _nameInput = [TATextField textFieldWithYellowBorder];
+        _nameInput = [TATextField textFieldTranslucent];
         self.nameInput.delegate = self;
         self.nameInput.placeholder = @"Name";
         self.nameInput.borderStyle = UITextBorderStyleRoundedRect;
@@ -43,7 +43,7 @@ static const CGFloat kContinueButtonHeight = 40.0;
         self.nameInput.returnKeyType = UIReturnKeyNext;
         [self addSubview:self.nameInput];
 
-        _descriptionInput = [TATextField textFieldWithYellowBorder];
+        _descriptionInput = [TATextField textFieldTranslucent];
         self.descriptionInput.delegate = self;
         self.descriptionInput.placeholder = @"College";
         self.descriptionInput.font = [UIFont fontWithName:@"Avenir-Book" size:12.0];
@@ -65,12 +65,12 @@ static const CGFloat kContinueButtonHeight = 40.0;
         _saveButton = [[UIButton alloc] init];
         [self.saveButton setTitle:@"Save and Continue" forState:UIControlStateNormal];
         [self.saveButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
-        self.saveButton.backgroundColor = [UIColor standardBlueButtonColor];
+        self.saveButton.backgroundColor = [UIColor darkerBlueColor];
         [self.saveButton addTarget:self action:@selector(saveButtonPressed) forControlEvents:UIControlEventTouchUpInside];
         self.saveButton.hidden = YES;
         self.saveButton.layer.cornerRadius = 5.0;
-        self.saveButton.layer.borderWidth = 1.0;
-        self.saveButton.layer.borderColor = [UIColor whiteColor].CGColor;
+        //self.saveButton.layer.borderWidth = 1.0;
+        //self.saveButton.layer.borderColor = [UIColor whiteColor].CGColor;
         [self addSubview:self.saveButton];
     }
     return self;
@@ -96,7 +96,7 @@ static const CGFloat kContinueButtonHeight = 40.0;
 
     frame = self.profileImageButton.frame;
     frame.origin.x = floorf((CGRectGetWidth(self.bounds) - kTextFieldWidth) / 2.0);
-    frame.origin.y = CGRectGetMaxY(self.descriptionInput.frame) + margin + 20;
+    frame.origin.y = CGRectGetMaxY(self.descriptionInput.frame) + margin + 10;
     frame.size.width = kTextFieldWidth;
     frame.size.height = kTextFieldWidth;
     self.profileImageButton.frame = frame;
@@ -107,7 +107,7 @@ static const CGFloat kContinueButtonHeight = 40.0;
     frame.size.width = kContinueButtonWidth;
     frame.size.height = kContinueButtonHeight;
     frame.origin.x = floorf((CGRectGetWidth(self.bounds) - kContinueButtonWidth)/ 2.0);
-    frame.origin.y = CGRectGetMaxY(self.profileImageButton.frame) + margin * 0.5;
+    frame.origin.y = CGRectGetMaxY(self.profileImageButton.frame) + margin;
     self.saveButton.frame = frame;
 }
 
