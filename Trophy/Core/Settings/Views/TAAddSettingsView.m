@@ -57,7 +57,7 @@ static const CGFloat kContinueButtonHeight = 40.0;
         [self.profileImageButton setBackgroundImage:[UIImage imageNamed:@"create-profile-placeholder"] forState:UIControlStateNormal];
         [self.profileImageButton setTitleColor:[UIColor trophyYellowColor] forState:UIControlStateNormal];
         [self.profileImageButton addTarget:self action:@selector(profileImageButtonPressed) forControlEvents:UIControlEventTouchUpInside];
-        self.profileImageButton.layer.borderWidth = 3.0f;
+        //self.profileImageButton.layer.borderWidth = 3.0f;
         self.profileImageButton.layer.borderColor = [UIColor trophyYellowColor].CGColor;
         self.profileImageButton.clipsToBounds = YES;
         [self addSubview:self.profileImageButton];
@@ -133,6 +133,16 @@ static const CGFloat kContinueButtonHeight = 40.0;
 }
 
 #pragma mark - UITextFieldDelegate Methods
+
+- (BOOL)textFieldShouldBeginEditing:(UITextField *)textField
+{
+    if (textField == self.nameInput) {
+        self.nameInput.backgroundColor = [UIColor whiteColor];
+    } else if (textField == self.descriptionInput) {
+        self.descriptionInput.backgroundColor = [UIColor whiteColor];
+    }
+    return YES;
+}
 
 - (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string
 {

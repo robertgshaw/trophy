@@ -35,10 +35,10 @@ static const CGFloat kJoinGroupVerticalMargin = 30.0;
         self.backgroundColor = [UIColor trophyNavyColor];
         
         _titleLabel = [[UILabel alloc] init];
-        [self.titleLabel setText:@"Group Info"];
+        [self.titleLabel setText:@"Enter code:"];
         [self.titleLabel setTextAlignment:NSTextAlignmentCenter];
-        self.titleLabel.textColor = [UIColor trophyYellowColor];
-        self.titleLabel.font = [UIFont fontWithName:@"Avenir-Heavy" size:22.0];
+        self.titleLabel.textColor = [UIColor whiteColor];
+        self.titleLabel.font = [UIFont fontWithName:@"Avenir" size:18.0];
         [self addSubview:self.titleLabel];
         
         
@@ -52,7 +52,7 @@ static const CGFloat kJoinGroupVerticalMargin = 30.0;
 //        [self addSubview:self.groupNameInput];
         
          
-        _inviteCodeInput = [TATextField textFieldWithYellowBorder];
+        _inviteCodeInput = [TATextField textFieldTranslucent];
         self.inviteCodeInput.delegate = self;
         self.inviteCodeInput.placeholder = @"Invite Code";
         self.inviteCodeInput.font = [UIFont fontWithName:@"Avenir-Book" size:15.0];
@@ -115,6 +115,17 @@ static const CGFloat kJoinGroupVerticalMargin = 30.0;
         [self.delegate joinGroupViewShouldShowJoinButton:self enabled:NO];
     }
     return YES;
+}
+
+- (BOOL)textFieldShouldBeginEditing:(UITextField *)textField
+{
+    if (textField == self.inviteCodeInput) {
+        self.inviteCodeInput.backgroundColor = [UIColor whiteColor];
+        
+        return YES;
+    }else{
+        return NO;
+    }
 }
 
 - (BOOL)textFieldShouldClear:(UITextField *)textField

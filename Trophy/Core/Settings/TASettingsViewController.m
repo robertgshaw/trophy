@@ -45,12 +45,15 @@
     
     if (self.showSetupFlow) {
         NSLog(@"New user, no settings information");
+        
+        //sets nav bar to hidden to properly configure status bar
         [self.navigationController setNavigationBarHidden:NO animated:YES];
+        
+        
         self.navigationItem.hidesBackButton = YES;
-        self.navigationController.navigationBar.barStyle = UIBarStyleDefault;
         self.navigationController.navigationBar.translucent = NO;
-        self.navigationController.navigationBar.clipsToBounds = YES;
         self.navigationController.navigationBar.barTintColor = [UIColor trophyNavyColor];
+        self.navigationController.navigationBar.tintColor = [UIColor trophyNavyColor];
         UILabel *titleLabel = [[UILabel alloc] init];
         titleLabel.backgroundColor = [UIColor clearColor];
         titleLabel.textColor = [UIColor whiteColor];
