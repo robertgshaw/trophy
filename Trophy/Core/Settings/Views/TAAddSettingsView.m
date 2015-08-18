@@ -54,7 +54,7 @@ static const CGFloat kContinueButtonHeight = 40.0;
         [self addSubview:self.descriptionInput];
 
         _profileImageButton = [[UIButton alloc] init];
-        [self.profileImageButton setBackgroundImage:[UIImage imageNamed:@"default-create-profile-icon"] forState:UIControlStateNormal];
+        [self.profileImageButton setBackgroundImage:[UIImage imageNamed:@"create-profile-placeholder"] forState:UIControlStateNormal];
         [self.profileImageButton setTitleColor:[UIColor trophyYellowColor] forState:UIControlStateNormal];
         [self.profileImageButton addTarget:self action:@selector(profileImageButtonPressed) forControlEvents:UIControlEventTouchUpInside];
         self.profileImageButton.layer.borderWidth = 3.0f;
