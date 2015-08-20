@@ -25,6 +25,19 @@
     return signupTextField;
 }
 
++ (TATextField *)textFieldTranslucent
+{
+    TATextField *translucentTextField = [[TATextField alloc] init];
+    translucentTextField.textColor = [UIColor trophyNavyColor];
+    translucentTextField.backgroundColor = [UIColor mediumTranslucentWhite];
+    translucentTextField.layer.cornerRadius = 5.0;
+    translucentTextField.layer.masksToBounds = YES;
+    translucentTextField.autocapitalizationType = UITextAutocapitalizationTypeNone;
+    translucentTextField.clearButtonMode = UITextFieldViewModeWhileEditing;
+    [translucentTextField setValue:[UIColor highTranslucentWhite] forKeyPath:@"_placeholderLabel.textColor"];
+    return translucentTextField;
+}
+
 - (CGRect)textRectForBounds:(CGRect)bounds {
     CGRect newBounds = bounds;
     newBounds.size.width = bounds.size.width - 15.0;
@@ -53,6 +66,20 @@
     phoneNumberField.layer.masksToBounds = YES;
     phoneNumberField.delegate = phoneNumberField;
     return phoneNumberField;
+}
+
++ (TAPhoneNumberField *)textFieldTranslucent
+{
+    TAPhoneNumberField *translucentTextField = [[TAPhoneNumberField alloc] init];
+    translucentTextField.textColor = [UIColor trophyNavyColor];
+    translucentTextField.backgroundColor = [UIColor mediumTranslucentWhite];
+    translucentTextField.layer.cornerRadius = 5.0;
+    translucentTextField.layer.masksToBounds = YES;
+    translucentTextField.autocapitalizationType = UITextAutocapitalizationTypeNone;
+    translucentTextField.clearButtonMode = UITextFieldViewModeWhileEditing;
+    translucentTextField.delegate = translucentTextField;
+    [translucentTextField setValue:[UIColor highTranslucentWhite] forKeyPath:@"_placeholderLabel.textColor"];
+    return translucentTextField;
 }
 
 - (CGRect)textRectForBounds:(CGRect)bounds {

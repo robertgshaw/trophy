@@ -78,7 +78,7 @@ static const CGFloat kGroupsButtonHeight = 70.0;
     
     // configures nav bar display
     self.navigationController.navigationBar.barStyle = UIBarStyleDefault;
-    self.navigationController.navigationBar.barTintColor = [UIColor darkYellowColor];
+    self.navigationController.navigationBar.barTintColor = [UIColor trophyNavyColor];
     
     self.backgroundTap = [[UIButton alloc] initWithFrame:self.view.bounds];
     [self.backgroundTap addTarget:self action:@selector(backgroundDidTap:) forControlEvents:UIControlEventTouchUpInside];
