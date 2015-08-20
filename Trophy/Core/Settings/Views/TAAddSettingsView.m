@@ -65,6 +65,7 @@ static const CGFloat kContinueButtonHeight = 40.0;
         _saveButton = [[UIButton alloc] init];
         [self.saveButton setTitle:@"Save and Continue" forState:UIControlStateNormal];
         [self.saveButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+        self.saveButton.font = [UIFont fontWithName:@"Avenir-Heavy" size:20.0];
         self.saveButton.backgroundColor = [UIColor darkerBlueColor];
         [self.saveButton addTarget:self action:@selector(saveButtonPressed) forControlEvents:UIControlEventTouchUpInside];
         self.saveButton.hidden = YES;

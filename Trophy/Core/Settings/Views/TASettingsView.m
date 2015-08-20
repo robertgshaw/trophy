@@ -42,7 +42,7 @@ static const CGFloat kSaveButtonHeight = 40.0;
 {
     self = [super init];
     if (self) {
-        self.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"sand-background"]];
+        self.backgroundColor = [UIColor trophyNavyColor];
         self.originalName = user.name;
         self.originalBio = user.bio;
         self.originalImage = user.profileImage;
@@ -50,7 +50,7 @@ static const CGFloat kSaveButtonHeight = 40.0;
         _nameLabel = [[UILabel alloc] init];
         self.nameLabel.text = @"Name";
         self.nameLabel.font = [UIFont fontWithName:@"Avenir-Book" size:16.0];
-        self.nameLabel.textColor = [UIColor trophyNavyColor];
+        self.nameLabel.textColor = [UIColor whiteColor];
         [self addSubview:self.nameLabel];
 
         _nameInput = [TATextField textFieldWithYellowBorder];
@@ -66,7 +66,7 @@ static const CGFloat kSaveButtonHeight = 40.0;
         _bioLabel = [[UILabel alloc] init];
         self.bioLabel.text = @"College";
         self.bioLabel.font = [UIFont fontWithName:@"Avenir-Book" size:15];
-        self.bioLabel.textColor = [UIColor trophyNavyColor];
+        self.bioLabel.textColor = [UIColor whiteColor];
         [self addSubview:self.bioLabel];
 
         _descriptionInput = [TATextField textFieldWithYellowBorder];

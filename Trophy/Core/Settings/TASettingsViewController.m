@@ -69,7 +69,7 @@
     } else {
         NSLog(@"Loading settings information");
         self.navigationController.navigationBar.barStyle = UIBarStyleDefault;
-        self.navigationController.navigationBar.barTintColor = [UIColor darkYellowColor];
+        self.navigationController.navigationBar.barTintColor = [UIColor trophyNavyColor];
         self.navigationController.navigationBar.tintColor = [UIColor whiteColor];
         
         UILabel *titleLabel = [[UILabel alloc] init];

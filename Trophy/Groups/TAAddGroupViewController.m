@@ -26,6 +26,8 @@ static const CGFloat kGroupButtonHeight = 40.0;
     self.view.backgroundColor = [UIColor trophyNavyColor];
     self.edgesForExtendedLayout = UIRectEdgeNone;
     self.navigationController.navigationBar.tintColor = [UIColor whiteColor];
+    self.navigationController.navigationBar.barTintColor = [UIColor trophyNavyColor];
+
     
     UIImageView *trophyImageView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"home-logo"]];
     CGRect frame = trophyImageView.frame;

@@ -104,7 +104,7 @@ static const CGFloat kContinueButtonHeight = 40.0;
         [self.privacyButton setTitle:@"Privacy Policy" forState:UIControlStateNormal];
         [self.privacyButton setTitleColor:[UIColor lightGrayColor] forState:UIControlStateNormal];
         [self.privacyButton setTitleColor:[UIColor colorWithRed:0.812 green:0.82 blue:0.82 alpha:1] forState:UIControlStateHighlighted];
-        self.privacyButton.titleLabel.font = [UIFont systemFontOfSize:12.0];
+        self.privacyButton.titleLabel.font = [UIFont fontWithName:@"Avenir-Medium" size:12.0];
         [self.privacyButton addTarget:self action:@selector(privacyButtonPressed) forControlEvents:UIControlEventTouchUpInside];
         [self addSubview:self.privacyButton];
         
@@ -112,7 +112,7 @@ static const CGFloat kContinueButtonHeight = 40.0;
         [self.legalButton setTitle:@"Legal Terms" forState:UIControlStateNormal];
         [self.legalButton setTitleColor:[UIColor lightGrayColor] forState:UIControlStateNormal];
         [self.legalButton setTitleColor:[UIColor colorWithRed:0.812 green:0.82 blue:0.82 alpha:1] forState:UIControlStateHighlighted];
-        self.legalButton.titleLabel.font = [UIFont systemFontOfSize:12.0];
+        self.legalButton.titleLabel.font = [UIFont fontWithName:@"Avenir-Medium" size:12.0];
 
         [self.legalButton addTarget:self action:@selector(legalButtonPressed) forControlEvents:UIControlEventTouchUpInside];
         [self addSubview:self.legalButton];
@@ -178,13 +178,13 @@ static const CGFloat kContinueButtonHeight = 40.0;
     [self.privacyButton sizeToFit];
     frame = self.privacyButton.frame;
     frame.origin.x = CGRectGetMinX(self.continueButton.frame);
-    frame.origin.y = CGRectGetMaxY(self.loginButton.frame) + 17.5;
+    frame.origin.y = CGRectGetMaxY(self.loginButton.frame) + 20.0;
     self.privacyButton.frame = frame;
     
     [self.legalButton sizeToFit];
     frame = self.legalButton.frame;
     frame.origin.x = CGRectGetMaxX(self.privacyButton.frame) + 12.5;
-    frame.origin.y = CGRectGetMaxY(self.loginButton.frame) + 17.5;
+    frame.origin.y = CGRectGetMaxY(self.loginButton.frame) + 20.0;
     self.legalButton.frame = frame;
 }
 
