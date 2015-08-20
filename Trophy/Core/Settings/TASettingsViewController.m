@@ -45,17 +45,21 @@
     
     if (self.showSetupFlow) {
         NSLog(@"New user, no settings information");
+        
+        //sets nav bar to hidden to properly configure status bar
         [self.navigationController setNavigationBarHidden:NO animated:YES];
+        
+        
         self.navigationItem.hidesBackButton = YES;
-        self.navigationController.navigationBar.barStyle = UIBarStyleDefault;
-        self.navigationController.navigationBar.barTintColor = [UIColor darkYellowColor];
+        self.navigationController.navigationBar.translucent = NO;
+        self.navigationController.navigationBar.barTintColor = [UIColor trophyNavyColor];
+        self.navigationController.navigationBar.tintColor = [UIColor trophyNavyColor];
         UILabel *titleLabel = [[UILabel alloc] init];
-        titleLabel.font = [UIFont boldSystemFontOfSize:20.0];
         titleLabel.backgroundColor = [UIColor clearColor];
         titleLabel.textColor = [UIColor whiteColor];
         titleLabel.textAlignment = NSTextAlignmentCenter;
-        titleLabel.text = @"Create Profile";
-        titleLabel.font = [UIFont fontWithName:@"Avenir-Heavy" size:20.0];
+        titleLabel.text = @"Create your profile";
+        titleLabel.font = [UIFont fontWithName:@"Avenir" size:20.0];
         [titleLabel sizeToFit];
         self.navigationItem.titleView = titleLabel;
         
@@ -69,12 +73,11 @@
         self.navigationController.navigationBar.tintColor = [UIColor whiteColor];
         
         UILabel *titleLabel = [[UILabel alloc] init];
-        titleLabel.font = [UIFont boldSystemFontOfSize:20.0];
         titleLabel.backgroundColor = [UIColor clearColor];
         titleLabel.textColor = [UIColor whiteColor];
         titleLabel.textAlignment = NSTextAlignmentCenter;
         titleLabel.font = [UIFont fontWithName:@"Avenir-Medium" size:20.0];
-        titleLabel.text = @"Settings";
+        titleLabel.text = @"Profile Settings";
         [titleLabel sizeToFit];
         self.navigationItem.titleView = titleLabel;
     
@@ -167,6 +170,11 @@
 - (void)logoutButtonPressed
 {
     [[TAActiveUserManager sharedManager] endSession];
+}
+
+-(UIStatusBarStyle)preferredStatusBarStyle
+{
+    return UIStatusBarStyleLightContent;
 }
 
 @end

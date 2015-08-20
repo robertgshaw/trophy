@@ -99,7 +99,7 @@
     } else {
         cell.textLabel.text = @"Group Settings";
         cell.textLabel.font = [UIFont fontWithName:@"Avenir-Black" size:17.0];
-        cell.textLabel.textColor = [UIColor standardBlueButtonColor];
+        cell.textLabel.textColor = [UIColor darkerBlueColor];
     }
     cell.textLabel.textAlignment = NSTextAlignmentCenter;
     return cell;

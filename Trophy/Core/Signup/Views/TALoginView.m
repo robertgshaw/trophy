@@ -42,7 +42,7 @@ static const CGFloat kContinueButtonHeight = 40.0;
     self = [super initWithFrame:frame];
     if (self) {
         self.backgroundColor = [UIColor trophyNavyColor];
-        self.buttonSelectedColor = [UIColor standardBlueButtonColor];
+        self.buttonSelectedColor = [UIColor darkerBlueColor];
         self.buttonUnselectedColor = [UIColor unselectedGrayColor];
         
         _usernameButton = [[UIButton alloc] init];
@@ -64,7 +64,7 @@ static const CGFloat kContinueButtonHeight = 40.0;
         [self.phoneNumberButton addTarget:self action:@selector(phoneNumberButtonPressed:) forControlEvents:UIControlEventTouchUpInside];
         [self addSubview:self.phoneNumberButton];
         
-        _usernameInput = [TATextField textFieldWithYellowBorder];
+        _usernameInput = [TATextField textFieldTranslucent];
         self.usernameInput.delegate = self;
         self.usernameInput.placeholder = @"Username";
         self.usernameInput.font = [UIFont fontWithName:@"Avenir-Book" size:13.0];
@@ -72,7 +72,7 @@ static const CGFloat kContinueButtonHeight = 40.0;
         self.usernameInput.returnKeyType = UIReturnKeyNext;
         [self addSubview:self.usernameInput];
 
-        _phoneNumberInput = [TAPhoneNumberField textFieldWithYellowBorder];
+        _phoneNumberInput = [TAPhoneNumberField textFieldTranslucent];
         self.phoneNumberInput.placeholder = @"Phone Number";
         self.phoneNumberInput.keyboardType = UIKeyboardTypePhonePad;
         [self addSubview:self.phoneNumberInput];
@@ -81,7 +81,7 @@ static const CGFloat kContinueButtonHeight = 40.0;
         self.phoneNumberInput.hidden = YES;
         self.phoneNumberInput.enabled = NO;
 
-        _passwordInput = [TATextField textFieldWithYellowBorder];
+        _passwordInput = [TATextField textFieldTranslucent];
         self.passwordInput.delegate = self;
         self.passwordInput.secureTextEntry = YES;
         self.passwordInput.placeholder = @"Password";
@@ -93,7 +93,7 @@ static const CGFloat kContinueButtonHeight = 40.0;
 
         _continueButton = [[UIButton alloc] init];
         [self.continueButton setTitle:@"Login" forState:UIControlStateNormal];
-        [self.continueButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+        [self.continueButton setTitleColor:[UIColor trophyNavyColor] forState:UIControlStateNormal];
         self.continueButton.backgroundColor = [UIColor trophyYellowColor];
         self.continueButton.layer.cornerRadius = 5.0;
         self.continueButton.font = [UIFont fontWithName:@"Avenir-Heavy" size:18.0];
