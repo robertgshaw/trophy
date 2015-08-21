@@ -39,7 +39,7 @@ static const CGFloat cellMarginLeft = 20.0;
         _nameLabel = [[UILabel alloc] initWithFrame:CGRectZero];
         self.nameLabel.textAlignment = NSTextAlignmentLeft;
         self.nameLabel.textColor = [UIColor darkGrayColor];
-        self.nameLabel.font = [UIFont boldSystemFontOfSize:25.0];
+        self.nameLabel.font = [UIFont fontWithName:@"Avenir-Heavy" size:22.0];
         [self addSubview:self.nameLabel];
 
     }

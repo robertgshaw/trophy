@@ -359,7 +359,7 @@ static const CGFloat kGroupsButtonHeight = 70.0;
 
 - (void) closeUpViewControllerBackButtonPressed
 {
-    self.navigationController.navigationBar.barTintColor = [UIColor trophyYellowColor];
+    self.navigationController.navigationBar.barTintColor = [UIColor trophyNavyColor];
     [self jumpToTimelineWithNavBarHidden:NO];
 }
 

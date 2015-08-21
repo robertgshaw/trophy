@@ -128,17 +128,11 @@ static const CGFloat kContinueButtonHeight = 40.0;
     frame.origin.y = floorf(CGRectGetMinY(self.bounds) / 5.0) + 50.0;
     self.logoImageView.frame = frame;
     
-    [self.titleLabel sizeToFit];
-    frame = self.titleLabel.frame;
-    frame.origin.x = floorf((CGRectGetWidth(self.bounds) - CGRectGetWidth(self.titleLabel.frame)) / 2.0);
-    frame.origin.y = floorf(CGRectGetMaxY(self.logoImageView.frame) + 10.0);
-    self.titleLabel.frame = frame;
-    
     frame = self.usernameInput.frame;
     frame.size.width = CGRectGetWidth(self.bounds) - 100.0;
     frame.size.height = kSignupTextFieldHeight;
     frame.origin.x = floorf((CGRectGetWidth(self.bounds) - frame.size.width) / 2.0);
-    frame.origin.y = CGRectGetMaxY(self.titleLabel.frame) + kSignupTextFieldVerticalMargin;
+    frame.origin.y = floorf(CGRectGetMaxY(self.logoImageView.frame) + 10.0) + kSignupTextFieldVerticalMargin;
     self.usernameInput.frame = frame;
 
     frame = self.passwordInput.frame;
@@ -160,7 +154,7 @@ static const CGFloat kContinueButtonHeight = 40.0;
     frame.size.width = kContinueButtonWidth;
     frame.size.height = kContinueButtonHeight;
     frame.origin.x = floorf((CGRectGetWidth(self.bounds) - kContinueButtonWidth) / 2.0);
-    frame.origin.y = CGRectGetMaxY(self.phoneNumberInput.frame) + kSignupTextFieldVerticalMargin;
+    frame.origin.y = CGRectGetMaxY(self.titleLabel.frame) + kSignupTextFieldVerticalMargin;
     self.continueButton.frame = frame;
 
     [self.loginButton sizeToFit];
@@ -168,6 +162,12 @@ static const CGFloat kContinueButtonHeight = 40.0;
     frame.origin.x = floorf((CGRectGetWidth(self.bounds) - CGRectGetWidth(self.loginButton.frame)) / 2.0);
     frame.origin.y = CGRectGetMaxY(self.continueButton.frame) + 12.5;
     self.loginButton.frame = frame;
+    
+    [self.titleLabel sizeToFit];
+    frame = self.titleLabel.frame;
+    frame.origin.x = floorf((CGRectGetWidth(self.bounds) - CGRectGetWidth(self.titleLabel.frame)) / 2.0);
+    frame.origin.y =  CGRectGetMaxY(self.phoneNumberInput.frame) + kSignupTextFieldVerticalMargin;
+    self.titleLabel.frame = frame;
     
     [self.legalLabel sizeToFit];
     frame = self.legalLabel.frame;
