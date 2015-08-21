@@ -7,10 +7,11 @@
 //
 
 #import "TASendTrophyCell.h"
+#import "UIColor+TAAdditions.h"
 #import <ParseUI/ParseUI.h>
 
-static const CGFloat kProfileImageWidth = 90.0;
-static const CGFloat cellMargin = 5.0;
+static const CGFloat kProfileImageWidth = 60.0;
+static const CGFloat cellMargin = 15.0;
 static const CGFloat cellMarginLeft = 20.0;
 
 @interface TASendTrophyCell ()
@@ -38,8 +39,8 @@ static const CGFloat cellMarginLeft = 20.0;
         // configures mame label
         _nameLabel = [[UILabel alloc] initWithFrame:CGRectZero];
         self.nameLabel.textAlignment = NSTextAlignmentLeft;
-        self.nameLabel.textColor = [UIColor darkGrayColor];
-        self.nameLabel.font = [UIFont fontWithName:@"Avenir-Heavy" size:22.0];
+        self.nameLabel.textColor = [UIColor trophyNavyColor];
+        self.nameLabel.font = [UIFont fontWithName:@"Avenir-Heavy" size:18.0];
         [self addSubview:self.nameLabel];
 
     }

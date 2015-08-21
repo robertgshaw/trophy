@@ -34,7 +34,7 @@ static const CGFloat kTrophySendIconWidth = 70.0;
         [self addSubview:self.backgroundImageView];
         
         _closeButton = [[UIButton alloc] initWithFrame:CGRectZero];
-        [self.closeButton setBackgroundImage:[UIImage imageNamed:@"editor-close-button"] forState:UIControlStateNormal];
+        [self.closeButton setBackgroundImage:[UIImage imageNamed:@"back-icon"] forState:UIControlStateNormal];
         [self.closeButton addTarget:self action:@selector(didPressClose) forControlEvents:UIControlEventTouchUpInside];
         [self addSubview:self.closeButton];
 
