@@ -56,7 +56,7 @@ static const CGFloat kSaveButtonHeight = 40.0;
         _nameInput = [TATextField textFieldTranslucent];
         self.nameInput.delegate = self;
         self.nameInput.placeholder = @"Name";
-        self.nameInput.font = [UIFont fontWithName:@"Avenir-Book" size:13.0];
+        self.nameInput.font = [UIFont fontWithName:@"Avenir" size:15.0];
         self.nameInput.textColor = [UIColor trophyNavyColor];
         self.nameInput.text = user.name;
         self.nameInput.autocapitalizationType = UITextAutocapitalizationTypeWords;
@@ -65,14 +65,14 @@ static const CGFloat kSaveButtonHeight = 40.0;
 
         _bioLabel = [[UILabel alloc] init];
         self.bioLabel.text = @"College";
-        self.bioLabel.font = [UIFont fontWithName:@"Avenir-Book" size:15];
+        self.bioLabel.font = [UIFont fontWithName:@"Avenir" size:15.0];
         self.bioLabel.textColor = [UIColor whiteColor];
         [self addSubview:self.bioLabel];
 
         _descriptionInput = [TATextField textFieldTranslucent];
         self.descriptionInput.delegate = self;
         self.descriptionInput.placeholder = @"College";
-        self.descriptionInput.font = [UIFont fontWithName:@"Avenir-Book" size:13.0];
+        self.descriptionInput.font = [UIFont fontWithName:@"Avenir" size:15.0];
         self.descriptionInput.textColor = [UIColor trophyNavyColor];
         self.descriptionInput.text = user.bio;
         self.descriptionInput.autocapitalizationType = UITextAutocapitalizationTypeSentences;

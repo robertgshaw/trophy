@@ -90,7 +90,7 @@ static const CGFloat kCellInnerMargin = 10.0;
         self.descriptionLabel.numberOfLines = 0;
         self.descriptionLabel.lineBreakMode = NSLineBreakByWordWrapping;
         self.descriptionLabel.textColor = [UIColor darkGrayColor];
-        self.descriptionLabel.font = [UIFont fontWithName:@"Avenir-Heavy" size:13.5];
+        self.descriptionLabel.font = [UIFont fontWithName:@"Avenir-Heavy" size:14.0];
         [self addSubview:self.descriptionLabel];
 
         _authorLabel = [[UILabel alloc] initWithFrame:CGRectZero];

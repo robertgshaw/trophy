@@ -67,7 +67,7 @@ static const CGFloat kContinueButtonHeight = 40.0;
         _usernameInput = [TATextField textFieldTranslucent];
         self.usernameInput.delegate = self;
         self.usernameInput.placeholder = @"Username";
-        self.usernameInput.font = [UIFont fontWithName:@"Avenir-Book" size:13.0];
+        self.usernameInput.font = [UIFont fontWithName:@"Avenir" size:15.0];
         self.usernameInput.backgroundColor = [UIColor whiteColor];
         self.usernameInput.returnKeyType = UIReturnKeyNext;
         [self addSubview:self.usernameInput];
@@ -77,7 +77,7 @@ static const CGFloat kContinueButtonHeight = 40.0;
         self.phoneNumberInput.keyboardType = UIKeyboardTypePhonePad;
         [self addSubview:self.phoneNumberInput];
         self.phoneNumberInput.backgroundColor = [UIColor whiteColor];
-        self.phoneNumberInput.font = [UIFont fontWithName:@"Avenir-Book" size:13.0];
+        self.phoneNumberInput.font = [UIFont fontWithName:@"Avenir" size:15.0];
         self.phoneNumberInput.hidden = YES;
         self.phoneNumberInput.enabled = NO;
 
@@ -85,7 +85,7 @@ static const CGFloat kContinueButtonHeight = 40.0;
         self.passwordInput.delegate = self;
         self.passwordInput.secureTextEntry = YES;
         self.passwordInput.placeholder = @"Password";
-        self.passwordInput.font = [UIFont fontWithName:@"Avenir-Book" size:13.0];
+        self.passwordInput.font = [UIFont fontWithName:@"Avenir" size:15.0];
 
         self.passwordInput.backgroundColor = [UIColor whiteColor];
         self.passwordInput.returnKeyType = UIReturnKeyNext;

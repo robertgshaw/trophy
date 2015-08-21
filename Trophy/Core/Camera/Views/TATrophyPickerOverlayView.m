@@ -58,7 +58,7 @@ static const CGFloat kPhotoButtonWidth = 80.0;
         [self addSubview:self.cancelButton];
         
         _photoAlbumButton = [[UIButton alloc] initWithFrame:CGRectZero];
-        [self.photoAlbumButton setBackgroundImage:[UIImage imageNamed:@"cameraroll"] forState:UIControlStateNormal];
+        [self.photoAlbumButton setBackgroundImage:[UIImage imageNamed:@"pull-from-existing"] forState:UIControlStateNormal];
         [self.photoAlbumButton addTarget:self action:@selector(didSelectPhotoAlbumButton) forControlEvents:UIControlEventTouchUpInside];
         [self addSubview:self.photoAlbumButton];
     }
