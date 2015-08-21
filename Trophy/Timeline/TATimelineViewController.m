@@ -84,6 +84,7 @@ static const CGFloat kGroupsButtonHeight = 70.0;
     //change top bar icon collor
     self.navigationController.navigationBar.barStyle = UIBarStyleDefault;
     self.navigationController.navigationBar.barTintColor = [UIColor trophyNavyColor];
+    self.navigationController.navigationBar.translucent = NO;
     
     //change bottom bar icon color
     self.tabBarController.tabBar.barStyle = UIBarStyleDefault;
