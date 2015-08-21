@@ -147,6 +147,7 @@
         [tableView deselectRowAtIndexPath:indexPath animated:YES];
         TAAddGroupViewController *addGroupVC = [[TAAddGroupViewController alloc] init];
         addGroupVC.delegate = self;
+        addGroupVC.hidesBottomBarWhenPushed = YES;
         [self.navigationController pushViewController:addGroupVC animated:YES];
     } else {
         TAGroup *group = [self groupAtIndex:(indexPath.row - 1)];
