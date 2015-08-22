@@ -31,16 +31,16 @@ static const CGFloat kPhotoButtonWidth = 80.0;
     if (self) {
         
         _takePhotoButton = [[UIButton alloc] initWithFrame:CGRectZero];
-        [self.takePhotoButton setBackgroundColor:[UIColor whiteColor]];
+        [self.takePhotoButton setBackgroundColor:[UIColor mediumTranslucentWhite]];
         self.takePhotoButton.layer.borderColor = [UIColor trophyYellowColor].CGColor;
-        self.takePhotoButton.layer.borderWidth = 5.0;
+        self.takePhotoButton.layer.borderWidth = 3.0;
         self.takePhotoButton.layer.cornerRadius = floorf(kPhotoButtonWidth / 2.0);
         self.takePhotoButton.clipsToBounds = YES;
         [self.takePhotoButton addTarget:self action:@selector(didSelectTakePhotoButton) forControlEvents:UIControlEventTouchUpInside];
         [self addSubview:self.takePhotoButton];
         
         _flashButton = [[UIButton alloc] initWithFrame:CGRectZero];
-        [self.flashButton setBackgroundImage:[UIImage imageNamed:@"camera-flash-on"] forState:UIControlStateNormal];
+        [self.flashButton setBackgroundImage:[UIImage imageNamed:@"flash-on-new"] forState:UIControlStateNormal];
         [self.flashButton setBackgroundImage:[UIImage imageNamed:@"camera-flash-off"] forState:UIControlStateSelected];
         [self.flashButton addTarget:self action:@selector(didSelectFlashButton) forControlEvents:UIControlEventTouchUpInside];
         [self addSubview:self.flashButton];
@@ -52,13 +52,13 @@ static const CGFloat kPhotoButtonWidth = 80.0;
 
         _cancelButton = [[UIButton alloc] initWithFrame:CGRectZero];
         [self.cancelButton setTitle:@"Cancel" forState:UIControlStateNormal];
-        self.cancelButton.titleLabel.font = [UIFont boldSystemFontOfSize:18.0];
+        self.cancelButton.titleLabel.font = [UIFont fontWithName:@"Avenir" size:18.0];
         [self.cancelButton setTitleColor:[UIColor trophyYellowColor] forState:UIControlStateNormal];
         [self.cancelButton addTarget:self action:@selector(didSelectCancelButton) forControlEvents:UIControlEventTouchUpInside];
         [self addSubview:self.cancelButton];
         
         _photoAlbumButton = [[UIButton alloc] initWithFrame:CGRectZero];
-        [self.photoAlbumButton setBackgroundImage:[UIImage imageNamed:@"photo-album-icon"] forState:UIControlStateNormal];
+        [self.photoAlbumButton setBackgroundImage:[UIImage imageNamed:@"pull-from-existing"] forState:UIControlStateNormal];
         [self.photoAlbumButton addTarget:self action:@selector(didSelectPhotoAlbumButton) forControlEvents:UIControlEventTouchUpInside];
         [self addSubview:self.photoAlbumButton];
     }

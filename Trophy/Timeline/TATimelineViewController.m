@@ -63,6 +63,8 @@ static const CGFloat kGroupsButtonHeight = 70.0;
                                                     image:[UIImage imageNamed:@"timeline-tab-button.png"]
                                             selectedImage:[UIImage imageNamed:@"timeline-tab-button-selected.png"]];
     self.tabBarItem.imageInsets = UIEdgeInsetsMake(5, 0, -5, 0);
+    self.tabBarController.tabBar.barTintColor = [UIColor trophyNavyColor];
+    self.tabBarController.tabBar.tintColor = [UIColor whiteColor];
 
     [self layoutGroupsButton];
     
@@ -84,6 +86,7 @@ static const CGFloat kGroupsButtonHeight = 70.0;
     //change top bar icon collor
     self.navigationController.navigationBar.barStyle = UIBarStyleDefault;
     self.navigationController.navigationBar.barTintColor = [UIColor trophyNavyColor];
+    self.navigationController.navigationBar.translucent = NO;
     
     //change bottom bar icon color
     self.tabBarController.tabBar.barStyle = UIBarStyleDefault;
@@ -137,7 +140,7 @@ static const CGFloat kGroupsButtonHeight = 70.0;
     frame.origin.y = 0.0;
     frame.size.width = width;
     self.groupListVC.view.frame = frame;
-    [self.groupListVC.view.layer setBorderColor:[UIColor trophyYellowColor].CGColor];
+    [self.groupListVC.view.layer setBorderColor:[UIColor trophyNavyColor].CGColor];
     [self.groupListVC.view.layer setBorderWidth:2.0];
     [self addChildViewController:self.groupListVC];
     [self.groupListVC didMoveToParentViewController:self];
@@ -166,7 +169,7 @@ static const CGFloat kGroupsButtonHeight = 70.0;
         CGFloat statusBarHeight = [UIApplication sharedApplication].statusBarFrame.size.height;
         CGRect frame = self.groupListVC.view.frame;
         frame.size.height = [self.groupListVC heightForList];
-        frame.origin.y = verticalOffset + CGRectGetHeight(self.navigationController.navigationBar.frame) + statusBarHeight;
+        frame.origin.y = verticalOffset;
         self.groupListVC.view.frame = frame;
         [self.view addSubview:self.groupListVC.view];
         self.tableView.scrollEnabled = NO;
@@ -206,7 +209,7 @@ static const CGFloat kGroupsButtonHeight = 70.0;
     frameLayer.frame = bounds;
     frameLayer.path = maskPath.CGPath;
     frameLayer.lineWidth = 5.0;
-    frameLayer.strokeColor = [UIColor trophyYellowColor].CGColor;
+    frameLayer.strokeColor = [UIColor trophyNavyColor].CGColor;
     frameLayer.fillColor = nil;
     self.formatGroupsLayer = frameLayer;
     [self.groupListVC.view.layer addSublayer:self.formatGroupsLayer];
@@ -312,6 +315,7 @@ static const CGFloat kGroupsButtonHeight = 70.0;
 }
 
 #pragma mark - helper methods
+
 - (void)reloadSelectedCellWithUpdatedTrophy:(TATrophy *)updatedTrophy;
 {
     // updates only the current closeup cell when an action is performed

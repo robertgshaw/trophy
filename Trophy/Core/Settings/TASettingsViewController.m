@@ -71,6 +71,7 @@
         self.navigationController.navigationBar.barStyle = UIBarStyleDefault;
         self.navigationController.navigationBar.barTintColor = [UIColor trophyNavyColor];
         self.navigationController.navigationBar.tintColor = [UIColor whiteColor];
+        self.navigationController.navigationBar.translucent = NO;
         
         UILabel *titleLabel = [[UILabel alloc] init];
         titleLabel.backgroundColor = [UIColor clearColor];
