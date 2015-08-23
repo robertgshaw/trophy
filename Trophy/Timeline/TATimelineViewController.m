@@ -35,6 +35,7 @@ static const CGFloat kGroupsButtonHeight = 70.0;
 @property (nonatomic, strong) TAGroupListViewController *groupListVC;
 @property (nonatomic, strong) TAGroup *currentGroup;
 @property (nonatomic, strong) UIButton *backgroundTap;
+@property (nonatomic, strong) UIImageView *zeroContentImage;
 @property (nonatomic, strong) CAShapeLayer *formatGroupsLayer;
 @property (nonatomic, strong) TAGroupListButton *groupListButton;
 @property (nonatomic, strong) NSIndexPath *indexPathOfCurrentSelectedCell;
@@ -57,6 +58,16 @@ static const CGFloat kGroupsButtonHeight = 70.0;
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    
+    PFQuery *query = [PFQuery queryWithClassName:@"Trophy"];
+    if([[query whereKey:@"groupID" containsString:self.currentGroup.groupId] countObjects] == 0){
+        self.zeroContentImage = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"empty-timeline-background-photo"]];
+        [self.tableView addSubview:self.zeroContentImage];
+        
+        self.zeroContentImage.hidden = NO;
+    }else{
+        self.zeroContentImage.hidden = YES;
+    }
     
     self.view.backgroundColor = [UIColor whiteColor];
     self.tabBarItem = [[UITabBarItem alloc] initWithTitle:@""
@@ -108,6 +119,11 @@ static const CGFloat kGroupsButtonHeight = 70.0;
         [self loadObjects];
     }
     
+//    PFQuery *query = [PFQuery queryWithClassName:@"Trophy"];
+//    if([[query whereKey:@"groupID" containsString:self.currentGroup.groupId] countObjects] == 0){
+//        self.zeroContentImage = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"empty-timeline-background-photo"]];
+//        [self.tableView addSubview:self.zeroContentImage];
+//    }
     // displays the nav bar and the tab bar - accounts for transition from comments view table
     self.navigationController.navigationBarHidden = NO;
 
