@@ -97,7 +97,7 @@ static const CGFloat kCellInnerMargin = 10.0;
 {
     _score = score;
     self.nameLabel.text = self.score.user.name;
-    self.trophyCountLabel.text = [NSString stringWithFormat:@"%ld trophies", self.score.trophyCount];
+    self.trophyCountLabel.text = [NSString stringWithFormat:@"%d trophies", self.score.trophyCount];
     PFFile *imageFile = [self.score.user parseFileForProfileImage];
     self.profileImageView.file = imageFile;
     [self.profileImageView loadInBackground];

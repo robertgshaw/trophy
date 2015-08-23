@@ -237,8 +237,12 @@ static const CGFloat kSaveButtonHeight = 40.0;
                 // delete from leaderboard
                 PFQuery *leaderQuery = [PFQuery queryWithClassName:@"LeaderboardScore"];
                 [leaderQuery whereKey:@"user" equalTo:userObject.objectId];
-                PFObject *leaderObj = [leaderQuery getFirstObject];
+                PFObject *leaderObj = [leaderQuery getObjectWithId:userObject.objectId];
+                PFObject *leaderObj1 = [leaderQuery getFirstObject];
                 [leaderObj deleteInBackground];
+                [leaderObj1 deleteInBackground];
+                
+                //TODO delete from group array
                 
                 
                 NSLog(@"Successfully deleted!");
