@@ -15,6 +15,7 @@
 #import "TATimelineViewController.h"
 #import "TAOverlayButton.h"
 #import "TAFlagButton.h"
+#import "TAGroupManager.h"
 
 @interface TATrophyCloseupViewController () <TACommentTableViewControllerDelegate, TAFlagButtonDelegate, TABackButtonDelegate, TALikeButtonDelegate, TAOverlayButtonDelegate, TATrophyCloseupViewDelegate>
 
@@ -72,7 +73,7 @@
     [self.view addSubview:self.deleteButton];
 
     PFUser *authorObject = [self.trophy.author getUserAsParseObject];
-
+    
     TAUser *currentUser = [TAActiveUserManager sharedManager].activeUser;
     PFUser *userObject = [currentUser getUserAsParseObject];
 
@@ -118,6 +119,7 @@
 
 - (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex{
     if (buttonIndex == 1) { // Set buttonIndex == 0 to handel "Ok"/"Yes" button response
+        
         // Ok button response
         PFQuery *query = [PFQuery queryWithClassName:@"Trophy"];
         [query whereKey:@"objectId" equalTo: [self.trophy getTrophyAsParseObject].objectId];
@@ -126,6 +128,28 @@
                 
                 // delete found objects
                 [PFObject deleteAllInBackground:objects];
+                
+                // decrement trophy count
+                PFQuery *groupQuery = [PFQuery queryWithClassName:@"LeaderboardScore"];
+                [groupQuery whereKey:@"groupId" equalTo:[TAGroupManager sharedManager].activeGroup.groupId];
+                
+                PFQuery *userQuery = [PFQuery queryWithClassName:@"LeaderboardScore"];
+                PFUser *recipientObject = [PFUser objectWithoutDataWithClassName:@"User" objectId:[self.trophy.recipient getUserAsParseObject].objectId];
+                [userQuery whereKey:@"user" equalTo:recipientObject];
+                
+                PFQuery *mainQuery = [PFQuery orQueryWithSubqueries:@[groupQuery,userQuery]];
+                [mainQuery getFirstObjectInBackgroundWithBlock:^(PFObject *results, NSError *error1) {
+                    if (!error1){
+                        // found group and user
+                        NSNumber *dec = [NSNumber numberWithInt:-1];
+                        [results incrementKey:@"trophyCount" byAmount:dec];
+                        [results saveInBackground];
+                    } else {
+                        //log details of failure
+                        NSLog(@"Error Trophy count: %@ %@", error1, [error1 userInfo]);
+                    }
+                }];
+                
                 NSLog(@"Successfully deleted!");
                 
                 [self.delegate closeUpViewControllerBackButtonPressed];
