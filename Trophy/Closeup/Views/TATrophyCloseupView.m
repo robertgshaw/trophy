@@ -45,9 +45,12 @@ static const CGFloat closeupMargin = 10.0;
         
         // adds trophy image view
         _trophyImageView = [[PFImageView alloc] init];
-        self.trophyImageView.layer.cornerRadius = kTrophyImageCornerRadius;
+        
+        // assure that images will not be warped (http://developer.xamarin.com/api/type/MonoTouch.UIKit.UIViewContentMode/)
+        self.trophyImageView.contentMode = UIViewContentModeScaleAspectFill;
+        self.trophyImageView.clipsToBounds = YES;
+        self.trophyImageView.layer.cornerRadius = 5.0;
         self.trophyImageView.layer.masksToBounds = YES;
-        self.trophyImageView.clipsToBounds = NO;
         self.trophyImageView.layer.borderColor = [UIColor trophyYellowColor].CGColor;
         self.trophyImageView.layer.borderWidth = 0.0;
         [self addSubview:self.trophyImageView];

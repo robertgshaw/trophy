@@ -61,27 +61,26 @@ static const CGFloat kOverLayMargin = 7.0;
         // configures comments
         _commentsLabel = [[UILabel alloc] initWithFrame:CGRectZero];
         self.commentsLabel.textColor = [UIColor trophyYellowColor];
-        self.commentsLabel.font = [UIFont boldSystemFontOfSize:12.0];
+        self.commentsLabel.font = [UIFont boldSystemFontOfSize:13.5];
         self.commentsLabel.lineBreakMode = NSLineBreakByTruncatingTail;
-        self.commentsLabel.numberOfLines = 0;
+        self.commentsLabel.numberOfLines = 1;
         [self addSubview:self.commentsLabel];
         self.commentsButton = [[UIButton alloc] init];
         [self addSubview:self.commentsButton];
 
         // configures description
         _descriptionLabel = [[UILabel alloc] initWithFrame:CGRectZero];
-        self.descriptionLabel.numberOfLines = 0;
+        self.descriptionLabel.numberOfLines = 1;
         self.descriptionLabel.lineBreakMode = NSLineBreakByTruncatingTail;
         self.descriptionLabel.textColor = [UIColor whiteColor];
-        self.descriptionLabel.font = [UIFont boldSystemFontOfSize:14];
+        self.descriptionLabel.font = [UIFont boldSystemFontOfSize:15];
         [self addSubview:self.descriptionLabel];
 
         // configures awarded to... logo
         _authorLabel = [[UILabel alloc] initWithFrame:CGRectZero];
-        self.authorLabel.numberOfLines = 0;
-        self.authorLabel.lineBreakMode = NSLineBreakByTruncatingMiddle;
+        self.authorLabel.numberOfLines = 2;
         self.authorLabel.textColor = [UIColor lightGrayColor];
-        self.authorLabel.font = [UIFont boldSystemFontOfSize:12.0];
+        self.authorLabel.font = [UIFont boldSystemFontOfSize:13.0];
         self.authorLabel.backgroundColor = [UIColor clearColor];
         [self addSubview:self.authorLabel];
 
@@ -109,7 +108,8 @@ static const CGFloat kOverLayMargin = 7.0;
     // formats image
     frame = self.imageView.frame;
     frame.size.width = self.frame.size.width - self.dateLabel.frame.size.width - 10;
-    frame.size.height = [TATimelineTableViewCell formatHeightFromSize:self.imageView.image.size withWidth:frame.size.width];
+    //frame.size.height = [TATimelineTableViewCell formatHeightFromSize:self.imageView.image.size withWidth:frame.size.width];
+    frame.size.height = frame.size.width * 1.3;
     frame.origin.x = CGRectGetMaxX(self.dateLabel.frame);
     frame.origin.y = 7;
     self.imageView.frame = frame;
@@ -149,7 +149,7 @@ static const CGFloat kOverLayMargin = 7.0;
     [self.descriptionLabel sizeToFit];
     frame = self.descriptionLabel.frame;
     frame.origin.x = CGRectGetMinX(self.authorLabel.frame);
-    frame.origin.y = CGRectGetMaxY(self.authorLabel.frame) + 3;
+    frame.origin.y = CGRectGetMaxY(self.authorLabel.frame) + 4;
     frame.size.width = CGRectGetMaxX(self.overlay.frame) - CGRectGetMinX(frame) - kOverLayMargin;
     self.descriptionLabel.frame = frame;
     
@@ -198,17 +198,17 @@ static const CGFloat kOverLayMargin = 7.0;
         NSInteger days = [components day];
         if (days > 7) {
             timeUnit = (int)floor(days / 7);
-            unitString = @"week";
+            unitString = @"w";
         } else {
-            unitString = @"day";
+            unitString = @"d";
             timeUnit = days;
         }
     } else if ([components hour] > 0) {
         timeUnit = [components hour];
-        unitString = @"hour";
+        unitString = @"hr";
     } else {
         timeUnit = [components minute];
-        unitString = @"minute";
+        unitString = @"min";
     }
     NSString *format = (timeUnit > 1 || timeUnit == 0) ? @"%ld %@s" : @"%ld %@";
     return [NSString stringWithFormat:format, timeUnit, unitString];

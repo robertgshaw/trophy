@@ -66,7 +66,7 @@
         }];
     };
     
-    NSData *imageData = UIImageJPEGRepresentation(trophy.image, 0.05f);
+    NSData *imageData = UIImageJPEGRepresentation(trophy.image, .25f);
     [self uploadImage:imageData withCompletion:uploadTrophy];
 }
 

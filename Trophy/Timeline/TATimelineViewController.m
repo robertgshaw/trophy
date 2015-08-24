@@ -52,7 +52,7 @@ static const CGFloat kGroupsButtonHeight = 70.0;
         self.parseClassName = @"Timeline";
         self.pullToRefreshEnabled = YES;
         self.paginationEnabled = YES;
-        self.objectsPerPage = 2;
+        self.objectsPerPage = 7;
         self.loadingViewEnabled = YES;
     }
     return self;
@@ -155,14 +155,14 @@ static const CGFloat kGroupsButtonHeight = 70.0;
 }
 
 
-//// loads second page of objects
-//- (void)scrollViewDidScroll:(UIScrollView *)scrollView {
-//    if (scrollView.contentSize.height - scrollView.contentOffset.y < (self.view.bounds.size.height)) {
-//        if ([self isLoading] == NO) {
-//            [self loadNextPage];
-//        }
-//    }
-//}
+// loads second page of objects
+- (void)scrollViewDidScroll:(UIScrollView *)scrollView {
+    if (scrollView.contentSize.height - scrollView.contentOffset.y < (self.view.bounds.size.height)) {
+        if ([self isLoading] == NO) {
+            [self loadNextPage];
+        }
+    }
+}
 
 #pragma mark - UITableView Datasource Methods
 
@@ -201,7 +201,6 @@ static const CGFloat kGroupsButtonHeight = 70.0;
     // sets the cells image as a placeholder
     if (cell.imageView.image == nil)
     {
-        NSLog(@"imageView = nil");
         cell.imageView.image = [UIImage imageNamed:@"default-profile-icon"];
     }
     // configures the cell with data
@@ -245,9 +244,9 @@ static const CGFloat kGroupsButtonHeight = 70.0;
         return [super tableView:tableView heightForRowAtIndexPath:indexPath];
     }
     
-    return 500;
+    // cell height is 1.25 * width of table view
+    return self.tableView.frame.size.width * 1.25;
 }
-
 
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
@@ -378,9 +377,13 @@ static const CGFloat kGroupsButtonHeight = 70.0;
     // ensure there is a current closeup
     if (self.indexPathOfCurrentSelectedCell != nil)
     {
-        // fetch the one row that needs to be refreshed
+        // fetch the one row that needs to be refreshed, reload ui
         PFObject *objectToUpdate = [self objectAtIndexPath:self.indexPathOfCurrentSelectedCell];
-        [objectToUpdate fetchInBackground];
+        [objectToUpdate fetchInBackgroundWithBlock:^(PFObject *object, NSError *error) {
+            [self.tableView beginUpdates];
+            [self.tableView reloadRowsAtIndexPaths:@[self.indexPathOfCurrentSelectedCell] withRowAnimation:UITableViewRowAnimationFade];
+            [self.tableView endUpdates];
+        }];
     }
 }
 
@@ -403,7 +406,7 @@ static const CGFloat kGroupsButtonHeight = 70.0;
     [self reloadSelectedCellWithUpdatedTrophy:updatedTrophy];
 }
 
-- (void) closeUpViewControllerBackButtonPressed
+- (void)closeUpViewControllerBackButtonPressed
 {
     self.navigationController.navigationBar.barTintColor = [UIColor trophyYellowColor];
     [self jumpToTimelineWithNavBarHidden:NO];
