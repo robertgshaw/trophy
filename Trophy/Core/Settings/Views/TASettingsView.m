@@ -221,26 +221,51 @@ static const CGFloat kSaveButtonHeight = 40.0;
         //Get user information
         TAUser *currentUser = [TAActiveUserManager sharedManager].activeUser;
         PFUser *userObject = [currentUser getUserAsParseObject];
+        PFUser *authorObject = [PFUser objectWithoutDataWithClassName:@"User" objectId:userObject.objectId];
+        
+        //TODO delete from leaderboard
+        PFQuery *leadQuery = [PFQuery queryWithClassName:@"LeaderboardScore"];
+        [leadQuery whereKey:@"user" equalTo:authorObject];
+        [leadQuery findObjectsInBackgroundWithBlock:^(NSArray *leadObjects, NSError *error1) {
+            if (!error1) {
+                // The find succeeded.
+                NSLog(@"Successfully deleted %d leaderboard users.", leadObjects.count);
+                // Do something with the found objects
+                [PFObject deleteAllInBackground:leadObjects];
+                
+                
+                
+            } else {
+                // Log details of the failure
+                NSLog(@"Error: %@ %@", error1, [error1 userInfo]);
+            }
+        }];
+        
         
         //Query parse
         PFQuery *query = [PFQuery queryWithClassName:@"User"];
-        
         //Match User with current user to delete
         [query whereKey:@"objectId" equalTo: userObject.objectId];
         [query findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
             if (!error) {
                 
                 
+                
                 // The find succeeded delete found objects
                 [[PFUser currentUser] deleteInBackground];
                 
                 // delete from leaderboard
+                
                 PFQuery *leaderQuery = [PFQuery queryWithClassName:@"LeaderboardScore"];
                 [leaderQuery whereKey:@"user" equalTo:userObject.objectId];
                 PFObject *leaderObj = [leaderQuery getObjectWithId:userObject.objectId];
                 PFObject *leaderObj1 = [leaderQuery getFirstObject];
                 [leaderObj deleteInBackground];
                 [leaderObj1 deleteInBackground];
+                
+                
+                
+                
                 
                 //TODO delete from group array
                 

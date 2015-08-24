@@ -77,9 +77,14 @@ static const CGFloat kTrophyBottomMargin = 50.0;
     self.trophyIconView.frame = frame;
     
     frame = self.trophyImageView.frame;
-    frame.size = CGSizeMake(kTrophyImageWidth, kTrophyImageHeight);
-    frame.origin.x = floorf((CGRectGetWidth(self.bounds) - kTrophyImageWidth) / 2.0);
+    //frame.size = CGSizeMake(kTrophyImageWidth, kTrophyImageHeight);
+    frame.size = CGSizeMake((CGRectGetMaxX(self.bounds)), (CGRectGetMinY(self.titleLabel.frame) - 25.0));
+    frame.origin.x = floorf((CGRectGetWidth(self.bounds) - kTrophyImageWidth) / 2.0) - 35.0;
     frame.origin.y = CGRectGetMidY(self.trophyIconView.frame) - floorf(kTrophyImageWidth / 2.0) +119;
+    if (CGRectGetMaxY(self.bounds) < 400) {
+        frame.size = CGSizeMake(kTrophyImageWidth, kTrophyImageHeight);
+        frame.origin.x = floorf((CGRectGetWidth(self.bounds) - kTrophyImageWidth) / 2.0);
+    }
     self.trophyImageView.frame = frame;
     
     frame = self.actionFooterView.frame;
