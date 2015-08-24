@@ -154,7 +154,6 @@
                 
                 [self.delegate closeUpViewControllerBackButtonPressed];
 
-                
             } else {
                 // Log details of the failure
                 NSLog(@"Error: %@ %@", error, [error userInfo]);
@@ -182,7 +181,6 @@
 - (void)backButtonDidPressBack
 {
     [self.delegate closeUpViewControllerBackButtonPressed];
-    NSLog(@"yes");
 }
 
 #pragma mark - TAFlagButtonDelegate Methods

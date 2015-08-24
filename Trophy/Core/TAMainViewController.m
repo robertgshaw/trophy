@@ -197,17 +197,15 @@
 {
     [self dismissViewControllerAnimated:YES completion:nil];
     
-    // NEED SOME CODE HERE TO RELOADTIMELINE
-//    NSArray *viewControllers = self.timelineController.viewControllers;
-//    NSLog(@"view controllers %@", viewControllers);
-//    for (int i = 0; i < [viewControllers count]; i++) {
-//        if ([viewControllers[i] isKindOfClass:[TATimelineViewController class]]) {
-//            TATimelineViewController *timelineVC = ((TATimelineViewController *) viewControllers[i]);
-//            [timelineVC.tableView beginUpdates];
-//            [timelineVC.tableView insertRowsAtIndexPaths:@[@0] withRowAnimation:UITableViewRowAnimationAutomatic];
-//            [timelineVC.tableView endUpdates];
-//        }
-//    }
+    // reloads timeline
+    NSArray *viewControllers = self.timelineController.viewControllers;
+    
+    for (int i = 0; i < [viewControllers count]; i++) {
+        if ([viewControllers[i] isKindOfClass:[TATimelineViewController class]]) {
+            TATimelineViewController *timelineVC = ((TATimelineViewController *) viewControllers[i]);
+            [timelineVC loadObjects];
+        }
+    }
 }
 
 #pragma mark - TAPresentedViewControllerDelegate Methods

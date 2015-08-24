@@ -96,7 +96,8 @@
 {
     if (self.hasCurrentUser) {
         // refreshes user information and saves all info in TAActiveUserManager.TAUser
-        [self refreshActiveUserWithSuccess:nil failure:nil];
+        [self refreshActiveUserWithSuccess:nil failure: ^(NSString *error) {
+                                                    NSLog(@"%@", error); }];
         
         // loads active group into data via a parse call
         [[TAGroupManager sharedManager] loadActiveGroup];
@@ -125,20 +126,6 @@
                 success();
         }
     }
-    
-    
-//    [query getFirstObjectInBackgroundWithBlock:^(PFObject *object, NSError *error) {
-//        if (error == nil) {
-//            self.activeUser = [[TAUser alloc] initWithStoredUser:(PFUser *)object];
-//            [self checkGroupsForActiveUser];
-//            NSLog(@"refresh active user with success %@", self.activeUser.groups);
-//            if (success) {
-//                success();
-//            }
-//        } else {
-//            if (failure) failure(error.description);
-//        }
-//    }];
 }
 
 - (void)checkGroupsForActiveUser

@@ -58,7 +58,6 @@
 {
     [super viewWillAppear:animated];
     
-    NSLog(@"here");
     [[TAGroupManager sharedManager] getUsersForActiveGroupWithSuccess:^(NSArray *users) {
         self.users = users;
         [self.tableView reloadData];
@@ -116,7 +115,6 @@
 // adds TASendTrophyCells to the table view
 - (TASendTrophyCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    NSLog(@"hereo");
     static NSString *cellIdentifier = @"Cell";
 
     TASendTrophyCell *cell = [tableView dequeueReusableCellWithIdentifier:cellIdentifier];

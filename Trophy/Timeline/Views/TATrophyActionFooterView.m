@@ -41,20 +41,7 @@ static const CGFloat kActionFooterWidth = 150.0;
         self.likesLabel.textColor = [UIColor colorWithRed:0.8 green:0.8 blue:0.8 alpha:1];
         self.likesLabel.font = [UIFont systemFontOfSize:12.0];
         [self addSubview:self.likesLabel];
-        
-        _commentsButton = [[UIButton alloc] initWithFrame:CGRectZero];
-        self.commentsButton.backgroundColor = [UIColor grayColor];
-        [self.commentsButton addTarget:self action:@selector(didPressCommentsButton) forControlEvents:UIControlEventTouchUpInside];
-        [self addSubview:self.commentsButton];
-        self.commentsButton.hidden = YES;
-
-        _addButton = [[UIButton alloc] initWithFrame:CGRectZero];
-        self.addButton.backgroundColor = [UIColor grayColor];
-        [self.addButton addTarget:self action:@selector(didPressAddButton) forControlEvents:UIControlEventTouchUpInside];
-        [self addSubview:self.addButton];
-        self.addButton.hidden = YES;
-        
-        
+    
     }
     return self;
 }
@@ -64,14 +51,11 @@ static const CGFloat kActionFooterWidth = 150.0;
     [super layoutSubviews];
 
     CGRect frame = self.bounds;
-    // frame.size.height = frame.size.height+100;
     frame.size = CGSizeMake(kActionFooterWidth, CGRectGetHeight(self.bounds));
     self.bounds = frame;
     
-
     frame = self.likesButton.frame;
     frame.size = CGSizeMake(kButtonWidth, kButtonWidth);
-    //frame.origin.x = kSideMargin;
     frame.origin.x = 2;
     frame.origin.y = 0;
     self.likesButton.frame = frame;
@@ -109,18 +93,6 @@ static const CGFloat kActionFooterWidth = 150.0;
     self.trophy = updatedTrophy;
 }
 
-- (void)didPressCommentsButton
-{
-    TACommentTableViewController *ycv = [[TACommentTableViewController alloc] init];
-    [ycv.navigationController pushViewController:ycv animated:YES];
-    
-    [self.delegate trophyActionFooterDidPressCommentsButton];
-}
-
-- (void)didPressAddButton
-{
-    [self.delegate trophyActionFooterDidPressAddButton];
-}
 
 + (CGFloat)actionFooterWidth
 {
