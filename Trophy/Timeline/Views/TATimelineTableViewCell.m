@@ -46,7 +46,7 @@ static const CGFloat kOverLayMargin = 7.0;
         _dateLabel = [[UILabel alloc] initWithFrame:CGRectZero];
         self.dateLabel.textColor = [UIColor whiteColor];
         self.dateLabel.backgroundColor = [UIColor trophyNavyColor];
-        self.dateLabel.font = [UIFont boldSystemFontOfSize:10.0];
+        self.dateLabel.font = [UIFont fontWithName:@"Avenir-Book" size:10.0];
         self.dateLabel.numberOfLines = 1;
         self.dateLabel.textAlignment = NSTextAlignmentCenter;
         [self addSubview:self.dateLabel];
@@ -61,7 +61,7 @@ static const CGFloat kOverLayMargin = 7.0;
         // configures comments
         _commentsLabel = [[UILabel alloc] initWithFrame:CGRectZero];
         self.commentsLabel.textColor = [UIColor trophyYellowColor];
-        self.commentsLabel.font = [UIFont boldSystemFontOfSize:13.5];
+        self.commentsLabel.font = [UIFont fontWithName:@"Avenir-Heavy" size:12.0];
         self.commentsLabel.lineBreakMode = NSLineBreakByTruncatingTail;
         self.commentsLabel.numberOfLines = 1;
         [self addSubview:self.commentsLabel];
@@ -70,18 +70,18 @@ static const CGFloat kOverLayMargin = 7.0;
 
         // configures description
         _descriptionLabel = [[UILabel alloc] initWithFrame:CGRectZero];
-        self.descriptionLabel.numberOfLines = 1;
-        self.descriptionLabel.lineBreakMode = NSLineBreakByTruncatingTail;
+        self.descriptionLabel.numberOfLines = 0;
+        self.descriptionLabel.lineBreakMode = NSLineBreakByWordWrapping;
         self.descriptionLabel.textColor = [UIColor whiteColor];
-        self.descriptionLabel.font = [UIFont boldSystemFontOfSize:15];
+        self.descriptionLabel.font = [UIFont fontWithName:@"Avenir-Heavy" size:14.0];
         [self addSubview:self.descriptionLabel];
 
         // configures awarded to... logo
         _authorLabel = [[UILabel alloc] initWithFrame:CGRectZero];
-        self.authorLabel.numberOfLines = 2;
-        self.authorLabel.textColor = [UIColor lightGrayColor];
-        self.authorLabel.font = [UIFont boldSystemFontOfSize:13.0];
-        self.authorLabel.backgroundColor = [UIColor clearColor];
+        self.authorLabel.numberOfLines = 0;
+        self.authorLabel.lineBreakMode = NSLineBreakByWordWrapping;
+        self.authorLabel.textColor = [UIColor whiteColor];
+        self.authorLabel.font = [UIFont fontWithName:@"Avenir-Medium" size:13.0];
         [self addSubview:self.authorLabel];
 
         // configures likes button

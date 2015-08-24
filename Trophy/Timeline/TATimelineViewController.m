@@ -62,16 +62,6 @@ static const CGFloat kGroupsButtonHeight = 70.0;
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    PFQuery *query = [PFQuery queryWithClassName:@"Trophy"];
-    if([[query whereKey:@"groupID" containsString:self.currentGroup.groupId] countObjects] == 0){
-        self.zeroContentImage = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"empty-timeline-background-photo"]];
-        [self.tableView addSubview:self.zeroContentImage];
-        
-        self.zeroContentImage.hidden = NO;
-    }else{
-        self.zeroContentImage.hidden = YES;
-    }
-    
     self.view.backgroundColor = [UIColor whiteColor];
     self.tabBarItem = [[UITabBarItem alloc] initWithTitle:@""
                                                     image:[UIImage imageNamed:@"timeline-tab-button.png"]
@@ -121,12 +111,7 @@ static const CGFloat kGroupsButtonHeight = 70.0;
     if (self.currentGroup && [self.currentGroup.groupId isEqualToString:activeGroup.groupId] == NO) {
         [self loadObjects];
     }
-    
-//    PFQuery *query = [PFQuery queryWithClassName:@"Trophy"];
-//    if([[query whereKey:@"groupID" containsString:self.currentGroup.groupId] countObjects] == 0){
-//        self.zeroContentImage = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"empty-timeline-background-photo"]];
-//        [self.tableView addSubview:self.zeroContentImage];
-//    }
+
     // displays the nav bar and the tab bar - accounts for transition from comments view table
     self.navigationController.navigationBarHidden = NO;
 
@@ -163,13 +148,22 @@ static const CGFloat kGroupsButtonHeight = 70.0;
     // if no objects loaded, display the vacant timeline image
     if ([self.objects count] == 0)
     {
-        // hides table
-        [self clear];
-        self.tableView.hidden = YES;
-        // displays empty timeline display
+        // configures empty timeline display
+        self.zeroContentImage = [[UIImageView alloc] initWithFrame:CGRectZero];
+        self.zeroContentImage.image = [UIImage imageNamed:@"empty-timeline-background-photo"];
+        // lays out the empty timeline display
+        CGRect frame = self.zeroContentImage.frame;
+        frame.size.width = self.view.frame.size.width;
+        frame.size.height = (frame.size.width / self.zeroContentImage.image.size.width) * self.zeroContentImage.image.size.height;
+        frame.origin.x = 0;
+        frame.origin.y = CGRectGetMidY(self.view.frame) - (frame.size.height / 2);
+        self.zeroContentImage.frame = frame;
+        [self.view addSubview:self.zeroContentImage];
+        
+        self.zeroContentImage.hidden = NO;
         
     } else {
-        self.tableView.hidden = NO;
+        self.zeroContentImage.hidden = YES;
     }
 }
 
