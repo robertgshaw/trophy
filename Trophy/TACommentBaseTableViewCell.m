@@ -61,8 +61,8 @@ static const CGFloat kProfileImageWidth = 70.0;
         [self.nameButton setBackgroundColor:[UIColor clearColor]];
         [self.nameButton setTitleColor:[UIColor colorWithRed:73.0f/255.0f green:55.0f/255.0f blue:35.0f/255.0f alpha:1.0f] forState:UIControlStateNormal];
         [self.nameButton setTitleColor:[UIColor colorWithRed:134.0f/255.0f green:100.0f/255.0f blue:65.0f/255.0f alpha:1.0f] forState:UIControlStateHighlighted];
-        [self.nameButton.titleLabel setFont:[UIFont boldSystemFontOfSize:13]];
-        [self.nameButton.titleLabel setLineBreakMode:UILineBreakModeTailTruncation];
+        [self.nameButton.titleLabel setFont:[UIFont fontWithName:@"Avenir-Medium" size:12.0f]];
+        [self.nameButton.titleLabel setLineBreakMode:NSLineBreakByTruncatingTail];
         [self.nameButton setTitleShadowColor:[UIColor whiteColor] forState:UIControlStateNormal];
         [self.nameButton setTitleShadowColor:[UIColor whiteColor] forState:UIControlStateSelected];
         [self.nameButton.titleLabel setShadowOffset:CGSizeMake( 0.0f, 1.0f)];
@@ -70,7 +70,7 @@ static const CGFloat kProfileImageWidth = 70.0;
         [mainView addSubview:self.nameButton];
         
         self.contentLabel = [[UILabel alloc] init];
-        [self.contentLabel setFont:[UIFont systemFontOfSize:13.0f]];
+        [self.contentLabel setFont:[UIFont fontWithName:@"Avenir-Book" size:13.0f]];
         [self.contentLabel setTextColor:[UIColor colorWithRed:73./255. green:55./255. blue:35./255. alpha:1.000]];
         [self.contentLabel setNumberOfLines:0];
         [self.contentLabel setLineBreakMode:UILineBreakModeWordWrap];
@@ -200,6 +200,7 @@ static const CGFloat kProfileImageWidth = 70.0;
     
     // Set name button properties and avatar image
     [self.avatarImageView setFile:[self.user objectForKey:@"profileImage"]];
+    [self.avatarImageView loadInBackground];
     [self.nameButton setTitle:[self.user objectForKey:@"name"] forState:UIControlStateNormal];
     [self.nameButton setTitle:[self.user objectForKey:@"name"] forState:UIControlStateHighlighted];
     

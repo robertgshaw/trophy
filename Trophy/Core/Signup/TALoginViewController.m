@@ -28,13 +28,13 @@
     
     [self.navigationController setNavigationBarHidden:NO animated:YES];
     self.navigationController.navigationBar.barStyle = UIBarStyleDefault;
-    self.navigationController.navigationBar.barTintColor = [UIColor darkYellowColor];
+    self.navigationController.navigationBar.barTintColor = [UIColor trophyNavyColor];
     self.navigationController.navigationBar.tintColor = [UIColor whiteColor];
     
     UILabel *titleLabel = [[UILabel alloc] init];
-    titleLabel.font = [UIFont boldSystemFontOfSize:20.0];
     titleLabel.backgroundColor = [UIColor clearColor];
     titleLabel.textColor = [UIColor whiteColor];
+    titleLabel.font = [UIFont fontWithName:@"Avenir-Heavy" size:20.0];
     titleLabel.textAlignment = NSTextAlignmentCenter;
     titleLabel.text = @"Login";
     [titleLabel sizeToFit];

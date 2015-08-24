@@ -38,7 +38,7 @@ static const CGFloat kActionFooterWidth = 150.0;
         
         _likesLabel = [[UILabel alloc] initWithFrame:CGRectZero];
         self.likesLabel.text = @"0";
-        self.likesLabel.textColor = [UIColor trophyYellowColor];
+        self.likesLabel.textColor = [UIColor colorWithRed:0.8 green:0.8 blue:0.8 alpha:1];
         self.likesLabel.font = [UIFont systemFontOfSize:12.0];
         [self addSubview:self.likesLabel];
     
@@ -72,8 +72,10 @@ static const CGFloat kActionFooterWidth = 150.0;
     _trophy = trophy;
     self.likesLabel.text = [NSString stringWithFormat:@"%ld", (long)trophy.likes];
     if ([trophy likedByCurrentUser]) {
+        self.likesLabel.textColor = [UIColor trophyYellowColor];
         self.likesButton.selected = YES;
     } else {
+        self.likesLabel.textColor = [UIColor colorWithRed:0.8 green:0.8 blue:0.8 alpha:1];
         self.likesButton.selected = NO;
     }
 }
@@ -81,8 +83,10 @@ static const CGFloat kActionFooterWidth = 150.0;
 - (void)didPressLikesButton
 {
     if (self.likesButton.selected) {
+        self.likesLabel.textColor = [UIColor colorWithRed:0.8 green:0.8 blue:0.8 alpha:1];
         self.likesButton.selected = NO;
     } else {
+        self.likesLabel.textColor = [UIColor trophyYellowColor];
         self.likesButton.selected = YES;
     }
     TATrophy *updatedTrophy = [[TATrophyManager sharedManager] likeTrophy:self.trophy];

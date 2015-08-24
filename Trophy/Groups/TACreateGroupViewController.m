@@ -41,7 +41,7 @@ static const NSInteger kInviteCodeLength = 6;
     
     UILabel *titleLabel = [[UILabel alloc] initWithFrame:CGRectZero];
     titleLabel.backgroundColor = [UIColor clearColor];
-    titleLabel.font = [UIFont boldSystemFontOfSize:18.0];
+    titleLabel.font = [UIFont fontWithName:@"Avenir-Book" size:18.0];
     titleLabel.textColor = [UIColor whiteColor];
     titleLabel.text = @"New Group";
     titleLabel.textAlignment = NSTextAlignmentCenter;

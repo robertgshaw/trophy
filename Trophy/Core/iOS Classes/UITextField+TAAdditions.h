@@ -12,10 +12,14 @@
 
 + (TATextField *)textFieldWithYellowBorder;
 
++ (TATextField *)textFieldTranslucent;
+
 @end
 
 @interface TAPhoneNumberField : TATextField<UITextFieldDelegate>
 
 + (TAPhoneNumberField *)textFieldWithYellowBorder;
+
++ (TAPhoneNumberField *) textFieldTranslucent;
 
 @end

@@ -78,7 +78,8 @@ static const CGFloat kGroupsButtonHeight = 70.0;
     
     // configures nav bar display
     self.navigationController.navigationBar.barStyle = UIBarStyleDefault;
-    self.navigationController.navigationBar.barTintColor = [UIColor darkYellowColor];
+    self.navigationController.navigationBar.barTintColor = [UIColor trophyNavyColor];
+    self.navigationController.navigationBar.translucent = NO;
     
     self.backgroundTap = [[UIButton alloc] initWithFrame:self.view.bounds];
     [self.backgroundTap addTarget:self action:@selector(backgroundDidTap:) forControlEvents:UIControlEventTouchUpInside];
@@ -123,12 +124,14 @@ static const CGFloat kGroupsButtonHeight = 70.0;
     UIButton *groupListButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, kGroupsButtonWidth, kGroupsButtonHeight)];
     [groupListButton addTarget:self action:@selector(groupListButtonDidPress) forControlEvents:UIControlEventTouchUpInside];
     UIView *groupListView = [[UIView alloc] initWithFrame:groupListButton.frame];
+    
     UILabel *groupListLabel = [[UILabel alloc] init];
-    groupListLabel.text = @"Hall of Fame";;
+    groupListLabel.text = @"Hall of Fame";
     groupListLabel.textColor = [UIColor whiteColor];
-    groupListLabel.font = [UIFont boldSystemFontOfSize:20.0];
+    groupListLabel.font = [UIFont fontWithName:@"Avenir-Medium" size:20.0];
     [groupListLabel sizeToFit];
     [groupListView addSubview:groupListLabel];
+   
     UIImageView *downArrowImageView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"down-arrow"]];
     [groupListView addSubview:downArrowImageView];
     
@@ -157,7 +160,7 @@ static const CGFloat kGroupsButtonHeight = 70.0;
     frame.origin.y = 0.0;
     frame.size.width = width;
     self.groupListVC.view.frame = frame;
-    [self.groupListVC.view.layer setBorderColor:[UIColor trophyYellowColor].CGColor];
+    [self.groupListVC.view.layer setBorderColor:[UIColor trophyNavyColor].CGColor];
     [self.groupListVC.view.layer setBorderWidth:2.0];
     [self addChildViewController:self.groupListVC];
     [self.groupListVC didMoveToParentViewController:self];
@@ -171,7 +174,7 @@ static const CGFloat kGroupsButtonHeight = 70.0;
         CGFloat statusBarHeight = [UIApplication sharedApplication].statusBarFrame.size.height;
         CGRect frame = self.groupListVC.view.frame;
         frame.size.height = [self.groupListVC heightForList];
-        frame.origin.y = verticalOffset + CGRectGetHeight(self.navigationController.navigationBar.frame) + statusBarHeight;
+        frame.origin.y = verticalOffset;
         self.groupListVC.view.frame = frame;
         [self.view addSubview:self.groupListVC.view];
         self.tableView.scrollEnabled = NO;
@@ -211,7 +214,7 @@ static const CGFloat kGroupsButtonHeight = 70.0;
     frameLayer.frame = bounds;
     frameLayer.path = maskPath.CGPath;
     frameLayer.lineWidth = 5.0;
-    frameLayer.strokeColor = [UIColor trophyYellowColor].CGColor;
+    frameLayer.strokeColor = [UIColor trophyNavyColor].CGColor;
     frameLayer.fillColor = nil;
     self.formatGroupsLayer = frameLayer;
     [self.groupListVC.view.layer addSublayer:self.formatGroupsLayer];

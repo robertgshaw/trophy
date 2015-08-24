@@ -14,7 +14,12 @@
 + (UIColor *)trophyNavyColor;
 + (UIColor *)darkYellowColor;
 + (UIColor *)standardBlueButtonColor;
++ (UIColor *)darkerBlueColor;
++ (UIColor *)trophyRedColor;
++ (UIColor *)trophyLightGrayColor;
 + (UIColor *)unselectedGrayColor;
++ (UIColor *)mediumTranslucentWhite;
++ (UIColor *)highTranslucentWhite;
 + (UIFont *)avenirFont;
 
 @end

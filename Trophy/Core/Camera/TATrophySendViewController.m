@@ -31,10 +31,11 @@
     
     //change top bar icon collor
     self.navigationController.navigationBar.barStyle = UIBarStyleDefault;
-    self.navigationController.navigationBar.barTintColor = [UIColor darkYellowColor];
+    self.navigationController.navigationBar.barTintColor = [UIColor trophyNavyColor];
+    self.navigationController.navigationBar.translucent = NO;
     
     UILabel *titleLabel = [[UILabel alloc] init];
-    titleLabel.font = [UIFont boldSystemFontOfSize:20.0];
+    titleLabel.font = [UIFont fontWithName:@"Avenir" size:20.0];
     titleLabel.backgroundColor = [UIColor clearColor];
     titleLabel.textColor = [UIColor whiteColor];
     titleLabel.textAlignment = NSTextAlignmentCenter;

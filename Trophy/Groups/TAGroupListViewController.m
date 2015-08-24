@@ -79,24 +79,29 @@
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"GroupsListCell" forIndexPath:indexPath];
     if (indexPath.row == 0) {
         cell.textLabel.text = @"My Groups";
-        cell.textLabel.textColor = [UIColor trophyYellowColor];
-        cell.textLabel.font = [UIFont boldSystemFontOfSize:18.0];
+        cell.textLabel.font = [UIFont fontWithName:@"Avenir-Black" size:18.0];
+        cell.textLabel.textColor = [UIColor whiteColor];
+        cell.backgroundColor = [UIColor trophyNavyColor];
     } else if (indexPath.row - 1 < [self.groups count]) {
         TAGroup *currentGroup = [self groupAtIndex:(indexPath.row - 1)];
         if (currentGroup) {
             cell.textLabel.text = currentGroup.name;
             // If this is the current group, change background color
             if ([currentGroup.groupId isEqualToString:[TAGroupManager sharedManager].activeGroup.groupId]) {
-                cell.backgroundColor = [UIColor trophyYellowColor];
-                cell.textLabel.textColor = [UIColor whiteColor];
-            } else {
-                cell.backgroundColor = [UIColor whiteColor];
+                cell.backgroundColor = [UIColor trophyNavyColor];
+                cell.textLabel.font = [UIFont fontWithName:@"Avenir" size:17.0];
                 cell.textLabel.textColor = [UIColor trophyYellowColor];
+            } else {
+                cell.backgroundColor = [UIColor trophyNavyColor];
+                cell.textLabel.font = [UIFont fontWithName:@"Avenir" size:17.0];
+                cell.textLabel.textColor = [UIColor whiteColor];
             }
         }
     } else {
-        cell.textLabel.text = @"Add a group";
-        cell.textLabel.textColor = [UIColor standardBlueButtonColor];
+        cell.textLabel.text = @"Add Group";
+        cell.textLabel.font = [UIFont fontWithName:@"Avenir-Black" size:17.0];
+        cell.textLabel.textColor = [UIColor whiteColor];
+        cell.backgroundColor = [UIColor trophyNavyColor];
     }
     cell.textLabel.textAlignment = NSTextAlignmentCenter;
     return cell;
@@ -144,6 +149,7 @@
         [tableView deselectRowAtIndexPath:indexPath animated:YES];
         TAAddGroupViewController *addGroupVC = [[TAAddGroupViewController alloc] init];
         addGroupVC.delegate = self;
+        addGroupVC.hidesBottomBarWhenPushed = YES;
         [self.navigationController pushViewController:addGroupVC animated:YES];
     } else {
         TAGroup *group = [self groupAtIndex:(indexPath.row - 1)];

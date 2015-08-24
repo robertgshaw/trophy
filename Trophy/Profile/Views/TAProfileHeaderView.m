@@ -24,7 +24,6 @@ static const CGFloat kLabelInnerMargin = 10.0;
 @property (nonatomic, strong) PFImageView *profileImageView;
 @property (nonatomic, strong) UILabel *nameLabel;
 @property (nonatomic, strong) UILabel *trophiesLabel;
-@property (nonatomic, strong) UILabel *groupsLabel;
 @property (nonatomic, strong) UILabel *bioLabel;
 @property (nonatomic, strong) UIButton *editButton;
 @property (nonatomic, strong) UIButton *flagButton;
@@ -38,7 +37,7 @@ static const CGFloat kLabelInnerMargin = 10.0;
 {
     self = [super initWithFrame:frame];
     if (self) {
-        self.backgroundColor = [UIColor colorWithRed:0.7 green:0.7 blue:0.7 alpha:0.4];
+        self.backgroundColor = [UIColor trophyNavyColor];
 
         _profileImageView = [[PFImageView alloc] init];
         self.profileImageView.backgroundColor = [UIColor whiteColor];
@@ -49,35 +48,27 @@ static const CGFloat kLabelInnerMargin = 10.0;
 
         _nameLabel = [[UILabel alloc] initWithFrame:CGRectZero];
         self.nameLabel.textAlignment = NSTextAlignmentLeft;
-        self.nameLabel.textColor = [UIColor darkGrayColor];
-        self.nameLabel.font = [UIFont boldSystemFontOfSize:16.0];
+        self.nameLabel.textColor = [UIColor whiteColor];
+        self.nameLabel.font = [UIFont fontWithName:@"Avenir-Medium" size:16.0];
         [self addSubview:self.nameLabel];
 
         _trophiesLabel = [[UILabel alloc] initWithFrame:CGRectZero];
         self.trophiesLabel.textAlignment = NSTextAlignmentLeft;
-        self.trophiesLabel.textColor = [UIColor darkGrayColor];
-        self.trophiesLabel.font = [UIFont systemFontOfSize:13.0];
+        self.trophiesLabel.textColor = [UIColor whiteColor];
+        self.trophiesLabel.font = [UIFont fontWithName:@"Avenir-Book" size:13.0];
         [self addSubview:self.trophiesLabel];
-
-        _groupsLabel = [[UILabel alloc] initWithFrame:CGRectZero];
-        self.groupsLabel.textAlignment = NSTextAlignmentLeft;
-        self.groupsLabel.textColor = [UIColor darkGrayColor];
-        self.groupsLabel.font = [UIFont systemFontOfSize:13.0];
-        [self addSubview:self.groupsLabel];
-        self.groupsLabel.hidden = YES;
         
         _bioLabel = [[UILabel alloc] initWithFrame:CGRectZero];
         self.bioLabel.textAlignment = NSTextAlignmentLeft;
-        self.bioLabel.textColor = [UIColor darkGrayColor];
-        self.bioLabel.font = [UIFont systemFontOfSize:13.0];
+        self.bioLabel.textColor = [UIColor whiteColor];
+        self.bioLabel.font = [UIFont fontWithName:@"Avenir-Book" size:13.0];
         [self addSubview:self.bioLabel];
-        self.groupsLabel.hidden = NO;
         
         _editButton = [[UIButton alloc] initWithFrame:CGRectZero];
         self.editButton.backgroundColor = [UIColor trophyYellowColor];
         [self.editButton setTitle:@"Edit" forState:UIControlStateNormal];
         [self.editButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
-        self.editButton.titleLabel.font = [UIFont boldSystemFontOfSize:10.0];
+        self.editButton.titleLabel.font = [UIFont fontWithName:@"Avenir-Black" size:12.0];
         self.editButton.layer.cornerRadius = 5.0;
         self.editButton.clipsToBounds = YES;
         [self.editButton addTarget:self action:@selector(editButtonPressed:) forControlEvents:UIControlEventTouchUpInside];
@@ -85,10 +76,10 @@ static const CGFloat kLabelInnerMargin = 10.0;
         [self addSubview:self.editButton];
         
         _flagButton = [[UIButton alloc] initWithFrame:CGRectZero];
-        self.flagButton.backgroundColor = [UIColor redColor];
+        self.flagButton.backgroundColor = [UIColor trophyRedColor];
         [self.flagButton setTitle:@"Flag" forState:UIControlStateNormal];
         [self.flagButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
-        self.flagButton.titleLabel.font = [UIFont boldSystemFontOfSize:10.0];
+        self.flagButton.titleLabel.font = [UIFont fontWithName:@"Avenir-Black" size:12.0];
         self.flagButton.layer.cornerRadius = 5.0;
         self.flagButton.clipsToBounds = YES;
         [self.flagButton addTarget:self action:@selector(flagButtonPressed:) forControlEvents:UIControlEventTouchUpInside];
@@ -137,7 +128,8 @@ static const CGFloat kLabelInnerMargin = 10.0;
                                                                 context:nil];
     frame = self.nameLabel.frame;
     frame.origin.x = CGRectGetMaxX(self.profileImageView.frame) + kLabelInnerMargin;
-    frame.origin.y = kNameLabelTopMargin + ([self isCurrentUser] ? 0.0 : 10.0);
+    //frame.origin.y = kNameLabelTopMargin + ([self isCurrentUser] ? 0.0 : 10.0);
+    frame.origin.y = kNameLabelTopMargin;
     frame.size.width = maxWidth;
     frame.size.height = boundRect.size.height;
     self.nameLabel.frame = frame;
@@ -149,16 +141,7 @@ static const CGFloat kLabelInnerMargin = 10.0;
     frame.origin.y = CGRectGetMaxY(self.nameLabel.frame) + kLabelPadding;
     frame.size.width = maxWidth;
     self.trophiesLabel.frame = frame;
-
-    self.groupsLabel.hidden = [self isCurrentUser] == NO;
-    [self.groupsLabel sizeToFit];
-    frame = self.groupsLabel.frame;
-    frame.origin.x = CGRectGetMinX(self.nameLabel.frame);
-    frame.origin.y = CGRectGetMaxY(self.trophiesLabel.frame) + kLabelPadding;
-    frame.size.width = maxWidth;
-    self.groupsLabel.frame = frame;
     
-    self.bioLabel.hidden = [self isCurrentUser] == YES;
     [self.bioLabel sizeToFit];
     frame = self.bioLabel.frame;
     frame.origin.x = CGRectGetMinX(self.nameLabel.frame);
@@ -178,7 +161,6 @@ static const CGFloat kLabelInnerMargin = 10.0;
         }
         
         [self.nameLabel setText:_user.name];
-        [self.groupsLabel setText:@"1 group"];
         [self.bioLabel setText:_user.bio];
         [self setNeedsLayout];
     }
@@ -200,7 +182,7 @@ static const CGFloat kLabelInnerMargin = 10.0;
 - (CGFloat)heightForProfileHeader
 {
     if ([self isCurrentUser]) {
-        return [self.groupsLabel.text length] > 0 ? 100.0 : 0.0;
+        return [self.bioLabel.text length] > 0 ? 100.0 : 0.0;
     } else {
         return (self.profileImageView.frame.size.width != 0.0) ? (CGRectGetMaxY(self.profileImageView.frame) + kProfileImageMargin-30) : 0.0;
     }
