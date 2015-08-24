@@ -12,8 +12,9 @@
 
 @interface TACommentButton : UIButton
 
-@property (nonatomic, strong) TATrophy *trophy;
 @property int numOfComments;
+@property (strong, nonatomic) UILabel *commentsLabel;
+@property (strong, nonatomic) UIButton *commentsButton;
 
 - (void)updateNumOfComments;
 @end

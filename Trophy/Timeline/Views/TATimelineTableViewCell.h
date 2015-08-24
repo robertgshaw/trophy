@@ -12,6 +12,7 @@
 #import "TATrophy.h"
 #import "TAUser.h"
 #import "TACommentButton.h"
+#import "TALikesButton.h"
 
 @class TATimelineTableViewCell;
 
@@ -23,11 +24,17 @@
 
 @interface TATimelineTableViewCell : PFTableViewCell
 
-@property (nonatomic, weak) id<TATimelineTableViewCellDelegate> delegate;
-@property (nonatomic, strong) TATrophy *trophy;
-@property (nonatomic, strong) TACommentButton *commentsButton;
+@property (nonatomic, weak) id<TATimelineTableViewCellDelegate, TALikeButtonDelegate> delegate;
+@property (nonatomic, strong) TALikesButton *likesButton;
+@property (nonatomic, strong) UIButton *commentsButton;
 @property (nonatomic, strong) UILabel *commentsLabel;
+@property (nonatomic, strong) UILabel *dateLabel;
+@property (nonatomic, strong) UILabel *descriptionLabel;
+@property (nonatomic, strong) UILabel *authorLabel;
+@property (nonatomic, strong) UIView *overlay;
+@property (nonatomic, strong) UIView *verticalBar;
 
 - (CGFloat)heightOfCell;
+- (NSString *)formatDate:(NSDate *)date;
 
 @end

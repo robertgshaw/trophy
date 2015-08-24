@@ -13,7 +13,7 @@
 
 @synthesize titleLabel = _titleLabel;
 
-- (instancetype) initWithDelegate:(id<TACommentTableViewControllerDelegate, TAOverlayButtonDelegate>) delegate
+- (instancetype) initWithDelegate:(id<TACommentTableViewControllerDelegate, TALikeButtonDelegate, TAOverlayButtonDelegate>) delegate
 {
     self = [super init];
     if (self) {
@@ -49,6 +49,7 @@
 
         // configures likes button
         self.likesButton = [[TALikesButton alloc] initWithFrame:CGRectZero];
+        self.likesButton.delegate = delegate;
         [self addSubview:self.likesButton];
         
         // configures comment button

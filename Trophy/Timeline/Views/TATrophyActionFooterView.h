@@ -12,9 +12,10 @@
 
 @protocol TATrophyActionFooterDelegate <NSObject>
 @required
-- (void)trophyActionFooterDidPressLikesButton;
-- (void)trophyActionFooterDidPressCommentsButton;
-- (void)trophyActionFooterDidPressAddButton;
+//- (void)trophyActionFooterDidPressLikesButton;
+//- (void)trophyActionFooterDidPressCommentsButton;
+//- (void)trophyActionFooterDidPressAddButton;
+- (void) didPressLikesButton;
 @end
 
 @interface TATrophyActionFooterView : UIView

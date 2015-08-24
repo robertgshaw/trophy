@@ -27,6 +27,7 @@ static const CGFloat kGroupsButtonHeight = 70.0;
 
 @interface TATimelineViewController () <UITableViewDataSource,
                                         UITableViewDelegate,
+                                        TALikeButtonDelegate,
                                         TATimelineTableViewCellDelegate,
                                         TACommentTableViewControllerDelegate,
                                         TAGroupListViewControllerDelegate,
@@ -38,6 +39,7 @@ static const CGFloat kGroupsButtonHeight = 70.0;
 @property (nonatomic, strong) CAShapeLayer *formatGroupsLayer;
 @property (nonatomic, strong) TAGroupListButton *groupListButton;
 @property (nonatomic, strong) NSIndexPath *indexPathOfCurrentSelectedCell;
+@property (nonatomic, strong) TATimelineTableViewCell *prototypeCell;
 
 @end
 
@@ -50,7 +52,8 @@ static const CGFloat kGroupsButtonHeight = 70.0;
         self.parseClassName = @"Timeline";
         self.pullToRefreshEnabled = YES;
         self.paginationEnabled = YES;
-        self.objectsPerPage = 7;
+        self.objectsPerPage = 2;
+        self.loadingViewEnabled = YES;
     }
     return self;
 }
@@ -94,7 +97,7 @@ static const CGFloat kGroupsButtonHeight = 70.0;
     self.backgroundTap.enabled = NO;
     
     [self layoutGroupListView];
-
+    
 }
 
 - (void)viewWillAppear:(BOOL)animated
@@ -114,6 +117,170 @@ static const CGFloat kGroupsButtonHeight = 70.0;
 {
     [super viewDidDisappear:animated];
     self.groupListVC.view.hidden = YES;
+}
+
+- (PFQuery *)queryForTable
+{
+    TAGroup *activeGroup = [TAGroupManager sharedManager].activeGroup;
+    self.currentGroup = activeGroup;
+    PFQuery *query = [PFQuery queryWithClassName:@"Trophy"];
+    [query whereKey:@"groupId" equalTo:activeGroup.groupId];
+    [query includeKey:@"recipient"];
+    [query includeKey:@"author"];
+    [query orderByDescending:@"createdAt"];
+    if ([self.objects count] == 0) {
+        query.cachePolicy = kPFCachePolicyNetworkOnly;
+    }
+    return query;
+}
+
+- (void) objectsDidLoad:(NSError *)error
+{
+    [super objectsDidLoad:error];
+    
+    // removes separator between cells
+    self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
+    
+    // if no objects loaded, display the vacant timeline image
+    if ([self.objects count] == 0)
+    {
+        // hides table
+        [self clear];
+        self.tableView.hidden = YES;
+        // displays empty timeline display
+        
+    } else {
+        self.tableView.hidden = NO;
+    }
+}
+
+
+//// loads second page of objects
+//- (void)scrollViewDidScroll:(UIScrollView *)scrollView {
+//    if (scrollView.contentSize.height - scrollView.contentOffset.y < (self.view.bounds.size.height)) {
+//        if ([self isLoading] == NO) {
+//            [self loadNextPage];
+//        }
+//    }
+//}
+
+#pragma mark - UITableView Datasource Methods
+
+- (PFTableViewCell *)tableView:(UITableView *)tableView cellForNextPageAtIndexPath:(NSIndexPath *)indexPath {
+    static NSString *CellIdentifier = @"NextPage";
+    
+    PFTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
+    
+    if (cell == nil) {
+        cell = [[PFTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
+    }
+    
+    cell.selectionStyle = UITableViewCellSelectionStyleNone;
+    cell.textLabel.text = @"Load more...";
+    cell.textLabel.textAlignment = NSTextAlignmentCenter;
+    cell.textLabel.textColor = [UIColor trophyNavyColor];
+    
+    return cell;
+}
+
+- (PFTableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath object:(PFObject *)object
+{
+    TATimelineTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:NSStringFromClass([TATimelineTableViewCell class])];
+    if (cell == nil)
+        cell = [[TATimelineTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:NSStringFromClass([TATimelineTableViewCell class])];
+    if (floor(fmodf(indexPath.row, 2.0)) == 0) {
+        cell.backgroundColor = [UIColor whiteColor];
+    } else {
+        cell.backgroundColor = [UIColor whiteColor];
+    }
+    
+    // sets the cell's delegate
+    cell.delegate = self;
+    cell.likesButton.delegate = self;
+    
+    // sets the cells image as a placeholder
+    if (cell.imageView.image == nil)
+    {
+        NSLog(@"imageView = nil");
+        cell.imageView.image = [UIImage imageNamed:@"default-profile-icon"];
+    }
+    // configures the cell with data
+    [self setCell:cell withObject:object];
+    
+    return cell;
+   
+}
+
+// sets the data for a particular cell
+- (void) setCell:(TATimelineTableViewCell *)cell withObject:(PFObject *)object
+{
+    // after the image loads, add it in
+    PFFile *imageFile = [object objectForKey:@"imageFile"];
+    [imageFile getDataInBackgroundWithBlock:^(NSData *data, NSError *error) {
+                                        cell.imageView.image = [UIImage imageWithData:data];
+    }];
+
+    
+    // set up caption label, author label, date label
+    cell.descriptionLabel.text = object[@"caption"];
+    cell.authorLabel.text = [NSString stringWithFormat:@"%@ awarded %@ for:", object[@"author"][@"name"], object[@"recipient"][@"name"]];
+    cell.dateLabel.text = [NSString stringWithFormat:@"%@" , [cell formatDate:object[@"time"]]];
+    
+    // sets comments label, button
+    if (object[@"commentNumber"] == nil) {
+        cell.commentsLabel.text = @"0 comments";
+    } else {
+        NSInteger commentNumber = [object[@"commentNumber"] integerValue];
+        cell.commentsLabel.text = [NSString stringWithFormat:@"%i comments", (int)commentNumber];
+    }
+    [cell.commentsButton addTarget:self action:@selector(presentTrophyComments:) forControlEvents:UIControlEventTouchUpInside];
+
+    // configures like button with a trophy
+    cell.likesButton.trophy = [[TATrophy alloc] initWithStoredTrophy:object];
+}
+
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+     if (indexPath.row == [self.objects count]) {
+        return [super tableView:tableView heightForRowAtIndexPath:indexPath];
+    }
+    
+    return 500;
+}
+
+
+
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    [self.tableView deselectRowAtIndexPath:indexPath animated:YES];
+    
+    // cell for next page, loads the next page of objects
+    if (indexPath.row == [self.objects count])
+    {
+        if ([self isLoading] == NO) {
+            [self loadNextPage];
+        }
+    // otherwise, present trophy closeup
+    } else {
+        // parse query
+        PFObject *object = [self.objects objectAtIndex:indexPath.row];
+        TATrophy *trophy = [[TATrophy alloc] initWithStoredTrophy:object];
+
+        // sets index path of current closeup
+        if ([[self tableView:tableView cellForRowAtIndexPath:indexPath] isKindOfClass:[TATimelineTableViewCell class]]) {
+            self.indexPathOfCurrentSelectedCell = indexPath;
+        }
+        [self presentTrophyCloseup:trophy];
+    }
+}
+
+- (BOOL)tableView:(UITableView *)tableView shouldHighlightRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    if (self.groupListVC.view.hidden == NO) {
+        return NO;
+    } else {
+        return YES;
+    }
 }
 
 - (void)layoutGroupsButton
@@ -141,21 +308,6 @@ static const CGFloat kGroupsButtonHeight = 70.0;
     [self.groupListVC.view.layer setBorderWidth:2.0];
     [self addChildViewController:self.groupListVC];
     [self.groupListVC didMoveToParentViewController:self];
-}
-
-- (PFQuery *)queryForTable
-{
-    TAGroup *activeGroup = [TAGroupManager sharedManager].activeGroup;
-    self.currentGroup = activeGroup;
-    PFQuery *query = [PFQuery queryWithClassName:@"Trophy"];
-    [query whereKey:@"groupId" equalTo:activeGroup.groupId];
-    [query includeKey:@"recipient"];
-    [query includeKey:@"author"];
-    [query orderByDescending:@"createdAt"];
-    if ([self.objects count] == 0) {
-        query.cachePolicy = kPFCachePolicyNetworkOnly;
-    }
-    return query;
 }
 
 - (void)groupListButtonDidPress
@@ -217,127 +369,23 @@ static const CGFloat kGroupsButtonHeight = 70.0;
     [self groupListButtonDidPress];
 }
 
-- (void)scrollViewDidScroll:(UIScrollView *)scrollView {
-    if (scrollView.contentSize.height - scrollView.contentOffset.y < (self.view.bounds.size.height)) {
-        if ([self isLoading] == NO) {
-            [self loadNextPage];
-        }
-    }
-}
 
-#pragma mark - UITableView Datasource Methods
-- (PFTableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath object:(PFObject *)object
-{
-    TATimelineTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:NSStringFromClass([TATimelineTableViewCell class])];
-    if (cell == nil)
-        cell = [[TATimelineTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:NSStringFromClass([TATimelineTableViewCell class])];
-    if (floor(fmodf(indexPath.row, 2.0)) == 0) {
-        cell.backgroundColor = [UIColor whiteColor];
-    } else {
-        cell.backgroundColor = [UIColor whiteColor];
-    }
-    
-    // sets the cells trophy based on parse query
-    cell.trophy = [[TATrophy alloc] initWithStoredTrophy:object];
-    
-    // set properties on commentsButton and commentsLabel from the tableView cell
-    cell.commentsButton.trophy = cell.trophy;
-    PFObject *trophyObject = [cell.trophy getTrophyAsParseObject];
-    cell.commentsLabel.text = [NSString stringWithFormat:@"%@ comments", trophyObject[@"commentNumber"]];
-    if(trophyObject[@"commentNumber"] == nil) {
-        cell.commentsLabel.text = @"0 comments";
-    
-    }
-    cell.commentsLabel.text = [NSString stringWithFormat:@"%ld comments", (long)cell.trophy.commentNumber];
+#pragma mark - Helper Methods
 
-    [cell.commentsButton addTarget:self action:@selector(presentTrophyComments:) forControlEvents:UIControlEventTouchUpInside];
-    cell.delegate = self;
-    return cell;
-    
-        // THE FOLLOWING COMMENTED-OUT CODE WAS FOR EXPERIMENTATION PURPOSES
-//    UITapGestureRecognizer *labelTapRecognizer = [[UITapGestureRecognizer alloc] init];
-//    [labelTapRecognizer addTarget:self action:@selector(presentTrophyCommentsFromLabel:)];
-//    [labelTapRecognizer setNumberOfTapsRequired:1];
-//    [cell.commentsLabel addGestureRecognizer:labelTapRecognizer];
-//    [cell bringSubviewToFront:cell.commentsLabel];
-   
-}
-
-- (PFTableViewCell *)tableView:(UITableView *)tableView cellForNextPageAtIndexPath:(NSIndexPath *)indexPath
-{
-    PFTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:NSStringFromClass([PFTableViewCell class])];
-    if (cell == nil)
-        cell = [[PFTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:NSStringFromClass([PFTableViewCell class])];
-    UIActivityIndicatorView *indicatorView = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleGray];
-    [cell addSubview:indicatorView];
-    indicatorView.center = CGPointMake(self.view.center.x, cell.center.y);
-    [indicatorView startAnimating];
-    return cell;
-}
-
-- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    if (indexPath.row == [self.objects count]) {
-        return [super tableView:tableView heightForRowAtIndexPath:indexPath];
-    }
-    TATimelineTableViewCell *cell = (TATimelineTableViewCell *)[self tableView:tableView cellForRowAtIndexPath:indexPath];
-    return [cell heightOfCell];
-}
-
-- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    [self.tableView deselectRowAtIndexPath:indexPath animated:YES];
-
-    // parse query
-    PFObject *object = [self.objects objectAtIndex:indexPath.row];
-    TATrophy *trophy = [[TATrophy alloc] initWithStoredTrophy:object];
-
-    // sets index path of current closeup
-    if ([[self tableView:tableView cellForRowAtIndexPath:indexPath] isKindOfClass:[TATimelineTableViewCell class]]) {
-        
-        self.indexPathOfCurrentSelectedCell = indexPath;
-    }
-    [self presentTrophyCloseup:trophy];
-}
-
-- (BOOL)tableView:(UITableView *)tableView shouldHighlightRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    if (self.groupListVC.view.hidden == NO) {
-        return NO;
-    } else {
-        return YES;
-    }
-}
-
-#pragma mark - helper methods
+// reloads a particular cell which was just "closeup"
 - (void)reloadSelectedCellWithUpdatedTrophy:(TATrophy *)updatedTrophy;
 {
-    // updates only the current closeup cell when an action is performed
+    // ensure there is a current closeup
     if (self.indexPathOfCurrentSelectedCell != nil)
     {
-        
+        // fetch the one row that needs to be refreshed
         PFObject *objectToUpdate = [self objectAtIndexPath:self.indexPathOfCurrentSelectedCell];
-        
-        NSLog(@"%@", objectToUpdate[@"commentNumber"]);
         [objectToUpdate fetchInBackground];
-        NSLog(@"%@", objectToUpdate[@"commentNumber"]);
     }
-}
-
-- (void)jumpToTimelineWithNavBarHidden:(BOOL)enabled
-{
-    // "unselects" cell
-    self.indexPathOfCurrentSelectedCell = nil;
-    
-    // pops to the timeline view controller
-    [self.navigationController popToViewController:self animated:YES];
-    
-    // displays the nav bar and the tab bar
-    self.navigationController.navigationBarHidden = enabled;
-
 }
 
 #pragma mark - TACommentTableViewControllerDelegate Methods
+
 - (void)trophyCommentDidPerformAction:(TATrophy *)updatedTrophy
 {
     [self reloadSelectedCellWithUpdatedTrophy:updatedTrophy];
@@ -361,6 +409,12 @@ static const CGFloat kGroupsButtonHeight = 70.0;
     [self jumpToTimelineWithNavBarHidden:NO];
 }
 
+#pragma mark - TALkesButtonDelegate Methods
+
+- (void)likesButtonDidPressLikesButton:(TATrophy *)updatedTrophy
+{
+    [self reloadSelectedCellWithUpdatedTrophy:updatedTrophy];
+}
 
 #pragma mark - TATimelineTableViewCellDelegate Methods
 
@@ -395,6 +449,19 @@ static const CGFloat kGroupsButtonHeight = 70.0;
 
 #pragma mark - UINavigation Methods
 
+// "pops" back to the timeline after closeup
+- (void)jumpToTimelineWithNavBarHidden:(BOOL)enabled
+{
+    // "unselects" cell
+    self.indexPathOfCurrentSelectedCell = nil;
+    
+    // pops to the timeline view controller
+    [self.navigationController popToViewController:self animated:YES];
+    
+    // displays the nav bar and the tab bar
+    self.navigationController.navigationBarHidden = enabled;
+}
+
 - (void)presentSettings
 {
     [self.presentedDelegate presentSettings:self];
@@ -415,7 +482,6 @@ static const CGFloat kGroupsButtonHeight = 70.0;
     [self.navigationController pushViewController:profileVC animated:YES];
 }
 
-// handles back button presses
 - (void)backButtonPressed
 {
     [self.navigationController dismissViewControllerAnimated:YES completion:nil];
@@ -436,23 +502,10 @@ static const CGFloat kGroupsButtonHeight = 70.0;
     
     self.indexPathOfCurrentSelectedCell = [self.tableView indexPathForCell:(TATimelineTableViewCell *)button.superview];
     
-    TACommentTableViewController *commentVC = [[TACommentTableViewController alloc] initWithPhoto:button.trophy];
+    // pass object to TACommentTableViewController as a TATrophy
+    TACommentTableViewController *commentVC = [[TACommentTableViewController alloc] initWithPhoto: [[TATrophy alloc] initWithStoredTrophy: [self.objects objectAtIndex:self.indexPathOfCurrentSelectedCell.row]]];
     commentVC.delegate = self;
     [self.navigationController pushViewController:commentVC animated:YES];
 }
-
-// AFFILIATED EXPERIMENTAL FUNCTIONS TO ABOVE
-//// this function checks the value of the comment button selected and calls the presentTrophyComments
-//// only call from gesture recognizer on comment label
-//-(IBAction)presentTrophyCommentsFromLabel:(id)sender
-//{
-//    // get superview and affiliated button
-//    UILabel *label = sender;
-//    TATimelineTableViewCell *parentCell = (TATimelineTableViewCell *)label.superview;
-//    
-//    TACommentTableViewController *commentVC = [[TACommentTableViewController alloc] initWithPhoto:parentCell.trophy];
-//    commentVC.delegate = self;
-//    [self.navigationController pushViewController:commentVC animated:YES];
-//}
 
 @end

@@ -19,22 +19,9 @@
 #import <ParseUI/ParseUI.h>
 #import <QuartzCore/QuartzCore.h>
 
-static const CGFloat kCellSideMargin = 20.0;
-static const CGFloat kCellTrophyImageWidth = 30.0;
-static const CGFloat kCellRecipientImageWidth = 100.0;
-static const CGFloat kCellInnerMargin = 10.0;
+static const CGFloat kOverLayMargin = 7.0;
 
-@interface TATimelineTableViewCell () <TATrophyActionFooterDelegate>
-
-@property (nonatomic, strong) UILabel *recipientLabel;
-@property (nonatomic, strong) UILabel *dateLabel;
-@property (nonatomic, strong) UILabel *descriptionLabel;
-@property (nonatomic, strong) UILabel *authorLabel;
-@property (nonatomic, strong) PFImageView *trophyImageView;
-@property (nonatomic, strong) UIImageView *trophyFrameView;
-@property (nonatomic, strong) UIButton *trophyPhoto;
-@property (nonatomic, strong) PFImageView *recipientImageView;
-@property (nonatomic, strong) TATrophyActionFooterView *actionFooterView;
+@interface TATimelineTableViewCell ()
 
 @end
 
@@ -44,65 +31,64 @@ static const CGFloat kCellInnerMargin = 10.0;
 {
     self = [super initWithStyle:style reuseIdentifier:reuseIdentifier];
     if (self) {
-    
-        _trophyImageView = [[PFImageView alloc] initWithFrame:CGRectMake(0, 0, kCellTrophyImageWidth, kCellTrophyImageWidth)];
-        // this is the wierd black box on top left
-        self.trophyImageView.backgroundColor = [UIColor clearColor];
-        self.trophyImageView.contentMode = UIViewContentModeScaleAspectFill;
-        self.trophyImageView.clipsToBounds = YES;
-        [self addSubview:self.trophyImageView];
+        // assure that images will not be warped (http://developer.xamarin.com/api/type/MonoTouch.UIKit.UIViewContentMode/)
+        self.imageView.contentMode = UIViewContentModeScaleAspectFill;
+        self.imageView.clipsToBounds = YES;
+        self.imageView.layer.cornerRadius = 5.0;
+        self.imageView.layer.masksToBounds = YES;
         
-        _trophyPhoto = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, kCellRecipientImageWidth, kCellRecipientImageWidth)];
-        [self.trophyPhoto setBackgroundImage:[UIImage imageNamed:@"default-profile-icon"] forState:UIControlStateNormal];
-        self.trophyPhoto.backgroundColor = [UIColor whiteColor];
-        self.trophyPhoto.layer.borderWidth = 3.0f;
-        self.trophyPhoto.layer.borderColor = [UIColor trophyYellowColor].CGColor;
-        self.trophyPhoto.layer.cornerRadius = floorf(kCellRecipientImageWidth / 2.0);
-        self.trophyPhoto.clipsToBounds = YES;
-        self.accessoryView = self.trophyPhoto;
-             
-        _recipientImageView = [[PFImageView alloc] initWithFrame:self.trophyPhoto.bounds];
-        self.recipientImageView.alpha = 2.0;
-        self.accessoryView = self.recipientImageView;
-
-        _recipientLabel = [[UILabel alloc] initWithFrame:CGRectZero];
-        self.recipientLabel.textColor = [UIColor darkGrayColor];
-        self.recipientLabel.font = [UIFont systemFontOfSize:13.0];
-        self.recipientLabel.numberOfLines = 1;
-        [self addSubview:self.recipientLabel];
+        // configures vertical gray bar
+        self.verticalBar = [[UIView alloc] init];
+        self.verticalBar.backgroundColor = [UIColor grayColor];
+        [self addSubview:self.verticalBar];
         
+        // configures date label
         _dateLabel = [[UILabel alloc] initWithFrame:CGRectZero];
-        self.dateLabel.textColor = [UIColor trophyYellowColor];
-        self.dateLabel.font = [UIFont systemFontOfSize:10.0];
+        self.dateLabel.textColor = [UIColor whiteColor];
+        self.dateLabel.backgroundColor = [UIColor trophyNavyColor];
+        self.dateLabel.font = [UIFont boldSystemFontOfSize:10.0];
         self.dateLabel.numberOfLines = 1;
+        self.dateLabel.textAlignment = NSTextAlignmentCenter;
         [self addSubview:self.dateLabel];
         
-        _commentsLabel = [[UILabel alloc] initWithFrame:CGRectZero];
-        self.commentsLabel.textColor = [UIColor darkGrayColor];
-        self.commentsLabel.font = [UIFont boldSystemFontOfSize:10.0];
-        self.commentsLabel.numberOfLines = 1;
-        [self addSubview:self.commentsLabel];
+        // configures overlay
+        self.overlay = [[UIView alloc] init];
+        self.overlay.backgroundColor = [UIColor trophyNavyColor];
+        self.overlay.layer.cornerRadius = 5.0;
+        self.overlay.layer.masksToBounds = YES;
+        [self addSubview:self.overlay];
         
-        self.commentsButton = [[TACommentButton alloc] init];
+        // configures comments
+        _commentsLabel = [[UILabel alloc] initWithFrame:CGRectZero];
+        self.commentsLabel.textColor = [UIColor trophyYellowColor];
+        self.commentsLabel.font = [UIFont boldSystemFontOfSize:12.0];
+        self.commentsLabel.lineBreakMode = NSLineBreakByTruncatingTail;
+        self.commentsLabel.numberOfLines = 0;
+        [self addSubview:self.commentsLabel];
+        self.commentsButton = [[UIButton alloc] init];
         [self addSubview:self.commentsButton];
 
+        // configures description
         _descriptionLabel = [[UILabel alloc] initWithFrame:CGRectZero];
         self.descriptionLabel.numberOfLines = 0;
-        self.descriptionLabel.lineBreakMode = NSLineBreakByWordWrapping;
-        self.descriptionLabel.textColor = [UIColor darkGrayColor];
-        self.descriptionLabel.font = [UIFont systemFontOfSize:13.5];
+        self.descriptionLabel.lineBreakMode = NSLineBreakByTruncatingTail;
+        self.descriptionLabel.textColor = [UIColor whiteColor];
+        self.descriptionLabel.font = [UIFont boldSystemFontOfSize:14];
         [self addSubview:self.descriptionLabel];
 
+        // configures awarded to... logo
         _authorLabel = [[UILabel alloc] initWithFrame:CGRectZero];
         self.authorLabel.numberOfLines = 0;
-        self.authorLabel.lineBreakMode = NSLineBreakByWordWrapping;
-        self.authorLabel.textColor = [UIColor darkGrayColor];
-        self.authorLabel.font = [UIFont boldSystemFontOfSize:10.0];
+        self.authorLabel.lineBreakMode = NSLineBreakByTruncatingMiddle;
+        self.authorLabel.textColor = [UIColor lightGrayColor];
+        self.authorLabel.font = [UIFont boldSystemFontOfSize:12.0];
+        self.authorLabel.backgroundColor = [UIColor clearColor];
         [self addSubview:self.authorLabel];
 
-        _actionFooterView = [[TATrophyActionFooterView alloc] initWithFrame:CGRectZero];
-        self.actionFooterView.delegate = self;
-        [self addSubview:self.actionFooterView];
+        // configures likes button
+        self.likesButton = [[TALikesButton alloc] initWithFrame:CGRectZero];
+        self.likesButton.delegate = self.delegate;
+        [self addSubview:self.likesButton];
     }
     return self;
 }
@@ -110,101 +96,83 @@ static const CGFloat kCellInnerMargin = 10.0;
 - (void)layoutSubviews
 {
     [super layoutSubviews];
-    CGPoint center = self.accessoryView.center;
-    center.y = CGRectGetMinY(self.descriptionLabel.frame) + floorf(self.descriptionLabel.font.lineHeight / 2.0);
-    self.accessoryView.center = center;
     
-    if (self.trophy) {
-        [self layoutCellViews];
-    }
-}
-
-- (void)layoutCellViews
-{
-    CGFloat maxWidth = CGRectGetWidth(self.bounds) - CGRectGetWidth(self.trophyFrameView.frame) - CGRectGetWidth(self.accessoryView.frame) - 2 * kCellInnerMargin - 2 * kCellSideMargin;
-    
-    // There is no recipient label in text, we use this as a place holder to hold the frame size
-    [self.recipientLabel sizeToFit];
-    CGRect frame = self.recipientLabel.frame;
-    frame.origin.x = kCellSideMargin + CGRectGetWidth(self.trophyFrameView.frame) + kCellInnerMargin;
-    frame.origin.y = kCellSideMargin + 60;
-    frame.size.width = maxWidth;
-    self.recipientLabel.frame = frame;
-    
-    //this is the actual trophy photo
-    [self.recipientImageView sizeToFit];
-    frame.origin.x = CGRectGetMaxX(self.bounds) - 100;
-    frame.origin.y = 8;
-    self.recipientImageView.frame = frame;
-    frame = self.recipientImageView.frame;
-    frame.size = CGSizeMake(90,112.5);
-    self.recipientImageView.frame = frame;
-    
+    // formats date label
     [self.dateLabel sizeToFit];
-    frame = self.dateLabel.frame;
-    frame.origin.x = (kCellSideMargin + CGRectGetWidth(self.trophyFrameView.frame) + (kCellInnerMargin*14));
-    frame.origin.y = kCellSideMargin * 5.4;
-    frame.size.width = maxWidth;
+    CGRect frame = self.dateLabel.frame;
+    frame.origin.x = 0;
+    frame.origin.y = 10;
+    frame.size.height = 20;
+    frame.size.width = 40;
     self.dateLabel.frame = frame;
     
-    [self.descriptionLabel sizeToFit];
-    CGSize textSize = CGSizeMake(maxWidth, 150);
-    NSDictionary *attributes = @{NSForegroundColorAttributeName:self.descriptionLabel.textColor,
-                                 NSFontAttributeName:self.descriptionLabel.font};
-    CGRect boundRect = [self.descriptionLabel.text boundingRectWithSize:textSize
-                                                                options:(NSStringDrawingUsesLineFragmentOrigin|NSStringDrawingUsesFontLeading)
-                                                             attributes:attributes
-                                                                context:nil];
-    frame = self.descriptionLabel.frame;
-    frame.origin.x = CGRectGetMinX(self.recipientLabel.frame);
-    frame.origin.y = CGRectGetMaxY(self.recipientLabel.frame) - 50.0;
-    frame.size = boundRect.size;
-    self.descriptionLabel.frame = frame;
+    // formats image
+    frame = self.imageView.frame;
+    frame.size.width = self.frame.size.width - self.dateLabel.frame.size.width - 10;
+    frame.size.height = [TATimelineTableViewCell formatHeightFromSize:self.imageView.image.size withWidth:frame.size.width];
+    frame.origin.x = CGRectGetMaxX(self.dateLabel.frame);
+    frame.origin.y = 7;
+    self.imageView.frame = frame;
+    
+    // formats vertical bar
+    frame = self.verticalBar.frame;
+    frame.size.height = self.frame.size.height;
+    frame.size.width = 2;
+    frame.origin.x = CGRectGetMidX(self.dateLabel.frame) - (frame.size.width / 2);
+    frame.origin.y = 0;
+    self.verticalBar.frame = frame;
+    
+    // formats overlay
+    frame = self.overlay.frame;
+    frame.size.height = self.imageView.frame.size.height / 5;
+    frame.size.width = self.imageView.frame.size.width * .95;
+    frame.origin.x = CGRectGetMidX(self.imageView.frame) - (frame.size.width / 2);
+    frame.origin.y = CGRectGetMaxY(self.imageView.frame) * .975 - frame.size.height;
+    self.overlay.frame = frame;
+    
+    // formats likes button, inside overlay
+    [self.likesButton sizeToFit];
+    frame = self.likesButton.frame;
+    frame.origin.x = CGRectGetMinX(self.overlay.frame) + kOverLayMargin;
+    frame.origin.y = CGRectGetMidY(self.overlay.frame) - (frame.size.height / 2) - 5;
+    self.likesButton.frame = frame;
 
+    // formats author label, inside overlay
     [self.authorLabel sizeToFit];
     frame = self.authorLabel.frame;
-    frame.origin.x = kCellSideMargin + CGRectGetWidth(self.trophyFrameView.frame) + kCellInnerMargin;
-    frame.origin.y = kCellSideMargin;
-    frame.size.width = maxWidth;
+    frame.origin.x = CGRectGetMaxX(self.likesButton.frame) + 7.5;
+    frame.origin.y = CGRectGetMinY(self.overlay.frame) + self.overlay.frame.size.height * .15;
+    frame.size.width = CGRectGetMaxX(self.overlay.frame) - CGRectGetMinX(frame) - kOverLayMargin;
     self.authorLabel.frame = frame;
-
-    frame = self.actionFooterView.frame;
-    frame.size = CGSizeMake([TATrophyActionFooterView actionFooterWidth], 70.0);
-    frame.origin.x = 0;
-    frame.origin.y = CGRectGetMaxY(self.descriptionLabel.frame) + (2.4 * kCellInnerMargin)-50;
-    self.actionFooterView.frame = frame;
-
-    frame = self.trophyFrameView.frame;
-    frame.origin.x = kCellSideMargin;
-    frame.origin.y = CGRectGetMinY(self.descriptionLabel.frame) + floorf(self.descriptionLabel.font.lineHeight / 2.0) -25;
-    self.trophyFrameView.frame = frame;
-    frame = self.trophyImageView.frame;
-    frame.size = CGSizeMake(kCellTrophyImageWidth, kCellTrophyImageWidth);
-    self.trophyImageView.frame = frame;
-    self.trophyImageView.center = CGPointMake(self.trophyFrameView.center.x, self.trophyFrameView.center.y - 10.0);
     
-    // set frame on commentsLabel and place label at front of subview
+    // formats description/ caption label, inside overlay
+    [self.descriptionLabel sizeToFit];
+    frame = self.descriptionLabel.frame;
+    frame.origin.x = CGRectGetMinX(self.authorLabel.frame);
+    frame.origin.y = CGRectGetMaxY(self.authorLabel.frame) + 3;
+    frame.size.width = CGRectGetMaxX(self.overlay.frame) - CGRectGetMinX(frame) - kOverLayMargin;
+    self.descriptionLabel.frame = frame;
+    
+    // formats comments button/ label
     [self.commentsLabel sizeToFit];
     frame = self.commentsLabel.frame;
-    frame.origin.x = (CGRectGetWidth(self.trophyFrameView.frame) + kCellInnerMargin*5);
-    frame.origin.y = kCellSideMargin*5.4;
+    frame.origin.x = CGRectGetMaxX(self.overlay.frame) - frame.size.width - kOverLayMargin * 2;
+    frame.origin.y = CGRectGetMaxY(self.overlay.frame) - frame.size.height - kOverLayMargin * 2;
     self.commentsLabel.frame = frame;
-    [self bringSubviewToFront:self.commentsLabel];
     
-    // set frame on commentsButton and place button at front of subview
-    frame = self.commentsButton.frame;
-    frame.origin.x = (CGRectGetWidth(self.trophyFrameView.frame) + kCellInnerMargin*2 + 7);
-    frame.origin.y = kCellSideMargin * 5.2;
-    frame.size.height = 18;
-    frame.size.width = 18;
+    // puts comment button as the label
     self.commentsButton.frame = frame;
-    [self bringSubviewToFront:self.commentsButton];
-    
+}
+
++ (CGFloat)formatHeightFromSize:(CGSize)dimensions withWidth:(CGFloat)width
+{
+    // format photo height based on width
+    return (width / dimensions.width) * dimensions.height;
 }
 
 - (CGFloat)heightOfCell
 {
-    return CGRectGetMaxY(self.actionFooterView.frame) + kCellSideMargin;
+    return CGRectGetMaxY(self.imageView.frame) + 2;
 }
 
 - (NSString *)formatDate:(NSDate *)date
@@ -242,52 +210,15 @@ static const CGFloat kCellInnerMargin = 10.0;
         timeUnit = [components minute];
         unitString = @"minute";
     }
-    NSString *format = (timeUnit > 1 || timeUnit == 0) ? @"%ld %@s ago" : @"%ld %@ ago";
+    NSString *format = (timeUnit > 1 || timeUnit == 0) ? @"%ld %@s" : @"%ld %@";
     return [NSString stringWithFormat:format, timeUnit, unitString];
 }
 
-- (void)setTrophy:(TATrophy *)trophy
-{
-    
-    _trophy = trophy;
-    self.recipientLabel.text = [NSString stringWithFormat:@" "];
-    self.descriptionLabel.text = trophy.caption;
-    self.authorLabel.text = [NSString stringWithFormat:@"%@ awarded %@ for:",trophy.author.name, trophy.recipient.name];
-    self.actionFooterView.trophy = trophy;
-    self.dateLabel.text = [NSString stringWithFormat:@"%@" , [self formatDate:trophy.time]];
-    
-    PFFile *profileImageFile =[trophy parseFileForTrophyImage];
-    self.recipientImageView.file = profileImageFile;
-    self.recipientImageView.alpha = 1.0;
-    self.trophyPhoto.layer.borderWidth = 0.0;
-    self.recipientImageView.layer.cornerRadius = 3.0;
-    self.recipientImageView.clipsToBounds = YES;
-    [self.recipientImageView loadInBackground];
-    
-    [self layoutCellViews];
-}
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {
     [super setSelected:selected animated:animated];
 
     // Configure the view for the selected state
-}
-
-#pragma mark - TATimelineActionFooterView Delegate
-
-- (void)trophyActionFooterDidPressLikesButton
-{
-    
-}
-
-- (void)trophyActionFooterDidPressCommentsButton
-{
-
-}
-
-- (void)trophyActionFooterDidPressAddButton
-{
-
 }
 
 @end
