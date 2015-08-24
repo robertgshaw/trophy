@@ -213,7 +213,6 @@ static const CGFloat kPAPCellInsetWidth = 20.0f;
         PFObject *counter = [trophy getObjectWithId:[self.trophy getTrophyAsParseObject].objectId];
         [counter incrementKey:@"commentNumber" byAmount:[NSNumber numberWithInt:1]];
         [counter save];
-        NSLog(@"here");
         
         [self.trophy updateCommentNumber];
         
@@ -287,8 +286,6 @@ static const CGFloat kPAPCellInsetWidth = 20.0f;
             // on success, reload comments in the comment view
             [MBProgressHUD hideHUDForView:self.view.superview animated:YES];
             [self loadObjects];
-            
-            NSLog(@"here2");
             
             // on success, tell timeline of updated trophy
             [self.delegate trophyCommentDidPerformAction:self.trophy];
