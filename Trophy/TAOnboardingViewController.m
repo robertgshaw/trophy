@@ -67,6 +67,14 @@ static const CGFloat extraInfoLogoHeight = 50.0;
     welcomeLabel.font = [font fontWithSize:24];
     [self.view addSubview:welcomeLabel];
     
+//    // adds trophy image
+//    UIImageView *trophyImageView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"home-logo"]];
+//    frame = trophyImageView.frame;
+//    frame.origin.x = CGRectGetMidX(self.view.bounds) - floorf(CGRectGetWidth(trophyImageView.frame) / 2.0);
+//    frame.origin.y = CGRectGetMaxY(welcomeLabel.frame) + 25.0;
+//    trophyImageView.frame = frame;
+//    [self.view addSubview:trophyImageView];
+    
     // adds join group button
     UIButton *joinGroupButton = [[UIButton alloc] init];
     [joinGroupButton setTitle:@"Join Group" forState:UIControlStateNormal];
