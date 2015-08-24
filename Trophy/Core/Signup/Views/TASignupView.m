@@ -48,9 +48,9 @@ static const CGFloat kContinueButtonHeight = 40.0;
         [self addSubview:self.logoImageView];
         
         _titleLabel = [[UILabel alloc] init];
-        self.titleLabel.text = @"Welcome to Trophy";
-        self.titleLabel.font = [UIFont fontWithName:@"Avenir-Heavy" size:25.0];
-        self.titleLabel.textColor = [UIColor trophyYellowColor];
+        self.titleLabel.text = @"Welcome to Trophy.";
+        self.titleLabel.font = [UIFont fontWithName:@"Avenir" size:25.0];
+        self.titleLabel.textColor = [UIColor whiteColor];
         [self addSubview:self.titleLabel];
         
         _legalLabel = [[UILabel alloc] init];
@@ -59,34 +59,31 @@ static const CGFloat kContinueButtonHeight = 40.0;
         self.legalLabel.textColor = [UIColor lightGrayColor];
         [self addSubview:self.legalLabel];
         
-        _usernameInput = [TATextField textFieldWithYellowBorder];
+        _usernameInput = [TATextField textFieldTranslucent];
         self.usernameInput.delegate = self;
         self.usernameInput.placeholder = @"Username";
         self.usernameInput.returnKeyType = UIReturnKeyNext;
-        self.usernameInput.backgroundColor = [UIColor whiteColor];
-        self.usernameInput.font = [UIFont fontWithName:@"Avenir-Book" size:13.0];
+        self.usernameInput.font = [UIFont fontWithName:@"Avenir" size:15.0];
         [self addSubview:self.usernameInput];
 
-        _passwordInput = [TATextField textFieldWithYellowBorder];
+        _passwordInput = [TATextField textFieldTranslucent];
         self.passwordInput.delegate = self;
         self.passwordInput.secureTextEntry = YES;
         self.passwordInput.placeholder = @"Password";
         self.passwordInput.returnKeyType = UIReturnKeyNext;
-        self.passwordInput.backgroundColor = [UIColor whiteColor];
-        self.passwordInput.font = [UIFont fontWithName:@"Avenir-Book" size:13.0];
+        self.passwordInput.font = [UIFont fontWithName:@"Avenir" size:15.0];
         [self addSubview:self.passwordInput];
 
-        _phoneNumberInput = [TAPhoneNumberField textFieldWithYellowBorder];
+        _phoneNumberInput = [TAPhoneNumberField textFieldTranslucent];
         self.phoneNumberInput.placeholder = @"Phone Number";
         self.phoneNumberInput.returnKeyType = UIReturnKeyDone;
         self.phoneNumberInput.keyboardType = UIKeyboardTypePhonePad;
-        self.phoneNumberInput.backgroundColor = [UIColor whiteColor];
-        self.phoneNumberInput.font = [UIFont fontWithName:@"Avenir-Book" size:13.0];
+        self.phoneNumberInput.font = [UIFont fontWithName:@"Avenir" size:15.0];
         [self addSubview:self.phoneNumberInput];
 
         _continueButton = [[UIButton alloc] init];
-        [self.continueButton setTitle:@"Let's get started" forState:UIControlStateNormal];
-        [self.continueButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+        [self.continueButton setTitle:@"Sign up" forState:UIControlStateNormal];
+        [self.continueButton setTitleColor:[UIColor trophyNavyColor] forState:UIControlStateNormal];
         self.continueButton.backgroundColor = [UIColor trophyYellowColor];
         self.continueButton.layer.cornerRadius = 5.0;
         self.continueButton.font = [UIFont fontWithName:@"Avenir-Heavy" size:17.0];
@@ -94,12 +91,12 @@ static const CGFloat kContinueButtonHeight = 40.0;
         [self addSubview:self.continueButton];
 
         _loginButton = [[UIButton alloc] init];
-        [self.loginButton setTitle:@" Login " forState:UIControlStateNormal];
-        [self.loginButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
-        self.loginButton.backgroundColor = [UIColor trophyYellowColor];
+        [self.loginButton setTitle:@" I have an account " forState:UIControlStateNormal];
+        [self.loginButton setTitleColor:[UIColor trophyNavyColor] forState:UIControlStateNormal];
+        self.loginButton.backgroundColor = [UIColor whiteColor];
         self.loginButton.layer.cornerRadius = 5.0;
         [self.loginButton setTitleColor:[UIColor colorWithRed:0.812 green:0.82 blue:0.82 alpha:1] forState:UIControlStateHighlighted];
-        self.loginButton.font = [UIFont fontWithName:@"Avenir-Heavy" size:17.0];
+        self.loginButton.font = [UIFont fontWithName:@"Avenir-Heavy" size:13.0];
         [self.loginButton addTarget:self action:@selector(loginButtonPressed) forControlEvents:UIControlEventTouchUpInside];
         [self addSubview:self.loginButton];
         
@@ -107,7 +104,7 @@ static const CGFloat kContinueButtonHeight = 40.0;
         [self.privacyButton setTitle:@"Privacy Policy" forState:UIControlStateNormal];
         [self.privacyButton setTitleColor:[UIColor lightGrayColor] forState:UIControlStateNormal];
         [self.privacyButton setTitleColor:[UIColor colorWithRed:0.812 green:0.82 blue:0.82 alpha:1] forState:UIControlStateHighlighted];
-        self.privacyButton.titleLabel.font = [UIFont systemFontOfSize:12.0];
+        self.privacyButton.titleLabel.font = [UIFont fontWithName:@"Avenir-Medium" size:12.0];
         [self.privacyButton addTarget:self action:@selector(privacyButtonPressed) forControlEvents:UIControlEventTouchUpInside];
         [self addSubview:self.privacyButton];
         
@@ -115,7 +112,7 @@ static const CGFloat kContinueButtonHeight = 40.0;
         [self.legalButton setTitle:@"Legal Terms" forState:UIControlStateNormal];
         [self.legalButton setTitleColor:[UIColor lightGrayColor] forState:UIControlStateNormal];
         [self.legalButton setTitleColor:[UIColor colorWithRed:0.812 green:0.82 blue:0.82 alpha:1] forState:UIControlStateHighlighted];
-        self.legalButton.titleLabel.font = [UIFont systemFontOfSize:12.0];
+        self.legalButton.titleLabel.font = [UIFont fontWithName:@"Avenir-Medium" size:12.0];
 
         [self.legalButton addTarget:self action:@selector(legalButtonPressed) forControlEvents:UIControlEventTouchUpInside];
         [self addSubview:self.legalButton];
@@ -128,20 +125,14 @@ static const CGFloat kContinueButtonHeight = 40.0;
     
     CGRect frame = self.logoImageView.frame;
     frame.origin.x = floorf((CGRectGetWidth(self.bounds) - CGRectGetWidth(self.logoImageView.frame)) / 2.0);
-    frame.origin.y = floorf(CGRectGetMinY(self.bounds) / 5.0) + 25.0;
+    frame.origin.y = floorf(CGRectGetMinY(self.bounds) / 5.0) + 50.0;
     self.logoImageView.frame = frame;
-    
-    [self.titleLabel sizeToFit];
-    frame = self.titleLabel.frame;
-    frame.origin.x = floorf((CGRectGetWidth(self.bounds) - CGRectGetWidth(self.titleLabel.frame)) / 2.0);
-    frame.origin.y = floorf(CGRectGetMaxY(self.logoImageView.frame) + 10.0);
-    self.titleLabel.frame = frame;
     
     frame = self.usernameInput.frame;
     frame.size.width = CGRectGetWidth(self.bounds) - 100.0;
     frame.size.height = kSignupTextFieldHeight;
     frame.origin.x = floorf((CGRectGetWidth(self.bounds) - frame.size.width) / 2.0);
-    frame.origin.y = CGRectGetMaxY(self.titleLabel.frame) + kSignupTextFieldVerticalMargin;
+    frame.origin.y = floorf(CGRectGetMaxY(self.logoImageView.frame) + 10.0) + kSignupTextFieldVerticalMargin;
     self.usernameInput.frame = frame;
 
     frame = self.passwordInput.frame;
@@ -163,7 +154,7 @@ static const CGFloat kContinueButtonHeight = 40.0;
     frame.size.width = kContinueButtonWidth;
     frame.size.height = kContinueButtonHeight;
     frame.origin.x = floorf((CGRectGetWidth(self.bounds) - kContinueButtonWidth) / 2.0);
-    frame.origin.y = CGRectGetMaxY(self.phoneNumberInput.frame) + kSignupTextFieldVerticalMargin + 10.0;
+    frame.origin.y = CGRectGetMaxY(self.titleLabel.frame) + kSignupTextFieldVerticalMargin;
     self.continueButton.frame = frame;
 
     [self.loginButton sizeToFit];
@@ -171,6 +162,12 @@ static const CGFloat kContinueButtonHeight = 40.0;
     frame.origin.x = floorf((CGRectGetWidth(self.bounds) - CGRectGetWidth(self.loginButton.frame)) / 2.0);
     frame.origin.y = CGRectGetMaxY(self.continueButton.frame) + 12.5;
     self.loginButton.frame = frame;
+    
+    [self.titleLabel sizeToFit];
+    frame = self.titleLabel.frame;
+    frame.origin.x = floorf((CGRectGetWidth(self.bounds) - CGRectGetWidth(self.titleLabel.frame)) / 2.0);
+    frame.origin.y =  CGRectGetMaxY(self.phoneNumberInput.frame) + kSignupTextFieldVerticalMargin;
+    self.titleLabel.frame = frame;
     
     [self.legalLabel sizeToFit];
     frame = self.legalLabel.frame;
@@ -181,13 +178,13 @@ static const CGFloat kContinueButtonHeight = 40.0;
     [self.privacyButton sizeToFit];
     frame = self.privacyButton.frame;
     frame.origin.x = CGRectGetMinX(self.continueButton.frame);
-    frame.origin.y = CGRectGetMaxY(self.loginButton.frame) + 17.5;
+    frame.origin.y = CGRectGetMaxY(self.loginButton.frame) + 20.0;
     self.privacyButton.frame = frame;
     
     [self.legalButton sizeToFit];
     frame = self.legalButton.frame;
     frame.origin.x = CGRectGetMaxX(self.privacyButton.frame) + 12.5;
-    frame.origin.y = CGRectGetMaxY(self.loginButton.frame) + 17.5;
+    frame.origin.y = CGRectGetMaxY(self.loginButton.frame) + 20.0;
     self.legalButton.frame = frame;
 }
 
@@ -243,7 +240,7 @@ static const CGFloat kContinueButtonHeight = 40.0;
         [self.activityIndicator stopAnimating];
         [self.activityIndicator removeFromSuperview];
         self.activityIndicator = nil;
-        [self.continueButton setTitle:@"Let's get started" forState:UIControlStateNormal];
+        [self.continueButton setTitle:@"Sign up" forState:UIControlStateNormal];
         self.continueButton.enabled = YES;
     }
 }

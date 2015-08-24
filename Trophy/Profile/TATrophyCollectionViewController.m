@@ -31,7 +31,8 @@ static const CGFloat kTrophyCollectionViewCellWidth = 250.0;
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    self.collectionView.backgroundColor = [UIColor whiteColor];
+    self.collectionView.backgroundColor = [UIColor trophyLightGrayColor];
+
     
     NSString *reuseIdentifier = NSStringFromClass([TATrophyCollectionViewCell class]);
     [self.collectionView registerClass:[TATrophyCollectionViewCell class] forCellWithReuseIdentifier:reuseIdentifier];

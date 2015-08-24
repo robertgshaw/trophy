@@ -45,17 +45,21 @@
     
     if (self.showSetupFlow) {
         NSLog(@"New user, no settings information");
+        
+        //sets nav bar to hidden to properly configure status bar
         [self.navigationController setNavigationBarHidden:NO animated:YES];
+        
+        
         self.navigationItem.hidesBackButton = YES;
-        self.navigationController.navigationBar.barStyle = UIBarStyleDefault;
-        self.navigationController.navigationBar.barTintColor = [UIColor darkYellowColor];
+        self.navigationController.navigationBar.translucent = NO;
+        self.navigationController.navigationBar.barTintColor = [UIColor trophyNavyColor];
+        self.navigationController.navigationBar.tintColor = [UIColor trophyNavyColor];
         UILabel *titleLabel = [[UILabel alloc] init];
-        titleLabel.font = [UIFont boldSystemFontOfSize:20.0];
         titleLabel.backgroundColor = [UIColor clearColor];
         titleLabel.textColor = [UIColor whiteColor];
         titleLabel.textAlignment = NSTextAlignmentCenter;
-        titleLabel.text = @"CREATE PROFILE";
-        titleLabel.font = [UIFont fontWithName:@"Avenir-Heavy" size:20.0];
+        titleLabel.text = @"Create your profile";
+        titleLabel.font = [UIFont fontWithName:@"Avenir" size:20.0];
         [titleLabel sizeToFit];
         self.navigationItem.titleView = titleLabel;
         
@@ -65,22 +69,22 @@
     } else {
         NSLog(@"Loading settings information");
         self.navigationController.navigationBar.barStyle = UIBarStyleDefault;
-        self.navigationController.navigationBar.barTintColor = [UIColor darkYellowColor];
+        self.navigationController.navigationBar.barTintColor = [UIColor trophyNavyColor];
         self.navigationController.navigationBar.tintColor = [UIColor whiteColor];
+        self.navigationController.navigationBar.translucent = NO;
         
         UILabel *titleLabel = [[UILabel alloc] init];
-        titleLabel.font = [UIFont boldSystemFontOfSize:20.0];
         titleLabel.backgroundColor = [UIColor clearColor];
         titleLabel.textColor = [UIColor whiteColor];
         titleLabel.textAlignment = NSTextAlignmentCenter;
         titleLabel.font = [UIFont fontWithName:@"Avenir-Medium" size:20.0];
-        titleLabel.text = @"Settings";
+        titleLabel.text = @"Profile Settings";
         [titleLabel sizeToFit];
         self.navigationItem.titleView = titleLabel;
     
         UIBarButtonItem *rightButton = [[UIBarButtonItem alloc] initWithTitle:@"Logout" style:UIBarButtonItemStylePlain target:self action:@selector(logoutButtonPressed)];
         self.navigationItem.rightBarButtonItem = rightButton;
-
+        
         TASettingsView *settingsView = [[TASettingsView alloc] initWithSettings:[TAActiveUserManager sharedManager].activeUser];
         settingsView.frame = self.view.bounds;
         settingsView.delegate = self;
@@ -167,6 +171,11 @@
 - (void)logoutButtonPressed
 {
     [[TAActiveUserManager sharedManager] endSession];
+}
+
+-(UIStatusBarStyle)preferredStatusBarStyle
+{
+    return UIStatusBarStyleLightContent;
 }
 
 @end

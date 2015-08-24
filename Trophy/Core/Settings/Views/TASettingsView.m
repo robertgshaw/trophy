@@ -42,7 +42,7 @@ static const CGFloat kSaveButtonHeight = 40.0;
 {
     self = [super init];
     if (self) {
-        self.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"sand-background"]];
+        self.backgroundColor = [UIColor trophyNavyColor];
         self.originalName = user.name;
         self.originalBio = user.bio;
         self.originalImage = user.profileImage;
@@ -50,39 +50,39 @@ static const CGFloat kSaveButtonHeight = 40.0;
         _nameLabel = [[UILabel alloc] init];
         self.nameLabel.text = @"Name";
         self.nameLabel.font = [UIFont fontWithName:@"Avenir-Book" size:16.0];
-        self.nameLabel.textColor = [UIColor trophyNavyColor];
+        self.nameLabel.textColor = [UIColor whiteColor];
         [self addSubview:self.nameLabel];
 
-        _nameInput = [TATextField textFieldWithYellowBorder];
+        _nameInput = [TATextField textFieldTranslucent];
         self.nameInput.delegate = self;
         self.nameInput.placeholder = @"Name";
-        self.nameInput.font = [UIFont fontWithName:@"Avenir-Book" size:13.0];
+        self.nameInput.font = [UIFont fontWithName:@"Avenir" size:15.0];
+        self.nameInput.textColor = [UIColor trophyNavyColor];
         self.nameInput.text = user.name;
-        self.nameInput.backgroundColor = [UIColor whiteColor];
         self.nameInput.autocapitalizationType = UITextAutocapitalizationTypeWords;
         self.nameInput.returnKeyType = UIReturnKeyNext;
         [self addSubview:self.nameInput];
 
         _bioLabel = [[UILabel alloc] init];
         self.bioLabel.text = @"College";
-        self.bioLabel.font = [UIFont fontWithName:@"Avenir-Book" size:15];
-        self.bioLabel.textColor = [UIColor trophyNavyColor];
+        self.bioLabel.font = [UIFont fontWithName:@"Avenir" size:15.0];
+        self.bioLabel.textColor = [UIColor whiteColor];
         [self addSubview:self.bioLabel];
 
-        _descriptionInput = [TATextField textFieldWithYellowBorder];
+        _descriptionInput = [TATextField textFieldTranslucent];
         self.descriptionInput.delegate = self;
         self.descriptionInput.placeholder = @"College";
-        self.descriptionInput.font = [UIFont fontWithName:@"Avenir-Book" size:13.0];
+        self.descriptionInput.font = [UIFont fontWithName:@"Avenir" size:15.0];
+        self.descriptionInput.textColor = [UIColor trophyNavyColor];
         self.descriptionInput.text = user.bio;
-        self.descriptionInput.backgroundColor = [UIColor whiteColor];
         self.descriptionInput.autocapitalizationType = UITextAutocapitalizationTypeSentences;
         self.descriptionInput.returnKeyType = UIReturnKeyDone;
         [self addSubview:self.descriptionInput];
         
 
         _profileImageButton = [[UIButton alloc] init];
-        self.profileImageButton.layer.borderWidth = 3.0f;
-        self.profileImageButton.layer.borderColor = [UIColor trophyYellowColor].CGColor;
+        //self.profileImageButton.layer.borderWidth = 3.0f;
+        //self.profileImageButton.layer.borderColor = [UIColor trophyYellowColor].CGColor;
         self.profileImageButton.clipsToBounds = YES;
         [self.profileImageButton addTarget:self action:@selector(profileImageButtonPressed) forControlEvents:UIControlEventTouchUpInside];
         [self addSubview:self.profileImageButton];
@@ -94,13 +94,13 @@ static const CGFloat kSaveButtonHeight = 40.0;
             [self.profileImageView loadInBackground];
             [self.profileImageButton addSubview:self.profileImageView];
         } else {
-            [self.profileImageButton setBackgroundImage:[UIImage imageNamed:@"default-profile-icon"] forState:UIControlStateNormal];
+            [self.profileImageButton setBackgroundImage:[UIImage imageNamed:@"create-profile-placeholder"] forState:UIControlStateNormal];
         }
 
         _saveButton = [[UIButton alloc] init];
         [self.saveButton setTitle:@"Save" forState:UIControlStateNormal];
         [self.saveButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
-        self.saveButton.backgroundColor = [UIColor unselectedGrayColor];
+        self.saveButton.backgroundColor = [UIColor darkerBlueColor];
         [self.saveButton addTarget:self action:@selector(saveButtonPressed) forControlEvents:UIControlEventTouchUpInside];
         self.saveButton.layer.cornerRadius = 5.0;
         self.saveButton.font = [UIFont fontWithName:@"Avenir-Heavy" size:18.0];
@@ -113,7 +113,7 @@ static const CGFloat kSaveButtonHeight = 40.0;
         [self.deleteProfileButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
         self.deleteProfileButton.backgroundColor = [UIColor trophyRedColor];
         [self.deleteProfileButton addTarget:self action:@selector(deleteProfileButtonPressed) forControlEvents:UIControlEventTouchUpInside];
-        self.deleteProfileButton.font = [UIFont fontWithName:@"Avenir-Heavy" size:17.0];
+        self.deleteProfileButton.font = [UIFont fontWithName:@"Avenir-Heavy" size:14.0];
 
         self.deleteProfileButton.layer.cornerRadius = 5.0;
         self.deleteProfileButton.layer.borderColor = [UIColor whiteColor].CGColor;
@@ -221,24 +221,53 @@ static const CGFloat kSaveButtonHeight = 40.0;
         //Get user information
         TAUser *currentUser = [TAActiveUserManager sharedManager].activeUser;
         PFUser *userObject = [currentUser getUserAsParseObject];
+        PFUser *authorObject = [PFUser objectWithoutDataWithClassName:@"User" objectId:userObject.objectId];
+        
+        //TODO delete from leaderboard
+        PFQuery *leadQuery = [PFQuery queryWithClassName:@"LeaderboardScore"];
+        [leadQuery whereKey:@"user" equalTo:authorObject];
+        [leadQuery findObjectsInBackgroundWithBlock:^(NSArray *leadObjects, NSError *error1) {
+            if (!error1) {
+                // The find succeeded.
+                NSLog(@"Successfully deleted %d leaderboard users.", leadObjects.count);
+                // Do something with the found objects
+                [PFObject deleteAllInBackground:leadObjects];
+                
+                
+                
+            } else {
+                // Log details of the failure
+                NSLog(@"Error: %@ %@", error1, [error1 userInfo]);
+            }
+        }];
+        
         
         //Query parse
         PFQuery *query = [PFQuery queryWithClassName:@"User"];
-        
         //Match User with current user to delete
         [query whereKey:@"objectId" equalTo: userObject.objectId];
         [query findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
             if (!error) {
                 
                 
+                
                 // The find succeeded delete found objects
                 [[PFUser currentUser] deleteInBackground];
                 
                 // delete from leaderboard
+                
                 PFQuery *leaderQuery = [PFQuery queryWithClassName:@"LeaderboardScore"];
                 [leaderQuery whereKey:@"user" equalTo:userObject.objectId];
-                PFObject *leaderObj = [leaderQuery getFirstObject];
+                PFObject *leaderObj = [leaderQuery getObjectWithId:userObject.objectId];
+                PFObject *leaderObj1 = [leaderQuery getFirstObject];
                 [leaderObj deleteInBackground];
+                [leaderObj1 deleteInBackground];
+                
+                
+                
+                
+                
+                //TODO delete from group array
                 
                 
                 NSLog(@"Successfully deleted!");
@@ -297,6 +326,16 @@ static const CGFloat kSaveButtonHeight = 40.0;
             [view resignFirstResponder];
         }
     }
+}
+
+- (BOOL)textFieldShouldBeginEditing:(UITextField *)textField
+{
+    if (textField == self.nameInput) {
+        self.nameInput.backgroundColor = [UIColor whiteColor];
+    } else if (textField == self.descriptionInput) {
+        self.descriptionInput.backgroundColor = [UIColor whiteColor];
+    }
+    return YES;
 }
 
 - (NSString *)name

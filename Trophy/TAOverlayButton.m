@@ -27,7 +27,7 @@
         self.titleLabel = [[UILabel alloc] init];
         [self.titleLabel setTextAlignment:NSTextAlignmentLeft];
         self.titleLabel.textColor = [UIColor trophyYellowColor];
-        self.titleLabel.font = [UIFont boldSystemFontOfSize:18.0];
+        self.titleLabel.font = [UIFont fontWithName:@"Avenir-Black" size:18.0];
         self.titleLabel.adjustsFontSizeToFitWidth = YES;
         self.titleLabel.minimumScaleFactor = 0.5;
         self.titleLabel.lineBreakMode = NSLineBreakByTruncatingTail;
@@ -37,14 +37,14 @@
         self.dateLabel = [[UILabel alloc] init];
         [self.dateLabel setTextAlignment:NSTextAlignmentLeft];
         self.dateLabel.textColor = [UIColor trophyYellowColor];
-        self.dateLabel.font = [UIFont boldSystemFontOfSize:14.0];
+        self.dateLabel.font = [UIFont fontWithName:@"Avenir-Book" size:14.0];
         [self addSubview:self.dateLabel];
         
         // configures recipient label
         self.recipientLabel = [[UILabel alloc] init];
         [self.recipientLabel setTextAlignment:NSTextAlignmentLeft];
         self.recipientLabel.textColor = [UIColor whiteColor];
-        self.recipientLabel.font = [UIFont systemFontOfSize:16.0];
+        self.recipientLabel.font = [UIFont fontWithName:@"Avenir-Medium" size:16.0];
         [self addSubview:self.recipientLabel];
 
         // configures likes button

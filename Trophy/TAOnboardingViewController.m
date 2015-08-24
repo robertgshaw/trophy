@@ -34,47 +34,49 @@ static const CGFloat extraInfoLogoHeight = 50.0;
     // configures nav bar
     [self.navigationController setNavigationBarHidden:NO animated:YES];
     self.navigationController.navigationBar.barStyle = UIBarStyleDefault;
-    self.navigationController.navigationBar.barTintColor = [UIColor darkYellowColor];
+    self.navigationController.navigationBar.barTintColor = [UIColor trophyNavyColor];
     self.navigationController.navigationBar.tintColor = [UIColor whiteColor];
+    self.navigationController.navigationBar.translucent = NO;
    
     // configures the onboarding View
     self.view.backgroundColor = [UIColor trophyNavyColor];
     self.edgesForExtendedLayout = UIRectEdgeNone;
     
+    // adds trophy image
+    
+    UIImageView *trophyImageView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"home-logo"]];
+    CGRect frame = trophyImageView.frame;
+    frame.origin.x = CGRectGetMidX(self.view.bounds) - floorf(CGRectGetWidth(trophyImageView.frame) / 2.0);
+    frame.origin.y = 60.0;
+    trophyImageView.frame = frame;
+    [self.view addSubview:trophyImageView];
+    
     // configures welcome label
     UILabel *welcomeLabel = [[UILabel alloc] init];
-    CGRect frame = welcomeLabel.frame;
+    frame = welcomeLabel.frame;
     frame.size.width = welcomeLogoWidth;
     frame.size.height = welcomeLogoHeight;
     frame.origin.x = floorf((CGRectGetWidth(self.view.bounds) - welcomeLogoWidth) / 2.0) + 6.0;
-    frame.origin.y = 60.0;
+    frame.origin.y = CGRectGetMaxY(trophyImageView.frame) + 25.0;
     welcomeLabel.frame = frame;
     welcomeLabel.textAlignment = NSTextAlignmentCenter;
-    welcomeLabel.font = [UIFont fontWithName:@"Avenir-Heavy" size:25.0];
-    welcomeLabel.text = @"Welcome To Trophy";
-    welcomeLabel.textColor = [UIColor trophyYellowColor];
+    welcomeLabel.font = [UIFont fontWithName:@"Avenir" size:25.0];
+    welcomeLabel.text = @"Have a group code?";
+    welcomeLabel.textColor = [UIColor whiteColor];
     UIFont *font = welcomeLabel.font;
     welcomeLabel.font = [font fontWithSize:24];
     [self.view addSubview:welcomeLabel];
-    
-    // adds trophy image
-    UIImageView *trophyImageView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"home-logo"]];
-    frame = trophyImageView.frame;
-    frame.origin.x = CGRectGetMidX(self.view.bounds) - floorf(CGRectGetWidth(trophyImageView.frame) / 2.0);
-    frame.origin.y = CGRectGetMaxY(welcomeLabel.frame) + 25.0;
-    trophyImageView.frame = frame;
-    [self.view addSubview:trophyImageView];
     
     // adds join group button
     UIButton *joinGroupButton = [[UIButton alloc] init];
     [joinGroupButton setTitle:@"Join Group" forState:UIControlStateNormal];
     joinGroupButton.font = [UIFont fontWithName:@"Avenir-Heavy" size:20.0];
     [joinGroupButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
-    joinGroupButton.backgroundColor = [UIColor standardBlueButtonColor];
+    joinGroupButton.backgroundColor = [UIColor darkerBlueColor];
     joinGroupButton.layer.cornerRadius = 5.0;
     frame = CGRectZero;
     frame.origin.x = floorf((CGRectGetWidth(self.view.bounds) - kGroupButtonWidth) / 2.0);
-    frame.origin.y = CGRectGetMaxY(trophyImageView.frame) + 50.0;
+    frame.origin.y = CGRectGetMaxY(welcomeLabel.frame) + 25.0;
     frame.size.width = kGroupButtonWidth;
     frame.size.height = kGroupButtonHeight;
     joinGroupButton.frame = frame;
@@ -99,7 +101,7 @@ static const CGFloat extraInfoLogoHeight = 50.0;
 //    [self.view addSubview:welcomeLabel];
     
     // adds settings button to view
-    UIBarButtonItem *leftButton = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"user-settings-icon"]
+    UIBarButtonItem *leftButton = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"settings-new-small"]
                                                                    style:UIBarButtonItemStylePlain
                                                                   target:self
                                                                   action:@selector(presentSettings:)];
