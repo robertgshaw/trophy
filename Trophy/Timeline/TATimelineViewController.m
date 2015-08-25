@@ -102,11 +102,15 @@ static const CGFloat kGroupsButtonHeight = 70.0;
     
     [self layoutGroupListView];
     
+    
 }
 
 - (void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
+    
+    //sets active group
+    
     TAGroup *activeGroup = [TAGroupManager sharedManager].activeGroup;
     if (self.currentGroup && [self.currentGroup.groupId isEqualToString:activeGroup.groupId] == NO) {
         [self loadObjects];
