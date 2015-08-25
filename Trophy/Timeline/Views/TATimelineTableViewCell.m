@@ -33,6 +33,8 @@
         self.imageView.contentMode = UIViewContentModeScaleAspectFill;
         self.imageView.clipsToBounds = YES;
         self.imageView.layer.cornerRadius = 5.0;
+        self.imageView.layer.borderWidth = 1.0;
+        self.imageView.layer.borderColor = [UIColor lightGrayColor].CGColor;
         self.imageView.layer.masksToBounds = YES;
         
         // configures vertical gray bar
