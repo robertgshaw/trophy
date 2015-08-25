@@ -9,29 +9,23 @@
 #import "TATrophyCloseupView.h"
 #import "TACommentTableViewController.h"
 #import "TATrophyActionFooterView.h"
-#import "TAOverlayButton.h"
 #import "TABackButton.h"
-#import "TAFlagButton.h"
-
+#import "TAOverlayButton.h"
 #import "UIColor+TAAdditions.h"
 #import <Parse/Parse.h>
 #import <ParseUI/ParseUI.h>
 #import "TATrophyManager.h"
 #import "TALikesButton.h"
+#import "TAOverlayButton.h"
 
 
-static const CGFloat kTrophyImageCornerRadius = 15.0;
-static const CGFloat overlayHeight = 140.0;
-static const CGFloat closeupMargin = 10.0;
+static const CGFloat closeupMargin = 4;
 
 @interface TATrophyCloseupView ()
 
 @property (nonatomic, strong) PFImageView *trophyImageView;
 @property (nonatomic, strong) TAOverlayButton *overlay;
-@property (nonatomic, strong) TABackButton *backButton;
-@property (nonatomic, strong) TAFlagButton *flagButton;
-
-
+@property (nonatomic, strong) UIButton *backgroundTap;
 @end
 
 @implementation TATrophyCloseupView
@@ -49,26 +43,31 @@ static const CGFloat closeupMargin = 10.0;
         // assure that images will not be warped (http://developer.xamarin.com/api/type/MonoTouch.UIKit.UIViewContentMode/)
         self.trophyImageView.contentMode = UIViewContentModeScaleAspectFill;
         self.trophyImageView.clipsToBounds = YES;
-        self.trophyImageView.layer.cornerRadius = 5.0;
         self.trophyImageView.layer.masksToBounds = YES;
         self.trophyImageView.layer.borderColor = [UIColor trophyYellowColor].CGColor;
         self.trophyImageView.layer.borderWidth = 0.0;
         [self addSubview:self.trophyImageView];
         
+        // enables background tap
+        self.backgroundTap = [[UIButton alloc] init];
+        [self.backgroundTap addTarget:self action:@selector(backgroundDidTap:) forControlEvents:UIControlEventTouchUpInside];
+        [self addSubview:self.backgroundTap];
+        
         // adds back button
         self.backButton = [[TABackButton alloc] initWithFrame:CGRectZero];
-        [self.backButton setTintColor:[UIColor trophyYellowColor]];
         self.backButton.delegate = delegate;
+        self.backButton.hidden = YES;
         [self addSubview:self.backButton];
         
         // adds flag button
         self.flagButton = [[TAFlagButton alloc] initWithFrame:CGRectZero];
-        [self.backButton setTintColor:[UIColor trophyYellowColor]];
         self.flagButton.delegate = delegate;
+        self.flagButton.hidden = YES;
         [self addSubview:self.flagButton];
         
         // adds overlay
         self.overlay = [[TAOverlayButton alloc] initWithDelegate:delegate];
+        self.overlay.hidden = YES;
         [self addSubview:self.overlay];
         
         self.backgroundColor = [UIColor blackColor];
@@ -93,22 +92,26 @@ static const CGFloat closeupMargin = 10.0;
     self.trophyImageView.frame = frame;
     
     // lays out the overlay
-    frame.size = CGSizeMake(_trophyImageView.bounds.size.width, overlayHeight);
+    frame.size = CGSizeMake(_trophyImageView.bounds.size.width, (CGRectGetMaxY(self.bounds) - CGRectGetMaxY(self.trophyImageView.frame) + 80));
     frame.origin.x = CGRectGetMinX(self.bounds);
-    frame.origin.y = CGRectGetMaxY(self.bounds) - overlayHeight;
+    frame.origin.y = CGRectGetMaxY(self.bounds) - frame.size.height;
     self.overlay.frame = frame;
     
     // lays out the flag button
-    frame.size = CGSizeMake(70.0, 25.0);
-    frame.origin.x = CGRectGetMaxX(self.bounds) - (frame.size.width);
-    frame.origin.y = 25;
+    frame.size = CGSizeMake(25.0, 25.0);
+    frame.origin.x = CGRectGetMaxX(self.bounds) - (frame.size.width) - closeupMargin;
+    frame.origin.y = closeupMargin * 5;
     self.flagButton.frame = frame;
     
     // lays out the back button
-    frame.size = CGSizeMake(70.0, 25.0);
+    frame.size = CGSizeMake(25.0, 25.0);
     frame.origin.x = closeupMargin;
-    frame.origin.y = 25.0;
+    frame.origin.y = self.flagButton.frame.origin.y;
     self.backButton.frame = frame;
+    
+    // adds background tap
+    self.backgroundTap.frame = self.bounds;
+
 }
 
 // square crop
@@ -168,7 +171,7 @@ static const CGFloat closeupMargin = 10.0;
         [self.overlay.dateLabel setText:[format stringFromDate:trophy.time]];
         
         // "___ AWARDED _____"
-        self.overlay.recipientLabel.text = [NSString stringWithFormat:@"%@ awarded %@ for:",trophy.author.name, trophy.recipient.name];
+        self.overlay.recipientLabel.text = [NSString stringWithFormat:@"%@ awarded %@",trophy.author.name, trophy.recipient.name];
         [self.overlay.recipientLabel setText:self.overlay.recipientLabel.text];
         
         // Likes
@@ -176,6 +179,18 @@ static const CGFloat closeupMargin = 10.0;
         
         [self setNeedsLayout];
     }
+}
+
+// hides overlay on click
+- (void) hideOverlay
+{
+    self.overlay.hidden = !self.overlay.hidden;
+}
+
+// on background tap, hide
+- (void)backgroundDidTap:(id)sender
+{
+    [self.delegate1 hideDisplays];
 }
 
 @end

@@ -17,11 +17,14 @@
 #import "TAFlagButton.h"
 #import "TAGroupManager.h"
 
+static const CGFloat closeupMargin = 3;
+
 @interface TATrophyCloseupViewController () <TACommentTableViewControllerDelegate, TAFlagButtonDelegate, TABackButtonDelegate, TALikeButtonDelegate, TAOverlayButtonDelegate, TATrophyCloseupViewDelegate>
 
 @property (nonatomic, strong) TATrophy *trophy;
 @property (nonatomic, strong) TATrophyCloseupView *closeupView;
 @property (nonatomic, strong) UIButton *deleteButton;
+@property BOOL isAbleToBeDeleted;
 
 @end
 
@@ -56,19 +59,15 @@
     
     // configures and adds delete button
     _deleteButton = [[UIButton alloc] initWithFrame:CGRectZero];
-    self.deleteButton.backgroundColor = [UIColor trophyYellowColor];
-    [self.deleteButton setTitle:@"Delete" forState:UIControlStateNormal];
-    [self.deleteButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
-    self.deleteButton.titleLabel.font = [UIFont boldSystemFontOfSize:14.0];
-    self.deleteButton.layer.cornerRadius = 5.0;
-    self.deleteButton.clipsToBounds = YES;
+    [self.deleteButton setBackgroundImage:[UIImage imageNamed:@"delete-icon"] forState:UIControlStateNormal];
     [self.deleteButton addTarget:self action:@selector(deleteButtonPressed) forControlEvents:UIControlEventTouchUpInside];
     self.deleteButton.hidden = YES;
+    self.isAbleToBeDeleted = NO;
     
     CGRect frame;
-    frame.size = CGSizeMake(70.0, 25.0);
+    frame.size = CGSizeMake(25.0, 25.0);
     frame.origin.x = CGRectGetMidX(self.view.bounds) - (frame.size.width / 2);
-    frame.origin.y = 25;
+    frame.origin.y = closeupMargin * 6;
     self.deleteButton.frame = frame;
     [self.view addSubview:self.deleteButton];
 
@@ -79,7 +78,8 @@
 
     if([authorObject.objectId isEqualToString:userObject.objectId])
     {
-        self.deleteButton.hidden = NO;
+//        self.deleteButton.hidden = NO;
+        self.isAbleToBeDeleted = YES;
     }
 }
 
@@ -99,6 +99,19 @@
     TACommentTableViewController *commentsVC = [[TACommentTableViewController alloc] init];
     UINavigationController *navController = [[UINavigationController alloc] initWithRootViewController:commentsVC];
     [self presentViewController:navController animated:YES completion:nil];
+}
+
+// on background tap, hide the labels, etc
+- (void)hideDisplays
+{
+    [self.closeupView hideOverlay];
+    self.closeupView.backButton.hidden = !self.closeupView.backButton.hidden;
+    self.closeupView.flagButton.hidden = !self.closeupView.flagButton.hidden;
+    
+    // only toggle delete button if user is author of image
+    if (self.isAbleToBeDeleted) {
+        self.deleteButton.hidden = !self.deleteButton.hidden;
+    }
 }
 
 #pragma mark - TALikesButtonDelegate Methods

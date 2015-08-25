@@ -11,13 +11,6 @@
 #import <ParseUI/ParseUI.h>
 #import <Parse/Parse.h>
 
-@interface TAFlagButton ()
-
-@property (nonatomic, strong) UILabel *flagLabel;
-@property (nonatomic, strong) UIImageView *flagLogo;
-
-@end
-
 @implementation TAFlagButton
 
 - (instancetype)initWithFrame:(CGRect)frame
@@ -26,39 +19,12 @@
     if (self) {
         
         [self addTarget:self action:@selector(didPressFlagButton) forControlEvents:UIControlEventTouchUpInside];
-        
-        // initializes back label
-        self.flagLabel = [[UILabel alloc] initWithFrame:CGRectZero];
-        self.flagLabel.text = @"Flag";
-        self.flagLabel.textColor = [UIColor trophyYellowColor];
-        [self addSubview:self.flagLabel];
-        
-        // initializes back logo
-        self.flagLogo = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"flag-icon"]];
-        [self addSubview:self.flagLogo];
-    
+        [self setBackgroundImage:[UIImage imageNamed:@"flag-icon-white"] forState:UIControlStateNormal];
+
     }
     
     return self;
 }
-
-- (void) layoutSubviews
-{
-    // lays out the back logo
-    CGRect frame = self.flagLogo.frame;
-    frame.size = CGSizeMake(20.0, 20.0);
-    frame.origin.x = 0.0;
-    frame.origin.y = 0.0;
-    self.flagLogo.frame = frame;
-    
-    // lays out the back label
-    [self.flagLabel sizeToFit];
-    frame = self.flagLabel.frame;
-    frame.origin.x = CGRectGetMaxX(self.flagLogo.frame) + 1;
-    frame.origin.y = self.flagLogo.frame.origin.y;
-    self.flagLabel.frame = frame;
-}
-
 
 #pragma mark - button action handlers
 - (void)didPressFlagButton {

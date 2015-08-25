@@ -231,10 +231,10 @@ static const CGFloat kGroupsButtonHeight = 70.0;
                                         cell.imageView.image = [UIImage imageWithData:data];
     }];
 
-    
+    NSLog(@"%@", object);
     // set up caption label, author label, date label
     cell.descriptionLabel.text = object[@"caption"];
-    cell.authorLabel.text = [NSString stringWithFormat:@"%@ awarded %@ for:", object[@"author"][@"name"], object[@"recipient"][@"name"]];
+    cell.authorLabel.text = [NSString stringWithFormat:@"%@ awarded %@", object[@"author"][@"name"], object[@"recipient"][@"name"]];
     cell.dateLabel.text = [NSString stringWithFormat:@"%@" , [cell formatDate:object[@"time"]]];
     
     // sets comments label, button
