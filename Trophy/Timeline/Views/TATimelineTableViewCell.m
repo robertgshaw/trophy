@@ -19,8 +19,6 @@
 #import <ParseUI/ParseUI.h>
 #import <QuartzCore/QuartzCore.h>
 
-static const CGFloat kOverLayMargin = 7.0;
-
 @interface TATimelineTableViewCell ()
 
 @end
@@ -35,6 +33,8 @@ static const CGFloat kOverLayMargin = 7.0;
         self.imageView.contentMode = UIViewContentModeScaleAspectFill;
         self.imageView.clipsToBounds = YES;
         self.imageView.layer.cornerRadius = 5.0;
+        self.imageView.layer.borderWidth = 1.0;
+        self.imageView.layer.borderColor = [UIColor lightGrayColor].CGColor;
         self.imageView.layer.masksToBounds = YES;
         
         // configures vertical gray bar
@@ -61,8 +61,10 @@ static const CGFloat kOverLayMargin = 7.0;
         // configures comments
         _commentsLabel = [[UILabel alloc] initWithFrame:CGRectZero];
         self.commentsLabel.textColor = [UIColor trophyYellowColor];
-        self.commentsLabel.font = [UIFont fontWithName:@"Avenir-Heavy" size:12.0];
+        self.commentsLabel.font = [UIFont fontWithName:@"Avenir-Heavy" size:10.0];
         self.commentsLabel.lineBreakMode = NSLineBreakByTruncatingTail;
+        self.commentsLabel.textAlignment = NSTextAlignmentRight;
+        
         self.commentsLabel.numberOfLines = 1;
         [self addSubview:self.commentsLabel];
         self.commentsButton = [[UIButton alloc] init];
@@ -70,18 +72,18 @@ static const CGFloat kOverLayMargin = 7.0;
 
         // configures description
         _descriptionLabel = [[UILabel alloc] initWithFrame:CGRectZero];
-        self.descriptionLabel.numberOfLines = 0;
-        self.descriptionLabel.lineBreakMode = NSLineBreakByWordWrapping;
+        self.descriptionLabel.numberOfLines = 1;
+        self.descriptionLabel.lineBreakMode = NSLineBreakByTruncatingTail;
         self.descriptionLabel.textColor = [UIColor whiteColor];
-        self.descriptionLabel.font = [UIFont fontWithName:@"Avenir-Heavy" size:14.0];
+        self.descriptionLabel.font = [UIFont fontWithName:@"Avenir-Heavy" size:12.5];
         [self addSubview:self.descriptionLabel];
 
         // configures awarded to... logo
         _authorLabel = [[UILabel alloc] initWithFrame:CGRectZero];
-        self.authorLabel.numberOfLines = 0;
-        self.authorLabel.lineBreakMode = NSLineBreakByWordWrapping;
+        self.authorLabel.numberOfLines = 1;
+        self.authorLabel.lineBreakMode = NSLineBreakByTruncatingTail;
         self.authorLabel.textColor = [UIColor whiteColor];
-        self.authorLabel.font = [UIFont fontWithName:@"Avenir-Medium" size:13.0];
+        self.authorLabel.font = [UIFont fontWithName:@"Avenir-Medium" size:11.5];
         [self addSubview:self.authorLabel];
 
         // configures likes button
@@ -108,7 +110,6 @@ static const CGFloat kOverLayMargin = 7.0;
     // formats image
     frame = self.imageView.frame;
     frame.size.width = self.frame.size.width - self.dateLabel.frame.size.width - 10;
-    //frame.size.height = [TATimelineTableViewCell formatHeightFromSize:self.imageView.image.size withWidth:frame.size.width];
     frame.size.height = frame.size.width * 1.3;
     frame.origin.x = CGRectGetMaxX(self.dateLabel.frame);
     frame.origin.y = 7;
@@ -130,6 +131,8 @@ static const CGFloat kOverLayMargin = 7.0;
     frame.origin.y = CGRectGetMaxY(self.imageView.frame) * .975 - frame.size.height;
     self.overlay.frame = frame;
     
+    CGFloat kOverLayMargin = frame.size.height / 20;
+    
     // formats likes button, inside overlay
     [self.likesButton sizeToFit];
     frame = self.likesButton.frame;
@@ -142,7 +145,7 @@ static const CGFloat kOverLayMargin = 7.0;
     frame = self.authorLabel.frame;
     frame.origin.x = CGRectGetMaxX(self.likesButton.frame) + 7.5;
     frame.origin.y = CGRectGetMinY(self.overlay.frame) + self.overlay.frame.size.height * .15;
-    frame.size.width = CGRectGetMaxX(self.overlay.frame) - CGRectGetMinX(frame) - kOverLayMargin;
+    frame.size.width = self.overlay.frame.size.width * .8;
     self.authorLabel.frame = frame;
     
     // formats description/ caption label, inside overlay
@@ -150,12 +153,13 @@ static const CGFloat kOverLayMargin = 7.0;
     frame = self.descriptionLabel.frame;
     frame.origin.x = CGRectGetMinX(self.authorLabel.frame);
     frame.origin.y = CGRectGetMaxY(self.authorLabel.frame) + 4;
-    frame.size.width = CGRectGetMaxX(self.overlay.frame) - CGRectGetMinX(frame) - kOverLayMargin;
+    frame.size.width = self.authorLabel.frame.size.width;
     self.descriptionLabel.frame = frame;
     
     // formats comments button/ label
     [self.commentsLabel sizeToFit];
     frame = self.commentsLabel.frame;
+    frame.size.width = self.overlay.frame.size.width * .3;
     frame.origin.x = CGRectGetMaxX(self.overlay.frame) - frame.size.width - kOverLayMargin * 2;
     frame.origin.y = CGRectGetMaxY(self.overlay.frame) - frame.size.height - kOverLayMargin * 2;
     self.commentsLabel.frame = frame;

@@ -102,17 +102,20 @@ static const CGFloat kGroupsButtonHeight = 70.0;
     
     [self layoutGroupListView];
     
+    
 }
 
 - (void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
+    
+    //sets active group
+    
     TAGroup *activeGroup = [TAGroupManager sharedManager].activeGroup;
     if (self.currentGroup && [self.currentGroup.groupId isEqualToString:activeGroup.groupId] == NO) {
         [self loadObjects];
     }
-
-    // displays the nav bar and the tab bar - accounts for transition from comments view table
+    
     self.navigationController.navigationBarHidden = NO;
 
 }
@@ -150,13 +153,13 @@ static const CGFloat kGroupsButtonHeight = 70.0;
     {
         // configures empty timeline display
         self.zeroContentImage = [[UIImageView alloc] initWithFrame:CGRectZero];
-        self.zeroContentImage.image = [UIImage imageNamed:@"empty-timeline-background-photo"];
+        self.zeroContentImage.image = [UIImage imageNamed:@"zero-content-timeline"];
         // lays out the empty timeline display
         CGRect frame = self.zeroContentImage.frame;
         frame.size.width = self.view.frame.size.width;
         frame.size.height = (frame.size.width / self.zeroContentImage.image.size.width) * self.zeroContentImage.image.size.height;
         frame.origin.x = 0;
-        frame.origin.y = CGRectGetMidY(self.view.frame) - (frame.size.height / 2);
+        frame.origin.y = (CGRectGetMinY(self.view.frame)-30.0);
         self.zeroContentImage.frame = frame;
         [self.view addSubview:self.zeroContentImage];
         
@@ -232,10 +235,10 @@ static const CGFloat kGroupsButtonHeight = 70.0;
                                         cell.imageView.image = [UIImage imageWithData:data];
     }];
 
-    
+    NSLog(@"%@", object);
     // set up caption label, author label, date label
     cell.descriptionLabel.text = object[@"caption"];
-    cell.authorLabel.text = [NSString stringWithFormat:@"%@ awarded %@ for:", object[@"author"][@"name"], object[@"recipient"][@"name"]];
+    cell.authorLabel.text = [NSString stringWithFormat:@"%@ awarded %@", object[@"author"][@"name"], object[@"recipient"][@"name"]];
     cell.dateLabel.text = [NSString stringWithFormat:@"%@" , [cell formatDate:object[@"time"]]];
     
     // sets comments label, button

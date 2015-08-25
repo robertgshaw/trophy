@@ -10,7 +10,6 @@
 #import "UIColor+TAAdditions.h"
 #import "TATrophyManager.h"
 
-static const CGFloat kActionFooterWidth = 150.0;
 static const CGFloat kButtonWidth = 25.0;
 
 @interface TALikesButton ()
@@ -93,7 +92,7 @@ static const CGFloat kButtonWidth = 25.0;
 
 + (CGFloat)likeButtonWidth
 {
-    return kActionFooterWidth;
+    return kButtonWidth;
 }
 
 

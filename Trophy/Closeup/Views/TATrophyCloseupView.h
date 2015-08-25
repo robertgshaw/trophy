@@ -8,11 +8,12 @@
 
 #import <UIKit/UIKit.h>
 
-#import "TAOverlayButton.h"
 #import "TATrophy.h"
 #import "TATrophyActionFooterView.h"
 #import "TALikesButton.h"
 #import "TABackButton.h"
+#import "TAFlagButton.h"
+#import "TAOverlayButton.h"
 
 
 @class TATrophyCloseupView;
@@ -20,6 +21,8 @@
 @protocol TATrophyCloseupViewDelegate <NSObject>
 
 - (void)closeupViewDidPressCommentsButton:(TATrophyCloseupView *)TrophyCloseupView;
+- (void)hideDisplays;
+
 
 @end
 
@@ -31,5 +34,10 @@
 @property (nonatomic, weak) id<TATrophyCloseupViewDelegate> delegate1;
 
 @property (nonatomic, strong) TATrophy *trophy;
+
+@property (nonatomic, strong) TABackButton *backButton;
+@property (nonatomic, strong) TAFlagButton *flagButton;
+
+-(void) hideOverlay;
 
 @end
