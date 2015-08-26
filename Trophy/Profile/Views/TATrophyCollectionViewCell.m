@@ -60,9 +60,10 @@ static const CGFloat kTrophyBottomMargin = 50.0;
         self.authorLabel.font = [UIFont fontWithName:@"Avenir-Book" size:13.0];
         [self addSubview:self.authorLabel];
         
-        _actionFooterView = [[TATrophyActionFooterView alloc] initWithFrame:CGRectZero];
-        self.actionFooterView.delegate = self.actionFooterDelegate;
-        [self addSubview:self.actionFooterView];
+        //this adds like button, commented out because it doesn't look good directly over the photo
+//        _actionFooterView = [[TATrophyActionFooterView alloc] initWithFrame:CGRectZero];
+//        self.actionFooterView.delegate = self.actionFooterDelegate;
+//        [self addSubview:self.actionFooterView];
     }
     return self;
 }
@@ -87,11 +88,11 @@ static const CGFloat kTrophyBottomMargin = 50.0;
     }
     self.trophyImageView.frame = frame;
     
-    frame = self.actionFooterView.frame;
-    frame.size = CGSizeMake([TATrophyActionFooterView actionFooterWidth], 20.0);
-    frame.origin.x = CGRectGetMidX(self.bounds) - floorf([TATrophyActionFooterView actionFooterWidth] / 2.0)+60;
-    frame.origin.y = CGRectGetMaxY(self.bounds) - 60.0;
-    self.actionFooterView.frame = frame;
+//    frame = self.actionFooterView.frame;
+//    frame.size = CGSizeMake([TATrophyActionFooterView actionFooterWidth], 20.0);
+//    frame.origin.x = CGRectGetMidX(self.bounds) - floorf([TATrophyActionFooterView actionFooterWidth] / 2.0)+60;
+//    frame.origin.y = CGRectGetMaxY(self.bounds) - 60.0;
+//    self.actionFooterView.frame = frame;
     
     [self.authorLabel sizeToFit];
     frame = self.authorLabel.frame;
