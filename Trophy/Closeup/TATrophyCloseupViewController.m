@@ -64,12 +64,14 @@ static const CGFloat closeupMargin = 3;
     self.deleteButton.hidden = YES;
     self.isAbleToBeDeleted = NO;
     
+    CGFloat margin = self.closeupView.bounds.size.width * .07;
+    
     CGRect frame;
-    frame.size = CGSizeMake(25.0, 25.0);
+    frame.size = CGSizeMake(30.0, 30.0);
     frame.origin.x = CGRectGetMidX(self.view.bounds) - (frame.size.width / 2);
-    frame.origin.y = closeupMargin * 6;
+    frame.origin.y = margin * 1.1;
     self.deleteButton.frame = frame;
-    [self.view addSubview:self.deleteButton];
+    [self.closeupView addSubview:self.deleteButton];
 
     PFUser *authorObject = [self.trophy.author getUserAsParseObject];
     

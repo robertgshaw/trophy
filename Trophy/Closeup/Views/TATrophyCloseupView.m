@@ -81,31 +81,33 @@ static const CGFloat closeupMargin = 4;
 {
     [super layoutSubviews];
     
+    CGFloat margin = self.bounds.size.width * .07;
+    
     // configures image display
     CGRect frame = self.trophyImageView.frame;
-    CGFloat height = CGRectGetMaxY(self.frame) * 8 / 10;
+    CGFloat height = CGRectGetMaxY(self.frame) * 6 / 8;
     CGFloat width = CGRectGetMaxX(self.frame);
     frame.origin.x = (CGRectGetMidX(self.bounds) - floorf(width / 2.0));
-    frame.origin.y = CGRectGetMaxY(self.frame) * 1 / 10;
+    frame.origin.y = CGRectGetMaxY(self.frame) * 1 / 8;
     frame.size.width = width;
     frame.size.height = height;
     self.trophyImageView.frame = frame;
     
     // lays out the overlay
-    frame.size = CGSizeMake(_trophyImageView.bounds.size.width, (CGRectGetMaxY(self.bounds) - CGRectGetMaxY(self.trophyImageView.frame) + 80));
+    frame.size = CGSizeMake(_trophyImageView.bounds.size.width, (CGRectGetMaxY(self.bounds) - CGRectGetMaxY(self.trophyImageView.frame) + 75));
     frame.origin.x = CGRectGetMinX(self.bounds);
     frame.origin.y = CGRectGetMaxY(self.bounds) - frame.size.height;
     self.overlay.frame = frame;
     
     // lays out the flag button
-    frame.size = CGSizeMake(25.0, 25.0);
-    frame.origin.x = CGRectGetMaxX(self.bounds) - (frame.size.width) - closeupMargin;
-    frame.origin.y = closeupMargin * 5;
+    frame.size = CGSizeMake(30.0, 30.0);
+    frame.origin.x = CGRectGetMaxX(self.bounds) - (frame.size.width) - margin / 2;
+    frame.origin.y = margin * 1.1;
     self.flagButton.frame = frame;
     
     // lays out the back button
-    frame.size = CGSizeMake(25.0, 25.0);
-    frame.origin.x = closeupMargin;
+    frame.size = CGSizeMake(30.0, 30.0);
+    frame.origin.x = margin / 2;
     frame.origin.y = self.flagButton.frame.origin.y;
     self.backButton.frame = frame;
     

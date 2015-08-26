@@ -75,6 +75,8 @@ static const CGFloat closeupMargin = 3;
 {
     [super layoutSubviews];
     
+    CGFloat margin = self.bounds.size.width * .07;
+    
     // configures recipient label
     [self.recipientLabel sizeToFit];
     CGRect frame = self.recipientLabel.frame;
@@ -94,22 +96,22 @@ static const CGFloat closeupMargin = 3;
     // configures date label
     [self.dateLabel sizeToFit];
     frame = self.dateLabel.frame;
-    frame.size.height = 40;
+    frame.size.height = self.frame.size.height * .08;
     frame.origin.x = CGRectGetMidX(self.bounds) - (self.dateLabel.bounds.size.width / 2);
-    frame.origin.y = CGRectGetMaxY(self.bounds) - (closeupMargin * 2) - frame.size.height;
+    frame.origin.y = CGRectGetMaxY(self.bounds) - frame.size.height - margin;
     self.dateLabel.frame = frame;
 
     // configures like button
     frame = self.likesButton.frame;
     frame.size = CGSizeMake([TALikesButton likeButtonWidth], 40.0);
-    frame.origin.x = CGRectGetMaxX(self.bounds) - (closeupMargin) - frame.size.width;
+    frame.origin.x = CGRectGetMaxX(self.bounds) - margin - frame.size.width;
     frame.origin.y = CGRectGetMaxY(self.bounds) - (closeupMargin * 2) - frame.size.height;
     self.likesButton.frame = frame;
     
     // configures comment button
     frame = self.commentsButton.frame;
     frame.size = CGSizeMake(25.0, 25.0);
-    frame.origin.x = closeupMargin;
+    frame.origin.x = CGRectGetMinX(self.likesButton.frame) - frame.size.width - 10;
     frame.origin.y = self.likesButton.frame.origin.y + closeupMargin;
     self.commentsButton.frame = frame;
 
