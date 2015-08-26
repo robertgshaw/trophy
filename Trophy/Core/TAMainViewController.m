@@ -168,7 +168,6 @@
 {
     if (self.imagePickerController.cameraFlashMode == UIImagePickerControllerCameraFlashModeOn) {
         self.imagePickerController.cameraFlashMode = UIImagePickerControllerCameraFlashModeOff;
-       
     }
     else  {
         self.imagePickerController.cameraFlashMode = UIImagePickerControllerCameraFlashModeOn;

@@ -110,8 +110,8 @@ static const CGFloat closeupMargin = 3;
     
     // configures comment button
     frame = self.commentsButton.frame;
-    frame.size = CGSizeMake(25.0, 25.0);
-    frame.origin.x = CGRectGetMinX(self.likesButton.frame) - frame.size.width - 10;
+    frame.size = CGSizeMake(30.0, 30.0);
+    frame.origin.x = CGRectGetMinX(self.likesButton.frame) - frame.size.width - 20;
     frame.origin.y = self.likesButton.frame.origin.y + closeupMargin;
     self.commentsButton.frame = frame;
 
