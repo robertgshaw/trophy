@@ -63,7 +63,7 @@ static const CGFloat kContinueButtonHeight = 40.0;
         self.usernameInput.delegate = self;
         self.usernameInput.placeholder = @"Username";
         self.usernameInput.returnKeyType = UIReturnKeyNext;
-        self.usernameInput.font = [UIFont fontWithName:@"Avenir" size:15.0];
+        self.usernameInput.font = [UIFont fontWithName:@"Avenir" size:13.0];
         [self addSubview:self.usernameInput];
 
         _passwordInput = [TATextField textFieldTranslucent];
@@ -71,14 +71,14 @@ static const CGFloat kContinueButtonHeight = 40.0;
         self.passwordInput.secureTextEntry = YES;
         self.passwordInput.placeholder = @"Password";
         self.passwordInput.returnKeyType = UIReturnKeyNext;
-        self.passwordInput.font = [UIFont fontWithName:@"Avenir" size:15.0];
+        self.passwordInput.font = [UIFont fontWithName:@"Avenir" size:13.0];
         [self addSubview:self.passwordInput];
 
         _phoneNumberInput = [TAPhoneNumberField textFieldTranslucent];
         self.phoneNumberInput.placeholder = @"Phone Number";
         self.phoneNumberInput.returnKeyType = UIReturnKeyDone;
         self.phoneNumberInput.keyboardType = UIKeyboardTypePhonePad;
-        self.phoneNumberInput.font = [UIFont fontWithName:@"Avenir" size:15.0];
+        self.phoneNumberInput.font = [UIFont fontWithName:@"Avenir" size:13.0];
         [self addSubview:self.phoneNumberInput];
 
         _continueButton = [[UIButton alloc] init];
@@ -124,67 +124,71 @@ static const CGFloat kContinueButtonHeight = 40.0;
 {
     
     CGRect frame = self.logoImageView.frame;
-    frame.origin.x = floorf((CGRectGetWidth(self.bounds) - CGRectGetWidth(self.logoImageView.frame)) / 2.0);
-    frame.origin.y = floorf(CGRectGetMinY(self.bounds) / 5.0) + 50.0;
+    frame.size.width = self.bounds.size.width * .3;
+    frame.size.height = frame.size.width;
+    frame.origin.x = floorf((CGRectGetWidth(self.bounds) - CGRectGetWidth(frame)) / 2.0);
+    frame.origin.y = floorf(CGRectGetMinY(self.bounds) / 5.0) + (self.bounds.size.height * .075);
     self.logoImageView.frame = frame;
     
     frame = self.usernameInput.frame;
-    frame.size.width = CGRectGetWidth(self.bounds) - 100.0;
-    frame.size.height = kSignupTextFieldHeight;
+    frame.size.width = CGRectGetWidth(self.bounds) - (self.bounds.size.width * .3);
+    frame.size.height = self.bounds.size.height * .075;
     frame.origin.x = floorf((CGRectGetWidth(self.bounds) - frame.size.width) / 2.0);
-    frame.origin.y = floorf(CGRectGetMaxY(self.logoImageView.frame) + 10.0) + kSignupTextFieldVerticalMargin;
+    frame.origin.y = floorf(CGRectGetMaxY(self.logoImageView.frame)) + (self.bounds.size.height * .04);
     self.usernameInput.frame = frame;
 
     frame = self.passwordInput.frame;
-    frame.size.width = CGRectGetWidth(self.bounds) - 100.0;
-    frame.size.height = kSignupTextFieldHeight;
-    frame.origin.x = floorf((CGRectGetWidth(self.bounds) - frame.size.width) / 2.0);
-    frame.origin.y = CGRectGetMaxY(self.usernameInput.frame) + kSignupTextFieldVerticalMargin;
+    frame.size.width = self.usernameInput.frame.size.width;
+    frame.size.height = self.usernameInput.frame.size.height;
+    frame.origin.x = self.usernameInput.frame.origin.x;
+    frame.origin.y = CGRectGetMaxY(self.usernameInput.frame) + (self.bounds.size.height * .03);
     self.passwordInput.frame = frame;
 
     frame = self.phoneNumberInput.frame;
-    frame.size.width = CGRectGetWidth(self.bounds) - 100.0;
-    frame.size.height = kSignupTextFieldHeight;
-    frame.origin.x = floorf((CGRectGetWidth(self.bounds) - frame.size.width) / 2.0);
-    frame.origin.y = CGRectGetMaxY(self.passwordInput.frame) + kSignupTextFieldVerticalMargin;
+    frame.size.width = self.usernameInput.frame.size.width;
+    frame.size.height = self.usernameInput.frame.size.height;
+    frame.origin.x = self.usernameInput.frame.origin.x;
+    frame.origin.y = CGRectGetMaxY(self.passwordInput.frame) + (self.bounds.size.height * .03);
     self.phoneNumberInput.frame = frame;
+    
+    [self.titleLabel sizeToFit];
+    frame = self.titleLabel.frame;
+    frame.size.height = self.bounds.size.height * .05;
+    frame.origin.x = floorf((CGRectGetWidth(self.bounds) - CGRectGetWidth(self.titleLabel.frame)) / 2.0);
+    frame.origin.y =  CGRectGetMaxY(self.phoneNumberInput.frame) + (self.bounds.size.height * .03);
+    self.titleLabel.frame = frame;
 
     [self.continueButton sizeToFit];
     frame = self.continueButton.frame;
-    frame.size.width = kContinueButtonWidth;
-    frame.size.height = kContinueButtonHeight;
-    frame.origin.x = floorf((CGRectGetWidth(self.bounds) - kContinueButtonWidth) / 2.0);
-    frame.origin.y = CGRectGetMaxY(self.titleLabel.frame) + kSignupTextFieldVerticalMargin;
+    frame.size.height = self.bounds.size.height * .06;
+    frame.size.width = self.bounds.size.width * .5;
+    frame.origin.x = floorf(CGRectGetMidX(self.bounds) - (frame.size.width / 2.0));
+    frame.origin.y = CGRectGetMaxY(self.titleLabel.frame) + (self.bounds.size.height * .03);
     self.continueButton.frame = frame;
 
     [self.loginButton sizeToFit];
     frame = self.loginButton.frame;
+    frame.size.height = self.bounds.size.height * .05;
     frame.origin.x = floorf((CGRectGetWidth(self.bounds) - CGRectGetWidth(self.loginButton.frame)) / 2.0);
-    frame.origin.y = CGRectGetMaxY(self.continueButton.frame) + 12.5;
+    frame.origin.y = CGRectGetMaxY(self.continueButton.frame) + (self.bounds.size.height * .02);
     self.loginButton.frame = frame;
-    
-    [self.titleLabel sizeToFit];
-    frame = self.titleLabel.frame;
-    frame.origin.x = floorf((CGRectGetWidth(self.bounds) - CGRectGetWidth(self.titleLabel.frame)) / 2.0);
-    frame.origin.y =  CGRectGetMaxY(self.phoneNumberInput.frame) + kSignupTextFieldVerticalMargin;
-    self.titleLabel.frame = frame;
     
     [self.legalLabel sizeToFit];
     frame = self.legalLabel.frame;
-    frame.origin.x = CGRectGetMinX(self.bounds) + 15.0;
-    frame.origin.y = CGRectGetMaxY(self.loginButton.frame) + 12.5;
+    frame.origin.x = CGRectGetMidX(self.bounds) - (frame.size.width / 2);
+    frame.origin.y = CGRectGetMaxY(self.loginButton.frame) + (self.bounds.size.height * .02);
     self.legalLabel.frame = frame;
     
     [self.privacyButton sizeToFit];
     frame = self.privacyButton.frame;
-    frame.origin.x = CGRectGetMinX(self.continueButton.frame);
-    frame.origin.y = CGRectGetMaxY(self.loginButton.frame) + 20.0;
+    frame.origin.x = CGRectGetMidX(self.bounds) - frame.size.width * 1.25;
+    frame.origin.y = CGRectGetMaxY(self.legalLabel.frame) + (self.bounds.size.height * .01);
     self.privacyButton.frame = frame;
     
     [self.legalButton sizeToFit];
     frame = self.legalButton.frame;
-    frame.origin.x = CGRectGetMaxX(self.privacyButton.frame) + 12.5;
-    frame.origin.y = CGRectGetMaxY(self.loginButton.frame) + 20.0;
+    frame.origin.x = CGRectGetMidX(self.bounds) + frame.size.width * .25;
+    frame.origin.y = self.privacyButton.frame.origin.y;
     self.legalButton.frame = frame;
 }
 
