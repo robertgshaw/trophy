@@ -49,7 +49,6 @@
         //sets nav bar to hidden to properly configure status bar
         [self.navigationController setNavigationBarHidden:NO animated:YES];
         
-        
         self.navigationItem.hidesBackButton = YES;
         self.navigationController.navigationBar.translucent = NO;
         self.navigationController.navigationBar.barTintColor = [UIColor trophyNavyColor];

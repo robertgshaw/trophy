@@ -109,8 +109,7 @@ static const CGFloat kGroupsButtonHeight = 70.0;
 {
     [super viewWillAppear:animated];
     
-    //sets active group
-    
+    // sets active group
     TAGroup *activeGroup = [TAGroupManager sharedManager].activeGroup;
     if (self.currentGroup && [self.currentGroup.groupId isEqualToString:activeGroup.groupId] == NO) {
         [self loadObjects];
@@ -235,7 +234,6 @@ static const CGFloat kGroupsButtonHeight = 70.0;
                                         cell.imageView.image = [UIImage imageWithData:data];
     }];
 
-    NSLog(@"%@", object);
     // set up caption label, author label, date label
     cell.descriptionLabel.text = object[@"caption"];
     cell.authorLabel.text = [NSString stringWithFormat:@"%@ awarded %@", object[@"author"][@"name"], object[@"recipient"][@"name"]];
