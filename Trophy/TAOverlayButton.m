@@ -28,7 +28,7 @@ static const CGFloat closeupMargin = 3;
         // configures title label
         self.titleLabel = [[UILabel alloc] init];
         [self.titleLabel setTextAlignment:NSTextAlignmentLeft];
-        self.titleLabel.textColor = [UIColor trophyYellowColor];
+        self.titleLabel.textColor = [UIColor whiteColor];
         self.titleLabel.font = [UIFont fontWithName:@"Avenir-Black" size:16.0];
         self.titleLabel.adjustsFontSizeToFitWidth = YES;
         self.titleLabel.minimumScaleFactor = 0.5;
@@ -40,7 +40,7 @@ static const CGFloat closeupMargin = 3;
         self.dateLabel = [[UILabel alloc] init];
         [self.dateLabel setTextAlignment:NSTextAlignmentLeft];
         self.dateLabel.textColor = [UIColor whiteColor];
-        self.dateLabel.font = [UIFont fontWithName:@"Avenir-Book" size:14.0];
+        self.dateLabel.font = [UIFont fontWithName:@"Avenir-Book" size:16.0];
         [self addSubview:self.dateLabel];
         
         // configures recipient label
@@ -63,7 +63,7 @@ static const CGFloat closeupMargin = 3;
         [self addSubview:self.commentsButton];
         
         // adds the shadow to the overlay
-        [self setBackgroundColor:[UIColor colorWithRed:0 green:0 blue:0 alpha:0.5]];
+        [self setBackgroundColor:[UIColor trophyNavyTranslucentColor]];
     
     }
     

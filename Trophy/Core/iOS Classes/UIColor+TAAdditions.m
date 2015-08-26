@@ -40,6 +40,11 @@
 + (UIColor *)trophyNavyColor {
     return [UIColor colorWithRed:50/255.0f green:80/255.0f blue:109/255.0f alpha:1.0f];
 }
+
++ (UIColor *)trophyNavyTranslucentColor {
+    return [UIColor colorWithRed:50/255.0f green:80/255.0f blue:109/255.0f alpha:0.5f];
+}
+
 + (UIFont *)avenirFont {
     return [UIFont fontWithName:@"Avenir-Book" size:12.0];
 }

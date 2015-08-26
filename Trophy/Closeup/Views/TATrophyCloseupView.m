@@ -70,7 +70,7 @@ static const CGFloat closeupMargin = 4;
         self.overlay.hidden = NO;
         [self addSubview:self.overlay];
         
-        self.backgroundColor = [UIColor blackColor];
+        self.backgroundColor = [UIColor trophyNavyColor];
         
     }
     return self;
