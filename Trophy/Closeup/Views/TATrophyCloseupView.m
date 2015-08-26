@@ -56,18 +56,18 @@ static const CGFloat closeupMargin = 4;
         // adds back button
         self.backButton = [[TABackButton alloc] initWithFrame:CGRectZero];
         self.backButton.delegate = delegate;
-        self.backButton.hidden = YES;
+        self.backButton.hidden = NO;
         [self addSubview:self.backButton];
         
         // adds flag button
         self.flagButton = [[TAFlagButton alloc] initWithFrame:CGRectZero];
         self.flagButton.delegate = delegate;
-        self.flagButton.hidden = YES;
+        self.flagButton.hidden = NO;
         [self addSubview:self.flagButton];
         
         // adds overlay
         self.overlay = [[TAOverlayButton alloc] initWithDelegate:delegate];
-        self.overlay.hidden = YES;
+        self.overlay.hidden = NO;
         [self addSubview:self.overlay];
         
         self.backgroundColor = [UIColor blackColor];

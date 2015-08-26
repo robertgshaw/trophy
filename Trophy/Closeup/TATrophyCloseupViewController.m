@@ -78,7 +78,7 @@ static const CGFloat closeupMargin = 3;
 
     if([authorObject.objectId isEqualToString:userObject.objectId])
     {
-//        self.deleteButton.hidden = NO;
+        self.deleteButton.hidden = NO;
         self.isAbleToBeDeleted = YES;
     }
 }
