@@ -15,9 +15,6 @@
 #import "TASignupViewController.h"
 
 static const CGFloat kTextFieldWidth = 200.0;
-static const CGFloat kTextFieldHeight = 40.0;
-static const CGFloat kSaveButtonWidth = 120.0;
-static const CGFloat kSaveButtonHeight = 40.0;
 
 @interface TASettingsView ()<UITextFieldDelegate>
 
@@ -129,17 +126,20 @@ static const CGFloat kSaveButtonHeight = 40.0;
 
 - (void)layoutSubviews
 {
+    // constants
     CGFloat superWidth = self.bounds.size.width;
     CGFloat superHeight = self.bounds.size.height;
     CGFloat margin = superWidth * .1;
     CGFloat space = superHeight * .055;
 
+    // name label
     [self.nameLabel sizeToFit];
     CGRect frame = self.nameLabel.frame;
     frame.origin.x = margin;
     frame.origin.y = margin;
     self.nameLabel.frame = frame;
 
+    // name input
     frame = self.nameInput.frame;
     frame.origin.x = CGRectGetMaxX(self.nameLabel.frame) + 20.0;
     frame.size.width = superWidth - margin - frame.origin.x;
@@ -147,12 +147,14 @@ static const CGFloat kSaveButtonHeight = 40.0;
     frame.origin.y = CGRectGetMidY(self.nameLabel.frame) - (frame.size.height / 2);
     self.nameInput.frame = frame;
 
+    // bio label
     [self.bioLabel sizeToFit];
     frame = self.bioLabel.frame;
     frame.origin.x = self.nameLabel.frame.origin.x;
     frame.origin.y = CGRectGetMaxY(self.nameInput.frame) + space;
     self.bioLabel.frame = frame;
 
+    // description input
     frame = self.descriptionInput.frame;
     frame.origin.x = self.nameInput.frame.origin.x;
     frame.size.width = self.nameInput.frame.size.width;
@@ -160,6 +162,7 @@ static const CGFloat kSaveButtonHeight = 40.0;
     frame.origin.y = CGRectGetMidY(self.bioLabel.frame) - (frame.size.height / 2);
     self.descriptionInput.frame = frame;
 
+    // profile image button
     frame = self.profileImageButton.frame;
     frame.size.width = superWidth * .5;
     frame.size.height = frame.size.width;
@@ -169,6 +172,7 @@ static const CGFloat kSaveButtonHeight = 40.0;
     self.profileImageButton.layer.cornerRadius = floorf(CGRectGetWidth(self.profileImageButton.frame) / 2.0);
     self.profileImageView.frame = self.profileImageButton.bounds;
     
+    // save button
     [self.saveButton sizeToFit];
     frame = self.saveButton.frame;
     frame.size.width = superWidth * .3;
@@ -177,6 +181,7 @@ static const CGFloat kSaveButtonHeight = 40.0;
     frame.origin.y = CGRectGetMaxY(self.profileImageButton.frame) + space / 2;
     self.saveButton.frame = frame;
     
+    // delete profile button
     [self.deleteProfileButton sizeToFit];
     frame = self.deleteProfileButton.frame;
     frame.size.width = superWidth * .3;

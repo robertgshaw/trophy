@@ -79,37 +79,94 @@ static const CGFloat kContinueButtonHeight = 40.0;
 
 - (void)layoutSubviews
 {
-    CGFloat margin = 30.0;
+//    CGFloat margin = 30.0;
+//
+//    CGRect frame = self.nameInput.frame;
+//    frame.origin.x = floorf((CGRectGetWidth(self.bounds) - kTextFieldWidth) / 2.0);
+//    frame.origin.y = 50.0;
+//    frame.size.width = kTextFieldWidth;
+//    frame.size.height = kTextFieldHeight;
+//    self.nameInput.frame = frame;
+//
+//    frame = self.descriptionInput.frame;
+//    frame.origin.x = floorf((CGRectGetWidth(self.bounds) - kTextFieldWidth) / 2.0);
+//    frame.origin.y = CGRectGetMaxY(self.nameInput.frame) + margin;
+//    frame.size.width = kTextFieldWidth;
+//    frame.size.height = kTextFieldHeight;
+//    self.descriptionInput.frame = frame;
+//
+//    frame = self.profileImageButton.frame;
+//    frame.origin.x = floorf((CGRectGetWidth(self.bounds) - kTextFieldWidth) / 2.0);
+//    frame.origin.y = CGRectGetMaxY(self.descriptionInput.frame) + margin + 10;
+//    frame.size.width = kTextFieldWidth;
+//    frame.size.height = kTextFieldWidth;
+//    self.profileImageButton.frame = frame;
+//    self.profileImageButton.layer.cornerRadius = floorf(CGRectGetWidth(self.profileImageButton.frame) / 2.0);
+//
+//    [self.saveButton sizeToFit];
+//    frame = self.saveButton.frame;
+//    frame.size.width = kContinueButtonWidth;
+//    frame.size.height = kContinueButtonHeight;
+//    frame.origin.x = floorf((CGRectGetWidth(self.bounds) - kContinueButtonWidth)/ 2.0);
+//    frame.origin.y = CGRectGetMaxY(self.profileImageButton.frame) + margin;
+//    self.saveButton.frame = frame;
+    
+    // constants
+    CGFloat superWidth = self.bounds.size.width;
+    CGFloat superHeight = self.bounds.size.height;
+    CGFloat margin = superWidth * .1;
+    CGFloat space = superHeight * .055;
 
+    // name label
+//    [self.nameLabel sizeToFit];
+//    CGRect frame = self.nameLabel.frame;
+//    frame.origin.x = margin;
+//    frame.origin.y = margin;
+//    self.nameLabel.frame = frame;
+
+    // name input
     CGRect frame = self.nameInput.frame;
-    frame.origin.x = floorf((CGRectGetWidth(self.bounds) - kTextFieldWidth) / 2.0);
-    frame.origin.y = 50.0;
-    frame.size.width = kTextFieldWidth;
-    frame.size.height = kTextFieldHeight;
+    frame.size.width = superWidth  * .75;
+    frame.size.height = superHeight * .075;
+    frame.origin.x = CGRectGetMidX(self.frame) - frame.size.width / 2;
+    frame.origin.y = superWidth * .1;
     self.nameInput.frame = frame;
 
+    // bio label
+//    [self.bioLabel sizeToFit];
+//    frame = self.bioLabel.frame;
+//    frame.origin.x = self.nameLabel.frame.origin.x;
+//    frame.origin.y = CGRectGetMaxY(self.nameInput.frame) + space;
+//    self.bioLabel.frame = frame;
+
+    // description input
     frame = self.descriptionInput.frame;
-    frame.origin.x = floorf((CGRectGetWidth(self.bounds) - kTextFieldWidth) / 2.0);
-    frame.origin.y = CGRectGetMaxY(self.nameInput.frame) + margin;
-    frame.size.width = kTextFieldWidth;
-    frame.size.height = kTextFieldHeight;
+    frame.origin.x = self.nameInput.frame.origin.x;
+    frame.size.width = self.nameInput.frame.size.width;
+    frame.size.height = self.nameInput.frame.size.height;
+    frame.origin.y = CGRectGetMaxY(self.nameInput.frame) + space;
     self.descriptionInput.frame = frame;
 
+    // profile image button
     frame = self.profileImageButton.frame;
-    frame.origin.x = floorf((CGRectGetWidth(self.bounds) - kTextFieldWidth) / 2.0);
-    frame.origin.y = CGRectGetMaxY(self.descriptionInput.frame) + margin + 10;
-    frame.size.width = kTextFieldWidth;
-    frame.size.height = kTextFieldWidth;
+    frame.size.width = superWidth * .45;
+    frame.size.height = frame.size.width;
+    frame.origin.x = floorf(CGRectGetMidX(self.bounds) - (frame.size.width / 2.0));
+    frame.origin.y = CGRectGetMaxY(self.descriptionInput.frame) + margin;
     self.profileImageButton.frame = frame;
     self.profileImageButton.layer.cornerRadius = floorf(CGRectGetWidth(self.profileImageButton.frame) / 2.0);
-
+    
+    // save button
     [self.saveButton sizeToFit];
     frame = self.saveButton.frame;
-    frame.size.width = kContinueButtonWidth;
-    frame.size.height = kContinueButtonHeight;
-    frame.origin.x = floorf((CGRectGetWidth(self.bounds) - kContinueButtonWidth)/ 2.0);
-    frame.origin.y = CGRectGetMaxY(self.profileImageButton.frame) + margin;
+    frame.size.width = frame.size.width + 10;
+    frame.size.height = superHeight * .07;
+    frame.origin.x = floorf(CGRectGetMidX(self.bounds) - (frame.size.width / 2.0));
+    frame.origin.y = CGRectGetMaxY(self.profileImageButton.frame) + space;
     self.saveButton.frame = frame;
+    
+    NSLog(@"%@", NSStringFromCGRect(frame));
+
 }
 
 #pragma mark - Private Methods

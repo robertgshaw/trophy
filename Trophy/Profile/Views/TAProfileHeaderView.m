@@ -13,11 +13,7 @@
 #import "UIColor+TAAdditions.h"
 #import <ParseUI/ParseUI.h>
 
-static const CGFloat kProfileImageWidth = 70.0;
 static const CGFloat kProfileImageMargin = 30.0;
-static const CGFloat kNameLabelTopMargin = 10.0;
-static const CGFloat kLabelPadding = 7.5;
-static const CGFloat kLabelInnerMargin = 10.0;
 
 @interface TAProfileHeaderView ()
 
@@ -42,7 +38,6 @@ static const CGFloat kLabelInnerMargin = 10.0;
         _profileImageView = [[PFImageView alloc] init];
         self.profileImageView.backgroundColor = [UIColor whiteColor];
         self.profileImageView.image = [UIImage imageNamed:@"default-profile-icon"];
-        self.profileImageView.layer.cornerRadius = floorf(kProfileImageWidth / 2.0);
         self.profileImageView.clipsToBounds = YES;
         [self addSubview:self.profileImageView];
 
@@ -94,60 +89,53 @@ static const CGFloat kLabelInnerMargin = 10.0;
 {
     [super layoutSubviews];
 
+    // layout profile image
     CGRect frame = self.profileImageView.frame;
-    frame.origin.x = kProfileImageMargin;
-    frame.origin.y = kNameLabelTopMargin;
-    frame.size.width = kProfileImageWidth;
-    frame.size.height = kProfileImageWidth;
+    frame.size.height = self.bounds.size.height * .7;
+    frame.size.width = frame.size.height;
+    frame.origin.x = self.bounds.size.width * .05;
+    frame.origin.y = self.bounds.size.height * .5 - frame.size.height * .5;
     self.profileImageView.frame = frame;
-
-    self.flagButton.hidden = [self isCurrentUser] == YES;
-    [self.flagButton sizeToFit];
-    frame = self.flagButton.frame;
-    frame.origin.x = CGRectGetWidth(self.bounds) - CGRectGetWidth(self.flagButton.frame) - 2 * kLabelInnerMargin - kProfileImageMargin + 25.0;
-    frame.origin.y = CGRectGetMidY(self.profileImageView.frame) - floorf(CGRectGetHeight(self.flagButton.frame) / 2.0);
-    frame.size.width = CGRectGetWidth(self.flagButton.frame) + 2 * kLabelInnerMargin;
-    self.flagButton.frame = frame;
+    self.profileImageView.layer.cornerRadius = floorf(frame.size.width / 2.0);
     
-    self.editButton.hidden = [self isCurrentUser] == NO;
-    [self.editButton sizeToFit];
-    frame = self.editButton.frame;
-    frame.origin.x = CGRectGetWidth(self.bounds) - CGRectGetWidth(self.editButton.frame) - 2 * kLabelInnerMargin - kProfileImageMargin;
-    frame.origin.y = CGRectGetMidY(self.profileImageView.frame) - floorf(CGRectGetHeight(self.editButton.frame) / 2.0);
-    frame.size.width = CGRectGetWidth(self.editButton.frame) + 2 * kLabelInnerMargin;
-    self.editButton.frame = frame;
-    
+    // layout name label
     [self.nameLabel sizeToFit];
-    CGFloat maxWidth = (self.editButton.hidden ? CGRectGetWidth(self.bounds) - kProfileImageMargin : CGRectGetMinX(self.editButton.frame) - kLabelInnerMargin) - CGRectGetWidth(self.profileImageView.frame) - kProfileImageMargin - kLabelInnerMargin;
-    CGSize textSize = CGSizeMake(maxWidth, 150);
-    NSDictionary *attributes = @{NSForegroundColorAttributeName:self.nameLabel.textColor,
-                                 NSFontAttributeName:self.nameLabel.font};
-    CGRect boundRect = [self.nameLabel.text boundingRectWithSize:textSize
-                                                                options:(NSStringDrawingUsesLineFragmentOrigin|NSStringDrawingUsesFontLeading)
-                                                             attributes:attributes
-                                                                context:nil];
+    CGFloat maxWidth = CGRectGetMaxX(self.bounds) - CGRectGetMaxX(self.profileImageView.frame)- self.bounds.size.width * .1;
     frame = self.nameLabel.frame;
-    frame.origin.x = CGRectGetMaxX(self.profileImageView.frame) + kLabelInnerMargin;
-    //frame.origin.y = kNameLabelTopMargin + ([self isCurrentUser] ? 0.0 : 10.0);
-    frame.origin.y = kNameLabelTopMargin;
+    frame.origin.x = CGRectGetMaxX(self.profileImageView.frame) + self.bounds.size.width * .03;
+    frame.origin.y = self.bounds.size.height * .1;
     frame.size.width = maxWidth;
-    frame.size.height = boundRect.size.height;
     self.nameLabel.frame = frame;
 
+    // layout trophies label
     self.trophiesLabel.hidden = [self.nameLabel.text length] == 0;
     [self.trophiesLabel sizeToFit];
     frame = self.trophiesLabel.frame;
-    frame.origin.x = CGRectGetMinX(self.nameLabel.frame);
-    frame.origin.y = CGRectGetMaxY(self.nameLabel.frame) + kLabelPadding;
+    frame.origin.x = self.nameLabel.frame.origin.x;
+    frame.origin.y = CGRectGetMaxY(self.nameLabel.frame) + self.bounds.size.height * .075;
     frame.size.width = maxWidth;
     self.trophiesLabel.frame = frame;
     
+    // layout bio label
     [self.bioLabel sizeToFit];
     frame = self.bioLabel.frame;
-    frame.origin.x = CGRectGetMinX(self.nameLabel.frame);
-    frame.origin.y = CGRectGetMaxY(self.trophiesLabel.frame) + kLabelPadding;
+    frame.origin.x = self.nameLabel.frame.origin.x;
+    frame.origin.y = CGRectGetMaxY(self.trophiesLabel.frame) + self.bounds.size.height * .075;
     frame.size.width = maxWidth;
     self.bioLabel.frame = frame;
+    
+    // layout flag button
+    self.flagButton.hidden = [self isCurrentUser] == YES;
+    [self.flagButton sizeToFit];
+    frame = self.flagButton.frame;
+    frame.size.width = self.bounds.size.width * .13;
+    frame.origin.x = CGRectGetWidth(self.bounds) - frame.size.width - self.bounds.size.width * .06;
+    frame.origin.y = CGRectGetMinY(self.bioLabel.frame) - floorf(CGRectGetHeight(self.flagButton.frame) / 2.0);
+    self.flagButton.frame = frame;
+    
+    // layout edit button
+    self.editButton.hidden = [self isCurrentUser] == NO;
+    self.editButton.frame = self.flagButton.frame;
 }
 
 - (void)setUser:(TAUser *)user
@@ -184,7 +172,7 @@ static const CGFloat kLabelInnerMargin = 10.0;
     if ([self isCurrentUser]) {
         return [self.bioLabel.text length] > 0 ? 100.0 : 0.0;
     } else {
-        return (self.profileImageView.frame.size.width != 0.0) ? (CGRectGetMaxY(self.profileImageView.frame) + kProfileImageMargin-30) : 0.0;
+        return (self.profileImageView.frame.size.width != 0.0) ? (CGRectGetMaxY(self.profileImageView.frame) + kProfileImageMargin - 30) : 0.0;
     }
 }
 

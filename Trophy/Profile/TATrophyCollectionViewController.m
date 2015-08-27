@@ -17,10 +17,7 @@
 
 #import <Parse/Parse.h>
 
-static const CGFloat kTrophyCollectionViewCellWidth = 250.0;
-
-@interface TATrophyCollectionViewController () <UICollectionViewDelegateFlowLayout,
-                                                TATrophyActionFooterDelegate, TATrophyCloseupViewControllerDelegate>
+@interface TATrophyCollectionViewController () <UICollectionViewDelegateFlowLayout, TATrophyCloseupViewControllerDelegate>
 
 @property (nonatomic, strong) NSIndexPath *indexPathOfCurrentCloseupItem;
 
@@ -33,7 +30,6 @@ static const CGFloat kTrophyCollectionViewCellWidth = 250.0;
     
     self.collectionView.backgroundColor = [UIColor trophyLightGrayColor];
 
-    
     NSString *reuseIdentifier = NSStringFromClass([TATrophyCollectionViewCell class]);
     [self.collectionView registerClass:[TATrophyCollectionViewCell class] forCellWithReuseIdentifier:reuseIdentifier];
 }
@@ -54,12 +50,6 @@ static const CGFloat kTrophyCollectionViewCellWidth = 250.0;
     [self.navigationController pushViewController:closeupViewController animated:YES];
 }
 
--(void)presentTrophyComments:(TATrophy *)trophy
-{
-    TACommentTableViewController *commentVC = [[TACommentTableViewController alloc] initWithPhoto:trophy];
-    commentVC.delegate = self;
-    [self.navigationController pushViewController:commentVC animated:YES];
-}
 
 #pragma mark <UICollectionViewDataSource>
 
@@ -75,7 +65,6 @@ static const CGFloat kTrophyCollectionViewCellWidth = 250.0;
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath {
     NSString *reuseIdentifier = NSStringFromClass([TATrophyCollectionViewCell class]);
     TATrophyCollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:reuseIdentifier forIndexPath:indexPath];
-    cell.actionFooterDelegate = self;
     PFObject *parseObject = [self.trophies objectAtIndex:indexPath.row];
     cell.trophy = [[TATrophy alloc] initWithStoredTrophy:parseObject];;
     return cell;
@@ -98,16 +87,16 @@ static const CGFloat kTrophyCollectionViewCellWidth = 250.0;
 
 - (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath
 {
-    return CGSizeMake(kTrophyCollectionViewCellWidth, CGRectGetHeight(self.view.bounds) - 20);
+    return CGSizeMake(CGRectGetWidth(self.view.bounds), CGRectGetHeight(self.view.bounds));
 }
 
 - (UIEdgeInsets)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout insetForSectionAtIndex:(NSInteger)section
 {
-    CGFloat sidePadding = floorf((CGRectGetWidth(self.view.bounds) - kTrophyCollectionViewCellWidth) / 2.0);
-    return UIEdgeInsetsMake(10, sidePadding, 10, sidePadding);
+    return UIEdgeInsetsMake(0, 0, 0, 0);
 }
 
 #pragma mark - TACloseupViewControllerDelegate Methods
+
 - (void) closeUpViewControllerBackButtonPressed
 {
     // "unsets" current closeup
@@ -127,23 +116,6 @@ static const CGFloat kTrophyCollectionViewCellWidth = 250.0;
     {
         [self.collectionView reloadItemsAtIndexPaths:@[self.indexPathOfCurrentCloseupItem]];
     }
-}
-
-#pragma mark - TATimelineActionFooterViewDelegate Methods
-
-- (void)trophyActionFooterDidPressLikesButton
-{
-    
-}
-
-- (void)trophyActionFooterDidPressCommentsButton
-{
-    
-}
-
-- (void)trophyActionFooterDidPressAddButton
-{
-    
 }
 
 @end
