@@ -19,7 +19,7 @@
 
 @end
 
-@interface TATrophyCloseupViewController : UIViewController
+@interface TATrophyCloseupViewController : UIViewController <UIScrollViewDelegate>
 
 - (instancetype)initWithTrophy:(TATrophy *)trophy;
 

@@ -29,9 +29,9 @@
 
 @interface TATrophyCloseupView : UIView
 
-- (instancetype)initWithDelegate:(id< TALikeButtonDelegate, TABackButtonDelegate, TATrophyCloseupViewDelegate>)delegate;
+- (instancetype)initWithDelegate:(id< UIScrollViewDelegate, TALikeButtonDelegate, TABackButtonDelegate, TATrophyCloseupViewDelegate>)delegate;
 
-@property (nonatomic, weak) id<TATrophyCloseupViewDelegate, TALikeButtonDelegate, TABackButtonDelegate> delegate1;
+@property (nonatomic, weak) id< UIScrollViewDelegate, TATrophyCloseupViewDelegate, TALikeButtonDelegate, TABackButtonDelegate> delegate1;
 
 @property (nonatomic, strong) TATrophy *trophy;
 @property (nonatomic, strong) UIButton *commentsButton;

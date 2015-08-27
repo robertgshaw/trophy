@@ -19,7 +19,7 @@
 
 static const CGFloat closeupMargin = 3;
 
-@interface TATrophyCloseupViewController () <TACommentTableViewControllerDelegate, TAFlagButtonDelegate, TABackButtonDelegate, TALikeButtonDelegate, TAOverlayButtonDelegate, TATrophyCloseupViewDelegate>
+@interface TATrophyCloseupViewController () <TACommentTableViewControllerDelegate, TAFlagButtonDelegate, TABackButtonDelegate, TALikeButtonDelegate, TAOverlayButtonDelegate, TATrophyCloseupViewDelegate, UIScrollViewDelegate>
 
 @property (nonatomic, strong) TATrophy *trophy;
 @property (nonatomic, strong) TATrophyCloseupView *closeupView;
@@ -43,6 +43,7 @@ static const CGFloat closeupMargin = 3;
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+
     
     // hides navbar in closeup view
     self.navigationController.navigationBarHidden = YES;
@@ -200,6 +201,11 @@ static const CGFloat closeupMargin = 3;
 - (TATrophy *)getTATrophy
 {
     return self.trophy;
+}
+
+- (UIView *)viewForZoomingInScrollView:(UIScrollView *)scrollView
+{
+    return self.closeupView;
 }
 
 @end

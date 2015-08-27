@@ -26,16 +26,26 @@ static const CGFloat closeupMargin = 4;
 @property (nonatomic, strong) PFImageView *trophyImageView;
 @property (nonatomic, strong) TAOverlayButton *overlay;
 @property (nonatomic, strong) UIButton *backgroundTap;
+@property (nonatomic, strong) UIScrollView *scrollView;
 @end
 
 @implementation TATrophyCloseupView
 
-- (instancetype)initWithDelegate:(id<TAFlagButtonDelegate, TABackButtonDelegate, TALikeButtonDelegate, TAOverlayButtonDelegate, TATrophyCloseupViewDelegate>)delegate
+- (instancetype)initWithDelegate:(id<UIScrollViewDelegate, TAFlagButtonDelegate, TABackButtonDelegate, TALikeButtonDelegate, TAOverlayButtonDelegate, TATrophyCloseupViewDelegate>)delegate
 {
     self = [super init];
     if (self) {
 
         self.delegate1 = delegate;
+        
+        _scrollView = [[UIScrollView alloc] init];
+        
+        self.scrollView.scrollEnabled = NO;
+        self.scrollView.minimumZoomScale = 1.0;
+        self.scrollView.maximumZoomScale = 3.0;
+        self.scrollView.contentSize = self.trophyImageView.frame.size;
+        self.scrollView.delegate = delegate;
+        [self addSubview:self.scrollView];
         
         // adds trophy image view
         _trophyImageView = [[PFImageView alloc] init];
@@ -46,7 +56,8 @@ static const CGFloat closeupMargin = 4;
         self.trophyImageView.layer.masksToBounds = YES;
         self.trophyImageView.layer.borderColor = [UIColor trophyYellowColor].CGColor;
         self.trophyImageView.layer.borderWidth = 0.0;
-        [self addSubview:self.trophyImageView];
+        [self.scrollView addSubview:self.trophyImageView];
+
         
         // enables background tap
         self.backgroundTap = [[UIButton alloc] init];
