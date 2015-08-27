@@ -58,7 +58,7 @@ static const CGFloat closeupMargin = 3;
     self.closeupView.frame = self.view.frame;
     [self.view addSubview:self.closeupView];
     
-    // configures and adds delete button
+    // configure and add delete button
     _deleteButton = [[UIButton alloc] initWithFrame:CGRectZero];
     [self.deleteButton setBackgroundImage:[UIImage imageNamed:@"delete-icon"] forState:UIControlStateNormal];
     [self.deleteButton addTarget:self action:@selector(deleteButtonPressed) forControlEvents:UIControlEventTouchUpInside];
