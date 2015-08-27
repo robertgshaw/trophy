@@ -20,10 +20,7 @@
 @interface TAOverlayButton : UIButton
 
 @property (nonatomic, strong) UILabel *titleLabel;
-@property (nonatomic, strong) UILabel *dateLabel;
 @property (nonatomic, strong) UILabel *recipientLabel;
-@property (nonatomic, strong) UIButton *commentsButton;
-@property (nonatomic, strong) TALikesButton *likesButton;
 @property (nonatomic, strong) id<TAOverlayButtonDelegate> delegate;
 
 -(instancetype) initWithDelegate:(id<TALikeButtonDelegate, TAOverlayButtonDelegate>) delegate;

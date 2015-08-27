@@ -63,14 +63,7 @@ static const CGFloat closeupMargin = 3;
     [self.deleteButton addTarget:self action:@selector(deleteButtonPressed) forControlEvents:UIControlEventTouchUpInside];
     self.deleteButton.hidden = YES;
     self.isAbleToBeDeleted = NO;
-    
-    CGFloat margin = self.closeupView.bounds.size.width * .07;
-    
-    CGRect frame;
-    frame.size = CGSizeMake(30.0, 30.0);
-    frame.origin.x = CGRectGetMidX(self.view.bounds) - (frame.size.width / 2);
-    frame.origin.y = margin * 1.1;
-    self.deleteButton.frame = frame;
+    self.closeupView.deleteButton = self.deleteButton;
     [self.closeupView addSubview:self.deleteButton];
 
     PFUser *authorObject = [self.trophy.author getUserAsParseObject];
@@ -98,9 +91,9 @@ static const CGFloat closeupMargin = 3;
 
 - (void)closeupViewDidPressCommentsButton:(TATrophyCloseupView *)TrophyCloseupView
 {
-    TACommentTableViewController *commentsVC = [[TACommentTableViewController alloc] init];
-    UINavigationController *navController = [[UINavigationController alloc] initWithRootViewController:commentsVC];
-    [self presentViewController:navController animated:YES completion:nil];
+    TACommentTableViewController *commentViewController = [[TACommentTableViewController alloc] initWithPhoto:self.trophy];
+    commentViewController.delegate = self;
+    [self.navigationController pushViewController:commentViewController animated:YES];
 }
 
 // on background tap, hide the labels, etc
@@ -109,6 +102,9 @@ static const CGFloat closeupMargin = 3;
     [self.closeupView hideOverlay];
     self.closeupView.backButton.hidden = !self.closeupView.backButton.hidden;
     self.closeupView.flagButton.hidden = !self.closeupView.flagButton.hidden;
+    self.closeupView.commentsButton.hidden = !self.closeupView.commentsButton.hidden;
+    self.closeupView.dateLabel.hidden = !self.closeupView.dateLabel.hidden;
+    self.closeupView.likesButton.hidden = !self.closeupView.likesButton.hidden;
     
     // only toggle delete button if user is author of image
     if (self.isAbleToBeDeleted) {

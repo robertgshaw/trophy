@@ -36,13 +36,6 @@ static const CGFloat closeupMargin = 3;
         self.titleLabel.lineBreakMode = NSLineBreakByTruncatingTail;
         [self addSubview:self.titleLabel];
         
-        // configures date label
-        self.dateLabel = [[UILabel alloc] init];
-        [self.dateLabel setTextAlignment:NSTextAlignmentLeft];
-        self.dateLabel.textColor = [UIColor whiteColor];
-        self.dateLabel.font = [UIFont fontWithName:@"Avenir-Book" size:16.0];
-        [self addSubview:self.dateLabel];
-        
         // configures recipient label
         self.recipientLabel = [[UILabel alloc] init];
         [self.recipientLabel setTextAlignment:NSTextAlignmentLeft];
@@ -51,17 +44,6 @@ static const CGFloat closeupMargin = 3;
         self.recipientLabel.minimumScaleFactor = 0.5;
         [self addSubview:self.recipientLabel];
 
-        // configures likes button
-        self.likesButton = [[TALikesButton alloc] initWithFrame:CGRectZero];
-        self.likesButton.delegate = delegate;
-        [self addSubview:self.likesButton];
-        
-        // configures comment button
-        self.commentsButton = [[UIButton alloc] init];
-        [self.commentsButton setBackgroundImage:[UIImage imageNamed:@"comment-icon"] forState:UIControlStateNormal];
-        [self.commentsButton addTarget:self action:@selector(didPressCommentsButton) forControlEvents:UIControlEventTouchUpInside];
-        [self addSubview:self.commentsButton];
-        
         // adds the shadow to the overlay
         [self setBackgroundColor:[UIColor trophyNavyTranslucentColor]];
     
@@ -75,52 +57,28 @@ static const CGFloat closeupMargin = 3;
 {
     [super layoutSubviews];
     
-    CGFloat margin = self.bounds.size.width * .07;
+    // configures title label
+    [self.titleLabel sizeToFit];
+    CGRect frame = self.titleLabel.frame;
+    frame.size.width = self.bounds.size.width * .75;
+    frame.origin.x = self.bounds.size.width / 10;
+    frame.origin.y = CGRectGetMaxY(self.bounds) - frame.size.height - self.bounds.size.height * .1;
+    self.titleLabel.frame = frame;
     
     // configures recipient label
     [self.recipientLabel sizeToFit];
-    CGRect frame = self.recipientLabel.frame;
+    frame = self.recipientLabel.frame;
     frame.size.width = self.bounds.size.width * .8;
     frame.origin.x = self.bounds.size.width / 10;
-    frame.origin.y = self.bounds.size.height / 10;
+    frame.origin.y = CGRectGetMinY(self.titleLabel.frame) - frame.size.height - self.bounds.size.height * .04;
     self.recipientLabel.frame = frame;
-        
-    // configures title label
-    [self.titleLabel sizeToFit];
-    frame = self.titleLabel.frame;
-    frame.size.width = self.bounds.size.width * .8;
-    frame.origin.x = self.bounds.size.width / 10;
-    frame.origin.y = CGRectGetMinY(self.recipientLabel.frame) + (floorf(self.recipientLabel.font.lineHeight) * 1.1);
-    self.titleLabel.frame = frame;
     
-    // configures date label
-    [self.dateLabel sizeToFit];
-    frame = self.dateLabel.frame;
-    frame.size.height = self.frame.size.height * .08;
-    frame.origin.x = CGRectGetMidX(self.bounds) - (self.dateLabel.bounds.size.width / 2);
-    frame.origin.y = CGRectGetMaxY(self.bounds) - frame.size.height - margin;
-    self.dateLabel.frame = frame;
-
-    // configures like button
-    frame = self.likesButton.frame;
-    frame.size = CGSizeMake([TALikesButton likeButtonWidth], 40.0);
-    frame.origin.x = CGRectGetMaxX(self.bounds) - margin - frame.size.width;
-    frame.origin.y = CGRectGetMaxY(self.bounds) - (closeupMargin * 2) - frame.size.height;
-    self.likesButton.frame = frame;
-    
-    // configures comment button
-    frame = self.commentsButton.frame;
-    frame.size = CGSizeMake(30.0, 30.0);
-    frame.origin.x = CGRectGetMinX(self.likesButton.frame) - frame.size.width - 20;
-    frame.origin.y = self.likesButton.frame.origin.y + closeupMargin;
-    self.commentsButton.frame = frame;
-
-}
-
-// jumps back to delegate on comment button click
-- (void) didPressCommentsButton
-{
-    [self.delegate overlayViewDidPressCommentsButton];
+    if (frame.origin.y < 0) {
+        CGRect newOverlayFrame = self.frame;
+        newOverlayFrame.size.height = newOverlayFrame.size.height - frame.origin.y  + 7;
+        newOverlayFrame.origin.y = newOverlayFrame.origin.y + frame.origin.y - 7;
+        self.frame = newOverlayFrame;
+    }
     
 }
 @end

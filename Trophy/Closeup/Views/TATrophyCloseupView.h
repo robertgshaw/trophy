@@ -31,12 +31,16 @@
 
 - (instancetype)initWithDelegate:(id< TALikeButtonDelegate, TABackButtonDelegate, TATrophyCloseupViewDelegate>)delegate;
 
-@property (nonatomic, weak) id<TATrophyCloseupViewDelegate> delegate1;
+@property (nonatomic, weak) id<TATrophyCloseupViewDelegate, TALikeButtonDelegate, TABackButtonDelegate> delegate1;
 
 @property (nonatomic, strong) TATrophy *trophy;
-
+@property (nonatomic, strong) UIButton *commentsButton;
+@property (nonatomic, strong) TALikesButton *likesButton;
 @property (nonatomic, strong) TABackButton *backButton;
 @property (nonatomic, strong) TAFlagButton *flagButton;
+@property (nonatomic, strong) UILabel *dateLabel;
+@property (nonatomic, strong) UIButton *deleteButton;
+@property BOOL isAbleToBeDeleted;
 
 -(void) hideOverlay;
 

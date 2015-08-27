@@ -70,6 +70,24 @@ static const CGFloat closeupMargin = 4;
         self.overlay.hidden = NO;
         [self addSubview:self.overlay];
         
+        // configures likes button
+        self.likesButton = [[TALikesButton alloc] initWithFrame:CGRectZero];
+        self.likesButton.delegate = delegate;
+        [self addSubview:self.likesButton];
+        
+        // configures date label
+        self.dateLabel = [[UILabel alloc] init];
+        [self.dateLabel setTextAlignment:NSTextAlignmentLeft];
+        self.dateLabel.textColor = [UIColor whiteColor];
+        self.dateLabel.font = [UIFont fontWithName:@"Avenir-Book" size:16.0];
+        [self addSubview:self.dateLabel];
+        
+        // configures comment button
+        self.commentsButton = [[UIButton alloc] init];
+        [self.commentsButton setBackgroundImage:[UIImage imageNamed:@"comment-icon"] forState:UIControlStateNormal];
+        [self.commentsButton addTarget:self action:@selector(didPressCommentsButton) forControlEvents:UIControlEventTouchUpInside];
+        [self addSubview:self.commentsButton];
+        
         self.backgroundColor = [UIColor trophyNavyColor];
         
     }
@@ -85,35 +103,62 @@ static const CGFloat closeupMargin = 4;
     
     // configures image display
     CGRect frame = self.trophyImageView.frame;
-    CGFloat height = CGRectGetMaxY(self.frame) * 6 / 8;
+    CGFloat height = CGRectGetMaxY(self.frame) * .8;
     CGFloat width = CGRectGetMaxX(self.frame);
     frame.origin.x = (CGRectGetMidX(self.bounds) - floorf(width / 2.0));
-    frame.origin.y = CGRectGetMaxY(self.frame) * 1 / 8;
+    frame.origin.y = CGRectGetMidY(self.frame) - (frame.size.height / 2) + 2;
     frame.size.width = width;
     frame.size.height = height;
     self.trophyImageView.frame = frame;
     
     // lays out the overlay
-    frame.size = CGSizeMake(_trophyImageView.bounds.size.width, (CGRectGetMaxY(self.bounds) - CGRectGetMaxY(self.trophyImageView.frame) + 75));
+    frame.size = CGSizeMake(_trophyImageView.bounds.size.width, (self.bounds.size.height * .1));
     frame.origin.x = CGRectGetMinX(self.bounds);
-    frame.origin.y = CGRectGetMaxY(self.bounds) - frame.size.height;
+    frame.origin.y = CGRectGetMaxY(self.trophyImageView.frame) - frame.size.height;
     self.overlay.frame = frame;
     
     // lays out the flag button
-    frame.size = CGSizeMake(30.0, 30.0);
+    frame.size = CGSizeMake(25.0, 25.0);
     frame.origin.x = CGRectGetMaxX(self.bounds) - (frame.size.width) - margin / 2;
-    frame.origin.y = margin * 1.1;
+    frame.origin.y = CGRectGetMinY(self.trophyImageView.frame) - ((CGRectGetMinY(self.trophyImageView.frame) - CGRectGetMinY(self.bounds)) / 2) - (frame.size.height / 2) + 5;
     self.flagButton.frame = frame;
     
     // lays out the back button
-    frame.size = CGSizeMake(30.0, 30.0);
+    frame.size = CGSizeMake(25.0, 25.0);
     frame.origin.x = margin / 2;
     frame.origin.y = self.flagButton.frame.origin.y;
     self.backButton.frame = frame;
     
+    // lays out the delete button
+    frame.size = CGSizeMake(25.0, 25.0);
+    frame.origin.x = CGRectGetMinX(self.flagButton.frame) - frame.size.width - 10;
+    frame.origin.y = self.flagButton.frame.origin.y;
+    self.deleteButton.frame = frame;
+        
+     // configures date label
+    [self.dateLabel sizeToFit];
+    frame = self.dateLabel.frame;
+    frame.size.height = self.frame.size.height * .08;
+    frame.origin.x = CGRectGetMidX(self.bounds) - (self.dateLabel.bounds.size.width / 2);
+    frame.origin.y = CGRectGetMaxY(self.bounds) - ((CGRectGetMaxY(self.bounds) - CGRectGetMaxY(self.trophyImageView.frame)) / 2) - (frame.size.height / 2);
+    self.dateLabel.frame = frame;
+
+    // configures like button
+    frame = self.likesButton.frame;
+    frame.size = CGSizeMake([TALikesButton likeButtonWidth], 40.0);
+    frame.origin.x = CGRectGetMaxX(self.bounds) - margin - frame.size.width;
+    frame.origin.y = CGRectGetMaxY(self.bounds) - ((CGRectGetMaxY(self.bounds) - CGRectGetMaxY(self.trophyImageView.frame)) / 2) - (frame.size.height / 2);
+    self.likesButton.frame = frame;
+    
+    // configures comment button
+    frame = self.commentsButton.frame;
+    frame.size = CGSizeMake(25.0, 25.0);
+    frame.origin.x = CGRectGetMinX(self.likesButton.frame) - frame.size.width - 10;
+    frame.origin.y = CGRectGetMaxY(self.bounds) - ((CGRectGetMaxY(self.bounds) - CGRectGetMaxY(self.trophyImageView.frame)) / 2) - (frame.size.height / 2);
+    self.commentsButton.frame = frame;
+    
     // adds background tap
     self.backgroundTap.frame = self.bounds;
-
 }
 
 // square crop
@@ -170,14 +215,14 @@ static const CGFloat closeupMargin = 4;
         // Date
         NSDateFormatter *format = [[NSDateFormatter alloc] init];
         [format setDateFormat:@"MM/dd/yy"];
-        [self.overlay.dateLabel setText:[format stringFromDate:trophy.time]];
+        [self.dateLabel setText:[format stringFromDate:trophy.time]];
         
         // "___ AWARDED _____"
         self.overlay.recipientLabel.text = [NSString stringWithFormat:@"%@ awarded %@",trophy.author.name, trophy.recipient.name];
         [self.overlay.recipientLabel setText:self.overlay.recipientLabel.text];
         
         // Likes
-        self.overlay.likesButton.trophy = trophy;
+        self.likesButton.trophy = trophy;
         
         [self setNeedsLayout];
     }
@@ -193,6 +238,13 @@ static const CGFloat closeupMargin = 4;
 - (void)backgroundDidTap:(id)sender
 {
     [self.delegate1 hideDisplays];
+}
+
+// jumps back to delegate on comment button click
+- (void) didPressCommentsButton
+{
+    [self.delegate1 closeupViewDidPressCommentsButton:self];
+    
 }
 
 @end
