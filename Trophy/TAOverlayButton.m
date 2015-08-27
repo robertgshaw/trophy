@@ -9,8 +9,6 @@
 #import "TAOverlayButton.h"
 #import "TACommentTableViewController.h"
 
-static const CGFloat closeupMargin = 3;
-
 @implementation TAOverlayButton
 
 @synthesize titleLabel = _titleLabel;
