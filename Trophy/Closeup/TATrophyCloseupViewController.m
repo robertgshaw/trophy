@@ -203,9 +203,15 @@ static const CGFloat closeupMargin = 3;
     return self.trophy;
 }
 
+#pragma mark - UIScrollViewDelegate Methods
+
 - (UIView *)viewForZoomingInScrollView:(UIScrollView *)scrollView
 {
     return self.closeupView;
+}
+
+- (void)scrollViewDidEndZooming:(UIScrollView *)scrollView withView:(UIView *)view atScale:(CGFloat)scale
+{
 }
 
 @end

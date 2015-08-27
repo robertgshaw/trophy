@@ -62,42 +62,42 @@ static const CGFloat closeupMargin = 4;
         // enables background tap
         self.backgroundTap = [[UIButton alloc] init];
         [self.backgroundTap addTarget:self action:@selector(backgroundDidTap:) forControlEvents:UIControlEventTouchUpInside];
-        [self addSubview:self.backgroundTap];
+        [self.scrollView addSubview:self.backgroundTap];
         
         // adds back button
         self.backButton = [[TABackButton alloc] initWithFrame:CGRectZero];
         self.backButton.delegate = delegate;
         self.backButton.hidden = NO;
-        [self addSubview:self.backButton];
+        [self.scrollView addSubview:self.backButton];
         
         // adds flag button
         self.flagButton = [[TAFlagButton alloc] initWithFrame:CGRectZero];
         self.flagButton.delegate = delegate;
         self.flagButton.hidden = NO;
-        [self addSubview:self.flagButton];
+        [self.scrollView addSubview:self.flagButton];
         
         // adds overlay
         self.overlay = [[TAOverlayButton alloc] initWithDelegate:delegate];
         self.overlay.hidden = NO;
-        [self addSubview:self.overlay];
+        [self.scrollView addSubview:self.overlay];
         
         // configures likes button
         self.likesButton = [[TALikesButton alloc] initWithFrame:CGRectZero];
         self.likesButton.delegate = delegate;
-        [self addSubview:self.likesButton];
+        [self.scrollView addSubview:self.likesButton];
         
         // configures date label
         self.dateLabel = [[UILabel alloc] init];
         [self.dateLabel setTextAlignment:NSTextAlignmentLeft];
         self.dateLabel.textColor = [UIColor whiteColor];
         self.dateLabel.font = [UIFont fontWithName:@"Avenir-Book" size:16.0];
-        [self addSubview:self.dateLabel];
+        [self.scrollView addSubview:self.dateLabel];
         
         // configures comment button
         self.commentsButton = [[UIButton alloc] init];
         [self.commentsButton setBackgroundImage:[UIImage imageNamed:@"comment-icon"] forState:UIControlStateNormal];
         [self.commentsButton addTarget:self action:@selector(didPressCommentsButton) forControlEvents:UIControlEventTouchUpInside];
-        [self addSubview:self.commentsButton];
+        [self.scrollView addSubview:self.commentsButton];
         
         self.backgroundColor = [UIColor trophyNavyColor];
         
