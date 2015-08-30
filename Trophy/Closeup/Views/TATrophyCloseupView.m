@@ -18,9 +18,6 @@
 #import "TALikesButton.h"
 #import "TAOverlayButton.h"
 
-
-static const CGFloat closeupMargin = 4;
-
 @interface TATrophyCloseupView ()
 
 @property (nonatomic, strong) PFImageView *trophyImageView;
@@ -158,7 +155,17 @@ static const CGFloat closeupMargin = 4;
     self.commentsButton.frame = frame;
     
     // adds background tap
-    self.backgroundTap.frame = self.bounds;
+    // if back button is hidden
+    if (self.backButton.hidden == YES) {
+        // make the background tap cover the entire frame
+        self.backgroundTap.frame = self.bounds;
+        NSLog(@"yo");
+    } else {
+        // make the background tap only cover the image
+        self.backgroundTap.frame = self.trophyImageView.frame;
+    }
+    
+    
 }
 
 // square crop
@@ -238,6 +245,15 @@ static const CGFloat closeupMargin = 4;
 - (void)backgroundDidTap:(id)sender
 {
     [self.delegate1 hideDisplays];
+    
+    if (self.backButton.hidden == YES) {
+        // make the background tap cover the entire frame
+        self.backgroundTap.frame = self.bounds;
+    // otherwise
+    } else {
+        // make the background tap only cover the image
+        self.backgroundTap.frame = self.trophyImageView.frame;
+    }
 }
 
 // jumps back to delegate on comment button click

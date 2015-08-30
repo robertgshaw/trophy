@@ -17,8 +17,6 @@
 #import "TAFlagButton.h"
 #import "TAGroupManager.h"
 
-static const CGFloat closeupMargin = 3;
-
 @interface TATrophyCloseupViewController () <TACommentTableViewControllerDelegate, TAFlagButtonDelegate, TABackButtonDelegate, TALikeButtonDelegate, TAOverlayButtonDelegate, TATrophyCloseupViewDelegate>
 
 @property (nonatomic, strong) TATrophy *trophy;
