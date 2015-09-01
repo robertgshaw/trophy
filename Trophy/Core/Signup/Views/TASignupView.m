@@ -13,13 +13,6 @@
 #import <Parse/Parse.h>
 #import <QuartzCore/QuartzCore.h>
 
-static const CGFloat kSignupTextFieldHeight = 35.0;
-static const CGFloat kSignupTextFieldVerticalMargin = 20.0;
-
-static const CGFloat kContinueButtonWidth = 150.0;
-static const CGFloat kContinueButtonHeight = 40.0;
-
-
 @interface TASignupView () <UITextFieldDelegate>
 
 @property (nonatomic, strong) UIImageView *logoImageView;

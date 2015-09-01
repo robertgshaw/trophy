@@ -28,6 +28,7 @@
     return sharedManager;
 }
 
+// add trophy to active group
 - (void)addTrophyToActiveGroup:(TATrophy *)trophy
                      success:(void (^)(void))success
                      failure:(void (^)(NSString *error))failure
@@ -45,8 +46,10 @@
         trophyObject[@"likes"] = [NSNumber numberWithInteger:trophy.likes];
         trophyObject[@"comments"] = [NSNull null];
         
+        // saves object in background, ie posts to trophy's servers
         [trophyObject saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
             if (error == nil) {
+                // update leaderboard score
                 [self getLeaderboardScoreObjectForUser:trophy.recipient
                                            withGroupId:groupId
                                                success:^(PFObject *object) {
@@ -58,6 +61,7 @@
                                                    [SVProgressHUD dismiss];
                                                    failure(error.description);
                                                }];
+                // send push notifications
                 [self sendPushNotifications:trophy];
             } else {
                 [SVProgressHUD dismiss];
@@ -97,13 +101,28 @@
     return [[TATrophy alloc] initWithStoredTrophy:trophyObject];
 }
 
+// send push notifications, on trophy being added
 - (void)sendPushNotifications:(TATrophy *)trophy
 {
+    // current group
     NSString *currentGroup = [TAGroupManager sharedManager].activeGroup.groupId;
     NSString *message = [NSString stringWithFormat:@"%@ just added a new Trophy!", trophy.author.name];
     PFPush *push = [[PFPush alloc] init];
     [push setChannel:currentGroup];
-    [push setMessage:message];
+    
+    // sets data to be added to push
+    NSDictionary *data = @{
+        @"alert" : message,
+        @"badge" : @"Increment"
+    };
+    
+    // sets time interval, 1 day
+    NSTimeInterval interval = 60*60*24;
+    
+    [push expireAfterTimeInterval:interval];
+    [push setData:data];
+    
+    // sends push in the background
     [push sendPushInBackground];
 }
 

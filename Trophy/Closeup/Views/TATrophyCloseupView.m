@@ -260,7 +260,6 @@
 - (void) didPressCommentsButton
 {
     [self.delegate1 closeupViewDidPressCommentsButton:self];
-    
 }
 
 @end
