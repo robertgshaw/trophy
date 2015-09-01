@@ -41,7 +41,6 @@ static const CGFloat kGroupButtonHeight = 40.0;
     self.edgesForExtendedLayout = UIRectEdgeNone;
     
     // adds trophy image
-    
     UIImageView *trophyImageView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"home-logo"]];
     CGRect frame = trophyImageView.frame;
     frame.origin.x = CGRectGetMidX(self.view.bounds) - floorf(CGRectGetWidth(trophyImageView.frame) / 2.0);

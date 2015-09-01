@@ -90,6 +90,7 @@
 		969F25D31B716BB700D68520 /* TACommentButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 969F25D21B716BB700D68520 /* TACommentButton.m */; };
 		9F02A9271B67F2FA0047FFF9 /* TAGroupListButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 9F02A9261B67F2FA0047FFF9 /* TAGroupListButton.m */; };
 		9F1E3E2B1B6FCF11003CA892 /* TALikesButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 9F1E3E2A1B6FCF11003CA892 /* TALikesButton.m */; };
+		9F56FF6D1B961A7500ED10BC /* TATutorialViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9F56FF6C1B961A7500ED10BC /* TATutorialViewController.m */; };
 		9F5E3A991B6A732100D6C682 /* TAOverlayButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 9F5E3A981B6A732000D6C682 /* TAOverlayButton.m */; };
 		9F7880941B614F5900E800C2 /* TAOnboardingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9F7880931B614F5900E800C2 /* TAOnboardingViewController.m */; };
 		9F7AEFAB1B792E0300E0EBBA /* TASendTrophyCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 9F7AEFAA1B792E0300E0EBBA /* TASendTrophyCell.m */; };
@@ -254,6 +255,8 @@
 		9F02A9261B67F2FA0047FFF9 /* TAGroupListButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TAGroupListButton.m; sourceTree = "<group>"; };
 		9F1E3E291B6FCF11003CA892 /* TALikesButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TALikesButton.h; sourceTree = "<group>"; };
 		9F1E3E2A1B6FCF11003CA892 /* TALikesButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TALikesButton.m; sourceTree = "<group>"; };
+		9F56FF6B1B961A7500ED10BC /* TATutorialViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TATutorialViewController.h; sourceTree = "<group>"; };
+		9F56FF6C1B961A7500ED10BC /* TATutorialViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TATutorialViewController.m; sourceTree = "<group>"; };
 		9F5E3A971B6A732000D6C682 /* TAOverlayButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TAOverlayButton.h; sourceTree = "<group>"; };
 		9F5E3A981B6A732000D6C682 /* TAOverlayButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TAOverlayButton.m; sourceTree = "<group>"; };
 		9F7880921B614F5900E800C2 /* TAOnboardingViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TAOnboardingViewController.h; sourceTree = "<group>"; };
@@ -522,6 +525,8 @@
 				92E6F4851A56F18800010727 /* TALoginViewController.m */,
 				9F7880921B614F5900E800C2 /* TAOnboardingViewController.h */,
 				9F7880931B614F5900E800C2 /* TAOnboardingViewController.m */,
+				9F56FF6B1B961A7500ED10BC /* TATutorialViewController.h */,
+				9F56FF6C1B961A7500ED10BC /* TATutorialViewController.m */,
 			);
 			name = Signup;
 			sourceTree = "<group>";
@@ -893,6 +898,7 @@
 				920037011A89F3EB004C34DB /* UIColor+TAAdditions.m in Sources */,
 				969F25D31B716BB700D68520 /* TACommentButton.m in Sources */,
 				92E47AEB1A4CC76D00B08C3B /* TAAddSettingsView.m in Sources */,
+				9F56FF6D1B961A7500ED10BC /* TATutorialViewController.m in Sources */,
 				92B1DAB61A383AF7001B059E /* main.m in Sources */,
 				9F5E3A991B6A732100D6C682 /* TAOverlayButton.m in Sources */,
 				92E47AE81A4CC76200B08C3B /* TASettingsViewController.m in Sources */,

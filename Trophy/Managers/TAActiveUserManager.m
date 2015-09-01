@@ -14,6 +14,7 @@
 #import "TATimelineViewController.h"
 #import "TAGroupManager.h"
 #import "TAOnboardingViewController.h"
+#import "TATutorialViewController.h"
 
 #import <Parse/Parse.h>
 
@@ -74,6 +75,7 @@
     if (CREATE_TEST_GROUP) {
         [[TAGroupManager sharedManager] createTestGroup];
     } else {
+        // if logged in
         if (self.hasCurrentUser) {
             [self configureActiveUser];
             
@@ -87,6 +89,7 @@
                 [self transitionToMainViewController];
             }
         } else {
+            // if not logged in, go to tutorial
             [self transitionToAccountSetupFlow];
         }
     }
@@ -309,11 +312,16 @@
     }
 }
 
+// transition to the tutorial
 - (void)transitionToAccountSetupFlow
 {
-    TASignupViewController *signupViewController = [[TASignupViewController alloc] init];
-    UINavigationController *navController = [[UINavigationController alloc] initWithRootViewController:signupViewController];
+    TATutorialViewController *tutorialViewController = [[TATutorialViewController alloc] init];
+    UINavigationController *navController = [[UINavigationController alloc] initWithRootViewController:tutorialViewController];
     [self.delegate transitionToViewController:navController animated:NO withCompletion:nil];
+    
+//    TASignupViewController *signupViewController = [[TASignupViewController alloc] init];
+//    UINavigationController *navController = [[UINavigationController alloc] initWithRootViewController:signupViewController];
+//    [self.delegate transitionToViewController:navController animated:NO withCompletion:nil];
 }
 
 - (void)transitionToMainViewController
