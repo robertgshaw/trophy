@@ -60,40 +60,18 @@
     frame4.origin = CGPointMake(self.view.frame.size.width * 3, 0);
     frame4.size = frame1.size;
     
-    NSLog(@"%@", NSStringFromCGRect(frame1));
-    NSLog(@"%@", NSStringFromCGRect(frame2));
-    NSLog(@"%@", NSStringFromCGRect(frame3));
-    NSLog(@"%@", NSStringFromCGRect(frame4));
-    NSLog(@"%@", NSStringFromCGSize(self.scrollView.contentSize));
-    
-    
-    TATutorialView *tutorialView1 = [[TATutorialView alloc] initWithFrame:frame1 image:[UIImage imageNamed:@"tutorial-image-1"] caption:@"A trophy is a photo and a description that you award to a friend."];
+    // initializes tutorial views
+    TATutorialView *tutorialView1 = [[TATutorialView alloc] initWithFrame:frame1 image:[UIImage imageNamed:@"tutorial-image-1-1"] caption:@"A trophy is a photo and a description that you award to a friend."];
     [self.scrollView addSubview:tutorialView1];
     
-    TATutorialView *tutorialView2 = [[TATutorialView alloc] initWithFrame:frame2 image:[UIImage imageNamed:@"tutorial-image-2"] caption:@"Capture a trophy in the moment, or dig up an old photo for the group to relive."];
+    TATutorialView *tutorialView2 = [[TATutorialView alloc] initWithFrame:frame2 image:[UIImage imageNamed:@"tutorial-image-2-1"] caption:@"Capture a trophy in the moment, or dig up an old photo for the group to relive."];
     [self.scrollView addSubview:tutorialView2];
     
-    TATutorialView *tutorialView3 = [[TATutorialView alloc] initWithFrame:frame3 image:[UIImage imageNamed:@"tutorial-image-3"] caption:@"Compete for the top spot in the Hall of Fame. Who has what it takes?"];
+    TATutorialView *tutorialView3 = [[TATutorialView alloc] initWithFrame:frame3 image:[UIImage imageNamed:@"tutorial-image-3-1"] caption:@"Compete for the top spot in the Hall of Fame. Who has what it takes?"];
     [self.scrollView addSubview:tutorialView3];
     
-    TATutorialView *tutorialView4 = [[TATutorialView alloc] initWithFrame:frame4 image:[UIImage imageNamed:@"tutorial-image-4"] caption:@"Everything stays private within the group. Photos, comments, and profiles."];
+    TATutorialView *tutorialView4 = [[TATutorialView alloc] initWithFrame:frame4 image:[UIImage imageNamed:@"tutorial-image-4-1"] caption:@"Everything stays private within the group. Photos, comments, and profiles."];
     [self.scrollView addSubview:tutorialView4];
-    
-//    UILabel *label  = [[UILabel alloc] initWithFrame:frame1];
-//    [label setText:@"Hello"];
-//    [self.scrollView addSubview:label];
-//    
-//    UILabel *label2  = [[UILabel alloc] initWithFrame:frame2];
-//    [label2 setText:@"Hello2"];
-//    [self.scrollView addSubview:label2];
-//    
-//    UILabel *label3  = [[UILabel alloc] initWithFrame:frame3];
-//    [label3 setText:@"Hello3"];
-//    [self.scrollView addSubview:label3];
-//    
-//    UILabel *label4  = [[UILabel alloc] initWithFrame:frame4];
-//    [label4 setText:@"Hello4"];
-//    [self.scrollView addSubview:label4];
     
     // configure scroll view to only allow paganation
     [self.scrollView setPagingEnabled:YES];
@@ -106,7 +84,7 @@
     CGRect frame = self.pageControl.frame;
     frame.size = CGSizeMake(100, 30);
     frame.origin.x = self.view.frame.size.width / 2 - frame.size.width / 2;
-    frame.origin.y = tutorialView1.frame.size.height * .15 + tutorialView1.frame.size.height * .025 + 20;
+    frame.origin.y = tutorialView1.frame.size.height * .2 + tutorialView1.frame.size.height * .04 + 20;
     self.pageControl.frame = frame;
     self.pageControl.numberOfPages = 4;
     self.pageControl.currentPage = 0; 
@@ -136,6 +114,5 @@
     self.pageControl.currentPage = page;
     
 }
-
 
 @end

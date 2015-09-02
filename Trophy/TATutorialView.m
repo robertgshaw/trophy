@@ -23,7 +23,7 @@
         self.caption = [[UILabel alloc] init];
         self.caption.textAlignment = NSTextAlignmentCenter;
         self.caption.textColor = [UIColor whiteColor];
-        self.caption.font = [UIFont fontWithName:@"Avenir" size:20.0];
+        self.caption.font = [UIFont fontWithName:@"Avenir" size:19.0];
         self.caption.numberOfLines = 3;
         self.caption.lineBreakMode = NSLineBreakByTruncatingTail;
         self.caption.text = caption;
@@ -33,24 +33,22 @@
 }
 
 - (void)layoutSubviews {
+
+    // layout caption
     CGRect frame = self.caption.frame;
     frame.size.width = self.frame.size.width * .8;
-    frame.size.height = self.frame.size.height * .15;
+    frame.size.height = self.frame.size.height * .2;
     frame.origin.x = CGRectGetMidX(self.bounds) - frame.size.width / 2;
-    frame.origin.y = self.frame.size.height * .025;
+    frame.origin.y = self.frame.size.height * .04;
     self.caption.frame = frame;
     
-    NSLog(@"%@", NSStringFromCGRect(self.caption.frame));
-    
+    // layout image
     frame = self.image.frame;
     frame.size.width = self.frame.size.width * .9;
     frame.size.height = [self formatHeightFromSize:self.image.image.size withWidth:frame.size.width];
-    frame.origin.x = self.frame.size.width * .1;
-    frame.origin.y = 150;
+    frame.origin.x = CGRectGetMidX(self.bounds) - frame.size.width / 2;
+    frame.origin.y = CGRectGetMidY(self.bounds) - frame.size.height / 2 + 30;
     self.image.frame = frame;
-    
-//   NSLog(@"%@", NSStringFromCGRect(self.image.frame));
-    
 }
 
 - (CGFloat)formatHeightFromSize:(CGSize)dimensions withWidth:(CGFloat)width
