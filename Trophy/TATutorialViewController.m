@@ -76,7 +76,7 @@
     TATutorialView *tutorialView3 = [[TATutorialView alloc] initWithFrame:frame3 image:[UIImage imageNamed:@"tutorial-image-3-1"] caption:@"Compete for the top spot in the Hall of Fame. Who has what it takes?"];
     [self.scrollView addSubview:tutorialView3];
     
-    TATutorialView *tutorialView4 = [[TATutorialView alloc] initWithFrame:frame4 image:[UIImage imageNamed:@"tutorial-image-4-1"] caption:@"Everything stays private within the group. Photos, comments, and profiles."];
+    TATutorialView *tutorialView4 = [[TATutorialView alloc] initWithFrame:frame4 image:[UIImage imageNamed:@"tutorial-image-4-2"] caption:@"Everything stays private within the group. Photos, comments, and profiles."];
     [self.scrollView addSubview:tutorialView4];
     
     // configure scroll view to only allow paganation
