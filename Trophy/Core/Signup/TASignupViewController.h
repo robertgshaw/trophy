@@ -9,8 +9,10 @@
 #import <UIKit/UIKit.h>
 
 @interface TASignupViewController : UIViewController
+
 - (IBAction)closeLegal:(id)sender;
 - (IBAction)closePrivacy:(id)sender;
 
+- (void)signupViewDidPressLoginButton;
 
 @end

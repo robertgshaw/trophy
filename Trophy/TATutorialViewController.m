@@ -9,11 +9,14 @@
 #import "TATutorialViewController.h"
 #import "TATutorialView.h"
 #import "UIColor+TAAdditions.h"
+#import "TAActiveUserManager.h"
 
 @interface TATutorialViewController () <UIScrollViewDelegate>
 
 @property (strong, nonatomic) UIScrollView *scrollView;
 @property (strong, nonatomic) UIPageControl *pageControl;
+@property (strong, nonatomic) UIButton *loginButton;
+@property (strong, nonatomic) UIButton *signupButton;
 
 @end
 
@@ -34,10 +37,13 @@
     // hides nav bar
     [self.navigationController setNavigationBarHidden:YES animated:YES];
     
-    self.view.backgroundColor = [UIColor trophyRedColor];
+    self.view.backgroundColor = [UIColor trophyNavyColor];
+    
+    // height of the button
+    CGFloat heightOfButtons = self.view.frame.size.height * .08;
 
     // initialize the scroll view
-    self.scrollView = [[UIScrollView alloc] initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height - 50)];
+    self.scrollView = [[UIScrollView alloc] initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height - heightOfButtons)];
     self.scrollView.delegate = self;
     [self.scrollView setBackgroundColor:[UIColor trophyNavyColor]];
     [self.view addSubview:self.scrollView];
@@ -78,10 +84,44 @@
     self.scrollView.showsHorizontalScrollIndicator = NO;
     self.scrollView.showsVerticalScrollIndicator = NO;
     
+    // congigure login button
+    self.loginButton = [[UIButton alloc] init];
+    [self.loginButton setTitle:@"Log In" forState:UIControlStateNormal];
+    [self.loginButton setTitleColor:[UIColor trophyNavyColor] forState:UIControlStateNormal];
+    [self.loginButton setBackgroundColor:[UIColor whiteColor]];
+    self.loginButton.titleLabel.font = [UIFont fontWithName:@"Avenir" size:19.0];
+    [self.loginButton addTarget:self action:@selector(loginButtonPressed:) forControlEvents:UIControlEventTouchUpInside];
+    [self.view addSubview:self.loginButton];
+    
+    // set login button frame
+    CGRect frame = self.loginButton.frame;
+    frame.size.height = heightOfButtons;
+    frame.size.width = self.view.frame.size.width * .4;
+    frame.origin.x = 0;
+    frame.origin.y = self.view.frame.size.height - frame.size.height;
+    self.loginButton.frame = frame;
+    
+    // configure signup button
+    self.signupButton = [[UIButton alloc] init];
+    [self.signupButton setTitle:@"Sign up" forState:UIControlStateNormal];
+    [self.signupButton setTitleColor:[UIColor trophyNavyColor] forState:UIControlStateNormal];
+    [self.signupButton setBackgroundColor:[UIColor trophyYellowColor]];
+    self.signupButton.titleLabel.font = [UIFont fontWithName:@"Avenir" size:19.0];
+    [self.signupButton addTarget:self action:@selector(signupButtonPressed:) forControlEvents:UIControlEventTouchUpInside];
+    [self.view addSubview:self.signupButton];
+    
+    // set login button frame
+    frame = self.signupButton.frame;
+    frame.size.height = heightOfButtons;
+    frame.size.width = self.view.frame.size.width * .6;
+    frame.origin.x = CGRectGetMaxX(self.loginButton.frame);
+    frame.origin.y = self.view.frame.size.height - frame.size.height;
+    self.signupButton.frame = frame;
+    
     // page control button
     self.pageControl = [[UIPageControl alloc] init];
     [self.pageControl sizeToFit];
-    CGRect frame = self.pageControl.frame;
+    frame = self.pageControl.frame;
     frame.size = CGSizeMake(100, 30);
     frame.origin.x = self.view.frame.size.width / 2 - frame.size.width / 2;
     frame.origin.y = tutorialView1.frame.size.height * .2 + tutorialView1.frame.size.height * .04 + 20;
@@ -113,6 +153,18 @@
     NSInteger page = lround(fractionalPage);
     self.pageControl.currentPage = page;
     
+}
+
+#pragma mark - Action Handlers
+
+// transition to signupView
+- (void)signupButtonPressed:(id)sender {
+    [[TAActiveUserManager sharedManager] transitionToSignupViewController];
+}
+
+// transitions to loginView
+- (void)loginButtonPressed:(id)sender {
+    [[TAActiveUserManager sharedManager] transitionToLoginViewController];
 }
 
 @end

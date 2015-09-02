@@ -20,7 +20,6 @@
 
 #define CREATE_TEST_GROUP NO
 
-
 @implementation TAActiveUserManager
 
 @synthesize activeUser = _activeUser;
@@ -318,19 +317,36 @@
     TATutorialViewController *tutorialViewController = [[TATutorialViewController alloc] init];
     UINavigationController *navController = [[UINavigationController alloc] initWithRootViewController:tutorialViewController];
     [self.delegate transitionToViewController:navController animated:NO withCompletion:nil];
-    
-//    TASignupViewController *signupViewController = [[TASignupViewController alloc] init];
-//    UINavigationController *navController = [[UINavigationController alloc] initWithRootViewController:signupViewController];
-//    [self.delegate transitionToViewController:navController animated:NO withCompletion:nil];
 }
 
+// transition to the signupView
+- (void)transitionToSignupViewController
+{
+    TASignupViewController *signupViewController = [[TASignupViewController alloc] init];
+    UINavigationController *navController = [[UINavigationController alloc] initWithRootViewController:signupViewController];
+    [self.delegate transitionToViewController:navController animated:NO withCompletion:nil];
+}
+
+// transition to the loginView
+- (void)transitionToLoginViewController
+{
+    // create a signupView to act as the login view's delegate
+    TASignupViewController *signupViewController = [[TASignupViewController alloc] init];
+    UINavigationController *navController = [[UINavigationController alloc] initWithRootViewController:signupViewController];
+    [self.delegate transitionToViewController:navController animated:NO withCompletion:nil];
+    
+    // transition to login view
+    [signupViewController signupViewDidPressLoginButton];
+}
+
+// transition to timeline view controller
 - (void)transitionToMainViewController
 {
     TAMainViewController *mainViewController = [[TAMainViewController alloc] init];
     [self.delegate transitionToViewController:mainViewController animated:NO withCompletion:nil];
 }
 
-
+// transition to onboarding view controller
 - (void) transitionToOnboardingViewController
 {
     TAOnboardingViewController *onboardingViewController = [[TAOnboardingViewController alloc] init];

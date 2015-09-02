@@ -67,7 +67,7 @@ static const CGFloat kGroupButtonHeight = 40.0;
     // adds join group button
     UIButton *joinGroupButton = [[UIButton alloc] init];
     [joinGroupButton setTitle:@"Join Group" forState:UIControlStateNormal];
-    joinGroupButton.font = [UIFont fontWithName:@"Avenir-Heavy" size:20.0];
+    joinGroupButton.titleLabel.font = [UIFont fontWithName:@"Avenir-Heavy" size:20.0];
     [joinGroupButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
     joinGroupButton.backgroundColor = [UIColor darkerBlueColor];
     joinGroupButton.layer.cornerRadius = 5.0;

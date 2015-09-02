@@ -43,6 +43,7 @@
 
 #pragma mark - TASignupView Delegate Methods
 
+// on signup view continue press, display settings view
 - (void)signupViewDidPressContinueButton
 {
     if ([self.signupView signupIsValid]) {
@@ -63,6 +64,8 @@
         }
     }
 }
+
+// on login button, launch the login screen
 - (void)signupViewDidPressLoginButton
 {
     TALoginViewController *loginVC = [[TALoginViewController alloc] init];
@@ -73,9 +76,10 @@
     self.navigationController.navigationBar.tintColor = [UIColor trophyYellowColor];
     [self.navigationController pushViewController:loginVC animated:YES];
 }
+
+// on legal button press, dislplay terms
 - (void)signupViewDidPressLegalButton
 {
-    
     CGRect rect = [[UIScreen mainScreen] bounds];
     CGSize screenSize = rect.size;
     
@@ -92,10 +96,12 @@
     [button addTarget:self action:@selector(closeLegal:) forControlEvents:UIControlEventTouchUpInside];
     [webView addSubview:button];
 }
+
 - (IBAction)closeLegal:(id)sender
 {
     [[self.view viewWithTag:55] removeFromSuperview];
 }
+
 - (void)signupViewDidPressPrivacyButton
 {
     CGRect rect = [[UIScreen mainScreen] bounds];
@@ -114,12 +120,14 @@
     [button addTarget:self action:@selector(closePrivacy:) forControlEvents:UIControlEventTouchUpInside];
     [webView addSubview:button];
 }
--(IBAction)closePrivacy:(id)sender
+
+- (IBAction)closePrivacy:(id)sender
 {
     [[self.view viewWithTag:56] removeFromSuperview];
 
 }
--(void)backButtonPressed
+
+- (void)backButtonPressed
 {
     [self dismissViewControllerAnimated:YES completion:nil];
 }

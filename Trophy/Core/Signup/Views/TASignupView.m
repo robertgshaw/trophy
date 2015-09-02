@@ -79,7 +79,7 @@
         [self.continueButton setTitleColor:[UIColor trophyNavyColor] forState:UIControlStateNormal];
         self.continueButton.backgroundColor = [UIColor trophyYellowColor];
         self.continueButton.layer.cornerRadius = 5.0;
-        self.continueButton.font = [UIFont fontWithName:@"Avenir-Heavy" size:17.0];
+        self.continueButton.titleLabel.font = [UIFont fontWithName:@"Avenir-Heavy" size:17.0];
         [self.continueButton addTarget:self action:@selector(continueButtonPressed) forControlEvents:UIControlEventTouchUpInside];
         [self addSubview:self.continueButton];
 
@@ -89,7 +89,7 @@
         self.loginButton.backgroundColor = [UIColor whiteColor];
         self.loginButton.layer.cornerRadius = 5.0;
         [self.loginButton setTitleColor:[UIColor colorWithRed:0.812 green:0.82 blue:0.82 alpha:1] forState:UIControlStateHighlighted];
-        self.loginButton.font = [UIFont fontWithName:@"Avenir-Heavy" size:13.0];
+        self.loginButton.titleLabel.font = [UIFont fontWithName:@"Avenir-Heavy" size:13.0];
         [self.loginButton addTarget:self action:@selector(loginButtonPressed) forControlEvents:UIControlEventTouchUpInside];
         [self addSubview:self.loginButton];
         

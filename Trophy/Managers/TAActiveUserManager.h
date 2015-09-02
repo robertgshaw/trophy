@@ -34,6 +34,10 @@
                  success:(void (^)(void))success
                  failure:(void (^)(NSString *error))failure;
 
+- (void)transitionToSignupViewController;
+
+- (void)transitionToLoginViewController;
+
 - (void)signupSuccessfulForActiveUser;
 
 - (void)accountSetupSuccessfulForActiveUser;

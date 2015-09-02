@@ -121,7 +121,7 @@
     // Format image
     UIImage *image = chosenImage;
     UIImageOrientation correctOrientation;
-    if (picker.sourceType != UIImagePickerControllerSourceTypeSavedPhotosAlbum) {
+    if (picker.sourceType != UIImagePickerControllerSourceTypePhotoLibrary) {
         if (picker.cameraDevice == UIImagePickerControllerCameraDeviceFront) {
             correctOrientation = UIImageOrientationLeftMirrored;
         } else {
@@ -168,10 +168,8 @@
 {
     if (self.imagePickerController.cameraFlashMode == UIImagePickerControllerCameraFlashModeOn) {
         self.imagePickerController.cameraFlashMode = UIImagePickerControllerCameraFlashModeOff;
-    }
-    else  {
+    } else  {
         self.imagePickerController.cameraFlashMode = UIImagePickerControllerCameraFlashModeOn;
-       
     }
 }
 
@@ -184,7 +182,7 @@
 {
     UIImagePickerController *cameraRollSelector = [[UIImagePickerController alloc] init];
     [cameraRollSelector.view setFrame:self.view.bounds];
-    [cameraRollSelector setSourceType:UIImagePickerControllerSourceTypeSavedPhotosAlbum];
+    [cameraRollSelector setSourceType:UIImagePickerControllerSourceTypePhotoLibrary];
     [cameraRollSelector setDelegate:self];
     
     [self.imagePickerController presentViewController:cameraRollSelector animated:YES completion:nil];
