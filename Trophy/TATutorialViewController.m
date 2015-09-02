@@ -33,11 +33,13 @@
     
     // hides nav bar
     [self.navigationController setNavigationBarHidden:YES animated:YES];
+    
+    self.view.backgroundColor = [UIColor trophyRedColor];
 
     // initialize the scroll view
     self.scrollView = [[UIScrollView alloc] initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height - 50)];
     self.scrollView.delegate = self;
-    [self.scrollView setBackgroundColor:[UIColor redColor]];
+    [self.scrollView setBackgroundColor:[UIColor trophyNavyColor]];
     [self.view addSubview:self.scrollView];
     [self.scrollView setContentSize:CGSizeMake(self.view.frame.size.width * 4, self.scrollView.frame.size.height - 100)];
     
@@ -77,22 +79,21 @@
     TATutorialView *tutorialView4 = [[TATutorialView alloc] initWithFrame:frame4 image:[UIImage imageNamed:@"tutorial-image-4"] caption:@"Everything stays private within the group. Photos, comments, and profiles."];
     [self.scrollView addSubview:tutorialView4];
     
-    UILabel *label  = [[UILabel alloc] initWithFrame:frame1];
-    [label setText:@"Hello"];
-    [self.scrollView addSubview:label];
-    
-    UILabel *label2  = [[UILabel alloc] initWithFrame:frame2];
-    [label2 setText:@"Hello2"];
-    [self.scrollView addSubview:label2];
-    
-    UILabel *label3  = [[UILabel alloc] initWithFrame:frame3];
-    [label3 setText:@"Hello3"];
-    [self.scrollView addSubview:label3];
-    
-    UILabel *label4  = [[UILabel alloc] initWithFrame:frame4];
-    [label4 setText:@"Hello4"];
-    [self.scrollView addSubview:label4];
-
+//    UILabel *label  = [[UILabel alloc] initWithFrame:frame1];
+//    [label setText:@"Hello"];
+//    [self.scrollView addSubview:label];
+//    
+//    UILabel *label2  = [[UILabel alloc] initWithFrame:frame2];
+//    [label2 setText:@"Hello2"];
+//    [self.scrollView addSubview:label2];
+//    
+//    UILabel *label3  = [[UILabel alloc] initWithFrame:frame3];
+//    [label3 setText:@"Hello3"];
+//    [self.scrollView addSubview:label3];
+//    
+//    UILabel *label4  = [[UILabel alloc] initWithFrame:frame4];
+//    [label4 setText:@"Hello4"];
+//    [self.scrollView addSubview:label4];
     
     // configure scroll view to only allow paganation
     [self.scrollView setPagingEnabled:YES];
