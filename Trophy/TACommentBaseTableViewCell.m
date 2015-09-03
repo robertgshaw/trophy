@@ -53,7 +53,7 @@ static const CGFloat kProfileImageWidth = 70.0;
         self.avatarImageView = [[PFImageView alloc] init];
         self.avatarImageView.backgroundColor = [UIColor whiteColor];
         self.avatarImageView.image = [UIImage imageNamed:@"default-profile-icon"];
-        self.avatarImageView.layer.cornerRadius = 10;
+        self.avatarImageView.layer.cornerRadius = 20;
         self.avatarImageView.clipsToBounds = YES;
         [mainView addSubview:self.avatarImageView];
         
@@ -61,11 +61,10 @@ static const CGFloat kProfileImageWidth = 70.0;
         [self.nameButton setBackgroundColor:[UIColor clearColor]];
         [self.nameButton setTitleColor:[UIColor colorWithRed:73.0f/255.0f green:55.0f/255.0f blue:35.0f/255.0f alpha:1.0f] forState:UIControlStateNormal];
         [self.nameButton setTitleColor:[UIColor colorWithRed:134.0f/255.0f green:100.0f/255.0f blue:65.0f/255.0f alpha:1.0f] forState:UIControlStateHighlighted];
-        [self.nameButton.titleLabel setFont:[UIFont fontWithName:@"Avenir-Medium" size:12.0f]];
+        [self.nameButton.titleLabel setFont:[UIFont fontWithName:@"Avenir-Heavy" size:12.0f]];
         [self.nameButton.titleLabel setLineBreakMode:NSLineBreakByTruncatingTail];
         [self.nameButton setTitleShadowColor:[UIColor whiteColor] forState:UIControlStateNormal];
-        [self.nameButton setTitleShadowColor:[UIColor whiteColor] forState:UIControlStateSelected];
-        [self.nameButton.titleLabel setShadowOffset:CGSizeMake( 0.0f, 1.0f)];
+        [self.nameButton.titleLabel setShadowOffset:CGSizeMake(0.0f, 1.0f)];
         [self.nameButton addTarget:self action:@selector(didTapUserButtonAction:) forControlEvents:UIControlEventTouchUpInside];
         [mainView addSubview:self.nameButton];
         
@@ -73,7 +72,7 @@ static const CGFloat kProfileImageWidth = 70.0;
         [self.contentLabel setFont:[UIFont fontWithName:@"Avenir-Book" size:13.0f]];
         [self.contentLabel setTextColor:[UIColor colorWithRed:73./255. green:55./255. blue:35./255. alpha:1.000]];
         [self.contentLabel setNumberOfLines:0];
-        [self.contentLabel setLineBreakMode:UILineBreakModeWordWrap];
+        [self.contentLabel setLineBreakMode:NSLineBreakByTruncatingTail];
         [self.contentLabel setBackgroundColor:[UIColor clearColor]];
         [self.contentLabel setShadowColor:[UIColor colorWithWhite:1.0f alpha:0.70f]];
         [self.contentLabel setShadowOffset:CGSizeMake( 0.0f, 1.0f)];
@@ -86,7 +85,6 @@ static const CGFloat kProfileImageWidth = 70.0;
         [self.timeLabel setShadowColor:[UIColor colorWithWhite:1.0f alpha:0.70f]];
         [self.timeLabel setShadowOffset:CGSizeMake(0, 1)];
         [mainView addSubview:self.timeLabel];
-        
         
         self.avatarImageButton = [UIButton buttonWithType:UIButtonTypeCustom];
         [self.avatarImageButton setBackgroundColor:[UIColor clearColor]];
@@ -108,31 +106,58 @@ static const CGFloat kProfileImageWidth = 70.0;
 - (void)layoutSubviews {
     [super layoutSubviews];
     
-    [mainView setFrame:CGRectMake(cellInsetWidth, self.contentView.frame.origin.y, self.contentView.frame.size.width-2*cellInsetWidth, self.contentView.frame.size.height)];
+    [mainView setFrame:CGRectMake(cellInsetWidth, self.contentView.frame.origin.y, self.contentView.frame.size.width - (2 * cellInsetWidth), self.contentView.frame.size.height)];
     
-    // Layout avatar image
-    [self.avatarImageView setFrame:CGRectMake(avatarX, avatarY, avatarDim, avatarDim)];
-    [self.avatarImageButton setFrame:CGRectMake(avatarX, avatarY, avatarDim, avatarDim)];
-
+    NSLog(@"%@", NSStringFromCGRect(mainView.frame));
+    // lays out image view frame
+    CGRect frame = self.avatarImageView.frame;
+    frame.size.height = 40;
+    frame.size.width = frame.size.height;
+    frame.origin.x = 5;
+    frame.origin.y = 5;
+    self.avatarImageView.frame = frame;
+    self.avatarImageButton.frame = frame;
     
-    // Layout avatar image
-    [self.avatarImageButton setFrame:CGRectMake(avatarX, avatarY, avatarDim, avatarDim)];
+    // lays out name button frame
+    [self.nameButton sizeToFit];
+    frame = self.nameButton.frame;
+    frame.size.height = 20;
+    frame.origin.x = CGRectGetMaxY(self.avatarImageView.frame) + 7.5;
+    frame.origin.y = self.avatarImageView.frame.origin.x;
+    self.nameButton.frame = frame;
+        
+    // layout the content
+    [self.contentLabel sizeToFit];
+    frame = self.contentLabel.frame;
+    frame.size.width = self.mainView.frame.size.width - CGRectGetMaxX(self.avatarImageView.frame) - 15;
+    frame.origin.x = self.nameButton.frame.origin.x;
+    frame.origin.y = CGRectGetMaxY(self.nameButton.frame);
+    self.contentLabel.frame = frame;
+//    [self.contentLabel setBackgroundColor:[UIColor greenColor]];
     
-    // Layout the name button
-    CGSize nameSize = [self.nameButton.titleLabel.text sizeWithFont:[UIFont boldSystemFontOfSize:13] forWidth:nameMaxWidth lineBreakMode:UILineBreakModeTailTruncation];
-    [self.nameButton setFrame:CGRectMake(nameX, nameY, nameSize.width, nameSize.height)];
-    
-    // Layout the content
-    CGSize contentSize = [self.contentLabel.text sizeWithFont:[UIFont systemFontOfSize:13] constrainedToSize:CGSizeMake(horizontalTextSpace, CGFLOAT_MAX) lineBreakMode:UILineBreakModeWordWrap];
-    [self.contentLabel setFrame:CGRectMake(nameX, vertTextBorderSpacing, contentSize.width, contentSize.height)];
-    
-    // Layout the timestamp label
-    CGSize timeSize = [self.timeLabel.text sizeWithFont:[UIFont systemFontOfSize:11] forWidth:horizontalTextSpace lineBreakMode:UILineBreakModeTailTruncation];
-    [self.timeLabel setFrame:CGRectMake(timeX, contentLabel.frame.origin.y + contentLabel.frame.size.height + vertElemSpacing, timeSize.width, timeSize.height)];
-    
-    // Layour separator
-    [self.separatorImage setFrame:CGRectMake(0, self.frame.size.height-2, self.frame.size.width-cellInsetWidth*2, 2)];
-    [self.separatorImage setHidden:hideSeparator];
+//    // Layout avatar image
+//    [self.avatarImageView setFrame:CGRectMake(avatarX, avatarY, avatarDim, avatarDim)];
+//    [self.avatarImageButton setFrame:CGRectMake(avatarX, avatarY, avatarDim, avatarDim)];
+//
+//    
+//    // Layout avatar image
+//    [self.avatarImageButton setFrame:CGRectMake(avatarX, avatarY, avatarDim, avatarDim)];
+//    
+//    // Layout the name button
+//    CGSize nameSize = [self.nameButton.titleLabel.text sizeWithFont:[UIFont boldSystemFontOfSize:13] forWidth:nameMaxWidth lineBreakMode:UILineBreakModeTailTruncation];
+//    [self.nameButton setFrame:CGRectMake(nameX, nameY, nameSize.width, nameSize.height)];
+//    
+//    // Layout the content
+//    CGSize contentSize = [self.contentLabel.text sizeWithFont:[UIFont systemFontOfSize:13] constrainedToSize:CGSizeMake(horizontalTextSpace, CGFLOAT_MAX) lineBreakMode:UILineBreakModeWordWrap];
+//    [self.contentLabel setFrame:CGRectMake(nameX, vertTextBorderSpacing, contentSize.width, contentSize.height)];
+//    
+//    // Layout the timestamp label
+//    CGSize timeSize = [self.timeLabel.text sizeWithFont:[UIFont systemFontOfSize:11] forWidth:horizontalTextSpace lineBreakMode:UILineBreakModeTailTruncation];
+//    [self.timeLabel setFrame:CGRectMake(timeX, contentLabel.frame.origin.y + contentLabel.frame.size.height + vertElemSpacing, timeSize.width, timeSize.height)];
+//    
+//    // Layour separator
+//    [self.separatorImage setFrame:CGRectMake(0, self.frame.size.height-2, self.frame.size.width-cellInsetWidth*2, 2)];
+//    [self.separatorImage setHidden:hideSeparator];
 }
 
 - (void)drawRect:(CGRect)rect {
@@ -214,9 +239,10 @@ static const CGFloat kProfileImageWidth = 70.0;
 - (void)setContentText:(NSString *)contentString {
     // If we have a user we pad the content with spaces to make room for the name
     if (self.user) {
-        CGSize nameSize = [self.nameButton.titleLabel.text sizeWithFont:[UIFont boldSystemFontOfSize:13] forWidth:nameMaxWidth lineBreakMode:UILineBreakModeTailTruncation];
-        NSString *paddedString = [TACommentBaseTableViewCell padString:contentString withFont:[UIFont systemFontOfSize:13] toWidth:nameSize.width];
-        [self.contentLabel setText:paddedString];
+//        CGSize nameSize = [self.nameButton.titleLabel.text sizeWithFont:[UIFont boldSystemFontOfSize:13] forWidth:nameMaxWidth lineBreakMode:UILineBreakModeTailTruncation];
+//        NSString *paddedString = [TACommentBaseTableViewCell padString:contentString withFont:[UIFont systemFontOfSize:13] toWidth:nameSize.width];
+//        [self.contentLabel setText:paddedString];
+        [self.contentLabel setText:contentString];
     } else { // Otherwise we ignore the padding and we'll add it after we set the user
         [self.contentLabel setText:contentString];
     }

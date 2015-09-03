@@ -98,15 +98,37 @@ static const CGFloat kPAPCellInsetWidth = 20.0f;
 #pragma mark - UITableViewDelegate
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
-    if (indexPath.row < self.objects.count) { // A comment row
-        
-        //PFObject *object = [self.objects objectAtIndex:indexPath.row];
-        
-        
+    if (indexPath.row < self.objects.count) {
         NSString *commentString  = [[self.objects objectAtIndex:indexPath.row] objectForKey:@"content"];
-        NSString *nameString = @"";
         
-        return [TACommentActivityTableViewCell heightForCellWithName:nameString contentString:commentString cellInsetWidth:kPAPCellInsetWidth];
+        // label width = (width of the cell) - (cell insets) - (profile image + profile image insets)
+        CGFloat labelWidth = self.tableView.bounds.size.width - (kPAPCellInsetWidth * 2 + 7.5) - (5 + 40 + 7.5);
+        NSAttributedString *text = [[NSAttributedString alloc] initWithString:commentString];
+        NSStringDrawingOptions options = NSStringDrawingUsesLineFragmentOrigin |
+                                         NSStringDrawingUsesFontLeading;
+        CGRect boundingRect = [text boundingRectWithSize:CGSizeMake(labelWidth, CGFLOAT_MAX)
+                                                 options:options
+                                                 context:nil];
+        
+        UILabel *genericLabelForHeight = [[UILabel alloc] init];
+        genericLabelForHeight.text = commentString;
+        [genericLabelForHeight setFont:[UIFont fontWithName:@"Avenir-Book" size:13.0f]];
+        [genericLabelForHeight setNumberOfLines:0];
+        [genericLabelForHeight setLineBreakMode:NSLineBreakByTruncatingTail];
+
+        [genericLabelForHeight sizeToFit];
+        CGRect frame = genericLabelForHeight.frame;
+        frame.size.width = self.tableView.frame.size.width - (kPAPCellInsetWidth * 2) - 40 - 5 - 15;
+        genericLabelForHeight.frame = frame;
+        
+        NSLog(@"%@", NSStringFromCGRect(frame));
+        
+        if (boundingRect.size.height < 50) {
+            return 100;
+        } else {
+            return (CGFloat) (ceil(boundingRect.size.height));
+        }
+//        return 150;
     } else { // The pagination row
         return 44.0f;
     }
@@ -152,6 +174,8 @@ static const CGFloat kPAPCellInsetWidth = 20.0f;
     [cell setContentText:[object objectForKey:@"content"]];
     [cell setDate:[object createdAt]];
     
+    NSLog(@"Cell for row at index path");
+    
     return cell;
 }
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForNextPageAtIndexPath:(NSIndexPath *)indexPath {
@@ -187,7 +211,6 @@ static const CGFloat kPAPCellInsetWidth = 20.0f;
         // Set comment function
         PFObject *comment = [PFObject objectWithClassName:@"Activity"];
         [comment setValue:trimmedComment forKey:@"content"]; // Set comment text
-        //[comment setValue:_trophy.author forKey:@"recipient"]; // Set toUser
         [comment setValue:[PFUser currentUser] forKey:@"author"]; // Set fromUser
         [comment setValue:@"comment" forKey:@"type"];
         [comment setValue:[self.trophy getTrophyAsParseObject] forKey:@"trophy"];
