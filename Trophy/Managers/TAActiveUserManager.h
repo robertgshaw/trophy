@@ -38,6 +38,8 @@
 
 - (void)transitionToLoginViewController;
 
+- (void)transitionToTutorialViewController;
+
 - (void)signupSuccessfulForActiveUser;
 
 - (void)accountSetupSuccessfulForActiveUser;

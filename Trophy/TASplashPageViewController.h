@@ -1,5 +1,5 @@
 //
-//  TASpashPageViewController.h
+//  TASplashPageViewController.h
 //  Trophy
 //
 //  Created by Robert Shaw on 9/4/15.
@@ -8,6 +8,6 @@
 
 #import <UIKit/UIKit.h>
 
-@interface TASpashPageViewController : UIViewController
+@interface TASplashPageViewController : UIViewController
 
 @end

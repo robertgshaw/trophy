@@ -15,6 +15,7 @@
 #import "TAGroupManager.h"
 #import "TAOnboardingViewController.h"
 #import "TATutorialViewController.h"
+#import "TASplashPageViewController.h"
 
 #import <Parse/Parse.h>
 
@@ -311,12 +312,20 @@
     }
 }
 
-// transition to the tutorial
+// transition to the spash page
 - (void)transitionToAccountSetupFlow
+{
+    TASplashPageViewController *splashPageViewController = [[TASplashPageViewController alloc] init];
+    UINavigationController *navController = [[UINavigationController alloc] initWithRootViewController:splashPageViewController];
+    [self.delegate transitionToViewController:navController animated:NO withCompletion:nil];
+}
+
+// transition to the tutorial view
+- (void)transitionToTutorialViewController
 {
     TATutorialViewController *tutorialViewController = [[TATutorialViewController alloc] init];
     UINavigationController *navController = [[UINavigationController alloc] initWithRootViewController:tutorialViewController];
-    [self.delegate transitionToViewController:navController animated:NO withCompletion:nil];
+    [self.delegate transitionToViewController:navController animated:YES withCompletion:nil];
 }
 
 // transition to the signupView

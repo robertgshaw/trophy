@@ -97,8 +97,8 @@
 		9F7AEFAB1B792E0300E0EBBA /* TASendTrophyCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 9F7AEFAA1B792E0300E0EBBA /* TASendTrophyCell.m */; };
 		9F7AEFAE1B7A65AD00E0EBBA /* TABackButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 9F7AEFAD1B7A65AD00E0EBBA /* TABackButton.m */; };
 		9F7AEFB11B7A6BB700E0EBBA /* TAFlagButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 9F7AEFB01B7A6BB700E0EBBA /* TAFlagButton.m */; };
-		9FDB88551B9A10ED0063045A /* TASpashPageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9FDB88541B9A10ED0063045A /* TASpashPageViewController.m */; };
-		9FDB88581B9A113D0063045A /* TASplashView.m in Sources */ = {isa = PBXBuildFile; fileRef = 9FDB88571B9A113D0063045A /* TASplashView.m */; };
+		9FDB885B1B9A12C80063045A /* TASplashPageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9FDB885A1B9A12C80063045A /* TASplashPageViewController.m */; };
+		9FDB885E1B9A134D0063045A /* TASplashPageView.m in Sources */ = {isa = PBXBuildFile; fileRef = 9FDB885D1B9A134D0063045A /* TASplashPageView.m */; };
 		A8ABABD6EBC7E076CB6302AD /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = C423F20A0C7E6D3505D20EEC /* libPods.a */; };
 /* End PBXBuildFile section */
 
@@ -272,10 +272,10 @@
 		9F7AEFAD1B7A65AD00E0EBBA /* TABackButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TABackButton.m; sourceTree = "<group>"; };
 		9F7AEFAF1B7A6BB700E0EBBA /* TAFlagButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TAFlagButton.h; sourceTree = "<group>"; };
 		9F7AEFB01B7A6BB700E0EBBA /* TAFlagButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TAFlagButton.m; sourceTree = "<group>"; };
-		9FDB88531B9A10ED0063045A /* TASpashPageViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TASpashPageViewController.h; sourceTree = "<group>"; };
-		9FDB88541B9A10ED0063045A /* TASpashPageViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TASpashPageViewController.m; sourceTree = "<group>"; };
-		9FDB88561B9A113D0063045A /* TASplashView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TASplashView.h; sourceTree = "<group>"; };
-		9FDB88571B9A113D0063045A /* TASplashView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TASplashView.m; sourceTree = "<group>"; };
+		9FDB88591B9A12C80063045A /* TASplashPageViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TASplashPageViewController.h; sourceTree = "<group>"; };
+		9FDB885A1B9A12C80063045A /* TASplashPageViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TASplashPageViewController.m; sourceTree = "<group>"; };
+		9FDB885C1B9A134D0063045A /* TASplashPageView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TASplashPageView.h; sourceTree = "<group>"; };
+		9FDB885D1B9A134D0063045A /* TASplashPageView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TASplashPageView.m; sourceTree = "<group>"; };
 		C423F20A0C7E6D3505D20EEC /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		F333D028068B5D34422C9C06 /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -536,8 +536,8 @@
 				9F7880931B614F5900E800C2 /* TAOnboardingViewController.m */,
 				9F56FF6B1B961A7500ED10BC /* TATutorialViewController.h */,
 				9F56FF6C1B961A7500ED10BC /* TATutorialViewController.m */,
-				9FDB88531B9A10ED0063045A /* TASpashPageViewController.h */,
-				9FDB88541B9A10ED0063045A /* TASpashPageViewController.m */,
+				9FDB88591B9A12C80063045A /* TASplashPageViewController.h */,
+				9FDB885A1B9A12C80063045A /* TASplashPageViewController.m */,
 			);
 			name = Signup;
 			sourceTree = "<group>";
@@ -551,8 +551,8 @@
 				92E47AD01A46B73400B08C3B /* TASignupView.m */,
 				92E6F4871A56F3E100010727 /* TALoginView.h */,
 				92E6F4881A56F3E100010727 /* TALoginView.m */,
-				9FDB88561B9A113D0063045A /* TASplashView.h */,
-				9FDB88571B9A113D0063045A /* TASplashView.m */,
+				9FDB885C1B9A134D0063045A /* TASplashPageView.h */,
+				9FDB885D1B9A134D0063045A /* TASplashPageView.m */,
 			);
 			name = Views;
 			sourceTree = "<group>";
@@ -893,6 +893,7 @@
 				92E47AD11A46B73400B08C3B /* TASignupView.m in Sources */,
 				92E059FD1A63B35400A178B5 /* TAProfileHeaderView.m in Sources */,
 				4114CD2F1B44AD6600547D9A /* PAPUtility.m in Sources */,
+				9FDB885B1B9A12C80063045A /* TASplashPageViewController.m in Sources */,
 				04ECB29C1B44A6E9001292C0 /* RearViewController.m in Sources */,
 				925E653F1A91452100DF5CB6 /* TALeaderboardTableViewCell.m in Sources */,
 				928C22FA1A75D53400F6310A /* TAGroupInviteViewController.m in Sources */,
@@ -914,11 +915,11 @@
 				969F25D31B716BB700D68520 /* TACommentButton.m in Sources */,
 				92E47AEB1A4CC76D00B08C3B /* TAAddSettingsView.m in Sources */,
 				9F56FF6D1B961A7500ED10BC /* TATutorialViewController.m in Sources */,
-				9FDB88551B9A10ED0063045A /* TASpashPageViewController.m in Sources */,
 				92B1DAB61A383AF7001B059E /* main.m in Sources */,
 				9F5E3A991B6A732100D6C682 /* TAOverlayButton.m in Sources */,
 				92E47AE81A4CC76200B08C3B /* TASettingsViewController.m in Sources */,
 				92E059F21A61DFED00A178B5 /* TAGroupManager.m in Sources */,
+				9FDB885E1B9A134D0063045A /* TASplashPageView.m in Sources */,
 				9F7AEFAB1B792E0300E0EBBA /* TASendTrophyCell.m in Sources */,
 				92E6F4801A55949500010727 /* TASettingsView.m in Sources */,
 				921BC00F1A7B813B00C9B4F4 /* TAJoinGroupView.m in Sources */,
@@ -943,7 +944,6 @@
 				9F56FF731B9677BA00ED10BC /* TATutorialView.m in Sources */,
 				920036FE1A89DEC5004C34DB /* UITextField+TAAdditions.m in Sources */,
 				92E059F91A63B2C400A178B5 /* TAProfileViewController.m in Sources */,
-				9FDB88581B9A113D0063045A /* TASplashView.m in Sources */,
 				4114CD261B44ACC900547D9A /* TACommentLoadMoreTableViewCell.m in Sources */,
 				92E47AE51A4CC68B00B08C3B /* TALeaderboardViewController.m in Sources */,
 				92E6F4731A530F4C00010727 /* TATrophyActionFooterView.m in Sources */,
