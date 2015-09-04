@@ -8,6 +8,14 @@
 
 #import <UIKit/UIKit.h>
 
+@class  TATutorialViewController;
+
+@protocol TATutorialViewControllerDelegate <NSObject>
+
+@end
+
 @interface TATutorialViewController : UIViewController
+
+@property (nonatomic, weak) id<TATutorialViewControllerDelegate> delegate;
 
 @end

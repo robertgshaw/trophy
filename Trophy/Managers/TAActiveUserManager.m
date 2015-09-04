@@ -15,6 +15,7 @@
 #import "TAGroupManager.h"
 #import "TAOnboardingViewController.h"
 #import "TATutorialViewController.h"
+#import "TASplashPageViewController.h"
 
 #import <Parse/Parse.h>
 
@@ -314,8 +315,10 @@
 // transition to the tutorial
 - (void)transitionToAccountSetupFlow
 {
-    TATutorialViewController *tutorialViewController = [[TATutorialViewController alloc] init];
-    UINavigationController *navController = [[UINavigationController alloc] initWithRootViewController:tutorialViewController];
+    
+    TASplashPageViewController *splashPageViewController = [[TASplashPageViewController alloc] init];
+//    TATutorialViewController *tutorialViewController = [[TATutorialViewController alloc] init];
+    UINavigationController *navController = [[UINavigationController alloc] initWithRootViewController:splashPageViewController];
     [self.delegate transitionToViewController:navController animated:NO withCompletion:nil];
 }
 

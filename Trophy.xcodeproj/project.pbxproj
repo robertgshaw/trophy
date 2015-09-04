@@ -19,6 +19,8 @@
 		416831701B56106D00D7E393 /* MBProgressHUD.m in Sources */ = {isa = PBXBuildFile; fileRef = 4168316F1B56106D00D7E393 /* MBProgressHUD.m */; };
 		4188E7C21B79E09A0009E3F7 /* Avenir.ttc in Resources */ = {isa = PBXBuildFile; fileRef = 4188E7C11B79E09A0009E3F7 /* Avenir.ttc */; };
 		41C58EA01B4BA868005A51FA /* TAPhotoDetailsFooterView.m in Sources */ = {isa = PBXBuildFile; fileRef = 41C58E9F1B4BA868005A51FA /* TAPhotoDetailsFooterView.m */; };
+		79FD1F651B99E18F0004C1DE /* TASplashPageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 79FD1F641B99E18F0004C1DE /* TASplashPageViewController.m */; };
+		79FD1F681B99E23E0004C1DE /* TASplashPageView.m in Sources */ = {isa = PBXBuildFile; fileRef = 79FD1F671B99E23E0004C1DE /* TASplashPageView.m */; };
 		920036FE1A89DEC5004C34DB /* UITextField+TAAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 920036FD1A89DEC5004C34DB /* UITextField+TAAdditions.m */; };
 		920037011A89F3EB004C34DB /* UIColor+TAAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 920037001A89F3EB004C34DB /* UIColor+TAAdditions.m */; };
 		921BC0091A7B7E5900C9B4F4 /* TAAddGroupViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 921BC0081A7B7E5900C9B4F4 /* TAAddGroupViewController.m */; };
@@ -132,6 +134,10 @@
 		4188E7C11B79E09A0009E3F7 /* Avenir.ttc */ = {isa = PBXFileReference; lastKnownFileType = file; path = Avenir.ttc; sourceTree = "<group>"; };
 		41C58E9E1B4BA868005A51FA /* TAPhotoDetailsFooterView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TAPhotoDetailsFooterView.h; sourceTree = "<group>"; };
 		41C58E9F1B4BA868005A51FA /* TAPhotoDetailsFooterView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TAPhotoDetailsFooterView.m; sourceTree = "<group>"; };
+		79FD1F631B99E18F0004C1DE /* TASplashPageViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TASplashPageViewController.h; sourceTree = "<group>"; };
+		79FD1F641B99E18F0004C1DE /* TASplashPageViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TASplashPageViewController.m; sourceTree = "<group>"; };
+		79FD1F661B99E23E0004C1DE /* TASplashPageView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TASplashPageView.h; sourceTree = "<group>"; };
+		79FD1F671B99E23E0004C1DE /* TASplashPageView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TASplashPageView.m; sourceTree = "<group>"; };
 		83373A0D52091F2573F5C014 /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
 		920036FC1A89DEC5004C34DB /* UITextField+TAAdditions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "UITextField+TAAdditions.h"; path = "Core/iOS Classes/UITextField+TAAdditions.h"; sourceTree = "<group>"; };
 		920036FD1A89DEC5004C34DB /* UITextField+TAAdditions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "UITextField+TAAdditions.m"; path = "Core/iOS Classes/UITextField+TAAdditions.m"; sourceTree = "<group>"; };
@@ -528,6 +534,8 @@
 				92E6F4851A56F18800010727 /* TALoginViewController.m */,
 				9F7880921B614F5900E800C2 /* TAOnboardingViewController.h */,
 				9F7880931B614F5900E800C2 /* TAOnboardingViewController.m */,
+				79FD1F631B99E18F0004C1DE /* TASplashPageViewController.h */,
+				79FD1F641B99E18F0004C1DE /* TASplashPageViewController.m */,
 				9F56FF6B1B961A7500ED10BC /* TATutorialViewController.h */,
 				9F56FF6C1B961A7500ED10BC /* TATutorialViewController.m */,
 			);
@@ -537,6 +545,8 @@
 		92B1DAE71A3849D6001B059E /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				79FD1F661B99E23E0004C1DE /* TASplashPageView.h */,
+				79FD1F671B99E23E0004C1DE /* TASplashPageView.m */,
 				9F56FF711B9677BA00ED10BC /* TATutorialView.h */,
 				9F56FF721B9677BA00ED10BC /* TATutorialView.m */,
 				92E47ACF1A46B73400B08C3B /* TASignupView.h */,
@@ -909,6 +919,7 @@
 				92E47AE81A4CC76200B08C3B /* TASettingsViewController.m in Sources */,
 				92E059F21A61DFED00A178B5 /* TAGroupManager.m in Sources */,
 				9F7AEFAB1B792E0300E0EBBA /* TASendTrophyCell.m in Sources */,
+				79FD1F681B99E23E0004C1DE /* TASplashPageView.m in Sources */,
 				92E6F4801A55949500010727 /* TASettingsView.m in Sources */,
 				921BC00F1A7B813B00C9B4F4 /* TAJoinGroupView.m in Sources */,
 				9F7880941B614F5900E800C2 /* TAOnboardingViewController.m in Sources */,
@@ -921,6 +932,7 @@
 				92CF1E891A64FDCA00A45D88 /* TATrophyCloseupViewController.m in Sources */,
 				92E6F4831A56EB8D00010727 /* TAMainViewController.m in Sources */,
 				416831701B56106D00D7E393 /* MBProgressHUD.m in Sources */,
+				79FD1F651B99E18F0004C1DE /* TASplashPageViewController.m in Sources */,
 				92B1DAE61A3843B7001B059E /* AppDelegate.m in Sources */,
 				92E47ADB1A491CC900B08C3B /* TATimelineViewController.m in Sources */,
 				924A9B811AA4424200298877 /* FBMissingSymbols.m in Sources */,
