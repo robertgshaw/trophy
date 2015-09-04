@@ -10,8 +10,9 @@
 #import "UIColor+TAAdditions.h"
 #import "TASplashPageViewController.h"
 #import "TATutorialViewController.h"
+#import "TAActiveUserManager.h"
 
-@interface TASplashPageViewController () <TATutorialViewControllerDelegate>
+@interface TASplashPageViewController () <TASplashViewDelegate>
 
 @property (nonatomic, strong) TASplashPageView *splashPageView;
 
@@ -30,8 +31,10 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
+    // splash view
     self.splashPageView = [[TASplashPageView alloc] initWithFrame:self.view.bounds];
-     self.splashPageView.backgroundColor = [UIColor trophyNavyColor];
+    self.splashPageView.backgroundColor = [UIColor trophyNavyColor];
+    self.splashPageView.delegate = self;
     [self.view addSubview:self.splashPageView];
     
     // hides nav bar
@@ -58,9 +61,8 @@
 
 - (void)splashPageViewDidPressGetStarted:(TASplashPageView *)splashPageView
 {
-    TATutorialViewController *tutorialViewController = [[TATutorialViewController alloc] init];
-    tutorialViewController.delegate = self;
-    [self.navigationController pushViewController:tutorialViewController animated:YES];
+    NSLog(@"here");
+    [[TAActiveUserManager sharedManager] transitionToTutorialViewController];
 }
 
 
