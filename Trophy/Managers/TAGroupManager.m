@@ -189,11 +189,6 @@
     
     PFQuery *query = [PFQuery queryWithClassName:@"Group"];
     [query includeKey:@"users"];
-//    if ([query hasCachedResult]) {
-//        query.cachePolicy = kPFCachePolicyCacheThenNetwork;
-//    } else {
-//        query.cachePolicy = kPFCachePolicyCacheElseNetwork;
-//    }
     
     [query getObjectInBackgroundWithId:self.activeGroup.groupId block:^(PFObject *object, NSError *error) {
         if (error == nil) {

@@ -16,6 +16,7 @@
 #import "TAPhotoDetailsFooterView.h"
 #import "TAActiveUserManager.h"
 #import "MBProgressHUD.h"
+#import "TAGroupManager.h"
 
 enum ActionSheetTags {
     MainActionSheetTag = 0,
@@ -62,6 +63,7 @@ static const CGFloat kPAPCellInsetWidth = 20.0f;
     [self.navigationItem setHidesBackButton:NO];
     self.navigationController.navigationBarHidden = NO;
     
+    // back button
     UIButton *backButton = [UIButton buttonWithType:UIButtonTypeCustom];
     [backButton setFrame:CGRectMake( 0.0f, 0.0f, 52.0f, 32.0f)];
     [backButton setTitle:@"Back" forState:UIControlStateNormal];
@@ -221,7 +223,7 @@ static const CGFloat kPAPCellInsetWidth = 20.0f;
         [ACL setPublicReadAccess:YES];
         comment.ACL = ACL;
         
-        //[[PAPCache sharedCache] incrementCommentCountForPhoto:self.photo];
+        // [[PAPCache sharedCache] incrementCommentCountForPhoto:self.photo];
         
         // Show HUD view
         [MBProgressHUD showHUDAddedTo:self.view.superview animated:YES];
@@ -237,6 +239,27 @@ static const CGFloat kPAPCellInsetWidth = 20.0f;
                 [alert show];
                 [self.navigationController popViewControllerAnimated:YES];
             } else {
+                // current group
+                NSString *currentGroup = [TAGroupManager sharedManager].activeGroup.groupId;
+                NSString *message = [NSString stringWithFormat:@"%@ commented \"%@\"", comment[@"author"], comment[@"content"]];
+                PFPush *push = [[PFPush alloc] init];
+                [push setChannel:currentGroup];
+                
+                // sets data to be added to push
+                NSDictionary *data = @{
+                    @"alert" : message,
+                    @"badge" : @"Increment"
+                };
+                
+                // sets time interval, 1 day
+                NSTimeInterval interval = 60*60*24;
+                
+                [push expireAfterTimeInterval:interval];
+                [push setData:data];
+                
+                // sends push in the background
+                [push sendPushInBackground];
+                
                 /*
                  // TODO CHANGE IF WE WANT PUSH NOTIFS FOR COMMENTS
                  // refresh cache
@@ -359,14 +382,8 @@ static const CGFloat kPAPCellInsetWidth = 20.0f;
 }
 
 - (void)backButtonAction:(id)sender {
-    
-//    UINavigationController *navController = self.navigationController;
-//    
-//    [navController popViewControllerAnimated:YES];
-//    
-//    navController.navigationBarHidden = YES;
+    // back button pressed
     [self.delegate trophyCommentViewControllerDidPressBackButton];
-    
 }
 
 - (void)keyboardWillShow:(NSNotification*)note {

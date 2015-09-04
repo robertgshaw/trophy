@@ -21,7 +21,7 @@ static const CGFloat kPhotoButtonWidth = 80.0;
 @property (nonatomic, strong) UIButton *photoAlbumButton;
 @property (nonatomic, strong) UIImagePickerController *imagePickerController;
 @property(nonatomic) UIImagePickerControllerCameraFlashMode cameraFlashMode;
-
+@property BOOL flashIsOn;
 @end
 
 @implementation TATrophyPickerOverlayView
@@ -43,7 +43,7 @@ static const CGFloat kPhotoButtonWidth = 80.0;
         _flashButton = [[UIButton alloc] initWithFrame:CGRectZero];
         self.imagePickerController.cameraFlashMode = UIImagePickerControllerCameraFlashModeOff;
         [self.flashButton setBackgroundImage:[UIImage imageNamed:@"camera-flash-off"] forState:UIControlStateNormal];
-        [self.flashButton setBackgroundImage:[UIImage imageNamed:@"camera-flash-on"] forState:UIControlStateSelected];
+        self.flashIsOn = NO;
         [self.flashButton addTarget:self action:@selector(didSelectFlashButton:) forControlEvents:UIControlEventTouchUpInside];
         [self addSubview:self.flashButton];
         
@@ -54,8 +54,6 @@ static const CGFloat kPhotoButtonWidth = 80.0;
 
         _cancelButton = [[UIButton alloc] initWithFrame:CGRectZero];
         [self.cancelButton setBackgroundImage:[UIImage imageNamed:@"closeup-close-icon"] forState:UIControlStateNormal];
-//        self.cancelButton.titleLabel.font = [UIFont fontWithName:@"Avenir" size:18.0];
-//        [self.cancelButton setTitleColor:[UIColor trophyYellowColor] forState:UIControlStateNormal];
         [self.cancelButton addTarget:self action:@selector(didSelectCancelButton) forControlEvents:UIControlEventTouchUpInside];
         [self addSubview:self.cancelButton];
         
@@ -119,6 +117,16 @@ static const CGFloat kPhotoButtonWidth = 80.0;
 - (IBAction)didSelectFlashButton:(UIButton *)flashButton;
 {
     [self.delegate trophyPickerOverlayDidSelectFlashButton];
+    
+    // toggle image based on flash
+    if (self.flashIsOn) {
+        [self.flashButton setBackgroundImage:[UIImage imageNamed:@"camera-flash-off"] forState:UIControlStateNormal];
+    } else {
+        [self.flashButton setBackgroundImage:[UIImage imageNamed:@"camera-flash-on"] forState:UIControlStateNormal];
+    }
+    
+    // toggle state
+    self.flashIsOn = !self.flashIsOn;
 }
 
 - (void)didSelectCancelButton

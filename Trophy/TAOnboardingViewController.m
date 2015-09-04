@@ -19,8 +19,6 @@ static const CGFloat welcomeLogoWidth = 300.0;
 static const CGFloat welcomeLogoHeight = 50.0;
 static const CGFloat kGroupButtonWidth = 150.0;
 static const CGFloat kGroupButtonHeight = 40.0;
-static const CGFloat extraInfoLogoWidth = 300.0;
-static const CGFloat extraInfoLogoHeight = 50.0;
 
 @interface TAOnboardingViewController () <TAPresentSettingsViewControllerDelegate, TASettingsViewControllerDelegate>
 
@@ -43,7 +41,6 @@ static const CGFloat extraInfoLogoHeight = 50.0;
     self.edgesForExtendedLayout = UIRectEdgeNone;
     
     // adds trophy image
-    
     UIImageView *trophyImageView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"home-logo"]];
     CGRect frame = trophyImageView.frame;
     frame.origin.x = CGRectGetMidX(self.view.bounds) - floorf(CGRectGetWidth(trophyImageView.frame) / 2.0);
@@ -67,18 +64,10 @@ static const CGFloat extraInfoLogoHeight = 50.0;
     welcomeLabel.font = [font fontWithSize:24];
     [self.view addSubview:welcomeLabel];
     
-//    // adds trophy image
-//    UIImageView *trophyImageView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"home-logo"]];
-//    frame = trophyImageView.frame;
-//    frame.origin.x = CGRectGetMidX(self.view.bounds) - floorf(CGRectGetWidth(trophyImageView.frame) / 2.0);
-//    frame.origin.y = CGRectGetMaxY(welcomeLabel.frame) + 25.0;
-//    trophyImageView.frame = frame;
-//    [self.view addSubview:trophyImageView];
-    
     // adds join group button
     UIButton *joinGroupButton = [[UIButton alloc] init];
     [joinGroupButton setTitle:@"Join Group" forState:UIControlStateNormal];
-    joinGroupButton.font = [UIFont fontWithName:@"Avenir-Heavy" size:20.0];
+    joinGroupButton.titleLabel.font = [UIFont fontWithName:@"Avenir-Heavy" size:20.0];
     [joinGroupButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
     joinGroupButton.backgroundColor = [UIColor darkerBlueColor];
     joinGroupButton.layer.cornerRadius = 5.0;
@@ -92,21 +81,6 @@ static const CGFloat extraInfoLogoHeight = 50.0;
     // adds join button action trigger
     [joinGroupButton addTarget:self action:@selector(joinGroupButtonPressed:) forControlEvents:UIControlEventTouchUpInside];
     [self.view addSubview:joinGroupButton];
-    
-    //
-//    UILabel *welcomeLabel = [[UILabel alloc] init];
-//    CGRect frame = welcomeLabel.frame;
-//    frame.size.width = welcomeLogoWidth;
-//    frame.size.height = welcomeLogoHeight;
-//    frame.origin.x = floorf((CGRectGetWidth(self.view.bounds) - welcomeLogoWidth) / 2.0);
-//    frame.origin.y = 60.0;
-//    welcomeLabel.frame = frame;
-//    welcomeLabel.textAlignment = NSTextAlignmentCenter;
-//    welcomeLabel.text = @"Welcome To Trophy";
-//    welcomeLabel.textColor = [UIColor trophyYellowColor];
-//    UIFont *font = welcomeLabel.font;
-//    welcomeLabel.font = [font fontWithSize:24];
-//    [self.view addSubview:welcomeLabel];
     
     // adds settings button to view
     UIBarButtonItem *leftButton = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"settings-new-small"]

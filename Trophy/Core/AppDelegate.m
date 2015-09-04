@@ -38,7 +38,7 @@
     self.window.rootViewController = revealController;
     [self.window makeKeyAndVisible];
     
-    
+    // start or resume application
     if (self.rootViewController.activeViewController == nil) {
         [[TAActiveUserManager sharedManager] startOrResumeAppSession];
     }
@@ -65,12 +65,24 @@
     PFInstallation *currentInstallation = [PFInstallation currentInstallation];
     NSLog(@"Device token %@",deviceToken);
     [currentInstallation setDeviceTokenFromData:deviceToken];
-    [currentInstallation saveEventually];
+    currentInstallation.channels = @[ @"global" ];
+    [currentInstallation saveInBackground];
 }
 
+// handles notifications in the background
 - (void)application:(UIApplication *)application didReceiveRemoteNotification:(NSDictionary *)userInfo
 {
+    // on notification, push notification from parse
     [PFPush handlePush:userInfo];
+}
+
+// handles notifications in the foreground
+- (void)application:(UIApplication *)application
+  didReceiveRemoteNotification:(NSDictionary *)userInfo  fetchCompletionHandler:(void (^)(UIBackgroundFetchResult))handler {
+  
+  NSLog(@"did receive notification!!!!!");
+  
+  NSLog(@"dust");
 }
 
 - (void)applicationDidBecomeActive:(UIApplication *)application {
