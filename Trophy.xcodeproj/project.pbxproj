@@ -13,7 +13,6 @@
 		04ECB29D1B44A6E9001292C0 /* SWRevealViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 04ECB29B1B44A6E9001292C0 /* SWRevealViewController.m */; };
 		4114CD1E1B44AC6D00547D9A /* TACommentTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4114CD1D1B44AC6D00547D9A /* TACommentTableViewController.m */; };
 		4114CD261B44ACC900547D9A /* TACommentLoadMoreTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 4114CD251B44ACC900547D9A /* TACommentLoadMoreTableViewCell.m */; };
-		4114CD291B44ACDE00547D9A /* TACommentActivityTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 4114CD281B44ACDE00547D9A /* TACommentActivityTableViewCell.m */; };
 		4114CD2C1B44ACF500547D9A /* TACommentBaseTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 4114CD2B1B44ACF500547D9A /* TACommentBaseTableViewCell.m */; };
 		4114CD2F1B44AD6600547D9A /* PAPUtility.m in Sources */ = {isa = PBXBuildFile; fileRef = 4114CD2E1B44AD6600547D9A /* PAPUtility.m */; };
 		416831701B56106D00D7E393 /* MBProgressHUD.m in Sources */ = {isa = PBXBuildFile; fileRef = 4168316F1B56106D00D7E393 /* MBProgressHUD.m */; };
@@ -121,8 +120,6 @@
 		4114CD1D1B44AC6D00547D9A /* TACommentTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TACommentTableViewController.m; sourceTree = "<group>"; };
 		4114CD241B44ACC900547D9A /* TACommentLoadMoreTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TACommentLoadMoreTableViewCell.h; sourceTree = "<group>"; };
 		4114CD251B44ACC900547D9A /* TACommentLoadMoreTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TACommentLoadMoreTableViewCell.m; sourceTree = "<group>"; };
-		4114CD271B44ACDE00547D9A /* TACommentActivityTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TACommentActivityTableViewCell.h; sourceTree = "<group>"; };
-		4114CD281B44ACDE00547D9A /* TACommentActivityTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TACommentActivityTableViewCell.m; sourceTree = "<group>"; };
 		4114CD2A1B44ACF500547D9A /* TACommentBaseTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TACommentBaseTableViewCell.h; sourceTree = "<group>"; };
 		4114CD2B1B44ACF500547D9A /* TACommentBaseTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TACommentBaseTableViewCell.m; sourceTree = "<group>"; };
 		4114CD2D1B44AD6600547D9A /* PAPUtility.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PAPUtility.h; sourceTree = "<group>"; };
@@ -343,8 +340,6 @@
 			children = (
 				4114CD2A1B44ACF500547D9A /* TACommentBaseTableViewCell.h */,
 				4114CD2B1B44ACF500547D9A /* TACommentBaseTableViewCell.m */,
-				4114CD271B44ACDE00547D9A /* TACommentActivityTableViewCell.h */,
-				4114CD281B44ACDE00547D9A /* TACommentActivityTableViewCell.m */,
 				4114CD241B44ACC900547D9A /* TACommentLoadMoreTableViewCell.h */,
 				4114CD251B44ACC900547D9A /* TACommentLoadMoreTableViewCell.m */,
 			);
@@ -899,7 +894,6 @@
 				92E1C5061A77677100BF04A6 /* TAGroupInviteCell.m in Sources */,
 				9F7AEFB11B7A6BB700E0EBBA /* TAFlagButton.m in Sources */,
 				9F02A9271B67F2FA0047FFF9 /* TAGroupListButton.m in Sources */,
-				4114CD291B44ACDE00547D9A /* TACommentActivityTableViewCell.m in Sources */,
 				920037011A89F3EB004C34DB /* UIColor+TAAdditions.m in Sources */,
 				969F25D31B716BB700D68520 /* TACommentButton.m in Sources */,
 				92E47AEB1A4CC76D00B08C3B /* TAAddSettingsView.m in Sources */,

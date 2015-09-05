@@ -7,7 +7,6 @@
 //
 
 #import "TACommentTableViewController.h"
-#import "TACommentActivityTableViewCell.h"
 #import "TACommentBaseTableViewCell.h"
 #import "TATrophyCloseupView.h"
 #import "TATrophyCloseupViewController.h"
@@ -75,13 +74,12 @@ static const CGFloat kPAPCellInsetWidth = 20.0f;
     [backButton setBackgroundImage:[UIImage imageNamed:@"ButtonBackSelected"] forState:UIControlStateHighlighted];
     self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:backButton];
     
-
-     // Set table view properties
+     // set table view properties
      UIView *texturedBackgroundView = [[UIView alloc] initWithFrame:self.view.bounds];
      [texturedBackgroundView setBackgroundColor:[UIColor colorWithPatternImage:[UIImage imageNamed:@"BackgroundLeather"]]];
      self.tableView.backgroundView = texturedBackgroundView;
     
-    //set footer
+    // set footer
     TAPhotoDetailsFooterView *footerView = [[TAPhotoDetailsFooterView alloc] initWithFrame:[TAPhotoDetailsFooterView rectForView]];
     commentTextField = footerView.commentField;
     [commentTextField setDelegate:self];
@@ -91,44 +89,15 @@ static const CGFloat kPAPCellInsetWidth = 20.0f;
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillShow:) name:UIKeyboardWillShowNotification object:nil];
 }
 
-- (void)viewDidAppear:(BOOL)animated {
-    [super viewDidAppear:animated];
-}
-
 #pragma mark - UITableViewDelegate
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
     if (indexPath.row < self.objects.count) {
         NSString *commentString  = [[self.objects objectAtIndex:indexPath.row] objectForKey:@"content"];
-        
-        // label width = (width of the cell) - (cell insets) - (profile image + profile image insets)
-        CGFloat labelWidth = self.tableView.bounds.size.width - (kPAPCellInsetWidth * 2 + 7.5) - (5 + 40 + 7.5);
-        NSAttributedString *text = [[NSAttributedString alloc] initWithString:commentString];
-        NSStringDrawingOptions options = NSStringDrawingUsesLineFragmentOrigin |
-                                         NSStringDrawingUsesFontLeading;
-        CGRect boundingRect = [text boundingRectWithSize:CGSizeMake(labelWidth, CGFLOAT_MAX)
-                                                 options:options
-                                                 context:nil];
-        
-        UILabel *genericLabelForHeight = [[UILabel alloc] init];
-        genericLabelForHeight.text = commentString;
-        [genericLabelForHeight setFont:[UIFont fontWithName:@"Avenir-Book" size:13.0f]];
-        [genericLabelForHeight setNumberOfLines:0];
-        [genericLabelForHeight setLineBreakMode:NSLineBreakByTruncatingTail];
 
-        [genericLabelForHeight sizeToFit];
-        CGRect frame = genericLabelForHeight.frame;
-        frame.size.width = self.tableView.frame.size.width - (kPAPCellInsetWidth * 2) - 40 - 5 - 15;
-        genericLabelForHeight.frame = frame;
+        // return the height of the cell based on the content size
+        return [TACommentBaseTableViewCell heightForCellWithName:@"" contentString:commentString cellInsetWidth:kPAPCellInsetWidth cellWidth:self.tableView.bounds.size.width];
         
-        NSLog(@"%@", NSStringFromCGRect(frame));
-        
-        if (boundingRect.size.height < 50) {
-            return 100;
-        } else {
-            return (CGFloat) (ceil(boundingRect.size.height));
-        }
-//        return 150;
     } else { // The pagination row
         return 44.0f;
     }
@@ -156,10 +125,6 @@ static const CGFloat kPAPCellInsetWidth = 20.0f;
     return query;
 }
 
-- (void)objectsDidLoad:(NSError *)error {
-    [super objectsDidLoad:error];
-}
-
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath object:(PFObject *)object {
     static NSString *cellID = @"commentCell";
     
@@ -178,6 +143,7 @@ static const CGFloat kPAPCellInsetWidth = 20.0f;
     
     return cell;
 }
+
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForNextPageAtIndexPath:(NSIndexPath *)indexPath {
     static NSString *CellIdentifier = @"NextPage";
     
@@ -191,13 +157,11 @@ static const CGFloat kPAPCellInsetWidth = 20.0f;
     
     return cell;
 }
-// is this necessary hmm
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
-
 
 #pragma mark - UITextFieldDelegate
 

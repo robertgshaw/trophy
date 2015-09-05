@@ -40,10 +40,8 @@
 - (void)hideSeparator:(BOOL)hide;
 
 /*! Static Helper methods */
-+ (CGFloat)heightForCellWithName:(NSString *)name contentString:(NSString *)content;
-+ (CGFloat)heightForCellWithName:(NSString *)name contentString:(NSString *)content cellInsetWidth:(CGFloat)cellInset;
-+ (NSString *)padString:(NSString *)string withFont:(UIFont *)font toWidth:(CGFloat)width;
-
++ (CGFloat)heightForCellWithName:(NSString *)name contentString:(NSString *)content cellWidth:(CGFloat)cellWidth;
++ (CGFloat)heightForCellWithName:(NSString *)name contentString:(NSString *)content cellInsetWidth:(CGFloat)cellInset cellWidth:(CGFloat)cellWidth;
 @end
 
 /*! Layout constants */
