@@ -452,6 +452,7 @@ static const CGFloat kGroupsButtonHeight = 70.0;
 
 - (void)groupListViewControllerDidChangeGroups:(TAGroupListViewController *)groupListViewController
 {
+    self.zeroContentImage.hidden = YES;
     self.groupListVC.view.hidden = YES;
     [self.groupListVC.view removeFromSuperview];
     [self loadObjects];

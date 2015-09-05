@@ -120,7 +120,6 @@ static const CGFloat kGroupsButtonHeight = 70.0;
 
 - (void)layoutGroupsButton
 {
-
     UIButton *groupListButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, kGroupsButtonWidth, kGroupsButtonHeight)];
     [groupListButton addTarget:self action:@selector(groupListButtonDidPress) forControlEvents:UIControlEventTouchUpInside];
     UIView *groupListView = [[UIView alloc] initWithFrame:groupListButton.frame];
