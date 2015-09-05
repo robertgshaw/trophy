@@ -87,7 +87,7 @@ static const CGFloat kTrophySendIconWidth = 70.0;
     frame.origin.y = 30.0;
     self.closeButton.frame = frame;
     
-    //lay out translucent background view
+    //lays out translucent background view
     frame.origin.x = 0.0;
     frame.origin.y = 0.0;
     frame.size.width = CGRectGetWidth(self.bounds);
