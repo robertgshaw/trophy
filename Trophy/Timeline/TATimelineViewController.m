@@ -64,7 +64,7 @@ static const CGFloat kGroupsButtonHeight = 70.0;
     
     self.view.backgroundColor = [UIColor whiteColor];
     self.tabBarItem = [[UITabBarItem alloc] initWithTitle:@""
-                                                    image:[UIImage imageNamed:@"timeline-tab-button.png"]
+                                                    image:[UIImage imageNamed:@"timeline-tab-button"]
                                             selectedImage:[UIImage imageNamed:@"timeline-tab-button-selected.png"]];
     self.tabBarItem.imageInsets = UIEdgeInsetsMake(5, 0, -5, 0);
     self.tabBarController.tabBar.barTintColor = [UIColor trophyNavyColor];

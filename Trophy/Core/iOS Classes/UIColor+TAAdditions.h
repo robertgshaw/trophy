@@ -13,6 +13,7 @@
 + (UIColor *)trophyYellowColor;
 + (UIColor *)trophyNavyColor;
 + (UIColor *)trophyNavyTranslucentColor;
++ (UIColor *)trophyNavyLessTranslucentColor;
 + (UIColor *)darkYellowColor;
 + (UIColor *)standardBlueButtonColor;
 + (UIColor *)darkerBlueColor;
