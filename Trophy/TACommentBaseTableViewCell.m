@@ -147,9 +147,7 @@ static const CGFloat nameHeight = 17.5;
 
 /* Inform delegate that a user image or name was tapped */
 - (void)didTapUserButtonAction:(id)sender {
-    if (self.delegate && [self.delegate respondsToSelector:@selector(cell:didTapUserButton:)]) {
-        [self.delegate cell:self didTapUserButton:self.user];
-    }
+    [self.delegate commentViewDidPressUser:self.user];
 }
 
 #pragma mark - PAPBaseTextCell

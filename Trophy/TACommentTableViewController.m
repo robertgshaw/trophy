@@ -16,6 +16,7 @@
 #import "TAActiveUserManager.h"
 #import "MBProgressHUD.h"
 #import "TAGroupManager.h"
+#import "TAProfileViewController.h"
 
 enum ActionSheetTags {
     MainActionSheetTag = 0,
@@ -348,12 +349,13 @@ static const CGFloat kPAPCellInsetWidth = 20.0f;
 }
 
 #pragma mark - PAPBaseTextCellDelegate
-//TODO CHANGE FOR PRESSING PROFILE OF PERSON WHO COMMENTS
-/*
- - (void)cell:(TACommentBaseTableViewCell *)cellView didTapUserButton:(PFUser *)aUser {
- [self shouldPresentAccountViewForUser:aUser];
- }
- */
+
+- (void)commentViewDidPressUser:(PFUser *)user {
+    
+    TAProfileViewController *profileVC = [[TAProfileViewController alloc] initWithUser:[[TAUser alloc] initWithStoredUser:user]];
+    [self.navigationController pushViewController:profileVC animated:YES];
+}
+
 
 - (void)actionButtonAction:(id)sender {
     UIActionSheet *actionSheet = [[UIActionSheet alloc] initWithTitle:nil delegate:self cancelButtonTitle:@"Cancel" destructiveButtonTitle:@"Delete Photo" otherButtonTitles:nil];

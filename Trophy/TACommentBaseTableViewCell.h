@@ -68,13 +68,8 @@
  The protocol defines methods a delegate of a PAPBaseTextCell should implement.
  */
 @protocol TACommentBaseTableViewCellDelegate <NSObject>
-@optional
 
-/*!
- Sent to the delegate when a user button is tapped
- @param aUser the PFUser of the user that was tapped
- */
-- (void)cell:(TACommentBaseTableViewCell *)cellView didTapUserButton:(PFUser *)aUser;
+- (void)commentViewDidPressUser:(PFUser *)user;
 
 @end
 
